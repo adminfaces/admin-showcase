@@ -28,14 +28,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="admin-theme" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-api:7.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.mail:javax.mail:1.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.0" level="project" />
     <orderEntry type="library" name="Maven: org.omnifaces:omnifaces:2.5.1" level="project" />
-    <orderEntry type="module" module-name="admin-layout" />
-    <orderEntry type="library" name="Maven: com.github.adminfaces:admin-theme:0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.github.adminfaces:admin-template:0.1-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="admin-theme" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.22" level="project" />
   </component>
 </module>
