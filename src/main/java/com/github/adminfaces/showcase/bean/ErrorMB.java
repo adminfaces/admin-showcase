@@ -2,6 +2,7 @@ package com.github.adminfaces.showcase.bean;
 
 import org.omnifaces.cdi.ViewScoped;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -10,6 +11,11 @@ import java.io.Serializable;
  */
 @Named
 @ViewScoped
-public class IndexMB implements Serializable {
+public class ErrorMB implements Serializable {
+
+    @PostConstruct
+    public void init(){
+        throw new RuntimeException("error...");
+    }
 
 }
