@@ -1,5 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 template="/template.xhtml">
 
@@ -10,6 +11,18 @@
 
 
    <ui:define name="body">
-       #{errorMB}
+       <p:panel styleClass="box-danger" header="Exceptions">
+           <h:form>
+               <div class="ui-g">
+                   <div class="ui-g12">
+                       <p:commandButton styleClass="btn-danger" action="#{errorMB.throwRuntime}" value="Runtime exception"/>
+                   </div>
+                   <div class="ui-g12">
+                       <p:commandButton styleClass="btn-warning" action="#{errorMB.throwViewExpired}" value="ViewExpired exception"/>
+                   </div>
+               </div>
+
+           </h:form>
+       </p:panel>
    </ui:define>
 </ui:composition>

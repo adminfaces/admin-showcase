@@ -24,13 +24,7 @@
             <artifactId>primefaces</artifactId>
             <version>6.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.omnifaces</groupId>
-            <artifactId>omnifaces</artifactId>
-            <version>2.5.1</version>
-        </dependency>
-
+      
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>

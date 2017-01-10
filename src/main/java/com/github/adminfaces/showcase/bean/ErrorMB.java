@@ -3,6 +3,7 @@ package com.github.adminfaces.showcase.bean;
 import org.omnifaces.cdi.ViewScoped;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.ViewExpiredException;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -13,9 +14,15 @@ import java.io.Serializable;
 @ViewScoped
 public class ErrorMB implements Serializable {
 
-    @PostConstruct
     public void init(){
-        throw new RuntimeException("error...");
+    }
+
+    public void throwRuntime() {
+        throw new RuntimeException("this is a runtime exception...");
+    }
+
+    public void throwViewExpired() {
+        throw new ViewExpiredException("this is a view expired exception...");
     }
 
 }
