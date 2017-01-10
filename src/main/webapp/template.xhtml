@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
                 template="/admin.xhtml">
 
     <ui:define name="head">
@@ -26,6 +22,16 @@
 
     <ui:define name="topMenu">
         <ui:include src="top-menu.xhtml"/>
+    </ui:define>
+
+    <ui:define name="footer">
+        <a target="_blank"
+           href="https://github.com/admin-faces">
+            Copyright (C) 2016 - Admin Faces
+        </a>
+        <div class="pull-right hidden-xs" style="color: gray">
+            <strong>#{adm['admin.version']}</strong>
+        </div>
     </ui:define>
 
 </ui:composition>

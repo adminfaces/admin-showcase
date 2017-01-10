@@ -1,12 +1,14 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://java.sun.com/jsf/composite/components/admin"
                 template="/template.xhtml">
 
 
     <ui:define name="head">
         <ui:param name="sidebarCollapse" value="true"/>
     </ui:define>
+
     <ui:define name="title">
            Sidebar collapsing example
     </ui:define>
@@ -16,6 +18,7 @@
     </ui:define>
 
    <ui:define name="body">
+       <adm:breadCrumb link="/pages/layout/sidebar-collapsed" title="Sidebar"/>
        <div class="box box-primary">
                 <div class="box-header with-border">
                     <div class="callout callout-info">
