@@ -5,6 +5,12 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+    <!--
+     No need because admin-template already registers the theme in its web-fragment.xml
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>admin</param-value>
+    </context-param>-->
     <!-- Change to "Production" when you are ready to deploy -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
