@@ -2,6 +2,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
+
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
@@ -14,7 +15,7 @@
     <!-- Change to "Production" when you are ready to deploy -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Production</param-value>
+        <param-value>Development</param-value>
     </context-param>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
