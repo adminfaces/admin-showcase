@@ -29,6 +29,11 @@
             <artifactId>primefaces-extensions</artifactId>
             <version>6.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>1.8.3</version>
+        </dependency>
       
         <dependency>
             <groupId>com.github.adminfaces</groupId>
@@ -45,7 +50,7 @@
 
     <build>
         <finalName>showcase</finalName>
-        <resources>
+        <!--<resources>
             <resource>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
@@ -63,7 +68,7 @@
             <testResource>
                 <directory>src/test/java/</directory>
             </testResource>
-        </testResources>
+        </testResources>-->
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
