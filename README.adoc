@@ -1,3 +1,28 @@
 = Admin Showcase
 
 *Admin Faces* showcase application.
+
+== Build
+
+Just generate the `war file` using maven:
+
+```
+mvn clean package
+```
+
+NOTE: While Admin Faces is not in maven central, you need to install https://github.com/admin-faces/admin-theme[Admin Theme^] and https://github.com/admin-faces/admin-template[Admin Template^] into your local maven repository *before* building this project.
+
+== Supported Application Servers
+
+This application is compatible with `Java EE 7` application servers, tested with:
+
+* http://wildfly.org/downloads/[WildFly 10.1.0^] and 8.2.0
+* http://tomee.apache.org/downloads.html[Tomee 7.0.2 Web profile]
+* http://www.payara.fish/all_downloads[Payara 4.1.1.164 Web profile]
+
+== Non supported Servers
+
+* Java EE 6 app servers, see https://github.com/admin-faces/admin-showcase/issues/1[#1^]
+* https://developer.ibm.com/wasdev/downloads/liberty-profile-using-non-eclipse-environments/[WebSphere Liberty profile 16.0.0.4^], see https://github.com/admin-faces/admin-showcase/issues/2[#2]
+
+
