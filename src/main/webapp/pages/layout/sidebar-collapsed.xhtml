@@ -5,10 +5,6 @@
                 template="/template.xhtml">
 
 
-    <ui:define name="head">
-        <ui:param name="sidebarCollapse" value="true"/>
-    </ui:define>
-
     <ui:define name="title">
            Sidebar collapsing example
     </ui:define>
@@ -19,14 +15,15 @@
 
    <ui:define name="body">
        <adm:breadCrumb link="/pages/layout/sidebar-collapsed" title="Sidebar"/>
+       <adm:sidebar collapsed="true"/>
        <div class="box box-primary">
                 <div class="box-header with-border">
                     <div class="callout callout-info">
                         <h4>Tip!</h4>
-                        <p>In this page the sidebar comes colapsed by using the ui:param named <code>sidebarCollapse</code> and value <code>true</code></p>
+                        <p>In this page the sidebar comes colapsed by using the component adm:sidebar with attribute<code>collapsed=true</code></p>
                         <p>You can also toggle it by adding/removing the css class <code>sidebar-collapse</code> from <code>page body</code>.</p>
                     </div>
-                      <p:button styleClass="btn-primary" value="Toggle" onclick="if($(document.body).hasClass('sidebar-collapse')) {$(document.body).removeClass('sidebar-collapse')} else {$(document.body).addClass('sidebar-collapse')} return false"/>
+                    <p:button styleClass="btn-primary" value="Toggle" onclick="if($(document.body).hasClass('sidebar-collapse')) {$(document.body).removeClass('sidebar-collapse')} else {$(document.body).addClass('sidebar-collapse')} return false"/>
                </div>
        </div>
    </ui:define>

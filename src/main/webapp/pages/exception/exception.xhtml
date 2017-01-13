@@ -19,12 +19,15 @@
        <adm:breadCrumb link="/pages/exception/exception" title="Exceptions"/>
        <p:panel styleClass="box-danger" header="Exceptions">
            <h:form>
-               <div class="ui-g">
-                   <div class="ui-g12">
+               <div class="ui-g ui-fluid">
+                   <div class="ui-g-4 ui-sm-12">
                        <p:commandButton styleClass="btn-danger" action="#{errorMB.throwRuntime}" value="Runtime exception"/>
                    </div>
-                   <div class="ui-g12">
+                   <div class="ui-g-4 ui-sm-12">
                        <p:commandButton styleClass="btn-warning" action="#{errorMB.throwViewExpired}" value="ViewExpired exception"/>
+                   </div>
+                   <div class="ui-g-4  ui-sm-12">
+                       <p:button styleClass="bg-purple" href="github.com" value="404"/>
                    </div>
                </div>
 
