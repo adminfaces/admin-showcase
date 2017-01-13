@@ -16,14 +16,10 @@ NOTE: While Admin Faces is not in maven central, you need to install https://git
 
 This application is compatible with `Java EE 6/7` application servers, tested with:
 
-* http://wildfly.org/downloads/[WildFly 10.1.0 and 8.2.0^] 
-* http://tomee.apache.org/downloads.html[Tomee 7.0.2 Web profile and 1.7.4 Web]
-* http://www.payara.fish/all_downloads[Payara 4.1.1.164 Web profile]
-* https://developers.redhat.com/download-manager/file/jboss-eap-6.4.0.GA.zip[JBoss EAP 6.4^]
-
-== Tested and not working servers
-
-* Tomee 1.7.x see https://github.com/admin-faces/admin-showcase/issues/3[#3]
-* https://developer.ibm.com/wasdev/downloads/liberty-profile-using-non-eclipse-environments/[WebSphere Liberty profile 16.0.0.4^], see https://github.com/admin-faces/admin-showcase/issues/2[#2]
+* http://wildfly.org/downloads/[WildFly *10.1.0* and *8.2.0*^]
+* https://developers.redhat.com/download-manager/file/jboss-eap-6.4.0.GA.zip[JBoss EAP *6.4*^]
+* http://tomee.apache.org/downloads.html[Tomee *7.0.2* Web profile and *1.7.4* Web]
+* http://www.payara.fish/all_downloads[Payara *4.1.1.164* Web profile]
+* https://developer.ibm.com/wasdev/downloads/liberty-profile-using-non-eclipse-environments/[WebSphere Liberty profile *16.0.0.4*^]
 
 
