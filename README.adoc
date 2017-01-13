@@ -2,6 +2,8 @@
 
 *AdminFaces* showcase application.
 
+image:showcase.png[]
+
 == Build
 
 Just generate the `war file` using maven:
@@ -10,7 +12,7 @@ Just generate the `war file` using maven:
 mvn clean package
 ```
 
-NOTE: While AdminFaces is not in maven central, you need to install https://github.com/admin-faces/admin-theme[Admin Theme^] and https://github.com/admin-faces/admin-template[Admin Template^] into your local maven repository *before* building this project.
+NOTE: While AdminFaces is not in maven central, you need to install https://github.com/adminfaces/admin-theme[Admin Theme^] and https://github.com/adminfaces/admin-template[Admin Template^] into your local maven repository *before* building this project.
 
 == Supported Application Servers
 
