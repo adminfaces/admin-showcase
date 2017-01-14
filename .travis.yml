@@ -1,0 +1,13 @@
+sudo: false
+language: java
+jdk: oraclejdk8
+
+
+
+before_install:
+ - git clone https://github.com/adminfaces/admin-theme.git ~/builds/admin-theme
+ - cd ~/builds/admin-theme && mvn install
+ - git clone https://github.com/adminfaces/admin-template.git ~/builds/admin-template
+ - cd ~/builds/admin-template && mvn install
+script:
+  - mvn clean package
