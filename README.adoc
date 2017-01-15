@@ -4,6 +4,8 @@
 
 image:showcase.png[]
 
+Showcase is available on http://adminfaces-rpestano.rhcloud.com/showcase/index.xhtml[Openshift here^].
+
 == Build
 
 Just generate the `war file` using maven:
