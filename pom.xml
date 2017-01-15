@@ -12,6 +12,11 @@
 
     <packaging>war</packaging>
 
+    <ciManagement>
+        <system>tranvis-ci.org</system>
+        <url>https://travis-ci.org/adminfaces/admin-showcase</url>
+    </ciManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

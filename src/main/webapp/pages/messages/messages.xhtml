@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/admin-faces"
+                template="/template.xhtml">
+
+
+    <ui:define name="title">
+        Messages
+    </ui:define>
+
+    <ui:define name="description">
+        This page shows how the application behaves when exceptions are raised.
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadCrumb link="/pages/messages/messages" title="Messages"/>
+        <p:panel styleClass="box-info" header="Messages">
+            <p:tooltip/>
+
+            <h:form>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+                <p:growl autoUpdate="true" showDetail="true" life="3000" severity="info"/>
+                <p:growl autoUpdate="true" showDetail="true" sticky="true" severity="warn,error,fatal"/>
+
+                <p:commandButton value="Info" actionListener="#{messagesBean.info}" styleClass="btn-primary"
+                                 ignoreAutoUpdate="true" update="@form"/>
+                <p:commandButton value="Warn" actionListener="#{messagesBean.warn}" styleClass="btn-warning"
+                                 ignoreAutoUpdate="true" update="@form"/>
+                <p:commandButton value="Error" actionListener="#{messagesBean.error}" styleClass="btn-danger"
+                                 ignoreAutoUpdate="true" update="@form"/>
+                <p:commandButton value="Fatal" actionListener="#{messagesBean.fatal}" styleClass="btn-fatal"
+                                 ignoreAutoUpdate="true" update="@form"/>
+            </h:form>
+
+            <p:separator/>
+
+            <h:form>
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12">
+                        <p:outputLabel for="default" value="Default:"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="default" required="true"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:message for="default"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:outputLabel for="txt" value="Text:"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="txt" required="true"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:message for="txt" display="text"/>
+                    </div>
+
+                    <div class="ui-g-12">
+                        <p:outputLabel for="icon" value="Icon:"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="icon" required="true"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:message for="icon" display="icon"/>
+                    </div>
+
+                    <div class="ui-g-12">
+                        <p:outputLabel for="tt" value="Tooltip:"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:inputText id="tt" required="true"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:message for="tt" display="tooltip"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form" ignoreAutoUpdate="true"/>
+                    </div>
+                </div>
+
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
