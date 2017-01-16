@@ -1,8 +1,10 @@
 sudo: false
 language: java
 jdk: oraclejdk8
-
-
+jdk: oraclejdk8
+cache:
+  directories:
+    - '$HOME/.m2/repository'
 
 before_install:
  - git clone https://github.com/adminfaces/admin-theme.git ~/builds/admin-theme
@@ -10,4 +12,4 @@ before_install:
  - git clone https://github.com/adminfaces/admin-template.git ~/builds/admin-template
  - cd ~/builds/admin-template && mvn install
 script:
-  - cd $TRAVIS_BUILD_DIR && mvn clean package
+  - cd $TRAVIS_BUILD_DIR && mvn clean package -Ptests
