@@ -5,8 +5,12 @@ import com.github.adminfaces.showcase.pages.exception.ExceptionPage;
 import com.github.adminfaces.showcase.pages.IndexPage;
 import com.github.adminfaces.showcase.pages.exception.NotFoundPage;
 import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
+import com.github.adminfaces.showcase.pages.fragments.Menu;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.Graphene;
+import org.jboss.arquillian.graphene.GrapheneElement;
+import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
@@ -38,6 +42,15 @@ public class AdminFt {
 
     @Page
     protected ViewExpiredPage viewExpiredPage;
+
+    @Page
+    protected  ExceptionPage exceptionPage;
+
+    @FindByJQuery("div.ui-growl-message")
+    private GrapheneElement growl;
+
+    @FindByJQuery("section.sidebar > ul.sidebar-menu")
+    private Menu menu;
 
     @Deployment(testable = false)
     public static Archive<?> getDeployment(){
@@ -77,5 +90,13 @@ public class AdminFt {
         assertThat(notFoundPage.getTitle().getText()).isEqualTo("Oops! Page not found.");
     }
 
+    @Test
+    @InSequence(3)
+    public void shouldNavigateUsingSideMenu(@InitialPage IndexPage index){
+        menu.goToHomePage();
+        assertThat(index.getPageTitle().getText()).isEqualTo("Welcome to the AdminFaces Showcase!");
+        menu.goToExceptionPage();
+        assertThat(exceptionPage.getTitle().getText()).contains("Exceptions This page shows how the application behaves when exceptions are raised.");
+    }
 
 }
