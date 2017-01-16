@@ -16,12 +16,16 @@ import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 
 /**
@@ -97,6 +101,30 @@ public class AdminFt {
         assertThat(index.getPageTitle().getText()).isEqualTo("Welcome to the AdminFaces Showcase!");
         menu.goToExceptionPage();
         assertThat(exceptionPage.getTitle().getText()).contains("Exceptions This page shows how the application behaves when exceptions are raised.");
+    }
+
+    @Test
+    @Ignore("not working on phantomjs but works on chrome and firefox")
+    @InSequence(4)
+    public void shouldFilterMenuItens(@InitialPage IndexPage index){
+        WebElement menuSearchInput = browser.findElement(By.cssSelector("input.form-control"));
+        menuSearchInput.sendKeys("for");
+        waitModel();
+        assertThat(menu.getForms().isDisplayed()).isTrue();
+        assertThat(menu.getHome().isDisplayed()).isFalse();
+        assertThat(menu.getException().isDisplayed()).isFalse();
+        menuSearchInput.clear();
+        menuSearchInput.sendKeys("hom");
+        waitModel();
+        assertThat(menu.getHome().isDisplayed()).isTrue();
+        assertThat(menu.getForms().isDisplayed()).isFalse();
+        assertThat(menu.getException().isDisplayed()).isFalse();
+        menuSearchInput.clear();
+        menuSearchInput.sendKeys("exc");
+        waitModel();
+        assertThat(menu.getException().isDisplayed()).isTrue();
+        assertThat(menu.getHome().isDisplayed()).isFalse();
+        assertThat(menu.getForms().isDisplayed()).isFalse();
     }
 
 }

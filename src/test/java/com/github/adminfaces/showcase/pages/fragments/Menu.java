@@ -20,6 +20,9 @@ public class Menu {
     @FindByJQuery("li a[href$='exception.xhtml']")
     private GrapheneElement exception;
 
+    @FindByJQuery("li a[href$='forms.xhtml']")
+    private GrapheneElement forms;
+
 
     public void goToHomePage(){
         guardHttp(home).click();
@@ -27,5 +30,18 @@ public class Menu {
 
     public void goToExceptionPage(){
         guardHttp(exception).click();
+    }
+
+
+    public GrapheneElement getHome() {
+        return home;
+    }
+
+    public GrapheneElement getException() {
+        return exception;
+    }
+
+    public GrapheneElement getForms() {
+        return forms;
     }
 }

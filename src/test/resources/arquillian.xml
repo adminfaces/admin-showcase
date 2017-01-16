@@ -19,6 +19,7 @@
 	<extension qualifier="webdriver">
 		<property name="browser">${arquillian.browser}</property>
         <property name="chromeDriverBinary">${arquillian.chromeDriver}</property>
+        <property name="dimensions">1280x1024</property>
 	</extension>
 
 </arquillian>
