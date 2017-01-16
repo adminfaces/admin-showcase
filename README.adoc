@@ -1,5 +1,7 @@
 = Admin Showcase
 
+image:https://travis-ci.org/adminfaces/admin-showcase.svg[Build Status (Travis CI), link=https://travis-ci.org/adminfaces/admin-showcase]
+
 *AdminFaces* showcase application.
 
 image:showcase.png[]
