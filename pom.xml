@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <arquillian.container>wildfly:8.2.0.Final:managed</arquillian.container>
-        <arquillian.chromeDriver>/home/rmpestano/chromedriver</arquillian.chromeDriver>
+        <arquillian.chromePath>/home/rmpestano/chromedriver</arquillian.chromePath>
         <arquillian.browser>phantomjs</arquillian.browser>
     </properties>
 
