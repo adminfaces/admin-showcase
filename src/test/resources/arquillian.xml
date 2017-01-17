@@ -13,6 +13,10 @@
     <container qualifier="chameleon" default="true">
         <configuration>
             <property name="chameleonTarget">${arquillian.container}</property>
+			<property name="javaVmArguments">-Xmx300m -XX:MaxPermSize=256m 
+                -Duser.country=US -Duser.language=en -Duser.timezone=GMT-03:00
+            </property>
+			
         </configuration>
     </container>
 
