@@ -156,8 +156,14 @@ public class AdminFt {
         messagesPage.clickBtnWarn();
         assertThat(growlMessage.getText()).contains("AdminFaces Warning message.");
 
-        assertThat(messagesPage.getMsgErrorSummary().getText()).isEqualTo("Warning!");
-        assertThat(messagesPage.getMsgErrorDetail().getText()).isEqualTo("AdminFaces Warning message.");
+        assertThat(messagesPage.getMsgWarnSummary().getText()).isEqualTo("Warning!");
+        assertThat(messagesPage.getMsgWarnDetail().getText()).isEqualTo("AdminFaces Warning message.");
+
+        messagesPage.clickBtnFatal();
+        assertThat(growlMessage.getText()).contains("AdminFaces Fatal message.");
+
+        assertThat(messagesPage.getMsgFatalSummary().getText()).isEqualTo("Fatal!");
+        assertThat(messagesPage.getMsgFatalDetail().getText()).isEqualTo("AdminFaces Fatal message.");
     }
 
     @Test
