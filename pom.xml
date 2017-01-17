@@ -201,7 +201,7 @@
         <profile>
             <id>wildfly10-managed</id>
             <properties>
-                <arquillian.container>wildfly:10.1.0.Final:remote</arquillian.container>
+                <arquillian.container>wildfly:10.1.0.Final:managed</arquillian.container>
             </properties>
         </profile>
 

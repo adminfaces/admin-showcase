@@ -135,7 +135,7 @@ public class AdminFt {
     @InSequence(4)
     public void shouldShowFacesMessages(@InitialPage MessagesPage messagesPage) {
 
-        if(!isPhantomjs()){
+        if(isPhantomjs()){
             //this test doesn't work on phantomjs (conflict with jquery used by primefaces ajax: msg: ReferenceError: Can't find variable: $)
             // as consequence it doesn't fire ajax request properly: RequestGuardException: Request type 'XHR' was expected, but type 'HTTP' was done instead
             //works great with chrome driver (tested with version 55)
