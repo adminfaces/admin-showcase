@@ -12,6 +12,9 @@ import static org.jboss.arquillian.graphene.Graphene.*;
 @Location("pages/messages/messages.xhtml")
 public class MessagesPage extends BasePage {
 
+    @FindByJQuery("div.ui-g-4 button.btn-primary")
+    protected WebElement btnSubmit;
+
     @FindByJQuery("button.btn-primary")
     protected WebElement btnInfo;
 
@@ -47,6 +50,24 @@ public class MessagesPage extends BasePage {
 
     @FindByJQuery("span.ui-messages-fatal-detail")
     protected WebElement msgFatalDetail;
+
+    @FindByJQuery("div[id$='msgDefault'] span.ui-message-error-detail")
+    private WebElement fieldMsgDefault;
+
+    @FindByJQuery("div[id$='msgTxt'] span.ui-message-error-detail")
+    private WebElement fieldMsgTxt;
+
+    @FindByJQuery("div[id$='msgIcon'] span.ui-message-error-icon")
+    private WebElement fieldMsgIcon;
+
+    public void clickBtnSubmit(){
+        if(isPhantomjs()){
+            //phantom is having trouble to make primefaces ajax calls
+            guardHttp(btnSubmit).click();
+        } else{
+            guardAjax(btnSubmit).click();
+        }
+    }
 
     public void clickBtnInfo(){
         guardAjax(btnInfo).click();
@@ -94,5 +115,17 @@ public class MessagesPage extends BasePage {
 
     public WebElement getMsgFatalDetail() {
         return msgFatalDetail;
+    }
+
+    public WebElement getFieldMsgDefault() {
+        return fieldMsgDefault;
+    }
+
+    public WebElement getFieldMsgTxt() {
+        return fieldMsgTxt;
+    }
+
+    public WebElement getFieldMsgIcon() {
+        return fieldMsgIcon;
     }
 }

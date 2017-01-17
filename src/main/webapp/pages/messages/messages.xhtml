@@ -45,7 +45,7 @@
                         <p:inputText id="default" required="true"/>
                     </div>
                     <div class="ui-g-4">
-                        <p:message for="default"/>
+                        <p:message id="msgDefault" for="default"/>
                     </div>
                     <div class="ui-g-12">
                         <p:outputLabel for="txt" value="Text:"/>
@@ -54,7 +54,7 @@
                         <p:inputText id="txt" required="true"/>
                     </div>
                     <div class="ui-g-4">
-                        <p:message for="txt" display="text"/>
+                        <p:message id="msgTxt" for="txt" display="text"/>
                     </div>
 
                     <div class="ui-g-12">
@@ -64,7 +64,7 @@
                         <p:inputText id="icon" required="true"/>
                     </div>
                     <div class="ui-g-4">
-                        <p:message for="icon" display="icon"/>
+                        <p:message id="msgIcon" for="icon" display="icon"/>
                     </div>
 
                     <div class="ui-g-12">
@@ -74,7 +74,7 @@
                         <p:inputText id="tt" required="true"/>
                     </div>
                     <div class="ui-g-4">
-                        <p:message for="tt" display="tooltip"/>
+                        <p:message id="msgTt" for="tt" display="tooltip"/>
                     </div>
                     <div class="ui-g-4">
                         <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form" ignoreAutoUpdate="true"/>

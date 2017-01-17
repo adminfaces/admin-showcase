@@ -135,8 +135,10 @@ public class AdminFt {
     @InSequence(4)
     public void shouldShowFacesMessages(@InitialPage MessagesPage messagesPage) {
 
-        if(isPhantomjs()){
-            //this test doesn't work on phantomjs (cannot)
+        if(!isPhantomjs()){
+            //this test doesn't work on phantomjs (conflict with jquery used by primefaces ajax: msg: ReferenceError: Can't find variable: $)
+            // as consequence it doesn't fire ajax request properly: RequestGuardException: Request type 'XHR' was expected, but type 'HTTP' was done instead
+            //works great with chrome driver (tested with version 55)
             return;
         }
 
@@ -158,7 +160,14 @@ public class AdminFt {
         assertThat(messagesPage.getMsgErrorDetail().getText()).isEqualTo("AdminFaces Warning message.");
     }
 
-
+    @Test
+    @InSequence(5)
+    public void shouldShowFieldMessagesAfterFormSubmit(@InitialPage MessagesPage messagesPage) {
+        messagesPage.clickBtnSubmit();
+        assertThat(messagesPage.getFieldMsgDefault().getText()).isEqualTo("Default: Validation Error: Value is required.");
+        assertThat(messagesPage.getFieldMsgTxt().getText()).isEqualTo("Text: Validation Error: Value is required.");
+        assertThat(messagesPage.getFieldMsgIcon().getAttribute("title")).isEqualTo("Icon: Validation Error: Value is required.");
+    }
 
 
     private boolean isPhantomjs() {

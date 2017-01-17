@@ -25,11 +25,21 @@ public class ExceptionPage extends BasePage{
 
 
     public void clickRuntimeButton(){
-        guardHttp(btnRuntime).click();
+        if(isPhantomjs()){
+            guardHttp(btnRuntime).click();
+        } else{
+            guardAjax(btnRuntime).click();
+        }
+
     }
 
     public void clickViewExpiredButton(){
-        guardHttp(btnViewExpired).click();
+        if(isPhantomjs()){
+            guardHttp(btnViewExpired).click();
+        } else{
+            guardAjax(btnViewExpired).click();
+        }
+
     }
 
     public void click404Button(){
