@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:adm="http://github.com/admin-faces"
+                xmlns:adm="http://github.com/adminfaces"
                 template="/WEB-INF/templates/template.xhtml">
 
 
@@ -23,7 +23,7 @@
                         <p>In this page the sidebar comes colapsed by using the component adm:sidebar with attribute<code>collapsed=true</code></p>
                         <p>You can also toggle it by adding/removing the css class <code>sidebar-collapse</code> from <code>page body</code>.</p>
                     </div>
-                    <p:button styleClass="btn-primary" value="Toggle" onclick="if($(document.body).hasClass('sidebar-collapse')) {$(document.body).removeClass('sidebar-collapse')} else {$(document.body).addClass('sidebar-collapse')} return false"/>
+                    <p:button styleClass="btn-primary" value="Toggle" onclick="toggleSidebar(); return false"/>
                </div>
        </div>
    </ui:define>

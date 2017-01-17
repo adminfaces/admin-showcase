@@ -6,6 +6,7 @@ import com.github.adminfaces.showcase.pages.IndexPage;
 import com.github.adminfaces.showcase.pages.exception.NotFoundPage;
 import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
+import com.github.adminfaces.showcase.pages.messages.MessagesPage;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
@@ -51,7 +52,7 @@ public class AdminFt {
     protected  ExceptionPage exceptionPage;
 
     @FindByJQuery("div.ui-growl-message")
-    private GrapheneElement growl;
+    private GrapheneElement growlMessage;
 
     @FindByJQuery("section.sidebar > ul.sidebar-menu")
     private Menu menu;
@@ -104,9 +105,12 @@ public class AdminFt {
     }
 
     @Test
-    @Ignore("not working on phantomjs but works on chrome and firefox")
     @InSequence(4)
     public void shouldFilterMenuItens(@InitialPage IndexPage index){
+        if(isPhantomjs()){
+            //this test doesn't work on phantomjs (cannot)
+            return;
+        }
         WebElement menuSearchInput = browser.findElement(By.cssSelector("input.form-control"));
         menuSearchInput.sendKeys("for");
         waitModel();
@@ -127,4 +131,37 @@ public class AdminFt {
         assertThat(menu.getForms().isDisplayed()).isFalse();
     }
 
+    @Test
+    @InSequence(4)
+    public void shouldShowFacesMessages(@InitialPage MessagesPage messagesPage) {
+
+        if(isPhantomjs()){
+            //this test doesn't work on phantomjs (cannot)
+            return;
+        }
+
+        messagesPage.clickBtnInfo();
+        assertThat(growlMessage.getText()).contains("AdminFaces info message.");
+        assertThat(messagesPage.getMsgInfoSummary().getText()).isEqualTo("Info");
+        assertThat(messagesPage.getMsgInfoDetail().getText()).isEqualTo("AdminFaces info message.");
+
+        messagesPage.clickBtnError();
+        assertThat(growlMessage.getText()).contains("AdminFaces Error message.");
+
+        assertThat(messagesPage.getMsgErrorSummary().getText()).isEqualTo("Error!");
+        assertThat(messagesPage.getMsgErrorDetail().getText()).isEqualTo("AdminFaces Error message.");
+
+        messagesPage.clickBtnWarn();
+        assertThat(growlMessage.getText()).contains("AdminFaces Warning message.");
+
+        assertThat(messagesPage.getMsgErrorSummary().getText()).isEqualTo("Warning!");
+        assertThat(messagesPage.getMsgErrorDetail().getText()).isEqualTo("AdminFaces Warning message.");
+    }
+
+
+
+
+    private boolean isPhantomjs() {
+        return browser.getClass().toString().toLowerCase().contains("phantomjs");
+    }
 }
