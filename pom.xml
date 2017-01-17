@@ -46,7 +46,7 @@
             <artifactId>omnifaces</artifactId>
             <version>2.1</version>
         </dependency>
-      
+
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>
@@ -78,18 +78,12 @@
             <scope>test</scope>
             <type>pom</type>
         </dependency>
-
         <dependency>
-            <groupId>org.arquillian.universe</groupId>
-            <artifactId>arquillian-chameleon</artifactId>
-            <type>pom</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.jboss.arquillian.protocol</groupId>
+            <artifactId>arquillian-protocol-servlet</artifactId>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.arquillian.universe</groupId>
             <artifactId>arquillian-graphene</artifactId>
@@ -127,7 +121,7 @@
 
     <build>
         <finalName>showcase</finalName>
-         <resources>
+        <resources>
             <resource>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
@@ -159,54 +153,182 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <includes>
+                        <include>**/*Ft.java</include>
+                    </includes>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <profiles>
-
+        <!-- arquillian containers -->
         <profile>
-            <id>tests</id>
-             <build>
-                 <plugins>
-                     <plugin>
-                         <artifactId>maven-surefire-plugin</artifactId>
-                         <version>2.19.1</version>
-                         <configuration>
-                             <skipTests>false</skipTests>
-                             <includes>
-                                 <include>**/*Ft.java</include>
-                             </includes>
-                         </configuration>
-                     </plugin>
-                 </plugins>
-             </build>
+            <id>wildfly8-managed</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <arquillian.container>wildfly:8.2.0.Final:managed</arquillian.container>
+            </properties>
+            <!-- cannot be in main dependencies section because of conflict with tomee7-remote profile which doesn't use chameleon adapter-->
+            <dependencies>
+                <dependency>
+                    <groupId>org.arquillian.universe</groupId>
+                    <artifactId>arquillian-chameleon</artifactId>
+                    <type>pom</type>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.google.guava</groupId>
+                            <artifactId>guava</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
         </profile>
 
-        <!-- arquillian containers -->
         <profile>
             <id>wildfly8-remote</id>
             <properties>
                 <arquillian.container>wildfly:8.2.0.Final:remote</arquillian.container>
             </properties>
+            <!-- cannot be in main dependencies section because of conflict with tomee7-remote profile which doesn't use chameleon adapter-->
+            <dependencies>
+                <dependency>
+                    <groupId>org.arquillian.universe</groupId>
+                    <artifactId>arquillian-chameleon</artifactId>
+                    <type>pom</type>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.google.guava</groupId>
+                            <artifactId>guava</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>wildfly10-managed</id>
             <properties>
                 <arquillian.container>wildfly:10.1.0.Final:managed</arquillian.container>
             </properties>
+            <!-- cannot be in main dependencies section because of conflict with tomee7-remote profile which doesn't use chameleon adapter-->
+            <dependencies>
+                <dependency>
+                    <groupId>org.arquillian.universe</groupId>
+                    <artifactId>arquillian-chameleon</artifactId>
+                    <type>pom</type>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.google.guava</groupId>
+                            <artifactId>guava</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
         </profile>
-		
-		<profile>
+
+        <profile>
             <id>glassfish-managed</id>
             <properties>
                 <arquillian.container>glassfish:4.1:managed</arquillian.container>
             </properties>
+            <!-- cannot be in main dependencies section because of conflict with tomee7-remote profile which doesn't use chameleon adapter-->
+            <dependencies>
+                <dependency>
+                    <groupId>org.arquillian.universe</groupId>
+                    <artifactId>arquillian-chameleon</artifactId>
+                    <type>pom</type>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>com.google.guava</groupId>
+                            <artifactId>guava</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
         </profile>
-		
-		
+
+        <profile>
+            <id>tomee7-remote</id>
+            <repositories>
+                <repository>
+                    <id>apache-snapshot</id>
+                    <name>Apache Snapshots</name>
+                    <url>https://repository.apache.org/content/groups/snapshots/</url>
+                </repository>
+            </repositories>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <arquillian.qualifier>tomee-remote</arquillian.qualifier>
+                                <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.tomee</groupId>
+                    <artifactId>apache-tomee</artifactId>
+                    <version>7.0.2</version>
+                    <classifier>webprofile</classifier>
+                    <type>zip</type>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomee</groupId>
+                    <artifactId>arquillian-tomee-remote</artifactId>
+                    <version>7.0.2</version>
+                    <scope>test</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                            <artifactId>shrinkwrap-descriptors-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                            <artifactId>shrinkwrap-descriptors-api-base</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.protocol</groupId>
+                            <artifactId>arquillian-protocol-servlet</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.container</groupId>
+                            <artifactId>arquillian-container-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.test</groupId>
+                            <artifactId>arquillian-test-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.container</groupId>
+                            <artifactId>arquillian-container-test-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.core</groupId>
+                            <artifactId>arquillian-core-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.config</groupId>
+                            <artifactId>arquillian-config-impl-base</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>commons-logging</groupId>
+                            <artifactId>commons-logging</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
 
     </profiles>
 

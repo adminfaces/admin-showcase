@@ -12,5 +12,6 @@ before_install:
  - git clone https://github.com/adminfaces/admin-template.git ~/builds/admin-template
  - cd ~/builds/admin-template && mvn install
 script:
-  - cd $TRAVIS_BUILD_DIR && mvn clean package -Ptests
-  - mvn clean package -Ptests -Pglassfish-managed
+  - cd $TRAVIS_BUILD_DIR && mvn clean package -Pwildfly8-managed
+  - mvn test -Pglassfish-managed
+  - mvn test -Ptomee7-remote

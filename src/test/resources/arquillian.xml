@@ -16,7 +16,22 @@
 			<property name="javaVmArguments">-Xmx300m -XX:MaxPermSize=256m 
                 -Duser.country=US -Duser.language=en -Duser.timezone=GMT-03:00
             </property>
-			
+        </configuration>
+    </container>
+
+    <container qualifier="tomee-remote" default="false">
+        <configuration>
+            <property name="httpPort">-1</property>
+            <property name="ajpPort">-1</property>
+            <property name="stopPort">-1</property>
+            <property name="dir">target/tomee-remote</property>
+            <property name="appWorkingDir">target/arquillian-remote-working-dir</property>
+            <property name="cleanOnStartUp">true</property>
+            <property name="simpleLog">true</property>
+            <property name="properties">
+                user.language=en,
+                user.country=US
+            </property>
         </configuration>
     </container>
 
