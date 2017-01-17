@@ -15,3 +15,4 @@ script:
   - cd $TRAVIS_BUILD_DIR && mvn clean package -Pwildfly8-managed
   - mvn test -Pglassfish-managed
   - mvn test -Ptomee7-remote
+  - mvn test -Ptomee1.7-remote

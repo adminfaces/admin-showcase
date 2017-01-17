@@ -330,6 +330,87 @@
             </dependencies>
         </profile>
 
+        <profile>
+            <id>tomee1.7-remote</id>
+            <repositories>
+                <repository>
+                    <id>apache-snapshot</id>
+                    <name>Apache Snapshots</name>
+                    <url>https://repository.apache.org/content/groups/snapshots/</url>
+                </repository>
+            </repositories>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <arquillian.qualifier>tomee-remote</arquillian.qualifier>
+                                <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.openejb</groupId>
+                    <artifactId>apache-tomee</artifactId>
+                    <version>1.7.4</version>
+                    <classifier>webprofile</classifier>
+                    <type>zip</type>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.openejb</groupId>
+                    <artifactId>arquillian-tomee-remote</artifactId>
+                    <version>1.7.4</version>
+                    <scope>test</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                            <artifactId>shrinkwrap-descriptors-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                            <artifactId>shrinkwrap-descriptors-api-base</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.protocol</groupId>
+                            <artifactId>arquillian-protocol-servlet</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.container</groupId>
+                            <artifactId>arquillian-container-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.test</groupId>
+                            <artifactId>arquillian-test-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.container</groupId>
+                            <artifactId>arquillian-container-test-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.core</groupId>
+                            <artifactId>arquillian-core-spi</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jboss.arquillian.config</groupId>
+                            <artifactId>arquillian-config-impl-base</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>commons-logging</groupId>
+                            <artifactId>commons-logging</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+
     </profiles>
 
 
