@@ -187,9 +187,9 @@
 
         <!-- arquillian containers -->
         <profile>
-            <id>jboss-eap6-managed</id>
+            <id>jboss-as-managed</id>
             <properties>
-                <arquillian.container>jboss-eap:6.4.0.Final:managed</arquillian.container>
+                <arquillian.container>jboss as:7.1.1.Final:managed</arquillian.container>
             </properties>
         </profile>
         <profile>
