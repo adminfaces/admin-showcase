@@ -118,7 +118,7 @@
             <dependency>
                 <groupId>org.arquillian</groupId>
                 <artifactId>arquillian-universe</artifactId>
-                <version>1.0.0.Alpha4</version>
+                <version>1.0.0.Alpha5</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -187,12 +187,6 @@
 
         <!-- arquillian containers -->
         <profile>
-            <id>jboss-as-managed</id>
-            <properties>
-                <arquillian.container>jboss as:7.1.1.Final:managed</arquillian.container>
-            </properties>
-        </profile>
-        <profile>
             <id>wildfly8-remote</id>
             <properties>
                 <arquillian.container>wildfly:8.2.0.Final:remote</arquillian.container>
@@ -204,6 +198,15 @@
                 <arquillian.container>wildfly:10.1.0.Final:managed</arquillian.container>
             </properties>
         </profile>
+		
+		<profile>
+            <id>glassfish-managed</id>
+            <properties>
+                <arquillian.container>glassfish:4.1:managed</arquillian.container>
+            </properties>
+        </profile>
+		
+		
 
     </profiles>
 
