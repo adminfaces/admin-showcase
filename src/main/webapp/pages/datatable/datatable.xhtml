@@ -183,10 +183,10 @@
         &lt;adm:breadCrumb link="/pages/datatable/datatable" title="Datatable"/&gt;
         &lt;p:panel styleClass="box-info" header="Datatable"&gt;
             &lt;h:form&gt;
-                &lt;p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
+                &lt;p:dataTable var="car" value="\#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15" rows="10"
-                             emptyMessage="No cars found with given criteria" filteredValue="#{datatableMB.filteredCars}"&gt;
+                             emptyMessage="No cars found with given criteria" filteredValue="\#{datatableMB.filteredCars}"&gt;
 
                     &lt;f:facet name="header"&gt;
                         &lt;p:outputPanel&gt;
@@ -196,39 +196,39 @@
                         &lt;/p:outputPanel&gt;
                     &lt;/f:facet&gt;
 
-                    &lt;p:column filterBy="#{car.id}" sortBy="#{car.id}" headerText="Id" footerText="contains" filterMatchMode="contains"&gt;
-                        &lt;h:outputText value="#{car.id}" /&gt;
+                    &lt;p:column filterBy="\#{car.id}" sortBy="\#{car.id}" headerText="Id" footerText="contains" filterMatchMode="contains"&gt;
+                        &lt;h:outputText value="\#{car.id}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"&gt;
+                    &lt;p:column filterBy="\#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:spinner onchange="PF('carsTable').filter()" styleClass="year-spinner"&gt;
                                 &lt;f:converter converterId="javax.faces.Integer" /&gt;
                             &lt;/p:spinner&gt;
                         &lt;/f:facet&gt;
-                        &lt;h:outputText value="#{car.year}" /&gt;
+                        &lt;h:outputText value="\#{car.year}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact"&gt;
+                    &lt;p:column filterBy="\#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:selectOneMenu onchange="PF('carsTable').filter()" &gt;
-                                &lt;f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" /&gt;
-                                &lt;f:selectItems value="#{datatableMB.brands}" /&gt;
+                                &lt;f:selectItem itemLabel="Select One" itemValue="\#{null}" noSelectionOption="true" /&gt;
+                                &lt;f:selectItems value="\#{datatableMB.brands}" /&gt;
                             &lt;/p:selectOneMenu&gt;
                         &lt;/f:facet&gt;
-                        &lt;h:outputText value="#{car.brand}" /&gt;
+                        &lt;h:outputText value="\#{car.brand}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="#{car.color}" headerText="Color" footerText="in" filterMatchMode="in"&gt;
+                    &lt;p:column filterBy="\#{car.color}" headerText="Color" footerText="in" filterMatchMode="in"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:selectCheckboxMenu label="Colors" onchange="PF('carsTable').filter()" panelStyle="width:125px" scrollHeight="150"&gt;
-                                &lt;f:selectItems value="#{datatableMB.colors}" /&gt;
+                                &lt;f:selectItems value="\#{datatableMB.colors}" /&gt;
                             &lt;/p:selectCheckboxMenu&gt;
                         &lt;/f:facet&gt;
-                        &lt;h:outputText value="#{car.color}" /&gt;
+                        &lt;h:outputText value="\#{car.color}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="#{car.sold}" headerText="Status" footerText="equals" filterMatchMode="equals"&gt;
+                    &lt;p:column filterBy="\#{car.sold}" headerText="Status" footerText="equals" filterMatchMode="equals"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:selectOneButton onchange="PF('carsTable').filter()"&gt;
                                 &lt;f:converter converterId="javax.faces.Boolean" /&gt;
@@ -237,11 +237,11 @@
                                 &lt;f:selectItem itemLabel="Sale" itemValue="false" /&gt;
                             &lt;/p:selectOneButton&gt;
                         &lt;/f:facet&gt;
-                        &lt;h:outputText value="#{car.sold ? 'Sold': 'Sale'}" /&gt;
+                        &lt;h:outputText value="\#{car.sold ? 'Sold': 'Sale'}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="#{car.price}" headerText="Price" footerText="custom (min)" filterFunction="#{datatableMB.filterByPrice}"&gt;
-                        &lt;h:outputText value="#{car.price}"&gt;
+                    &lt;p:column filterBy="\#{car.price}" headerText="Price" footerText="custom (min)" filterFunction="\#{datatableMB.filterByPrice}"&gt;
+                        &lt;h:outputText value="\#{car.price}"&gt;
                             &lt;f:convertNumber currencySymbol="$" type="currency"/&gt;
                         &lt;/h:outputText&gt;
                     &lt;/p:column&gt;
@@ -252,7 +252,7 @@
         &lt;p:separator/&gt;
 
         &lt;p:panel styleClass="box-info" header="SubTable"&gt;
-            &lt;p:dataTable var="team" value="#{datatableMB.teams}"&gt;
+            &lt;p:dataTable var="team" value="\#{datatableMB.teams}"&gt;
                 &lt;f:facet name="header"&gt;
                     NBA Teams
                 &lt;/f:facet&gt;
@@ -268,24 +268,24 @@
                     &lt;/p:row&gt;
                 &lt;/p:columnGroup&gt;
 
-                &lt;p:subTable var="stats" value="#{team.stats}"&gt;
+                &lt;p:subTable var="stats" value="\#{team.stats}"&gt;
                     &lt;f:facet name="header"&gt;
-                        &lt;h:outputText value="#{team.name}" /&gt;
+                        &lt;h:outputText value="\#{team.name}" /&gt;
                     &lt;/f:facet&gt;
                     &lt;p:column&gt;
-                        &lt;h:outputText value="#{stats.season}" /&gt;
+                        &lt;h:outputText value="\#{stats.season}" /&gt;
                     &lt;/p:column&gt;
                     &lt;p:column&gt;
-                        &lt;h:outputText value="#{stats.win}" /&gt;
+                        &lt;h:outputText value="\#{stats.win}" /&gt;
                     &lt;/p:column&gt;
                     &lt;p:column&gt;
-                        &lt;h:outputText value="#{stats.loss}" /&gt;
+                        &lt;h:outputText value="\#{stats.loss}" /&gt;
                     &lt;/p:column&gt;
                     &lt;p:columnGroup type="footer"&gt;
                         &lt;p:row&gt;
                             &lt;p:column footerText="Totals: " style="text-align:right"/&gt;
-                            &lt;p:column footerText="#{team.allWins}" /&gt;
-                            &lt;p:column footerText="#{team.allLosses}" /&gt;
+                            &lt;p:column footerText="\#{team.allWins}" /&gt;
+                            &lt;p:column footerText="\#{team.allLosses}" /&gt;
                         &lt;/p:row&gt;
                     &lt;/p:columnGroup&gt;
                 &lt;/p:subTable&gt;
