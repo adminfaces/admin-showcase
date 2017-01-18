@@ -16,9 +16,6 @@ Just generate the `war file` using maven:
 mvn clean package -DskipTests
 ----
 
-NOTE: While AdminFaces is not in maven central, you need to install https://github.com/adminfaces/admin-theme[Admin Theme^] and https://github.com/adminfaces/admin-template[Admin Template^] into your local maven repository *before* building this project.
-
-
 == Test
 
 To execute funcional tests just choose the application server using maven profile, ex:
