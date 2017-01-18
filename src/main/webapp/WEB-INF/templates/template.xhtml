@@ -6,6 +6,7 @@
 
     <ui:define name="head">
         <h:outputStylesheet library="css" name="showcase.css"/>
+        <h:outputStylesheet library="css" name="prism.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
 
@@ -20,16 +21,20 @@
         Admin
     </ui:define>
 
-    <ui:define name="sidebar">
+    <ui:define name="before-sidebar">
         <ui:include src="/includes/menu-search.xhtml"/>
     </ui:define>
 
-     <ui:define name="sideMenu">
+     <ui:define name="sidebar">
          <ui:include src="/includes/menu.xhtml"/>
      </ui:define>
 
-    <ui:define name="topMenu">
+    <ui:define name="top-menu">
         <ui:include src="/includes/top-menu.xhtml"/>
+    </ui:define>
+    
+    <ui:define name="after-content">
+        <ui:insert name="code"/>
     </ui:define>
 
     <ui:define name="footer">
@@ -40,6 +45,9 @@
         <div class="pull-right hidden-xs" style="color: gray">
             <i>#{adm['admin.version']}</i>
         </div>
+
+        <h:outputScript library="js" name="prism.js"  target="head"/>
     </ui:define>
+
 
 </ui:composition>

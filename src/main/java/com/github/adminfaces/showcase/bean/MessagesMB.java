@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Named
 @ViewScoped
-public class MessagesBean implements Serializable{
+public class MessagesMB implements Serializable{
 
     public void info() {
         Messages.create("Info").detail("AdminFaces info message.").add();

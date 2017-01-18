@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+
+    <ui:define name="title">
+           Sidebar collapsing example
+    </ui:define>
+
+    <ui:define name="description">
+        This example page shows how to collapse sidebar.
+    </ui:define>
+
+   <ui:define name="body">
+       <adm:breadCrumb link="/pages/layout/sidebar" title="Sidebar"/>
+       <adm:sidebar collapsed="true"/>
+       <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div class="callout callout-info">
+                        <h4>Tip!</h4>
+                        <p>In this page the sidebar comes colapsed by using the component adm:sidebar with attribute<code>collapsed=true</code></p>
+                        <p>You can also toggle it by adding/removing the css class <code>sidebar-collapse</code> from <code>page body</code>.</p>
+                    </div>
+                    <p:button styleClass="btn-primary" value="Toggle" onclick="toggleSidebar(); return false"/>
+               </div>
+       </div>
+   </ui:define>
+
+      <ui:define name="code">
+         <p:tabView>
+       <p:tab title="sidebar.xhtml">
+           <pre>
+               <code class="language-html">&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml"&gt;
+
+
+    &lt;ui:define name="title"&gt;
+           Sidebar collapsing example
+    &lt;/ui:define&gt;
+
+    &lt;ui:define name="description"&gt;
+        This example page shows how to collapse sidebar.
+    &lt;/ui:define&gt;
+
+   &lt;ui:define name="body"&gt;
+       &lt;adm:breadCrumb link="/pages/layout/sidebar-collapsed" title="Sidebar"/&gt;
+       &lt;adm:sidebar collapsed="true"/&gt;
+       &lt;div class="box box-primary"&gt;
+                &lt;div class="box-header with-border"&gt;
+                    &lt;div class="callout callout-info"&gt;
+                        &lt;h4&gt;Tip!&lt;/h4&gt;
+                        &lt;p&gt;In this page the sidebar comes colapsed by using the component adm:sidebar with attribute&lt;code&gt;collapsed=true&lt;/code&gt;&lt;/p&gt;
+                        &lt;p&gt;You can also toggle it by adding/removing the css class &lt;code&gt;sidebar-collapse&lt;/code&gt; from &lt;code&gt;page body&lt;/code&gt;.&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;p:button styleClass="btn-primary" value="Toggle" onclick="toggleSidebar(); return false"/&gt;
+               &lt;/div&gt;
+       &lt;/div&gt;
+   &lt;/ui:define&gt;
+&lt;/ui:composition&gt;
+
+                </code>
+           </pre>
+       </p:tab>
+
+ </p:tabView>
+    </ui:define>
+</ui:composition>

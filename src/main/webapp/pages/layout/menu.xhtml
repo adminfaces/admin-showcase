@@ -1,0 +1,278 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+
+    <ui:define name="title">
+           Showcase menu
+    </ui:define>
+
+    <ui:define name="description">
+        This page desmonstrates showcase menu and top bar code
+    </ui:define>
+
+   <ui:define name="body">
+       <div class="box box-primary" >
+                <div class="box-header with-border" style="min-height: 150px">
+                     <p style="padding: 20px">The menu is <code>defined</code> via facelets templating by *extending* <a href="https://github.com/adminfaces/admin-template/blob/master/src/main/resources/META-INF/resources/admin.xhtml">Admin Template</a> </p>
+               </div>
+       </div>
+   </ui:define>
+
+      <ui:define name="code">
+         <p:tabView>
+       <p:tab title="template.xhtml">
+           <pre>
+               <code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/admin.xhtml"&gt;
+
+  &lt;ui:define name="before-sidebar"&gt;
+       &lt;ui:include src="/includes/menu-search.xhtml"/&gt;
+  &lt;/ui:define&gt;
+  &lt;ui:define name="sidebar"&gt;
+       &lt;ui:include src="/includes/menu.xhtml"/&gt;
+  &lt;/ui:define&gt;
+
+  &lt;ui:define name="topMenu"&gt;
+       &lt;ui:include src="/includes/top-menu.xhtml"/&gt;
+  &lt;/ui:define&gt;
+
+&lt;/ui:composition&gt;
+
+                </code>
+           </pre>
+       </p:tab>
+    <p:tab title="menu-search.xhtml">
+           <pre>
+               <code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"&gt;
+
+
+    &lt;div class="sidebar-form"&gt;
+        &lt;div class="input-group"&gt;
+            &lt;input type="text" name="q" class="form-control" placeholder="Search..."
+                   onclick="this.value='';searchMenu('')" title="Filter menus by name"
+                   onkeyup="searchMenu(this.value)"/&gt;
+                  &lt;span class="input-group-btn"&gt;
+                    &lt;button type="submit" name="search" id="search-btn" class="btn btn-flat"&gt;&lt;i
+                            class="fa fa-search"&gt;&lt;/i&gt;
+                    &lt;/button&gt;
+                  &lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+
+&lt;/ui:composition&gt;
+ </code>
+           </pre>
+       </p:tab>
+  <p:tab title="menu.xhtml">
+           <pre>
+               <code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"&gt;
+
+
+    &lt;ul class="sidebar-menu"&gt;
+        &lt;li&gt;
+            &lt;p:link href="/index.xhtml"&gt;
+                &lt;i class="fa fa-home"&gt;&lt;/i&gt;
+                &lt;span&gt;Home&lt;/span&gt;
+            &lt;/p:link&gt;
+        &lt;/li&gt;
+        &lt;li class="header"&gt;
+            General
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;p:link href="/pages/exception/exception.xhtml"&gt;
+                &lt;i class="fa fa-stack-overflow"&gt;&lt;/i&gt;
+                &lt;span&gt;Exceptions&lt;/span&gt;
+            &lt;/p:link&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;p:link href="/pages/layout/forms.xhtml"&gt;
+                &lt;i class="fa fa-edit"&gt;&lt;/i&gt;
+                &lt;span&gt;Forms&lt;/span&gt;
+            &lt;/p:link&gt;
+        &lt;/li&gt;
+        &lt;li class="treeview"&gt;
+            &lt;a href="#"&gt;
+                &lt;i class="fa fa-laptop"&gt;&lt;/i&gt;
+                &lt;span&gt;UI Elements&lt;/span&gt;
+            &lt;span class="pull-right-container"&gt;
+                     &lt;i class="fa fa-angle-left pull-right"&gt;&lt;/i&gt;
+                &lt;/span&gt;
+            &lt;/a&gt;
+            &lt;ul class="treeview-menu"&gt;
+                &lt;li&gt;
+                    &lt;p:link href="/todo" onclick="alert('TODO');return false"&gt;
+                        &lt;i class="fa fa-group"&gt;&lt;/i&gt;
+                        &lt;span&gt;Buttons&lt;/span&gt;
+                    &lt;/p:link&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;p:link href="/todo" onclick="alert('TODO');return false"&gt;
+                        &lt;i class="fa fa-th-list"&gt;&lt;/i&gt;
+                        &lt;span&gt;DataTable&lt;/span&gt;
+                    &lt;/p:link&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;p:link href="/todo" onclick="alert('TODO');return false"&gt;
+                        &lt;i class="fa fa-graduation-cap"&gt;&lt;/i&gt;
+                        &lt;span&gt;Dialog&lt;/span&gt;
+                    &lt;/p:link&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;p:link href="/pages/messages/messages.xhtml"&gt;
+                        &lt;i class="fa fa-envelope-o"&gt;&lt;/i&gt;
+                        &lt;span&gt;Messages&lt;/span&gt;
+                    &lt;/p:link&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;p:link href="/todo" onclick="alert('TODO');return false"&gt;
+                        &lt;i class="fa fa-graduation-cap"&gt;&lt;/i&gt;
+                        &lt;span&gt;Panels&lt;/span&gt;
+                    &lt;/p:link&gt;
+                &lt;/li&gt;
+
+                &lt;li&gt;
+                    &lt;p:link href="/todo" onclick="alert('TODO');return false"&gt;
+                        &lt;i class="fa fa-graduation-cap"&gt;&lt;/i&gt;
+                        &lt;span&gt;TabView&lt;/span&gt;
+                    &lt;/p:link&gt;
+                &lt;/li&gt;
+
+            &lt;/ul&gt;
+        &lt;/li&gt;
+
+        &lt;li class="header"&gt;
+            Layout
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;p:link href="/pages/layout/skin.xhtml"&gt;
+                &lt;i class="fa fa-gears"&gt;&lt;/i&gt;
+                &lt;span&gt;Skins&lt;/span&gt;
+            &lt;/p:link&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;p:link href="/pages/layout/sidebar.xhtml"&gt;
+                &lt;i class="fa fa-outdent"&gt;&lt;/i&gt;
+                &lt;span&gt;Sidebar&lt;/span&gt;
+            &lt;/p:link&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+
+
+
+&lt;/ui:composition&gt;
+                </code>
+           </pre>
+       </p:tab>
+
+             <p:tab title="top-menu.xhtml">
+           <pre>
+               <code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"&gt;
+
+    &lt;ul class="nav navbar-nav"&gt;
+        &lt;li class="dropdown messages-menu"&gt;
+            &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"&gt;
+                &lt;i class="fa fa-envelope-o"&gt;&lt;/i&gt;
+                &lt;span class="label label-success"&gt;4&lt;/span&gt;
+            &lt;/a&gt;
+            &lt;ul class="dropdown-menu"&gt;
+                &lt;li class="header align-center"&gt;You have 4 messages&lt;/li&gt;
+                &lt;li&gt;
+                    &lt;ul class="menu"&gt;
+                        &lt;li&gt;
+                            Message 1
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            Message 2
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            Message 3
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            Message 4
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class="footer"&gt;&lt;a href="#"&gt;See all messages&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class="dropdown notifications-menu"&gt;
+            &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"&gt;
+                &lt;i class="fa fa-bell-o"&gt;&lt;/i&gt;
+                &lt;span class="label label-warning"&gt;2&lt;/span&gt;
+            &lt;/a&gt;
+            &lt;ul class="dropdown-menu"&gt;
+                &lt;li class="header align-center"&gt;You have 2 notifications.&lt;/li&gt;
+                &lt;li&gt;
+                    &lt;!-- inner menu: contains the actual data --&gt;
+                    &lt;ul class="menu"&gt;
+                        &lt;li&gt;
+                            Notification 1
+                        &lt;/li&gt;
+
+                        &lt;li&gt;
+                            Notification 2
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class="footer"&gt;&lt;a href="#"&gt;See all notifications&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class="dropdown user user-menu"&gt;
+            &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown"&gt;
+                &lt;pe:gravatar id="userImage"
+                             value="nonexisting"/&gt;
+                &lt;span class="hidden-xs"&gt;Rafael Pestano&lt;/span&gt;
+            &lt;/a&gt;
+            &lt;ul class="dropdown-menu"&gt;
+                &lt;li class="user-header"&gt;
+                    &lt;div class="hidden-xs"&gt;
+                        &lt;pe:gravatar style="border-radius: 50%"
+                                     value="rmpestano@gmail.com"/&gt;
+                    &lt;/div&gt;
+                    &lt;p&gt;
+                        Rafael M. Pestano
+                        &lt;small&gt; Java EE Developer &lt;/small&gt;
+                    &lt;/p&gt;
+                &lt;/li&gt;
+                &lt;li class="user-footer"&gt;
+                    &lt;h:form prependId="false"&gt;
+                        &lt;div class="pull-left"&gt;
+                            &lt;p:commandLink  styleClass="btn btn-danger"  value="Change password"/&gt;
+                        &lt;/div&gt;
+                        &lt;div class="pull-right"&gt;
+                            &lt;p:link id="logout" href="/logoff"  title="Logoff"&gt;
+                                &lt;i class="fa fa-sign-out fa-2x"&gt;&lt;/i&gt;
+                            &lt;/p:link&gt;
+                        &lt;/div&gt;
+                    &lt;/h:form&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+
+    &lt;/ul&gt;
+
+
+&lt;/ui:composition&gt;
+ </code>
+           </pre>
+       </p:tab>
+ </p:tabView>
+    </ui:define>
+</ui:composition>
