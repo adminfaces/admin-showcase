@@ -13,7 +13,7 @@ Showcase is available on http://adminfaces-rpestano.rhcloud.com/showcase/index.x
 Just generate the `war file` using maven:
 
 ----
-mvn clean package -DskipTests=true
+mvn clean package -DskipTests
 ----
 
 NOTE: While AdminFaces is not in maven central, you need to install https://github.com/adminfaces/admin-theme[Admin Theme^] and https://github.com/adminfaces/admin-template[Admin Template^] into your local maven repository *before* building this project.

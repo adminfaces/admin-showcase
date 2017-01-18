@@ -177,6 +177,9 @@ public class AdminFt {
 
 
     private boolean isPhantomjs() {
+        //some tests doesn't work on phantomjs (conflict with jquery used by primefaces ajax: msg: ReferenceError: Can't find variable: $)
+        // as consequence it doesn't fire ajax request properly: RequestGuardException: Request type 'XHR' was expected, but type 'HTTP' was done instead
+        //works great with chrome driver (tested with version 55)
         return browser.getClass().toString().toLowerCase().contains("phantomjs");
     }
 }
