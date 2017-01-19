@@ -40,7 +40,7 @@
             <h:form>
                 <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" rows="10"
+                             rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{car.id}"
                              emptyMessage="No cars found with given criteria" filteredValue="#{datatableMB.filteredCars}">
 
                     <f:facet name="header">
@@ -51,11 +51,15 @@
                         </p:outputPanel>
                     </f:facet>
 
-                    <p:column filterBy="#{car.id}" sortBy="#{car.id}" headerText="Id" footerText="contains" filterMatchMode="contains">
+                    <p:column width="5%" selectionMode="multiple"
+                                  styleClass="align-center"
+                                  priority="1"/>
+
+                    <p:column filterBy="#{car.id}" sortBy="#{car.id}" headerText="Id" footerText="contains" filterMatchMode="contains"  priority="1">
                         <h:outputText value="#{car.id}" />
                     </p:column>
 
-                    <p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte">
+                    <p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"  priority="2">
                         <f:facet name="filter">
                             <p:spinner onchange="PF('carsTable').filter()" styleClass="year-spinner">
                                 <f:converter converterId="javax.faces.Integer" />
@@ -64,7 +68,7 @@
                         <h:outputText value="#{car.year}" />
                     </p:column>
 
-                    <p:column filterBy="#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact">
+                    <p:column filterBy="#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact"  priority="2">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('carsTable').filter()" >
                                 <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
@@ -74,7 +78,7 @@
                         <h:outputText value="#{car.brand}" />
                     </p:column>
 
-                    <p:column filterBy="#{car.color}" headerText="Color" footerText="in" filterMatchMode="in">
+                    <p:column filterBy="#{car.color}" headerText="Color" footerText="in" filterMatchMode="in"  priority="3">
                         <f:facet name="filter">
                             <p:selectCheckboxMenu label="Colors" onchange="PF('carsTable').filter()" panelStyle="width:125px" scrollHeight="150">
                                 <f:selectItems value="#{datatableMB.colors}" />
@@ -83,7 +87,7 @@
                         <h:outputText value="#{car.color}" />
                     </p:column>
 
-                    <p:column filterBy="#{car.sold}" headerText="Status" footerText="equals" filterMatchMode="equals">
+                    <p:column filterBy="#{car.sold}" headerText="Status" footerText="equals" filterMatchMode="equals"  priority="3">
                         <f:facet name="filter">
                             <p:selectOneButton onchange="PF('carsTable').filter()">
                                 <f:converter converterId="javax.faces.Boolean" />
@@ -95,7 +99,7 @@
                         <h:outputText value="#{car.sold ? 'Sold': 'Sale'}" />
                     </p:column>
 
-                    <p:column filterBy="#{car.price}" headerText="Price" footerText="custom (min)" filterFunction="#{datatableMB.filterByPrice}">
+                    <p:column filterBy="#{car.price}" headerText="Price" footerText="custom (min)" filterFunction="#{datatableMB.filterByPrice}"  priority="2">
                         <h:outputText value="#{car.price}">
                             <f:convertNumber currencySymbol="$" type="currency"/>
                         </h:outputText>
@@ -185,7 +189,7 @@
             &lt;h:form&gt;
                 &lt;p:dataTable var="car" value="\#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" rows="10"
+                             rowsPerPageTemplate="5,10,15" rows="10" rowKey="\#{car.id}"
                              emptyMessage="No cars found with given criteria" filteredValue="\#{datatableMB.filteredCars}"&gt;
 
                     &lt;f:facet name="header"&gt;
@@ -196,11 +200,15 @@
                         &lt;/p:outputPanel&gt;
                     &lt;/f:facet&gt;
 
-                    &lt;p:column filterBy="\#{car.id}" sortBy="\#{car.id}" headerText="Id" footerText="contains" filterMatchMode="contains"&gt;
+                    &lt;p:column width="5%" selectionMode="multiple"
+                                  styleClass="align-center"
+                                  priority="1"/&gt;
+
+                    &lt;p:column filterBy="\#{car.id}" sortBy="\#{car.id}" headerText="Id" footerText="contains" filterMatchMode="contains"  priority="1"&gt;
                         &lt;h:outputText value="\#{car.id}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="\#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"&gt;
+                    &lt;p:column filterBy="\#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"  priority="2"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:spinner onchange="PF('carsTable').filter()" styleClass="year-spinner"&gt;
                                 &lt;f:converter converterId="javax.faces.Integer" /&gt;
@@ -209,7 +217,7 @@
                         &lt;h:outputText value="\#{car.year}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="\#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact"&gt;
+                    &lt;p:column filterBy="\#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact"  priority="2"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:selectOneMenu onchange="PF('carsTable').filter()" &gt;
                                 &lt;f:selectItem itemLabel="Select One" itemValue="\#{null}" noSelectionOption="true" /&gt;
@@ -219,7 +227,7 @@
                         &lt;h:outputText value="\#{car.brand}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="\#{car.color}" headerText="Color" footerText="in" filterMatchMode="in"&gt;
+                    &lt;p:column filterBy="\#{car.color}" headerText="Color" footerText="in" filterMatchMode="in"  priority="3"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:selectCheckboxMenu label="Colors" onchange="PF('carsTable').filter()" panelStyle="width:125px" scrollHeight="150"&gt;
                                 &lt;f:selectItems value="\#{datatableMB.colors}" /&gt;
@@ -228,7 +236,7 @@
                         &lt;h:outputText value="\#{car.color}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="\#{car.sold}" headerText="Status" footerText="equals" filterMatchMode="equals"&gt;
+                    &lt;p:column filterBy="\#{car.sold}" headerText="Status" footerText="equals" filterMatchMode="equals"  priority="3"&gt;
                         &lt;f:facet name="filter"&gt;
                             &lt;p:selectOneButton onchange="PF('carsTable').filter()"&gt;
                                 &lt;f:converter converterId="javax.faces.Boolean" /&gt;
@@ -240,7 +248,7 @@
                         &lt;h:outputText value="\#{car.sold ? 'Sold': 'Sale'}" /&gt;
                     &lt;/p:column&gt;
 
-                    &lt;p:column filterBy="\#{car.price}" headerText="Price" footerText="custom (min)" filterFunction="\#{datatableMB.filterByPrice}"&gt;
+                    &lt;p:column filterBy="\#{car.price}" headerText="Price" footerText="custom (min)" filterFunction="\#{datatableMB.filterByPrice}"  priority="2"&gt;
                         &lt;h:outputText value="\#{car.price}"&gt;
                             &lt;f:convertNumber currencySymbol="$" type="currency"/&gt;
                         &lt;/h:outputText&gt;
