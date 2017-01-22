@@ -12,7 +12,7 @@ cache:
 #- cd ~/builds/admin-template && mvn install
 
 script:
-- mvn clean package -Pwildfly8-managed -Popenshift
+- mvn clean package -Pwildfly8-managed
 - mvn test -Pglassfish-managed
 - mvn test -Ptomee7-remote
 - mvn test -Ptomee1.7-remote
@@ -24,4 +24,4 @@ deploy:
   app: adminfaces
   domain: rpestano
   on:
-    repo: master
+    repo: adminfaces/admin-showcase
