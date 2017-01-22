@@ -6,6 +6,7 @@ import com.github.adminfaces.showcase.pages.IndexPage;
 import com.github.adminfaces.showcase.pages.exception.NotFoundPage;
 import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
+import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
 import com.github.adminfaces.showcase.pages.messages.MessagesPage;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -26,6 +27,7 @@ import org.openqa.selenium.WebElement;
 
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.jboss.arquillian.graphene.Graphene.guardHttp;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 
@@ -49,7 +51,10 @@ public class AdminFt {
     protected ViewExpiredPage viewExpiredPage;
 
     @Page
-    protected  ExceptionPage exceptionPage;
+    protected ExceptionPage exceptionPage;
+
+    @Page
+    protected MessagesPage messagesPage;
 
     @FindByJQuery("div.ui-growl-message")
     private GrapheneElement growlMessage;
@@ -58,7 +63,7 @@ public class AdminFt {
     private Menu menu;
 
     @Deployment(testable = false)
-    public static Archive<?> getDeployment(){
+    public static Archive<?> getDeployment() {
         return deploy();
     }
 
@@ -66,7 +71,7 @@ public class AdminFt {
     @Test
     @InSequence(1)
     public void shouldLoadIndexPage(@InitialPage IndexPage index) {
-        assertThat(index.getPageTitle().getText()).isEqualTo("Welcome to the AdminFaces Showcase!");
+        assertThat(index.getPageTitle().getText()).startsWith("Welcome to the AdminFaces Showcase!");
     }
 
 
@@ -97,17 +102,17 @@ public class AdminFt {
 
     @Test
     @InSequence(3)
-    public void shouldNavigateUsingSideMenu(@InitialPage IndexPage index){
+    public void shouldNavigateUsingSideMenu(@InitialPage IndexPage index) {
         menu.goToHomePage();
-        assertThat(index.getPageTitle().getText()).isEqualTo("Welcome to the AdminFaces Showcase!");
+        assertThat(index.getPageTitle().getText()).startsWith("Welcome to the AdminFaces Showcase!");
         menu.goToExceptionPage();
         assertThat(exceptionPage.getTitle().getText()).contains("Exceptions This page shows how the application behaves when exceptions are raised.");
     }
 
     @Test
     @InSequence(4)
-    public void shouldFilterMenuItens(@InitialPage IndexPage index){
-        if(isPhantomjs()){
+    public void shouldFilterMenuItens(@InitialPage IndexPage index) {
+        if (isPhantomjs()) {
             //this test doesn't work on phantomjs (cannot)
             return;
         }
@@ -135,7 +140,7 @@ public class AdminFt {
     @InSequence(4)
     public void shouldShowFacesMessages(@InitialPage MessagesPage messagesPage) {
 
-        if(isPhantomjs()){
+        if (isPhantomjs()) {
             //this test doesn't work on phantomjs (conflict with jquery used by primefaces ajax: msg: ReferenceError: Can't find variable: $)
             // as consequence it doesn't fire ajax request properly: RequestGuardException: Request type 'XHR' was expected, but type 'HTTP' was done instead
             //works great with chrome driver (tested with version 55)
@@ -173,6 +178,26 @@ public class AdminFt {
         assertThat(messagesPage.getFieldMsgDefault().getText()).isEqualTo("Default: Validation Error: Value is required.");
         assertThat(messagesPage.getFieldMsgTxt().getText()).isEqualTo("Text: Validation Error: Value is required.");
         assertThat(messagesPage.getFieldMsgIcon().getAttribute("title")).isEqualTo("Icon: Validation Error: Value is required.");
+    }
+
+    @Test
+    @InSequence(6)
+    public void shouldCreateBreadcrumbs(@InitialPage BreadcrumbPage breadcrumbPage) {
+        assertThat(breadcrumbPage.getBreadcrumb().isDisplayed()).isTrue();
+        assertThat(breadcrumbPage.getHomeItem().isDisplayed()).isTrue();
+        assertThat(breadcrumbPage.getHomeItem().getText()).isEqualTo("Home");
+        assertThat(breadcrumbPage.getBreadcrumbItem().isDisplayed()).isTrue();
+        assertThat(breadcrumbPage.getBreadcrumbItem().getText()).isEqualTo("Breadcrumbs");
+
+        breadcrumbPage.getInputLink().sendKeys("/pages/messages/messages");
+        breadcrumbPage.getInputTitle().sendKeys("Messages");
+        breadcrumbPage.clickBtnAdd();
+        WebElement messagesItem = breadcrumbPage.getBreadcrumbItem();//Messages item will be added as second item because "Breadcrumb" item is added in preRenderView
+        assertThat(messagesItem.isDisplayed());
+        assertThat(messagesItem.getText()).isEqualTo("Messages");
+        guardHttp(messagesItem).click();
+        assertThat(messagesPage.getTitle().isDisplayed()).isTrue();
+
     }
 
 

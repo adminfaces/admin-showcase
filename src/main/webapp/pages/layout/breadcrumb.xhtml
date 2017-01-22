@@ -16,7 +16,7 @@
     </ui:define>
 
     <ui:define name="body">
-        <adm:breadcrumb link="pages/layout/breadcrumb" title="Breadcrumbs"/>
+        <adm:breadcrumb link="/pages/layout/breadcrumb" title="Breadcrumbs"/>
 
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -36,11 +36,11 @@
                     <h:form>
                         <div class="ui-g ui-fluid">
                             <div class="ui-g-12 ui-md-4">
-                                <p:inputText placeholder="Breadcrumb title, ex: Github" value="#{breadcrumbExampleMB.title}"
+                                <p:inputText id="inpt-title" placeholder="Breadcrumb title, ex: Github" value="#{breadcrumbExampleMB.title}"
                                              />
                             </div>
                             <div class="ui-g-12 ui-md-4">
-                                <p:inputText placeholder="Breadcrumb link, ex: http://github.com" value="#{breadcrumbExampleMB.link}"
+                                <p:inputText id="inpt-link" placeholder="Breadcrumb link, ex: http://github.com" value="#{breadcrumbExampleMB.link}"
                                              />
                             </div>
                             <div class="ui-g-12 ui-md-4">

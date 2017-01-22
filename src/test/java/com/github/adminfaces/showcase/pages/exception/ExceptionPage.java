@@ -12,7 +12,7 @@ import static org.jboss.arquillian.graphene.Graphene.guardHttp;
  * Created by rafael-pestano on 16/01/17.
  */
 @Location("pages/exception/exception.xhtml")
-public class ExceptionPage extends BasePage{
+public class ExceptionPage extends BasePage {
 
     @FindByJQuery("button.btn-danger")
     protected WebElement btnRuntime;
@@ -24,25 +24,25 @@ public class ExceptionPage extends BasePage{
     protected WebElement btn404;
 
 
-    public void clickRuntimeButton(){
-        if(isPhantomjs()){
+    public void clickRuntimeButton() {
+        if (isPhantomjs()) {
             guardHttp(btnRuntime).click();
-        } else{
+        } else {
             guardAjax(btnRuntime).click();
         }
 
     }
 
-    public void clickViewExpiredButton(){
-        if(isPhantomjs()){
+    public void clickViewExpiredButton() {
+        if (isPhantomjs()) {
             guardHttp(btnViewExpired).click();
-        } else{
+        } else {
             guardAjax(btnViewExpired).click();
         }
 
     }
 
-    public void click404Button(){
+    public void click404Button() {
         guardHttp(btn404).click();
     }
 }
