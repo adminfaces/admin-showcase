@@ -28,6 +28,7 @@ import org.openqa.selenium.WebElement;
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jboss.arquillian.graphene.Graphene.guardHttp;
+import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 
@@ -195,7 +196,8 @@ public class AdminFt {
         WebElement messagesItem = breadcrumbPage.getBreadcrumbItem();//Messages item will be added as second item because "Breadcrumb" item is added in preRenderView
         assertThat(messagesItem.isDisplayed());
         assertThat(messagesItem.getText()).isEqualTo("Messages");
-        guardHttp(messagesItem).click();
+        messagesItem.click();
+        waitModel();
         assertThat(messagesPage.getTitle().isDisplayed()).isTrue();
 
     }
