@@ -24,4 +24,4 @@ deploy:
   app: adminfaces
   domain: rpestano
   on:
-    repo: adminfaces/admin-showcase
+    repo: master
