@@ -15,7 +15,7 @@
     </ui:define>
 
    <ui:define name="body">
-       <adm:breadCrumb link="/pages/exception/exception" title="Exceptions"/>
+       <adm:breadcrumb link="/pages/exception/exception" title="Exceptions"/>
        <p:panel styleClass="box-danger" header="Exceptions" style="min-height: 150px">
            <h:form>
                <div class="ui-g ui-fluid">
@@ -38,63 +38,14 @@
          <p:tabView>
        <p:tab title="exception.xhtml">
            <pre>
-               <code class="language-html">&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui"
-        xmlns:adm="http://github.com/adminfaces"
-        template="/WEB-INF/templates/template.xhtml"&gt;
-
-
-    &lt;ui:define name="title"&gt;
-           Exceptions
-    &lt;/ui:define&gt;
-
-    &lt;ui:define name="description"&gt;
-        This page shows how the application behaves when exceptions are raised.
-    &lt;/ui:define&gt;
-
-   &lt;ui:define name="body"&gt;
-       &lt;adm:breadCrumb link="/pages/exception/exception" title="Exceptions"/&gt;
-       &lt;p:panel styleClass="box-danger" header="Exceptions"&gt;
-           &lt;h:form&gt;
-               &lt;div class="ui-g ui-fluid"&gt;
-                   &lt;div class="ui-g-4 ui-sm-12"&gt;
-                       &lt;p:commandButton styleClass="btn-danger" action="\#{exceptionMB.throwRuntime}" value="Runtime exception"/&gt;
-                   &lt;/div&gt;
-                   &lt;div class="ui-g-4 ui-sm-12"&gt;
-                       &lt;p:commandButton styleClass="bg-dark-red" style="color: #fff" action="\#{exceptionMB.throwViewExpired}" value="ViewExpired exception"/&gt;
-                   &lt;/div&gt;
-                   &lt;div class="ui-g-4  ui-sm-12"&gt;
-                       &lt;p:button styleClass="btn-warning" href="github.com" value="404"/&gt;
-                   &lt;/div&gt;
-               &lt;/div&gt;
-
-           &lt;/h:form&gt;
-       &lt;/p:panel&gt;
-
-   &lt;/ui:define&gt;
-&lt;/ui:composition&gt;
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('pages/exception/exception')}" escape="true"/>
                 </code>
            </pre>
        </p:tab>
 
          <p:tab title="ExceptionMB.java">
               <pre>
-               <code class="language-java">@Named
-@ViewScoped
-public class ExceptionMB implements Serializable {
-
-    public void throwRuntime() {
-        throw new RuntimeException("this is a runtime exception...");
-    }
-
-    public void throwViewExpired() {
-        throw new ViewExpiredException("this is a view expired exception...");
-    }
-
-}
-             </code>
+               <code class="language-java"><h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ExceptionMB')}" escape="true"/></code>
              </pre>
          </p:tab>
  </p:tabView>

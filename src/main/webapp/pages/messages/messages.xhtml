@@ -15,7 +15,7 @@
     </ui:define>
 
     <ui:define name="body">
-        <adm:breadCrumb link="/pages/messages/messages" title="Messages"/>
+        <adm:breadcrumb link="/pages/messages/messages" title="Messages"/>
         <p:panel styleClass="box-info" header="Messages">
             <p:tooltip/>
 
@@ -90,95 +90,8 @@
          <p:tabView>
        <p:tab title="messages.xhtml">
            <pre>
-               <code class="language-html">&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:adm="http://github.com/adminfaces"
-                template="/WEB-INF/templates/template.xhtml"&gt;
-
-
-    &lt;ui:define name="title"&gt;
-        Messages
-    &lt;/ui:define&gt;
-
-    &lt;ui:define name="description"&gt;
-        This page shows how faces messages are rendered.
-    &lt;/ui:define&gt;
-
-    &lt;ui:define name="body"&gt;
-        &lt;adm:breadCrumb link="/pages/messages/messages" title="Messages"/&gt;
-        &lt;p:panel styleClass="box-info" header="Messages"&gt;
-            &lt;p:tooltip/&gt;
-
-            &lt;h:form&gt;
-                &lt;p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/&gt;
-                &lt;p:growl autoUpdate="true" showDetail="true" life="3000" severity="info"/&gt;
-                &lt;p:growl autoUpdate="true" showDetail="true" sticky="true" severity="warn,error,fatal"/&gt;
-
-                &lt;p:commandButton value="Info" actionListener="\#{messagesMB.info}" styleClass="btn-primary"
-                                 ignoreAutoUpdate="true" update="@form"/&gt;
-                &lt;p:commandButton value="Warn" actionListener="\#{messagesMB.warn}" styleClass="btn-warning"
-                                 ignoreAutoUpdate="true" update="@form"/&gt;
-                &lt;p:commandButton value="Error" actionListener="\#{messagesMB.error}" styleClass="btn-danger"
-                                 ignoreAutoUpdate="true" update="@form"/&gt;
-                &lt;p:commandButton value="Fatal" actionListener="\#{messagesMB.fatal}" styleClass="btn-fatal"
-                                 ignoreAutoUpdate="true" update="@form"/&gt;
-            &lt;/h:form&gt;
-
-            &lt;p:separator/&gt;
-
-            &lt;h:form&gt;
-                &lt;div class="ui-g ui-fluid"&gt;
-                    &lt;div class="ui-g-12"&gt;
-                        &lt;p:outputLabel for="default" value="Default:"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-8"&gt;
-                        &lt;p:inputText id="default" required="true"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-4"&gt;
-                        &lt;p:message id="msgDefault" for="default"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-12"&gt;
-                        &lt;p:outputLabel for="txt" value="Text:"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-8"&gt;
-                        &lt;p:inputText id="txt" required="true"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-4"&gt;
-                        &lt;p:message id="msgTxt" for="txt" display="text"/&gt;
-                    &lt;/div&gt;
-
-                    &lt;div class="ui-g-12"&gt;
-                        &lt;p:outputLabel for="icon" value="Icon:"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-8"&gt;
-                        &lt;p:inputText id="icon" required="true"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-4"&gt;
-                        &lt;p:message id="msgIcon" for="icon" display="icon"/&gt;
-                    &lt;/div&gt;
-
-                    &lt;div class="ui-g-12"&gt;
-                        &lt;p:outputLabel for="tt" value="Tooltip:"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-8"&gt;
-                        &lt;p:inputText id="tt" required="true"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-4"&gt;
-                        &lt;p:message id="msgTt" for="tt" display="tooltip"/&gt;
-                    &lt;/div&gt;
-                    &lt;div class="ui-g-4"&gt;
-                        &lt;p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form" ignoreAutoUpdate="true"/&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-
-
-            &lt;/h:form&gt;
-        &lt;/p:panel&gt;
-    &lt;/ui:define&gt;
-&lt;/ui:composition&gt;
-
+               <code class="language-html">
+<h:outputText value="#{sourceCodeMB.getPageSource('pages/messages/messages')}" escape="true"/>
                 </code>
            </pre>
        </p:tab>
@@ -186,27 +99,7 @@
          <p:tab title="MessagesMB.java">
               <pre>
                <code class="language-java">
-@Named
-@ViewScoped
-public class MessagesMB implements Serializable{
-
-    public void info() {
-        Messages.create("Info").detail("AdminFaces info message.").add();
-    }
-
-    public void warn() {
-        Messages.create("Warning!").warn().detail("AdminFaces Warning message.").add();
-    }
-
-    public void error() {
-        Messages.create("Error!").error().detail("AdminFaces Error message.").add();
-    }
-
-    public void fatal() {
-        Messages.create("Fatal!").fatal().detail("AdminFaces Fatal message.").add();
-    }
-}
-
+<h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.MessagesMB')}" escape="false"/>
              </code>
              </pre>
          </p:tab>
