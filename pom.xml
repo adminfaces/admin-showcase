@@ -448,8 +448,6 @@
                                 <warName>showcase</warName>
                             </configuration>
                         </plugin>
-
-
                     </plugins>
                 </pluginManagement>
             </build>
