@@ -57,6 +57,9 @@ public class AdminFt {
     @Page
     protected MessagesPage messagesPage;
 
+    @Page
+    protected BreadcrumbPage breadcrumbPage;
+
     @FindByJQuery("div.ui-growl-message")
     private GrapheneElement growlMessage;
 
@@ -183,12 +186,15 @@ public class AdminFt {
 
     @Test
     @InSequence(6)
-    public void shouldCreateBreadcrumbs(@InitialPage BreadcrumbPage breadcrumbPage) {
+    public void shouldCreateBreadcrumbs(@InitialPage IndexPage indexPage) {//start with index to clear items added in other tests
+        Graphene.goTo(BreadcrumbPage.class);
+        waitModel();
         assertThat(breadcrumbPage.getBreadcrumb().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getHomeItem().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getHomeItem().getText()).isEqualTo("Home");
         assertThat(breadcrumbPage.getBreadcrumbItem().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getBreadcrumbItem().getText()).isEqualTo("Breadcrumbs");
+
 
         breadcrumbPage.getInputLink().sendKeys("/pages/messages/messages");
         breadcrumbPage.getInputTitle().sendKeys("Messages");
