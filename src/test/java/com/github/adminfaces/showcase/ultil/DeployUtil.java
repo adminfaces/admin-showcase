@@ -35,12 +35,13 @@ public class DeployUtil {
         war.addAsWebInfResource(new File(WEB_INF, "beans.xml"), "beans.xml");
         war.addAsWebInfResource(new File(WEB_INF, "web.xml"), "web.xml");
         war.addAsWebInfResource(new File(WEB_INF, "faces-config.xml"), "faces-config.xml");
+        war.addAsDirectory("sources");
 
         //resources
         war.addAsResource(new File(RESOURCES, "admin-config.properties"), "admin-config.properties");
 
         war.merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory("src/main/webapp").as(GenericArchive.class), "/", Filters.include(".*\\.(xhtml|html|css|js|png|gif)$"));
-
+        war.merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory("src/main/java/com/github/adminfaces/showcase").as(GenericArchive.class), "/sources/com/github/adminfaces/showcase", Filters.include(".*\\.java$"));
         System.out.println(war.toString(true));
         return war;
     }
