@@ -17,6 +17,10 @@ script:
 - mvn test -Pglassfish-managed
 - mvn test -Ptomee7-remote
 - mvn test -Ptomee1.7-remote
+
+before_deploy:
+  - git checkout $TRAVIS_BRANCH
+
 deploy:
   provider: openshift
   user: rmpestano@gmail.com
