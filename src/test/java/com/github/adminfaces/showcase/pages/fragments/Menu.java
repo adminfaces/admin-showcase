@@ -3,8 +3,11 @@ package com.github.adminfaces.showcase.pages.fragments;
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.fragment.Root;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import static org.jboss.arquillian.graphene.Graphene.guardHttp;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 /**
  * Created by rafael-pestano on 16/01/17.
@@ -23,6 +26,19 @@ public class Menu {
     @FindByJQuery("li a[href$='forms.xhtml']")
     private GrapheneElement forms;
 
+    @FindByJQuery("li a[href$='datatable.xhtml']")
+    private GrapheneElement datatable;
+
+    @FindByJQuery("li a[href$='panel.xhtml']")
+    private GrapheneElement panel;
+
+    @FindByJQuery("li a[href$='dialog.xhtml']")
+    private GrapheneElement dialog;
+
+    @FindBy(xpath = "//SPAN[text()='UI Elements']")
+    protected WebElement uiElementsMenu;
+
+
 
     public void goToHomePage(){
         guardHttp(home).click();
@@ -30,6 +46,22 @@ public class Menu {
 
     public void goToExceptionPage(){
         guardHttp(exception).click();
+    }
+
+    public void goToDatatablePage(){
+        uiElementsMenu.click();
+        waitModel();
+        guardHttp(datatable).click();
+    }
+
+    public void goToPanelPage(){
+        uiElementsMenu.click();
+        waitModel();
+        guardHttp(panel).click();
+    }
+
+    public void goToDialogPage(){
+        guardHttp(dialog).click();
     }
 
 

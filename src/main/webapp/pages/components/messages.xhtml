@@ -15,7 +15,7 @@
     </ui:define>
 
     <ui:define name="body">
-        <adm:breadcrumb link="/pages/messages/messages" title="Messages"/>
+        <adm:breadcrumb link="/pages/components/messages" title="Messages"/>
         <p:panel styleClass="box-info" header="Messages">
             <p:tooltip/>
 
@@ -77,7 +77,8 @@
                         <p:message id="msgTt" for="tt" display="tooltip"/>
                     </div>
                     <div class="ui-g-4">
-                        <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form" ignoreAutoUpdate="true"/>
+                        <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form"
+                                         ignoreAutoUpdate="true"/>
                     </div>
                 </div>
 
@@ -87,22 +88,23 @@
     </ui:define>
 
     <ui:define name="code">
-         <p:tabView>
-       <p:tab title="messages.xhtml">
+        <p:tabView>
+            <p:tab title="messages.xhtml">
            <pre>
                <code class="language-html">
-<h:outputText value="#{sourceCodeMB.getPageSource('pages/messages/messages')}" escape="true"/>
-                </code>
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
            </pre>
-       </p:tab>
+            </p:tab>
 
-         <p:tab title="MessagesMB.java">
+            <p:tab title="MessagesMB.java">
               <pre>
                <code class="language-java">
-<h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.MessagesMB')}" escape="false"/>
-             </code>
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.MessagesMB')}"
+                                 escape="false"/>
+               </code>
              </pre>
-         </p:tab>
- </p:tabView>
+            </p:tab>
+        </p:tabView>
     </ui:define>
 </ui:composition>

@@ -48,6 +48,11 @@ public class SourceCodeMB {
         }
     }
 
+    public String getPageSource() {
+        String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+        return getPageSource(viewId);
+    }
+
     private String loadSource(String sourcePath, boolean isJavaSource) {
         String basePath = isJavaSource ? "/sources/" : "/";
         String sulfix = isJavaSource ? ".java":".xhtml";

@@ -7,7 +7,7 @@ import com.github.adminfaces.showcase.pages.exception.NotFoundPage;
 import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
 import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
-import com.github.adminfaces.showcase.pages.messages.MessagesPage;
+import com.github.adminfaces.showcase.pages.components.MessagesPage;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
@@ -18,7 +18,6 @@ import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -27,7 +26,6 @@ import org.openqa.selenium.WebElement;
 
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.jboss.arquillian.graphene.Graphene.guardHttp;
 import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
@@ -109,6 +107,10 @@ public class AdminFt {
         assertThat(index.getPageTitle().getText()).startsWith("Welcome to the AdminFaces Showcase!");
         menu.goToExceptionPage();
         assertThat(exceptionPage.getTitle().getText()).contains("Exceptions This page shows how the application behaves when exceptions are raised.");
+        menu.goToDatatablePage();
+        assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Datatable");
+        menu.goToPanelPage();
+        assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Panel");
     }
 
     @Test

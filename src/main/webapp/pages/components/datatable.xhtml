@@ -35,7 +35,7 @@
     </ui:define>
 
     <ui:define name="body">
-        <adm:breadcrumb link="/pages/datatable/datatable" title="Datatable"/>
+        <adm:breadcrumb link="/pages/components/datatable" title="Datatable"/>
         <p:panel styleClass="box-info" header="Datatable">
             <h:form>
                 <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
@@ -166,7 +166,7 @@
             <p:tab title="datatable.xhtml">
            <pre>
                <code class="language-html"><h:outputText
-                       value="#{sourceCodeMB.getPageSource('pages/datatable/datatable')}" escape="true"/>
+                       value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
            </pre>
             </p:tab>

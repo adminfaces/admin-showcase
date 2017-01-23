@@ -1,4 +1,4 @@
-package com.github.adminfaces.showcase.pages.messages;
+package com.github.adminfaces.showcase.pages.components;
 
 import com.github.adminfaces.showcase.pages.BasePage;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
@@ -9,7 +9,7 @@ import static org.jboss.arquillian.graphene.Graphene.*;
 /**
  * Created by rafael-pestano on 16/01/17.
  */
-@Location("pages/messages/messages.xhtml")
+@Location("pages/components/messages.xhtml")
 public class MessagesPage extends BasePage {
 
     @FindByJQuery("div.ui-g-4 button.btn-primary")
