@@ -6,6 +6,13 @@
                 xmlns:adm="http://github.com/adminfaces"
                 template="/WEB-INF/templates/template.xhtml">
 
+    <ui:define name="after-head">
+        <style type="text/css">
+            div.ui-panel {
+                margin-bottom: 20px;
+            }
+        </style>
+    </ui:define>
 
     <ui:define name="title">
         Panel
@@ -21,7 +28,7 @@
         <h:form>
             <p:growl id="msgs" showDetail="true"/>
 
-            <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px">
+            <p:panel id="basic" header="Basic" footer="Movie Details">
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:graphicImage name="demo/images/godfather1.jpg"/>
                     <h:outputText
@@ -30,16 +37,15 @@
             </p:panel>
 
 
-            <p:panel header="No border" footer="Movie Details" style="margin-bottom:20px" styleClass="no-border">
+            <p:panel header="No border" footer="Movie Details"  styleClass="no-border">
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:graphicImage name="demo/images/godfather1.jpg"/>
                     <h:outputText
                             value="The story begins as Don Vito Corleone..."/>
                 </h:panelGrid>
             </p:panel>
-
-            <div class="ui-g">
-                <div class="ui-lg-2 ui-md-4 ui-sm-12">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-12">
                     <p:panel header="Box default" styleClass="box-default">
                          <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage name="demo/images/godfather1.jpg"/>
@@ -48,7 +54,7 @@
                         </h:panelGrid>
                     </p:panel>
                 </div>
-                 <div class="ui-lg-2 ui-md-4 ui-sm-12">
+                 <div class="col-lg-2 col-md-4 col-sm-12">
                     <p:panel header="Box primary" styleClass="box-primary">
                          <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage name="demo/images/godfather1.jpg"/>
@@ -57,7 +63,7 @@
                         </h:panelGrid>
                     </p:panel>
                 </div>
-                 <div class="ui-lg-2 ui-md-4 ui-sm-12">
+                 <div class="col-lg-2 col-md-4 col-sm-12">
                     <p:panel header="Box warning" styleClass="box-warning">
                          <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage name="demo/images/godfather1.jpg"/>
@@ -66,7 +72,7 @@
                         </h:panelGrid>
                     </p:panel>
                 </div>
-                <div class="ui-lg-2 ui-md-4 ui-sm-12">
+                <div class="col-lg-2 col-md-4 col-sm-12">
                     <p:panel header="Box success" styleClass="box-success">
                          <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage name="demo/images/godfather1.jpg"/>
@@ -75,7 +81,7 @@
                         </h:panelGrid>
                     </p:panel>
                 </div>
-                <div class="ui-lg-2 ui-md-4 ui-sm-12">
+                <div class="col-lg-2 col-md-4 col-sm-12">
                     <p:panel header="Box danger" styleClass="box-danger">
                          <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage name="demo/images/godfather1.jpg"/>
@@ -85,9 +91,8 @@
                     </p:panel>
                 </div>
             </div>
-
              <p:panel id="toggleable" header="Toggleable" toggleable="true" closable="true" toggleSpeed="500"
-                     closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+                     closeSpeed="500" widgetVar="panel">
 
                 <p:ajax event="close" listener="#{panelMB.onClose}" update="msgs" ignoreAutoUpdate="true"/>
                 <p:ajax event="toggle" listener="#{panelMB.onToggle}" update="msgs" ignoreAutoUpdate="true"/>
@@ -107,7 +112,7 @@
                 </f:facet>
             </p:panel>
 
-            <p:panel id="custom" header="Custom Actions" style="margin-bottom:20px">
+            <p:panel id="custom" header="Custom Actions" >
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:graphicImage name="demo/images/godfather3.jpg"/>
                     <h:outputText value="After a break of more than 15 years..."/>
