@@ -50,13 +50,11 @@ public class Menu {
 
     public void goToDatatablePage(){
         uiElementsMenu.click();
-        waitModel();
+        waitModel().until().element(datatable).is().visible();
         guardHttp(datatable).click();
     }
 
     public void goToPanelPage(){
-        uiElementsMenu.click();
-        waitModel();
         guardHttp(panel).click();
     }
 
