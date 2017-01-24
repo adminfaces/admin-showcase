@@ -28,13 +28,14 @@ public class DeployUtil {
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.github.adminfaces:admin-template").withoutTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.primefaces.extensions:primefaces-extensions").withTransitivity().asFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.omnifaces:omnifaces").withTransitivity().asSingleFile());
+        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.webjars:font-awesome").withTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.slf4j:slf4j-api").withoutTransitivity().asSingleFile());
 
         //WEB-INF
 
         war.addAsWebInfResource(new File(WEB_INF, "beans.xml"), "beans.xml");
         war.addAsWebInfResource(new File(WEB_INF, "web.xml"), "web.xml");
-        war.addAsWebInfResource(new File(WEB_INF, "faces-config.xml"), "faces-config.xml");
+        war.addAsWebInfResource("test-faces-config.xml", "faces-config.xml");
         war.addAsDirectory("sources");
 
         //resources

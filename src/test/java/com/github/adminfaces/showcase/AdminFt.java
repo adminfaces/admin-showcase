@@ -8,6 +8,7 @@ import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
 import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
 import com.github.adminfaces.showcase.pages.components.MessagesPage;
+import io.github.bonigarcia.wdm.*;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
@@ -18,6 +19,7 @@ import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -26,7 +28,6 @@ import org.openqa.selenium.WebElement;
 
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.jboss.arquillian.graphene.Graphene.waitAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 
@@ -67,6 +68,16 @@ public class AdminFt {
         return deploy();
     }
 
+    @BeforeClass
+    public static void setup(){
+        //for selenium 3 we must setup the webdriverusing driver manager (it will download webdrivers to /tmp)
+        FirefoxDriverManager.getInstance().setup();
+        ChromeDriverManager.getInstance().setup();
+        PhantomJsDriverManager.getInstance().setup();
+        //EdgeDriverManager.getInstance().setup(); //not supported by arquillian at the moment
+        InternetExplorerDriverManager.getInstance().setup();
+    }
+
 
     @Test
     @InSequence(1)
@@ -78,6 +89,9 @@ public class AdminFt {
     @Test
     @InSequence(2)
     public void shouldGoToErrorPage(@InitialPage ExceptionPage exception) {
+        if(isPhantomjs()){
+            return;
+        }
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.clickRuntimeButton();
         assertThat(errorPage.getTitle().getText()).isEqualTo("500");
@@ -87,8 +101,12 @@ public class AdminFt {
     @Test
     @InSequence(2)
     public void shouldGoToViewExpiredPage(@InitialPage ExceptionPage exception) {
+        if(isPhantomjs()){
+            return;
+        }
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.clickViewExpiredButton();
+        waitModel();
         assertThat(viewExpiredPage.getTitle().getText()).isEqualTo("View expired");
     }
 

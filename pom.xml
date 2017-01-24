@@ -20,7 +20,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <arquillian.container>wildfly:8.2.0.Final:managed</arquillian.container>
-        <arquillian.chromePath>/home/rmpestano/chromedriver</arquillian.chromePath>
         <arquillian.browser>phantomjs</arquillian.browser>
     </properties>
 
@@ -40,6 +39,11 @@
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
             <version>6.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.omnifaces</groupId>
@@ -106,10 +110,24 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>1.5.1</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian.selenium</groupId>
+                <artifactId>selenium-bom</artifactId>
+                <version>3.0.1</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
             <dependency>
                 <groupId>org.arquillian</groupId>
                 <artifactId>arquillian-universe</artifactId>

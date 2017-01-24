@@ -61,12 +61,7 @@ public class MessagesPage extends BasePage {
     private WebElement fieldMsgIcon;
 
     public void clickBtnSubmit(){
-        if(isPhantomjs()){
-            //phantom is having trouble to make primefaces ajax calls
-            guardHttp(btnSubmit).click();
-        } else{
-            guardAjax(btnSubmit).click();
-        }
+          guardAjax(btnSubmit).click();
     }
 
     public void clickBtnInfo(){
