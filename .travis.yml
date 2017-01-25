@@ -14,10 +14,10 @@ cache:
 #- cd ~/builds/admin-template && mvn install
 
 script:
-- mvn clean package -Pwildfly8-managed
-- mvn test -Pglassfish-managed
-- mvn test -Ptomee7-remote
-- mvn test -Ptomee1.7-remote
+- mvn clean package -Pwildfly8-managed -Dtravisci
+- mvn test -Pglassfish-managed -Dtravisci
+- mvn test -Ptomee7-remote -Dtravisci
+- mvn test -Ptomee1.7-remote -Dtravisci
 
 deploy:
   provider: openshift

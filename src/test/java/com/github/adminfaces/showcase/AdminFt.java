@@ -11,6 +11,8 @@ import com.github.adminfaces.showcase.pages.components.MessagesPage;
 import io.github.bonigarcia.wdm.*;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.drone.impl.DroneContextImpl;
+import org.jboss.arquillian.drone.spi.DroneContext;
 import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
@@ -19,6 +21,7 @@ import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,13 +72,21 @@ public class AdminFt {
     }
 
     @BeforeClass
-    public static void setup(){
+    public static void setup() {
+        boolean travis = System.getProperty("travisci") != null;
         //for selenium 3 we must setup the webdriverusing driver manager (it will download webdrivers to /tmp)
+        if (travis) {
+            //setup only phantom in travis as other browsers will not be used
+            PhantomJsDriverManager.getInstance().setup();
+            return;
+        }
+        PhantomJsDriverManager.getInstance().setup();
         FirefoxDriverManager.getInstance().setup();
         ChromeDriverManager.getInstance().setup();
         PhantomJsDriverManager.getInstance().setup();
-        //EdgeDriverManager.getInstance().setup(); //not supported by arquillian at the moment
         InternetExplorerDriverManager.getInstance().setup();
+        //EdgeDriverManager.getInstance().setup(); //not supported by arquillian at the moment
+
     }
 
 
@@ -89,7 +100,7 @@ public class AdminFt {
     @Test
     @InSequence(2)
     public void shouldGoToErrorPage(@InitialPage ExceptionPage exception) {
-        if(isPhantomjs()){
+        if (isPhantomjs()) {
             return;
         }
         assertThat(exception.getTitle().getText()).contains("Exceptions");
@@ -101,7 +112,7 @@ public class AdminFt {
     @Test
     @InSequence(2)
     public void shouldGoToViewExpiredPage(@InitialPage ExceptionPage exception) {
-        if(isPhantomjs()){
+        if (isPhantomjs()) {
             return;
         }
         assertThat(exception.getTitle().getText()).contains("Exceptions");
@@ -125,12 +136,12 @@ public class AdminFt {
         assertThat(index.getPageTitle().getText()).startsWith("Welcome to the AdminFaces Showcase!");
         menu.goToExceptionPage();
         assertThat(exceptionPage.getTitle().getText()).contains("Exceptions This page shows how the application behaves when exceptions are raised.");
-        if(!isPhantomjs()){
+        if (!isPhantomjs()) {
             //TODO investigate why not working in phantom
             menu.goToDatatablePage();
             assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Datatable");
             menu.goToPanelPage();
-           assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Panel");
+            assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Panel");
         }
     }
 
@@ -208,7 +219,7 @@ public class AdminFt {
     @Test
     @InSequence(6)
     public void shouldCreateBreadcrumbs(@InitialPage BreadcrumbPage breadcrumbPage) {
-        if(isPhantomjs()){
+        if (isPhantomjs()) {
             return; //TODO investigate why it fails in phantomjs
         }
         assertThat(breadcrumbPage.getBreadcrumb().isDisplayed()).isTrue();
