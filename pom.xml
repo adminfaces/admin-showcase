@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <arquillian.container>wildfly:8.2.0.Final:managed</arquillian.container>
-        <arquillian.browser>phantomjs</arquillian.browser>
+        <arquillian.browser>chrome</arquillian.browser>
     </properties>
 
     <dependencies>

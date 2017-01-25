@@ -26,14 +26,11 @@ mvn clean package -P wildfly8-managed
 
 NOTE: wildfly8-managed is activated by default.
 
-By default tests run on phantomjs, to change the webdriver you need to use the property `arquillian.browser`:
+By default tests run on chrome, to change the webdriver you need to use the property `arquillian.browser`:
 
 ----
-mvn clean package -Ptomee-remote -Darquillian.browser=chrome -Darquillian.chromePath=/home/chromedriver
+mvn test -Ptomee-remote -Darquillian.browser=phantomjs
 ----
-
-TIP: You can download chrome driver https://sites.google.com/a/chromium.org/chromedriver/downloads[from here^].
-
 
 
 == Supported Application Servers
