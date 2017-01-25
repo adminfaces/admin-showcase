@@ -1,7 +1,6 @@
 sudo: false
 language: java
 jdk: oraclejdk8
-dist: trusty
 cache:
   directories:
   - "$HOME/.m2/repository"
@@ -19,8 +18,6 @@ script:
 - mvn test -Ptomee7-remote -Dtravisci -Darquillian.browser=phantomjs
 - mvn test -Ptomee1.7-remote -Dtravisci -Darquillian.browser=phantomjs
 
-before_deploy:
-- git config http.postBuffer 52428800
 
 deploy:
   provider: openshift
