@@ -74,16 +74,13 @@ public class AdminFt {
     @BeforeClass
     public static void setup() {
         boolean travis = System.getProperty("travisci") != null;
-        //for selenium 3 we must setup the webdriverusing driver manager (it will download webdrivers to /tmp)
         if (travis) {
-            //setup only phantom in travis as other browsers will not be used
-            PhantomJsDriverManager.getInstance().setup();
             return;
         }
-        PhantomJsDriverManager.getInstance().setup();
+        //for selenium 3 we must setup the webdriverusing driver manager (it will download webdrivers to /tmp)
+        //PhantomJsDriverManager.getInstance().setup();//no need because its automatically setup by arquillian
         FirefoxDriverManager.getInstance().setup();
         ChromeDriverManager.getInstance().setup();
-        PhantomJsDriverManager.getInstance().setup();
         InternetExplorerDriverManager.getInstance().setup();
         //EdgeDriverManager.getInstance().setup(); //not supported by arquillian at the moment
 
