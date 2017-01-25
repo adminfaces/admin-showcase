@@ -12,7 +12,7 @@
 
     <ui:define name="description">
         <p:link value="Breadcrumbs"
-                href="https://uxplanet.org/breadcrumbs-for-web-sites-what-when-and-how-9273dacf1960"/> indicates the location of the user within the site’s hierarchy
+                href="https://uxplanet.org/breadcrumbs-for-web-sites-what-when-and-how-9273dacf1960"/> indicates the location of the user within the site’s hierarchy.
     </ui:define>
 
     <ui:define name="body">
@@ -54,6 +54,12 @@
                     <h4>NOTE</h4>
 
                     <p><code>&lt;adm:breadcrumb</code> component (used in this page) adds breadCrumb in <b><i>preRenderView</i></b> phase so it adds this page <code>before</code> <b>Add breadcrumb</b> button.</p>
+               </div>
+
+                 <div class="callout callout-success">
+                    <h4>NOTE</h4>
+
+                    <p>You don't need to provide <code>link</code> attribute, in this case the component will use <b>current page url</b> (viewId) where component is declared.</p>
                </div>
 
             </div>

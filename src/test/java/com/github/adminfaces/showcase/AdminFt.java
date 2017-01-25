@@ -96,6 +96,25 @@ public class AdminFt {
 
     @Test
     @InSequence(2)
+    public void shouldThrowBusinessException(@InitialPage ExceptionPage exception) {
+        assertThat(exception.getTitle().getText()).contains("Exceptions");
+        exception.clickBusinessButton();
+        assertThat(exceptionPage.getErrorMessages().get(0).getText()).isEqualTo("This kind of exception generates a faces message with severity error.");
+    }
+
+    @Test
+    @InSequence(2)
+    public void shouldMultipleBusinessException(@InitialPage ExceptionPage exception) {
+        assertThat(exception.getTitle().getText()).contains("Exceptions");
+        exception.clickMultipleBusinessButton();
+        for (int i=1;i <=3;i++) {
+            assertThat(exceptionPage.getErrorMessages().get(i-1).getText()).isEqualTo("Exception "+i);
+        }
+
+    }
+
+    @Test
+    @InSequence(2)
     public void shouldGoToErrorPage(@InitialPage ExceptionPage exception) {
         if (isPhantomjs()) {
             return;

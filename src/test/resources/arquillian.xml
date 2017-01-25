@@ -37,7 +37,7 @@
 
 	<extension qualifier="webdriver">
 		<property name="browser">${arquillian.browser}</property>
-        <!--<property name="browser">chrome</property>-->
+        <!--<property name="browser">chrome,firefox or internetExplorer</property>-->
         <property name="dimensions">1280x1024</property>
 	</extension>
 

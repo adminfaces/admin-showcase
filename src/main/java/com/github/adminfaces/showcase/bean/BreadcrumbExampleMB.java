@@ -1,6 +1,7 @@
 package com.github.adminfaces.showcase.bean;
 
 import com.github.adminfaces.template.bean.BreadCrumbMB;
+import com.github.adminfaces.template.model.BreadCrumb;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ public class BreadcrumbExampleMB implements Serializable{
     private BreadCrumbMB breadCrumbMB;
 
     public void add(){
-        breadCrumbMB.add(link,title);
+        breadCrumbMB.add(new BreadCrumb(link,title));
     }
 
     public String getLink() {
