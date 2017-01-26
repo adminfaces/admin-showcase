@@ -7,53 +7,55 @@
 
 
     <ui:define name="title">
-           Exceptions
+        Exceptions
     </ui:define>
 
     <ui:define name="description">
         This page shows how the application behaves when exceptions are raised.
     </ui:define>
 
-   <ui:define name="body">
-       <adm:breadcrumb title="Exceptions"/>
-       <p:panel styleClass="box-danger" header="Exceptions" style="min-height: 150px">
-           <h:form>
-               <div class="ui-g ui-fluid">
+    <ui:define name="body">
+        <adm:breadcrumb title="Exceptions"/>
+        <p:panel styleClass="box-danger no-border" header="Exceptions" style="min-height: 150px">
+            <h:form>
+                <div class="ui-g ui-fluid">
                     <div class="ui-g-3 ui-sm-12">
-                       <p:commandButton  action="#{exceptionMB.throwBusinessException}" value="Business exception"/>
-                   </div>
-                   <div class="ui-g-3 ui-sm-12">
-                       <p:commandButton styleClass="btn-danger" action="#{exceptionMB.throwRuntime}" value="Runtime exception"/>
-                   </div>
-                   <div class="ui-g-3 ui-sm-12">
-                       <p:commandButton styleClass="bg-dark-red" style="color: #fff" action="#{exceptionMB.throwViewExpired}" value="ViewExpired exception"/>
-                   </div>
-                   <div class="ui-g-3  ui-sm-12">
-                       <p:button styleClass="btn-warning" href="github.com" value="404"/>
-                   </div>
-                   <div class="ui-g-12">
-                       <p:commandButton styleClass="bg-black" action="#{exceptionMB.multipleBusinessException}" value="Multiple business exceptions"/>
-                   </div>
-               </div>
-
-           </h:form>
-       </p:panel>
-   </ui:define>
+                        <p:commandButton action="#{exceptionMB.throwBusinessException}" value="Business exception"/>
+                    </div>
+                    <div class="ui-g-3 ui-sm-12">
+                        <p:commandButton styleClass="btn-danger" action="#{exceptionMB.throwRuntime}"
+                                         value="Runtime exception"/>
+                    </div>
+                    <div class="ui-g-3 ui-sm-12">
+                        <p:commandButton styleClass="bg-dark-red" style="color: #fff"
+                                         action="#{exceptionMB.throwViewExpired}" value="ViewExpired exception"/>
+                    </div>
+                    <div class="ui-g-3  ui-sm-12">
+                        <p:button styleClass="btn-warning" href="github.com" value="404"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:commandButton styleClass="bg-black" action="#{exceptionMB.multipleBusinessException}"
+                                         value="Multiple business exceptions"/>
+                    </div>
+                </div>
+            </h:form>
+        </p:panel>
+    </ui:define>
 
     <ui:define name="code">
-         <p:tabView>
-       <p:tab title="exception.xhtml">
+        <p:tabView>
+            <p:tab title="exception.xhtml">
            <pre>
-               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
-                </code>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/></code>
            </pre>
-       </p:tab>
+            </p:tab>
 
-         <p:tab title="ExceptionMB.java">
+            <p:tab title="ExceptionMB.java">
               <pre>
-               <code class="language-java"><h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ExceptionMB')}" escape="true"/></code>
+               <code class="language-java"><h:outputText
+                       value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ExceptionMB')}" escape="true"/></code>
              </pre>
-         </p:tab>
- </p:tabView>
+            </p:tab>
+        </p:tabView>
     </ui:define>
 </ui:composition>
