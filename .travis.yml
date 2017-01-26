@@ -6,14 +6,14 @@ cache:
   - "$HOME/.m2/repository"
 
 
-before_install:
+#before_install: Not needed anymore cause theme and template are deployed to central snapshots on each commit
 - git clone https://github.com/adminfaces/admin-theme.git ~/builds/admin-theme
-- cd ~/builds/admin-theme && mvn install
-- git clone https://github.com/adminfaces/admin-template.git ~/builds/admin-template
-- cd ~/builds/admin-template && mvn install
+#- cd ~/builds/admin-theme && mvn install
+#- git clone https://github.com/adminfaces/admin-template.git ~/builds/admin-template
+#- cd ~/builds/admin-template && mvn install
 
 script:
-- cd $TRAVIS_BUILD_DIR mvn -U clean package -Pwildfly8-managed -Dtravisci -Darquillian.browser=phantomjs
+- mvn -U clean package -Pwildfly8-managed -Dtravisci -Darquillian.browser=phantomjs
 - mvn test -Pglassfish-managed -Dtravisci -Darquillian.browser=phantomjs
 - mvn test -Ptomee7-remote -Dtravisci -Darquillian.browser=phantomjs
 - mvn test -Ptomee1.7-remote -Dtravisci -Darquillian.browser=phantomjs
