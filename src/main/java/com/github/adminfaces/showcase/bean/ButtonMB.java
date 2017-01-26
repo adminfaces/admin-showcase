@@ -15,6 +15,18 @@ public class ButtonMB {
         addMessage("Welcome to AdminFaces!!");
     }
 
+    public void save(ActionEvent actionEvent) {
+        addMessage("Data saved");
+    }
+
+    public void update(ActionEvent actionEvent) {
+        addMessage("Data updated");
+    }
+
+    public void delete(ActionEvent actionEvent) {
+        addMessage("Data deleted");
+    }
+
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
