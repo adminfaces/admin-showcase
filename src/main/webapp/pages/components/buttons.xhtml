@@ -57,9 +57,9 @@
 
                     <div class="col-sm-12 col-md-3">
                         <p:splitButton value="Save" actionListener="#{buttonMB.save}" update="growl"
-                                       icon="fa fa-floppy-o"
+                                       icon="fa fa-floppy-o" ignoreAutoUpdate="true"
                                        styleClass="btn-success btn-block">
-                            <p:menuitem value="Update" actionListener="#{buttonMB.update}" update="growl"
+                            <p:menuitem value="Update" actionListener="#{buttonMB.update}" update="growl" ignoreAutoUpdate="true"
                                         icon="fa fa-refresh"/>
                             <p:menuitem value="Delete" actionListener="#{buttonMB.delete}" ajax="false"
                                         icon="fa fa-close"/>
