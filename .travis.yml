@@ -13,10 +13,10 @@ cache:
 #- cd ~/builds/admin-template && mvn install
 
 script:
-- mvn -U clean package -Pwildfly8-managed -Dtravisci -Darquillian.browser=phantomjs
-- mvn test -Pglassfish-managed -Dtravisci -Darquillian.browser=phantomjs
-- mvn test -Ptomee7-remote -Dtravisci -Darquillian.browser=phantomjs
-- mvn test -Ptomee1.7-remote -Dtravisci -Darquillian.browser=phantomjs
+- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
+- mvn test -Pglassfish-managed -Dtravisci -Dbrowser=phantomjs
+- mvn test -Ptomee7-remote -Dtravisci -Dbrowser=phantomjs
+- mvn test -Ptomee1.7-remote -Dtravisci -Dbrowser=phantomjs
 
 
 deploy:
