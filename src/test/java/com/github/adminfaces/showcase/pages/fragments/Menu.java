@@ -32,6 +32,9 @@ public class Menu {
     @FindByJQuery("li a[href$='panel.xhtml']")
     private GrapheneElement panel;
 
+    @FindByJQuery("li a[href$='buttons.xhtml']")
+    private GrapheneElement buttons;
+
     @FindByJQuery("li a[href$='dialog.xhtml']")
     private GrapheneElement dialog;
 
@@ -56,6 +59,10 @@ public class Menu {
 
     public void goToPanelPage(){
         guardHttp(panel).click();
+    }
+
+    public void goToButtonsPage(){
+        guardHttp(buttons).click();
     }
 
     public void goToDialogPage(){

@@ -1,18 +1,15 @@
 package com.github.adminfaces.showcase;
 
+import com.github.adminfaces.showcase.pages.IndexPage;
+import com.github.adminfaces.showcase.pages.components.MessagesPage;
 import com.github.adminfaces.showcase.pages.exception.ErrorPage;
 import com.github.adminfaces.showcase.pages.exception.ExceptionPage;
-import com.github.adminfaces.showcase.pages.IndexPage;
 import com.github.adminfaces.showcase.pages.exception.NotFoundPage;
 import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
 import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
-import com.github.adminfaces.showcase.pages.components.MessagesPage;
-import io.github.bonigarcia.wdm.*;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
-import org.jboss.arquillian.drone.impl.DroneContextImpl;
-import org.jboss.arquillian.drone.spi.DroneContext;
 import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
@@ -21,8 +18,6 @@ import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -69,21 +64,6 @@ public class AdminFt {
     @Deployment(testable = false)
     public static Archive<?> getDeployment() {
         return deploy();
-    }
-
-    @BeforeClass
-    public static void setup() {
-        boolean travis = System.getProperty("travisci") != null;
-        if (travis) {
-            return;
-        }
-        //for selenium 3 we must setup the webdriverusing driver manager (it will download webdrivers to /tmp)
-        //PhantomJsDriverManager.getInstance().setup();//no need because its automatically setup by arquillian
-        FirefoxDriverManager.getInstance().setup();
-        ChromeDriverManager.getInstance().setup();
-        InternetExplorerDriverManager.getInstance().setup();
-        //EdgeDriverManager.getInstance().setup(); //not supported by arquillian at the moment
-
     }
 
 
@@ -158,6 +138,8 @@ public class AdminFt {
             assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Datatable");
             menu.goToPanelPage();
             assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Panel");
+            menu.goToButtonsPage();
+            assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Buttons");
         }
     }
 

@@ -18,7 +18,7 @@ mvn clean package -DskipTests
 
 == Test
 
-To execute funcional tests just choose the application server using maven profile, ex:
+To execute functional tests just choose the application server using maven profile, ex:
 
 ----
 mvn clean package -P wildfly8-managed
@@ -26,10 +26,10 @@ mvn clean package -P wildfly8-managed
 
 NOTE: wildfly8-managed is activated by default.
 
-By default tests run on chrome, to change the webdriver you need to use the property `arquillian.browser`:
+By default tests run on chrome, to change the webdriver you need to use the property `browser`:
 
 ----
-mvn test -Ptomee-remote -Darquillian.browser=phantomjs
+mvn test -Ptomee-remote -Dbrowser=phantomjs
 ----
 
 
