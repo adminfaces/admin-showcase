@@ -2,6 +2,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:adm="http://github.com/adminfaces"
                 template="/WEB-INF/templates/template.xhtml">
 
@@ -39,7 +40,7 @@
             <h:form>
                 <div class="ui-g ui-fluid">
                     <div class="ui-g-12">
-                        <p:outputLabel for="default" value="Default:"/>
+                        <p:outputLabel for="default" value="Default"/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="default" required="true"/>
@@ -47,8 +48,22 @@
                     <div class="ui-g-4">
                         <p:message id="msgDefault" for="default"/>
                     </div>
+                      <div class="ui-g-12">
+                        <p:outputLabel for="select" value="Select"/>
+                    </div>
+                     <div class="ui-g-8">
+                        <p:selectOneMenu id="select" value="#{null}" required="true">
+                            <f:selectItem itemLabel="Select"/>
+                            <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
+                            <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
+                            <f:selectItem itemLabel="Cash" itemValue="Cash"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:message id="msgSelect" for="select"/>
+                    </div>
                     <div class="ui-g-12">
-                        <p:outputLabel for="txt" value="Text:"/>
+                        <p:outputLabel for="txt" value="Text"/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="txt" required="true"/>
@@ -58,7 +73,7 @@
                     </div>
 
                     <div class="ui-g-12">
-                        <p:outputLabel for="icon" value="Icon:"/>
+                        <p:outputLabel for="icon" value="Icon"/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="icon" required="true"/>
@@ -68,7 +83,7 @@
                     </div>
 
                     <div class="ui-g-12">
-                        <p:outputLabel for="tt" value="Tooltip:"/>
+                        <p:outputLabel for="tt" value="Tooltip"/>
                     </div>
                     <div class="ui-g-8">
                         <p:inputText id="tt" required="true"/>

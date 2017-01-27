@@ -3,7 +3,7 @@ package com.github.adminfaces.showcase.bean;
 import com.github.adminfaces.showcase.model.Car;
 import com.github.adminfaces.showcase.model.Stats;
 import com.github.adminfaces.showcase.model.Team;
-import com.github.adminfaces.showcase.util.CarGenerator;
+import com.github.adminfaces.showcase.service.CarService;
 import org.omnifaces.cdi.ViewScoped;
 
 import javax.annotation.PostConstruct;
@@ -27,7 +27,7 @@ public class DatatableMB implements Serializable {
     private List<Car> filteredCars;
 
     @Inject
-    private CarGenerator carGenerator;
+    private CarService carService;
 
 
 
@@ -52,7 +52,7 @@ public class DatatableMB implements Serializable {
         celtics.getStats().add(new Stats("2010-2011", 35, 47));
         teams.add(celtics);
 
-        cars = carGenerator.createCars(30);
+        cars = carService.createCars(30);
     }
 
     public boolean filterByPrice(Object value, Object filter, Locale locale) {
@@ -74,11 +74,11 @@ public class DatatableMB implements Serializable {
     }
 
     public List<String> getBrands() {
-        return carGenerator.getBrands();
+        return carService.getBrands();
     }
 
     public List<String> getColors() {
-        return carGenerator.getColors();
+        return carService.getColors();
     }
 
     public List<Car> getCars() {
