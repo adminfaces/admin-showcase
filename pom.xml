@@ -55,11 +55,17 @@
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>
             <version>0.1-20170125.205416-10</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.adminfaces</groupId>
+                    <artifactId>admin-theme</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
-            <version>0.1-20170127.211636-42</version>
+            <version>0.1-SNAPSHOT</version>
             <!--<classifier>dev</classifier> uncompressed theme.css (note that you need to exclude admin-theme brought by admin-template dependency)-->
         </dependency>
 
