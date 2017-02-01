@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="title">
+        Dialog
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link value="Dialog"
+                href="http://www.primefaces.org/showcase/ui/overlay/dialog/basic.xhtml"/> is an overlay component used to bring attention while showing content.
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Dialog"/>
+        <h:form>
+            <div class="row ui-fluid">
+
+                <div class="col-md-3 col-sm-12">
+                    <p:commandButton value="Basic" type="button" onclick="PF('dlg1').show();" styleClass="btn-success"/>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <p:commandButton value="Modal" type="button" onclick="PF('dlg2').show();" styleClass="btn-warning"/>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <p:commandButton value="Effects" type="button" onclick="PF('dlg3').show();" styleClass="btn-info"/>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <p:commandButton value="Min/Max" onclick="PF('dlgMinMax').show();" type="button"
+                                     styleClass="btn-primary"/>
+                </div>
+                <div class="col-sm-12 align-center">
+                    <h:outputLink value="javascript:void(0)" onclick="PF('dlgLogin').show();" title="login">
+                        <p:graphicImage name="/demo/images/login.png"/>
+                    </h:outputLink>
+
+                </div>
+            </div>
+        </h:form>
+
+        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+
+        <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+            <h:outputText value="This is a Modal Dialog."/>
+        </p:dialog>
+
+        <p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
+            <h:outputText value="This dialog has nice effects."/>
+        </p:dialog>
+
+        <p:dialog header="Dialog" widgetVar="dlgMinMax" minimizable="true" maximizable="true">
+            <h:outputText value="This Dialog can be Maximized an Minimized!"/>
+        </p:dialog>
+
+        <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
+
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" minHeight="500" minWidth="500" responsive="true">
+            <h:form>
+                <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
+                    <h:outputLabel for="username" value="Username:"/>
+                    <p:inputText id="username" value="#{userLoginMB.username}" required="true" label="username"/>
+                    <h:outputLabel for="password" value="Password:"/>
+                    <p:password id="password" value="#{userLoginMB.password}" required="true" label="password"/>
+                </p:panelGrid>
+                <p:separator/>
+                <p:commandButton styleClass="btn-primary pull-right" value="Login" update="growl"
+                                 actionListener="#{userLoginMB.login}"
+                                 ignoreAutoUpdate="true"
+                                 oncomplete="handleLoginRequest(xhr, status, args)"/>
+            </h:form>
+        </p:dialog>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                }
+                else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="dialog.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

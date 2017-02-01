@@ -2,9 +2,6 @@ sudo: false
 language: java
 jdk: oraclejdk8
 
-before_cache:
-  - rm -r $HOME/.m2/repository/com/github/adminfaces/
-
 cache:
   bundler: true
   directories:
@@ -16,6 +13,10 @@ cache:
 #- cd ~/builds/admin-theme && mvn install
 #- git clone https://github.com/adminfaces/admin-template.git ~/builds/admin-template
 #- cd ~/builds/admin-template && mvn install
+
+
+before_script:
+  - rm -r $HOME/.m2/repository/com/github/adminfaces/
 
 script:
 - mvn clean package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
