@@ -3,7 +3,7 @@ language: java
 jdk: oraclejdk8
 
 before_cache:
-  - rm -f $HOME/.m2/repository/com/github/adminfaces
+  - rm -r $HOME/.m2/repository/com/github/adminfaces/
 
 cache:
   bundler: true
