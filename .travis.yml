@@ -3,6 +3,8 @@ language: java
 jdk: oraclejdk8
 cache:
   bundler: true
+  directories:
+  - "$HOME/.m2/repository"
 
 
 #before_install: Not needed anymore cause theme and template are deployed to central snapshots on each commit
@@ -12,7 +14,7 @@ cache:
 #- cd ~/builds/admin-template && mvn install
 
 script:
-- mvn clean -U package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
+- mvn clean package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
 - mvn test -Pglassfish-managed -Dtravisci -Dbrowser=phantomjs
 - mvn test -Ptomee7-remote -Dtravisci -Dbrowser=phantomjs
 - mvn test -Ptomee1.7-remote -Dtravisci -Dbrowser=phantomjs
