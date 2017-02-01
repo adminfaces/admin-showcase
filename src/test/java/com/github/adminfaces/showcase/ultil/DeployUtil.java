@@ -41,7 +41,7 @@ public class DeployUtil {
         //resources
         war.addAsResource(new File(RESOURCES, "admin-config.properties"), "admin-config.properties");
 
-        war.merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory("src/main/webapp").as(GenericArchive.class), "/", Filters.include(".*\\.(xhtml|html|css|js|png|gif|jpg)$"));
+        war.merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory("src/main/webapp").as(GenericArchive.class), "/", Filters.include(".*\\.(xhtml|html|css|js|png|gif|jpg|ico)$"));
         war.merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class).importDirectory("src/main/java/com/github/adminfaces/showcase").as(GenericArchive.class), "/sources/com/github/adminfaces/showcase", Filters.include(".*\\.java$"));
         System.out.println(war.toString(true));
         return war;

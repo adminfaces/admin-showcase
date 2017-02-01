@@ -3,8 +3,6 @@ language: java
 jdk: oraclejdk8
 cache:
   bundler: true
-  directories:
-  - "$HOME/.m2/repository"
 
 
 #before_install: Not needed anymore cause theme and template are deployed to central snapshots on each commit
