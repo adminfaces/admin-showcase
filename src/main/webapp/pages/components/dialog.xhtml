@@ -19,7 +19,6 @@
         <adm:breadcrumb title="Dialog"/>
         <h:form>
             <div class="row ui-fluid">
-
                 <div class="col-md-3 col-sm-12">
                     <p:commandButton value="Basic" type="button" onclick="PF('dlg1').show();" styleClass="btn-success"/>
                 </div>
@@ -33,20 +32,45 @@
                     <p:commandButton value="Min/Max" onclick="PF('dlgMinMax').show();" type="button"
                                      styleClass="btn-primary"/>
                 </div>
-                <div class="col-sm-12 align-center">
+                <div class="col-sm-12 align-center" style="margin-top: 30px">
                     <h:outputLink value="javascript:void(0)" onclick="PF('dlgLogin').show();" title="login">
                         <p:graphicImage name="/demo/images/login.png"/>
                     </h:outputLink>
-
                 </div>
             </div>
         </h:form>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog default" onclick="PF('dlgDefault').show();return false" styleClass="btn-default btn-block"/>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog primary" onclick="PF('dlgPrimary').show();return false" styleClass="btn-primary btn-block"/>
+            </div>
 
-        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+             <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog info" onclick="PF('dlgInfo').show();return false" styleClass="btn-info btn-block"/>
+            </div>
+             <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog success" onclick="PF('dlgSuccess').show();return false" styleClass="btn-success btn-block"/>
+            </div>
+             <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog warning" onclick="PF('dlgWarning').show();return false" styleClass="btn-warning btn-block"/>
+            </div>
+             <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog danger" onclick="PF('dlgDanger').show();return false" styleClass="btn-danger btn-block"/>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog fatal" onclick="PF('dlgFatal').show();return false" styleClass="btn-fatal btn-block"/>
+            </div>
+
+        </div>
+
+        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40" responsive="true">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
 
-        <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+        <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100" >
             <h:outputText value="This is a Modal Dialog."/>
         </p:dialog>
 
@@ -58,15 +82,38 @@
             <h:outputText value="This Dialog can be Maximized an Minimized!"/>
         </p:dialog>
 
+        <p:dialog header="Dialog default" styleClass="box-default" widgetVar="dlgDefault" minHeight="100" modal="true" >
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog primary" styleClass="box-primary" widgetVar="dlgPrimary" minHeight="100" modal="true" >
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog info" styleClass="box-info" widgetVar="dlgInfo" minHeight="100" modal="true" >
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog success" styleClass="box-success" widgetVar="dlgSuccess" minHeight="100" modal="true" >
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog warning" styleClass="box-warning" widgetVar="dlgWarning" minHeight="100" modal="true" >
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog danger" styleClass="box-danger" widgetVar="dlgDanger" minHeight="100" modal="true" >
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog fatal" styleClass="box-fatal" widgetVar="dlgFatal" minHeight="100" modal="true" >
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
         <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" minHeight="500" minWidth="500" responsive="true">
             <h:form>
                 <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="no-border">
                     <h:outputLabel for="username" value="Username:"/>
-                    <p:inputText id="username" value="#{userLoginMB.username}" required="true" requiredMessage="Username is required." label="username"/>
+                    <p:inputText id="username" value="#{userLoginMB.username}" required="true"
+                                 requiredMessage="Username is required." label="username"/>
                     <h:outputLabel for="password" value="Password:"/>
-                    <p:password id="password" value="#{userLoginMB.password}" required="true" requiredMessage="Password is required." label="password"/>
+                    <p:password id="password" value="#{userLoginMB.password}" required="true"
+                                requiredMessage="Password is required." label="password"/>
                 </p:panelGrid>
                 <p:separator/>
                 <p:commandButton styleClass="btn-primary pull-right" value="Login" update="growl"
