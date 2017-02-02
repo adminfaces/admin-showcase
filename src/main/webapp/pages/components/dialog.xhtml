@@ -62,11 +62,11 @@
 
         <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" minHeight="500" minWidth="500" responsive="true">
             <h:form>
-                <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
+                <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="no-border">
                     <h:outputLabel for="username" value="Username:"/>
-                    <p:inputText id="username" value="#{userLoginMB.username}" required="true" label="username"/>
+                    <p:inputText id="username" value="#{userLoginMB.username}" required="true" requiredMessage="Username is required." label="username"/>
                     <h:outputLabel for="password" value="Password:"/>
-                    <p:password id="password" value="#{userLoginMB.password}" required="true" label="password"/>
+                    <p:password id="password" value="#{userLoginMB.password}" required="true" requiredMessage="Password is required." label="password"/>
                 </p:panelGrid>
                 <p:separator/>
                 <p:commandButton styleClass="btn-primary pull-right" value="Login" update="growl"
