@@ -54,7 +54,13 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.1-20170125.205416-10</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.adminfaces</groupId>
+                    <artifactId>admin-theme</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.github.adminfaces</groupId>
