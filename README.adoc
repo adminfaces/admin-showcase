@@ -44,3 +44,12 @@ This application is compatible with `Java EE 6/7` application servers, tested wi
 * https://developer.ibm.com/wasdev/downloads/liberty-profile-using-non-eclipse-environments/[WebSphere Liberty profile *16.0.0.4*^]
 
 
+== WildFly Swarm
+
+This showcase is http://wildfly-swarm.io/[Wildfly Swarm^] compatible, just run the following command:
+
+----
+mvn wildfly-swarm:run  -Pswarm -DskipTests
+----
+
+and access `http://localhost:8080/showcase`.
