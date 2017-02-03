@@ -49,7 +49,7 @@ This application is compatible with `Java EE 6/7` application servers, tested wi
 This showcase is http://wildfly-swarm.io/[Wildfly Swarm^] compatible, just run the following command:
 
 ----
-mvn wildfly-swarm:run  -Pswarm -DskipTests
+mvn wildfly-swarm:run  -Pswarm
 ----
 
 and access `http://localhost:8080/showcase`.
