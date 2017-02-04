@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
@@ -10,33 +11,43 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet library="css" name="prism.css"/>
     </h:head>
 
     <h:body styleClass="hold-transition login-page">
+        <p:growl autoUpdate="true" life="4000"/>
+
         <div class="login-box">
             <div class="login-logo">
                 <p:link href="index.xhtml"><b>Admin</b>Faces</p:link>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <h:form>
+                    <p class="login-box-msg">Sign in to start your session</p>
 
-                <div class="form-group has-feedback">
-                    <p:inputText type="email" styleClass="form-control" placeholder="Email"/>
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <p:inputText type="password" styleClass="form-control" placeholder="Password"/>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                         <p:selectBooleanCheckbox itemLabel="Remember Me" value=""/>
+                    <div class="form-group has-feedback">
+                        <p:inputText value="#{logonMB.email}" type="email" styleClass="form-control" placeholder="Email"
+                                     required="true"
+                                     requiredMessage="Email is required."/>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
-                    <div class="col-xs-4">
-                        <p:button styleClass="btn btn-primary btn-block btn-flat" outcome="index.xhtml" value="Sign In"/>
+                    <div class="form-group has-feedback">
+                        <p:inputText value="#{logonMB.password}" type="password" styleClass="form-control"
+                                     placeholder="Password" required="true"
+                                     requiredMessage="Password is required."/>
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <p:selectBooleanCheckbox itemLabel="Remember Me" value="#{logonMB.remember}"/>
+                        </div>
+                        <div class="col-xs-4">
+                            <p:commandButton styleClass="btn btn-primary btn-block btn-flat" action="#{logonMB.doLogon}"
+                                             value="Sign In" process="@form" update="@form"/>
+                        </div>
+                    </div>
+                </h:form>
 
                 <div class="social-auth-links text-center">
                     <p>- OR -</p>
@@ -50,11 +61,25 @@
                 <!-- /.social-auth-links -->
 
                 <a href="#">I forgot my password</a><br/>
-                <a href="register.html" class="text-center">Register a new membership</a>
+                <a href="#" class="text-center">Register a new membership</a>
 
             </div>
             <!-- /.login-box-body -->
         </div>
+        <section class="content">
+
+            <p:tabView>
+                <p:tab title="logon.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+                </p:tab>
+
+            </p:tabView>
+        </section>
+        <h:outputScript library="js" name="prism.js"  target="head"/>
     </h:body>
 </f:view>
 </html>
