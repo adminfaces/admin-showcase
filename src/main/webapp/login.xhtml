@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+    </h:head>
+
+    <h:body styleClass="hold-transition login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <p:link href="index.xhtml"><b>Admin</b>Faces</p:link>
+            </div>
+            <!-- /.login-logo -->
+            <div class="login-box-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <div class="form-group has-feedback">
+                    <p:inputText type="email" styleClass="form-control" placeholder="Email"/>
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <p:inputText type="password" styleClass="form-control" placeholder="Password"/>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                         <p:selectBooleanCheckbox itemLabel="Remember Me" value=""/>
+                    </div>
+                    <div class="col-xs-4">
+                        <p:button styleClass="btn btn-primary btn-block btn-flat" outcome="index.xhtml" value="Sign In"/>
+                    </div>
+                </div>
+
+                <div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i
+                            class="fa fa-facebook"></i> Sign in using
+                        Facebook</a>
+                    <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i
+                            class="fa fa-google-plus"></i> Sign in using
+                        Google+</a>
+                </div>
+                <!-- /.social-auth-links -->
+
+                <a href="#">I forgot my password</a><br/>
+                <a href="register.html" class="text-center">Register a new membership</a>
+
+            </div>
+            <!-- /.login-box-body -->
+        </div>
+    </h:body>
+</f:view>
+</html>

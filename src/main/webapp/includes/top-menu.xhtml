@@ -77,9 +77,9 @@
                             <p:commandLink  styleClass="btn btn-danger"  value="Change password"/>
                         </div>
                         <div class="pull-right">
-                            <p:link id="logout" href="/logoff"  title="Logoff">
+                            <p:commandLink id="logout" action="#{logoutMB.doLogout}"  title="Logoff">
                                 <i class="fa fa-sign-out fa-2x"></i>
-                            </p:link>
+                            </p:commandLink>
                         </div>
                     </h:form>
                 </li>
