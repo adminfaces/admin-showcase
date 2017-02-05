@@ -13,6 +13,10 @@
                 text-align: right !important;
             }
 
+            #boxTable.ui-datatable .ui-datatable-header {
+                text-align: center !important;
+            }
+
             .year-spinner input {
                 width: 100px
             }
@@ -158,6 +162,24 @@
                     </p:columnGroup>
                 </p:subTable>
             </p:dataTable>
+        </p:panel>
+        <p:separator/>
+        <p:panel header="Box colors">
+        <p:dataTable id="boxTable" var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true" styleClass="box-primary"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{car.id}"
+                             emptyMessage="No cars found with given criteria"
+                             filteredValue="#{datatableMB.filteredCars}">
+
+                    <f:facet name="header">
+                            <h:outputText value="Box primary table"/>
+                    </f:facet>
+
+                    <p:column styleClass="align-center"
+                              priority="1">
+                             <h:outputText value="#{car.id}"/>
+                            </p:column>
+        </p:dataTable>
         </p:panel>
     </ui:define>
 
