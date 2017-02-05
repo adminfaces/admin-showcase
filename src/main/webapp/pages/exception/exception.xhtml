@@ -33,9 +33,13 @@
                     <div class="ui-g-3  ui-sm-12">
                         <p:button styleClass="btn-warning" href="github.com" value="404"/>
                     </div>
-                    <div class="ui-g-12">
+                    <div class="ui-g-6">
                         <p:commandButton styleClass="bg-black" action="#{exceptionMB.multipleBusinessException}"
                                          value="Multiple business exceptions"/>
+                    </div>
+                     <div class="ui-g-6">
+                        <p:commandButton styleClass="btn-success" action="#{exceptionMB.throwOptimisticLock}"
+                                         value="Optimistic lock exception"/>
                     </div>
                 </div>
             </h:form>
