@@ -5,6 +5,7 @@ import org.omnifaces.cdi.ViewScoped;
 
 import javax.faces.application.ViewExpiredException;
 import javax.inject.Named;
+import javax.persistence.OptimisticLockException;
 import java.io.Serializable;
 
 /**
@@ -34,4 +35,7 @@ public class ExceptionMB implements Serializable {
         throw new ViewExpiredException("this is a view expired exception...");
     }
 
+     public void throwOptimisticLock() {
+        throw new OptimisticLockException("this is a optimistic lock exception...");
+    }
 }
