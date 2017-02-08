@@ -23,11 +23,11 @@
         Admin
     </ui:define>
 
-    <ui:define name="before-sidebar">
+    <ui:define name="menu-begin">
         <ui:include src="/includes/menu-search.xhtml"/>
     </ui:define>
 
-     <ui:define name="sidebar">
+     <ui:define name="menu">
          <ui:include src="/includes/menu.xhtml"/>
      </ui:define>
 
@@ -35,7 +35,7 @@
         <ui:include src="/includes/top-menu.xhtml"/>
     </ui:define>
     
-    <ui:define name="after-content">
+    <ui:define name="content-end">
         <section class="content">
             <ui:insert name="code"/>
         </section>
