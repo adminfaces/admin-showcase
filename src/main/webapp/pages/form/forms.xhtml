@@ -137,7 +137,8 @@
                     <p:spacer/>
                     <p:spacer/>
                 </p:panelGrid>
-                <p:commandButton id="dialog" value="Dialog" icon="ui-icon-extlink" styleClass="btn-success" type="button" onclick="PF('dlg').show()" style="margin-top:20px;display:block"/>
+                <p:commandButton id="dialog" value="Dialog" icon="ui-icon-extlink" styleClass="btn-success"
+                                 type="button" onclick="PF('dlg').show()" style="margin-top:20px;display:block"/>
                 <p:dialog header="Login" widgetVar="dlg" resizable="false" responsive="true" modal="true">
                     <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank"
                                  columnClasses="ui-grid-col-4,ui-grid-col-8">
@@ -344,6 +345,40 @@
                 but given to ruthless violence whenever anything stands against the good of the family."/>
                     </p:panelGrid>
                 </p:panel>
+            </div>
+            <div class="row">
+                <p:growl id="messages" showDetail="true" life="3000"/>
+                <p:schedule id="schedule" value="#{scheduleMB.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
+
+                    <p:ajax event="dateSelect" listener="#{scheduleMB.onDateSelect}" update="eventDetails"
+                            oncomplete="PF('eventDialog').show();"/>
+                    <p:ajax event="eventSelect" listener="#{scheduleMB.onEventSelect}" update="eventDetails"
+                            oncomplete="PF('eventDialog').show();"/>
+                    <p:ajax event="eventMove" listener="#{scheduleMB.onEventMove}" update="messages"/>
+                    <p:ajax event="eventResize" listener="#{scheduleMB.onEventResize}" update="messages"/>
+
+                </p:schedule>
+                <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip" responsive="true">
+                    <h:panelGrid id="eventDetails" columns="2">
+                        <p:outputLabel for="title" value="Titles:"/>
+                        <p:inputText id="title" value="#{scheduleMB.event.title}" required="true"/>
+
+                        <p:outputLabel for="from" value="From:"/>
+                        <p:calendar id="from" value="#{scheduleMB.event.startDate}" timeZone="GMT+2"
+                                    pattern="dd/MM/yyyy HH:mm"/>
+
+                        <p:outputLabel for="to" value="To:"/>
+                        <p:calendar id="to" value="#{scheduleMB.event.endDate}" timeZone="GMT+2"
+                                    pattern="dd/MM/yyyy HH:mm"/>
+
+                        <p:outputLabel for="allDay" value="All Day:"/>
+                        <h:selectBooleanCheckbox id="allDay" value="#{scheduleMB.event.allDay}"/>
+
+                        <p:commandButton type="reset" value="Reset"/>
+                        <p:commandButton id="addButton" value="Save" actionListener="#{scheduleMB.addEvent}"
+                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+                    </h:panelGrid>
+                </p:dialog>
             </div>
         </h:form>
     </ui:define>
