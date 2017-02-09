@@ -6,14 +6,6 @@
                 xmlns:adm="http://github.com/adminfaces"
                 template="/WEB-INF/templates/template.xhtml">
 
-    <ui:define name="head-end">
-        <style type="text/css">
-            .ui-panelgrid.panelgrid-noborder .ui-grid-responsive {
-                border: none;
-            }
-        </style>
-    </ui:define>
-
     <ui:define name="title">
         Schedule
     </ui:define>
@@ -80,7 +72,7 @@
            </pre>
             </p:tab>
 
-            <p:tab title="DatatableMB.java">
+            <p:tab title="ScheduleMB.java">
               <pre>
                <code class="language-java">
                    <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ScheduleMB')}"
