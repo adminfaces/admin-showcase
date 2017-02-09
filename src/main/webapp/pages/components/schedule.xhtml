@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-panelgrid.panelgrid-noborder .ui-grid-responsive {
+                border: none;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="title">
+        Schedule
+    </ui:define>
+
+    <ui:define name="description">
+        Schedule is component to manage events.
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Schedule"/>
+        <h:form>
+            <div class="row">
+                <p:growl id="messages" showDetail="true" life="3000"/>
+                <p:schedule id="schedule" value="#{scheduleMB.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
+
+                    <p:ajax event="dateSelect" listener="#{scheduleMB.onDateSelect}" update="eventDetails"
+                            oncomplete="PF('eventDialog').show();"/>
+                    <p:ajax event="eventSelect" listener="#{scheduleMB.onEventSelect}" update="eventDetails"
+                            oncomplete="PF('eventDialog').show();"/>
+                    <p:ajax event="eventMove" listener="#{scheduleMB.onEventMove}" update="messages"/>
+                    <p:ajax event="eventMove" listener="#{scheduleMB.onEventMove}" update="messages"/>
+                    <p:ajax event="eventResize" listener="#{scheduleMB.onEventResize}" update="messages"/>
+
+                </p:schedule>
+                <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip"
+                          responsive="true" width="350">
+                    <p:panelGrid id="eventDetails" columns="2" layout="grid" styleClass="ui-fluid">
+                        <p:outputLabel for="title" value="Title:"/>
+                        <p:inputText id="title" value="#{scheduleMB.event.title}" required="true"/>
+
+                        <p:outputLabel for="from" value="From:"/>
+                        <p:calendar id="from" value="#{scheduleMB.event.startDate}" timeZone="GMT+2"
+                                    pattern="dd/MM/yyyy HH:mm"/>
+
+                        <p:outputLabel for="to" value="To:"/>
+                        <p:calendar id="to" value="#{scheduleMB.event.endDate}" timeZone="GMT+2"
+                                    pattern="dd/MM/yyyy HH:mm"/>
+
+                        <p:outputLabel for="allDay" value="All Day:"/>
+                        <p:selectBooleanCheckbox id="allDay" value="#{scheduleMB.event.allDay}"/>
+
+                    </p:panelGrid>
+                    <f:facet name="footer">
+                        <div class="pull-right" style="padding: 5px">
+                            <p:commandButton type="reset" value="Reset" styleClass="btn-success"/>
+                            <p:spacer height="5"/>
+                            <p:commandButton id="addButton" value="Save" styleClass="btn-primary"
+                                             actionListener="#{scheduleMB.addEvent}"
+                                             oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+                        </div>
+                    </f:facet>
+                </p:dialog>
+            </div>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="schedule.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText
+                       value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="DatatableMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ScheduleMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

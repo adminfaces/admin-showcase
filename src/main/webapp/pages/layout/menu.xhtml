@@ -34,38 +34,19 @@
 
       <ui:define name="code">
          <p:tabView>
-       <p:tab title="template.xhtml">
+       <p:tab title="WEB-INF/templates/template.xhtml">
            <pre>
-               <code class="language-html">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                template="/admin.xhtml"&gt;
-
-  &lt;ui:define name="before-sidebar"&gt;
-       &lt;ui:include src="/includes/menu-search.xhtml"/&gt;
-  &lt;/ui:define&gt;
-  &lt;ui:define name="sidebar"&gt;
-       &lt;ui:include src="/includes/menu.xhtml"/&gt;
-  &lt;/ui:define&gt;
-
-  &lt;ui:define name="topMenu"&gt;
-       &lt;ui:include src="/includes/top-menu.xhtml"/&gt;
-  &lt;/ui:define&gt;
-
-&lt;/ui:composition&gt;
-
-                </code>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('WEB-INF/templates/template.xhtml')}" escape="true"/></code>
            </pre>
        </p:tab>
-    <p:tab title="menu-search.xhtml">
+    <p:tab title="includes/menu-search.xhtml">
            <pre>
                <code class="language-html">
 <h:outputText value="#{sourceCodeMB.getPageSource('includes/menu-search')}" escape="true"/>
  </code>
            </pre>
        </p:tab>
-  <p:tab title="menu.xhtml">
+  <p:tab title="includes/menu.xhtml">
            <pre>
                <code class="language-html">
 <h:outputText value="#{sourceCodeMB.getPageSource('includes/menu')}" escape="true"/>
