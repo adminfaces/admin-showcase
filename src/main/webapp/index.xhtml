@@ -9,40 +9,59 @@
 
     <ui:define name="title">
         <p:growl autoUpdate="true" life="4000"/>
+
         <h2 class="align-center">
-           Welcome to the <span class="text-aqua"> <i><a href="https://github.com/adminfaces/" target="_blank" style="text-transform: none;text-decoration: none"> AdminFaces</a></i></span> Showcase!
-           <br/>
-           <small>Integrating <p:link value="Primefaces" href="http://primefaces.org"/>, <p:link value="Bootstrap" href="http://getbootstrap.com/"/> and <p:link value="Admin LTE" href="https://almsaeedstudio.com/themes/AdminLTE/index2.html/"/> into your <p:link value="JSF" href="https://javaserverfaces.java.net/"/> application.</small>
+            Welcome to the <span class="text-aqua"> <i><a href="https://github.com/adminfaces/" target="_blank"
+                                                          style="text-transform: none;text-decoration: none"> AdminFaces</a></i></span> Showcase!
+            <br/>
+            <small>Integrating <p:link value="Primefaces" href="http://primefaces.org"/>, <p:link value="Bootstrap"
+                                                                                                  href="http://getbootstrap.com/"/> and
+                <p:link value="Admin LTE" href="https://almsaeedstudio.com/themes/AdminLTE/index2.html/"/> into your
+                <p:link value="JSF" href="https://javaserverfaces.java.net/"/> application.
+            </small>
         </h2>
 
     </ui:define>
 
 
-   <ui:define name="body">
-       <div class="box box-primary" style="font-family: 'Helvetica Neue';font-size: 15px">
-                <div class="box-header with-border">
-                    <b>AdminFaces</b> is composed by 4 main projects
-                </div>
+    <ui:define name="body">
+        <div class="box box-primary" style="font-family: 'Helvetica Neue';font-size: 15px">
+            <div class="box-header with-border">
+                <b>AdminFaces</b> is composed by 5 main projects
+            </div>
 
-           <div class="box-body">
+            <div class="box-body">
 
-                    <ul>
-                        <li>
-                            <p:link value="Admin Theme" href="https://github.com/adminfaces/admin-theme"/>: Is a <i><p:link value="Primefaces theme" href="http://primefaces.org/themes"/> </i> based on <p:link value="Bootstrap" href="http://getbootstrap.com"/> and <p:link value=" Admin LTE" href="https://almsaeedstudio.com/themes/AdminLTE/index2.html"/> where Primefaces components are customized to look like mentioned frameworks.
-                        </li>
-                        <li>
-                                <p:link value="Admin Template" href="https://github.com/adminfaces/admin-template"/>: It's a <b>fully responsive</b> <i> <p:link value="Java Server Faces" href="https://javaserverfaces.java.net/"/> </i> <code>admin</code> template (used by this Showcase) which is also based on <b>Bootstrap</b> and <b>Admin LTE</b>.
-                        </li>
-                        <li>
-                            <p:link value="Admin Showcase" href="https://github.com/adminfaces/admin-showcase"/>: This web application which demonstrates AdminFaces main features and components.
-                        </li>
-                        <li>
-                            <p:link value="Admin Designer" href="https://github.com/adminfaces/admin-designer"/>: It's the same showcase application with Admin Theme and Admin Template bundled inside in order to make it easier to customize the theme and the template.
-                        </li>
-                    </ul>
-           </div>
-       </div>
+                <ul>
+                    <li>
+                        <p:link value="Admin Theme" href="https://github.com/adminfaces/admin-theme"/>: Is a <i><p:link
+                            value="Primefaces theme" href="http://primefaces.org/themes"/> </i> based on <p:link
+                            value="Bootstrap" href="http://getbootstrap.com"/> and <p:link value=" Admin LTE"
+                                                                                           href="https://almsaeedstudio.com/themes/AdminLTE/index2.html"/> where Primefaces components are customized to look like mentioned frameworks.
+                    </li>
+                    <li>
+                        <p:link value="Admin Template" href="https://github.com/adminfaces/admin-template"/>: It's a
+                        <b>fully responsive</b> <i> <p:link value="Java Server Faces"
+                                                            href="https://javaserverfaces.java.net/"/> </i>
+                        <code>admin</code> template (used by this Showcase) which is also based on <b>Bootstrap</b> and
+                        <b>Admin LTE</b>.
+                    </li>
+                    <li>
+                        <p:link value="Admin Showcase"
+                                href="https://github.com/adminfaces/admin-showcase"/>: This web application which demonstrates AdminFaces main features and components.
+                    </li>
+                    <li>
+                        <p:link value="Admin Designer"
+                                href="https://github.com/adminfaces/admin-designer"/>: It's the same showcase application with Admin Theme and Admin Template bundled (instead of being library dependencies) in order to make it easier to customize the theme and the template.
+                    </li>
+                    <li>
+                        <p:link value="Admin Starter"
+                                href="https://github.com/adminfaces/admin-starter"/>: A simple starter project to get you started with AdminFaces.
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-       <ui:include src="pages/dashboard/dashboard.xhtml"/>
-   </ui:define>
+        <ui:include src="pages/dashboard/dashboard.xhtml"/>
+    </ui:define>
 </ui:composition>
