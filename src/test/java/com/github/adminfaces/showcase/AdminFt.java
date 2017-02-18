@@ -2,10 +2,7 @@ package com.github.adminfaces.showcase;
 
 import com.github.adminfaces.showcase.pages.IndexPage;
 import com.github.adminfaces.showcase.pages.components.MessagesPage;
-import com.github.adminfaces.showcase.pages.exception.ErrorPage;
-import com.github.adminfaces.showcase.pages.exception.ExceptionPage;
-import com.github.adminfaces.showcase.pages.exception.NotFoundPage;
-import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
+import com.github.adminfaces.showcase.pages.exception.*;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
 import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,6 +41,9 @@ public class AdminFt {
 
     @Page
     protected NotFoundPage notFoundPage;
+
+    @Page
+    protected AccessDeniedPage accessDeniedPage;
 
     @Page
     protected ViewExpiredPage viewExpiredPage;
@@ -123,6 +123,14 @@ public class AdminFt {
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.click404Button();
         assertThat(notFoundPage.getTitle().getText()).isEqualTo("Oops! Page not found.");
+    }
+
+    @Test
+    @InSequence(2)
+    public void shouldGoTo403Page(@InitialPage ExceptionPage exception) {
+        assertThat(exception.getTitle().getText()).contains("Exceptions");
+        exception.click404Button();
+        assertThat(accessDeniedPage.getTitle().getText()).isEqualTo("Access denied! You do not have access to the requested page.");
     }
 
     @Test
