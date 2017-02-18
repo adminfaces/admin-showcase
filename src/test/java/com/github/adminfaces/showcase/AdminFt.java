@@ -129,7 +129,7 @@ public class AdminFt {
     @InSequence(2)
     public void shouldGoTo403Page(@InitialPage ExceptionPage exception) {
         assertThat(exception.getTitle().getText()).contains("Exceptions");
-        exception.click404Button();
+        exception.click403Button();
         assertThat(accessDeniedPage.getTitle().getText()).isEqualTo("Access denied! You do not have access to the requested page.");
     }
 

@@ -29,6 +29,9 @@ public class ExceptionPage extends BasePage {
     @FindByJQuery("button.btn-warning")
     protected WebElement btn404;
 
+    @FindByJQuery("button.bg-gray")
+    protected WebElement btn403;
+
     @FindByJQuery("button.bg-black")
     protected WebElement btnMultipleBusiness;
 
@@ -54,6 +57,10 @@ public class ExceptionPage extends BasePage {
 
     public void click404Button() {
         guardHttp(btn404).click();
+    }
+
+    public void click403Button() {
+        guardHttp(btn403).click();
     }
 
 
