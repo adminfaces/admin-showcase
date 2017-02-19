@@ -692,8 +692,6 @@
                                     <backend>pdf</backend>
                                     <sourceHighlighter>coderay</sourceHighlighter>
                                     <attributes>
-                                        <pdf-stylesdir>${project.basedir}/src/docs/styles/pdf</pdf-stylesdir>
-                                        <pdf-style>arqjava</pdf-style>
                                         <icons>font</icons>
                                         <pagenums/>
                                         <toc/>
