@@ -60,7 +60,7 @@ public class ExceptionPage extends BasePage {
     }
 
     public void click403Button() {
-        guardHttp(btn403).click();
+        guardAjax(btn403).click();
     }
 
 
