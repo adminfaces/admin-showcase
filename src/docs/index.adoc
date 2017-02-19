@@ -16,17 +16,17 @@
 :link-admin-designer: {link-adminfaces}/admin-designer
 
 :link-jsf: https://javaserverfaces.java.net/
-:link-primefaces: www.primefaces.org
+:link-primefaces: http://primefaces.org
 :link-bootstrap: http://getbootstrap.com/
 :link-adminlte: https://almsaeedstudio.com/themes/AdminLTE/index2.html
 
 
 ifeval::["{backend}" == "html5"]
-icon:file-pdf-o[] Read this documentation {link-admin-docs}/index.pdf[in PDF here, role="external", window="_blank"]. +
+icon:file-pdf-o[] Read this documentation {link-admin-docs}/index.pdf[in PDF here, role="external", window="_blank"].
 endif::[]
 
 ifeval::["{backend}" == "pdf"]
-icon:html5[] Read this documentation {link-admin-docs}/[in HTML5 here, role="external", window="_blank"]. +
+icon:html5[] Read this documentation {link-admin-docs}/[in HTML5 here, role="external", window="_blank"].
 endif::[]
 
 == Introduction
