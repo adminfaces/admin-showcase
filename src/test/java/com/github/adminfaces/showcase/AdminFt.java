@@ -128,7 +128,6 @@ public class AdminFt {
 
     @Test
     @InSequence(2)
-    @Ignore(value = "Not working on al app servers")
     public void shouldGoTo403Page(@InitialPage ExceptionPage exception) {
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.click403Button();
