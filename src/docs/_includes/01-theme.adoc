@@ -46,7 +46,7 @@ include::{projectRoot}/pom.xml[tags=dep-admin-theme]
 </context-param>
 ----
 +
-NOTE: If you use <Admin Template> the theme already comes activated.
+NOTE: If you use <<Admin Template>> the theme already comes activated.
 
 Now PrimeFaces components are styled like Bootstrap and AdminLTE.
 
