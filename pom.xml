@@ -43,11 +43,13 @@
             <artifactId>primefaces-extensions</artifactId>
             <version>6.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>font-awesome</artifactId>
-            <version>4.7.0</version>
-        </dependency>
+<!-- tag::dep-webjar[] -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>font-awesome</artifactId>
+    <version>4.7.0</version>
+</dependency>
+<!-- end::dep-webjar[] -->
         <dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
@@ -57,7 +59,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>
-            <version>0.1-20170219.030757-43</version>
+            <version>0.1-20170220.000804-44</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.github.adminfaces</groupId>
@@ -65,13 +67,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>com.github.adminfaces</groupId>
-            <artifactId>admin-theme</artifactId>
-            <version>0.1-20170218.204513-136</version>
-            <!--<classifier>dev</classifier> uncompressed theme.css (note that you need to exclude admin-theme brought by admin-template dependency)-->
-        </dependency>
-
+<!-- tag::dep-admin-theme[] -->
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+    <version>0.1-20170220.000753-138</version>
+    <!--<classifier>dev</classifier> uncompressed theme.css -->
+</dependency>
+<!-- end::dep-admin-theme[] -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

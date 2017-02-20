@@ -53,3 +53,7 @@ mvn wildfly-swarm:run  -Pswarm
 ----
 
 and access `http://localhost:8080/showcase`.
+
+== Documentation
+
+Documentation can be found here: http://adminfaces-rpestano.rhcloud.com/showcase/docs/

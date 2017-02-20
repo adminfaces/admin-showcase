@@ -1,0 +1,59 @@
+= Admin Theme
+
+It is a simple PrimeFaces theme where components are styled to look like AdminLTE ones (which in turn are based on Bootstrap).
+
+== Prerequisites
+
+The only pre-requisite is `PrimeFaces` and `Font Awesome`.
+
+[IMPORTANT]
+====
+Since PrimeFaces `5.1.1` font awesome comes embedded.
+
+For previous version or if you need to upgrade FA version you may include it in your pages by using webjars:
+
+[source,html]
+----
+<h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
+----
+
+and add web jar in your classpath:
+
+[source,xml]
+----
+include::{projectRoot}/pom.xml[tags=dep-webjar]
+----
+
+====
+
+== Usage
+
+To start using the theme you need the following:
+
+. Add admin theme to your classpath:
++
+[source,xml]
+----
+include::{projectRoot}/pom.xml[tags=dep-admin-theme]
+----
+. Activate the theme in `web.xml`
++
+[source,xml]
+----
+<context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>admin</param-value>
+</context-param>
+----
++
+NOTE: If you use <Admin Template> the theme already comes activated.
+
+Now PrimeFaces components are styled like Bootstrap and AdminLTE.
+
+image::messages.png[]
+
+
+== Architecture
+
+== Development
+

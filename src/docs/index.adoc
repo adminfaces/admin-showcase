@@ -3,11 +3,12 @@
 :linkattrs:
 :sectanchors:
 :sectlink:
+:includedir: _includes
 :experimental:
 
+:projectRoot: ../../..
 
-
-:link-adminfaces: http://github.com/adminfaces/
+:link-adminfaces: http://github.com/adminfaces
 :link-admin-showcase: {link-adminfaces}/admin-showcase
 :link-admin-showcase-openshift: http://adminfaces-rpestano.rhcloud.com/showcase/
 :link-admin-starter: {link-adminfaces}/admin-starter
@@ -37,6 +38,16 @@ AdminFaces ecosystem is composed by following projects:
 
 * {link-admin-theme}[Admin Theme^]: Is a Primefaces theme based on {link-bootstrap}[Bootstrap^] and {link-adminlte}[Admin LTE^] where {link-primefaces}[Primefaces^] components are customized to look like mentioned frameworks.
 * {link-admin-template}[Admin Template^]: It's a *fully responsive* {link-jsf}[Java Server Faces^] `admin` template (used by this Showcase) which is also based on *Bootstrap* and *Admin LTE*.
-* {link-admin-showcase}[Admin Showcase^]: A showcase web application which demonstrates AdminFaces main features and components.
+* {link-admin-showcase}[Admin Showcase^]: A showcase web application, {link-showcase-openshift}[deployed on openshift^], which demonstrates AdminFaces main features and components.
 * {link-admin-designer}[Admin Designer^]: It's the same showcase application with Admin Theme and Admin Template bundled (instead of being library dependencies) in order to make it easier to customize the theme and the template.
 * {link-admin-starter}[Admin Starter^]: A simple starter project to get you started with AdminFaces.
+
+In subsequent chapters we will drive through each project in detail.
+
+include::{includedir}/01-theme.adoc[leveloffset=+1]
+
+include::{includedir}/02-template.adoc[leveloffset=+1]
+
+include::{includedir}/03-designer.adoc[leveloffset=+1]
+
+include::{includedir}/04-starter.adoc[leveloffset=+1]
