@@ -20,6 +20,7 @@
 :link-primefaces: http://primefaces.org
 :link-bootstrap: http://getbootstrap.com/
 :link-adminlte: https://almsaeedstudio.com/themes/AdminLTE/index2.html
+:link-less: http://lesscss.org/
 
 
 ifeval::["{backend}" == "html5"]
