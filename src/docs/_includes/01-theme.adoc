@@ -52,43 +52,43 @@ Now PrimeFaces components are styled like Bootstrap and AdminLTE.
 
 image::messages.png[]
 
-TIP: See {link-admin-openshift}/pages/form/forms.xhtml[showcase forms page^] to get an idea.
+TIP: See {link-admin-showcase-openshift}/pages/form/forms.xhtml[showcase forms page^] to get an idea.
 
 
 == Architecture
 
-The theme uses {link-less}[less^] as css pre processor. Each primefaces component has its own less file:
+The theme uses {link-less}[less^] as css pre-processor. Each PrimeFaces component has its own less file:
 
 .src/main/resources/less
 ----
 ├── admin-lte
 │    |
-│    └──bootstrap <1>
-│    |
-│    └── skins <2>
-│    |
+│    ├── bootstrap <1>
+│    │
+│    ├── skins <2>
+│    │
 │    └── admin lte less files
 │
 ├── primefaces-admin
-│   |
-    └─ components <3>
-    │   |
-    │   └── accordeon.less
-    │   |
-    │   └── autocomplete.less
-    │   |
-    │   └── etc...
-    │
-    └─ theme.less <4>
-    |
-    └─ variables.less
+│    |
+│    ├─ components <3>
+│    │   |
+│    │   ├── accordeon.less
+│    │   │
+│    │   ├── autocomplete.less
+│    │   │
+│    │   └── etc...
+│    │
+│    ├─ theme.less <4>
+│    │
+     └─ variables.less
 ----
-<1> Bootstrap variables and https://css-tricks.com/snippets/css/useful-css3-less-mixins/[mixins^]
+<1> Bootstrap variables and https://css-tricks.com/snippets/css/useful-css3-less-mixins/[mixins^] are used as reference in AdminLTE and admin theme less files
 <2> Built in skins
-<3> Primefaces components
-<4> Components and admin-lte less files are included in theme.less
+<3> PrimeFaces components
+<4> Components and Admin-LTE less files are included in theme.less
 
-After compilation in will generate a single theme.css with admin-lte, bootstrap.
+After compilation it will generate the theme.css with Admin-LTE, Bootstrap and Primefaces components.
 
 NOTE: Bootstrap.css (from src/META-INF/resources) is included in theme.less, bootstrap less is not maintained in this project only it's mixins.
 
@@ -99,4 +99,4 @@ To get your hands dirty with admin theme it is recommended to use <<Admin Design
 
 Using designer (which is backed by wildfly swarm) plus brackets will let you change the components less files and see the results instantly.
 
-NOTE: theme.less is already brackets aware so you just need to change any component less file and see the results.
+NOTE: theme.less is already brackets aware so you just need to change any component less file, save it and see the results in Admin Designer.
