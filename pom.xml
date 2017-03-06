@@ -55,18 +55,19 @@
             <artifactId>omnifaces</artifactId>
             <version>2.1</version>
         </dependency>
-
-        <dependency>
+<!-- tag::dep-admin-template[] -->
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-template</artifactId>
+    <version>0.1-20170227.183730-45</version>
+<!-- end::dep-admin-template[] -->
+    <exclusions>
+        <exclusion>
             <groupId>com.github.adminfaces</groupId>
-            <artifactId>admin-template</artifactId>
-            <version>0.1-20170227.183730-45</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.github.adminfaces</groupId>
-                    <artifactId>admin-theme</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+            <artifactId>admin-theme</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
 <!-- tag::dep-admin-theme[] -->
 <dependency>
     <groupId>com.github.adminfaces</groupId>

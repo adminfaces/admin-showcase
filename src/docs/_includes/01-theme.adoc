@@ -1,6 +1,6 @@
 = Admin Theme
 
-It is a simple PrimeFaces theme where components are styled to look like AdminLTE ones (which in turn are based on Bootstrap).
+https://github.com/adminfaces/admin-theme[Admin Theme^] is a simple http://primefaces.org/themes[PrimeFaces theme^] where components are styled to look like AdminLTE ones (which in turn are based on Bootstrap).
 
 == Prerequisites
 
@@ -95,7 +95,7 @@ NOTE: Bootstrap.css (from src/META-INF/resources) is included in theme.less, boo
 
 == Development
 
-To get your hands dirty with admin theme it is recommended to use <<Admin Designer>> in combination with http://brackets.io/[Brackets].
+To get your hands dirty with admin theme it is recommended to use <<Admin Designer>> in combination with http://brackets.io/[Brackets] or any tool that `compile less` files to css on save.
 
 Using designer (which is backed by wildfly swarm) plus brackets will let you change the components less files and see the results instantly.
 

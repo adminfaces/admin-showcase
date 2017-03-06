@@ -1,2 +1,261 @@
 = Admin Template
 
+https://github.com/adminfaces/admin-template[Admin Template^] is a *fully responsive* https://javaserverfaces.java.net/[_Java Server Faces_] `admin template` based on http://getbootstrap.com/[Bootstrap^] and https://almsaeedstudio.com/themes/AdminLTE/index2.html/[Admin LTE^].
+
+== Usage
+
+Add the following dependency to your classpath:
+
+[source,xml]
+----
+include::{projectRoot}/pom.xml[tags=dep-admin-template]
+</dependency>
+----
+
+[WARNING]
+====
+Admin template will bring the following transitive dependencies:
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+    <version>version</version>
+</dependency>
+<dependency>
+    <groupId>org.primefaces</groupId>
+    <artifactId>primefaces</artifactId>
+    <version>6.0</version>
+</dependency>
+
+<dependency>
+    <groupId>org.omnifaces</groupId>
+    <artifactId>omnifaces</artifactId>
+    <version>2.1</version>
+</dependency>
+----
+
+Which you can override in your pom.xml as needed.
+====
+
+With the template dependency in classpath now you can use `admin` facelets template into your JSF pages.
+
+=== Example
+
+Consider the following sample page:
+
+[source,html]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/admin.xhtml"> <1>
+
+    <ui:define name="head">
+        <title>Admin Starter</title>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+        Admin Starter
+    </ui:define>
+
+    <ui:define name="logo-mini">
+        Admin
+    </ui:define>
+
+    <ui:define name="menu">
+        <ul class="sidebar-menu">
+            <li>
+                <p:link href="/index.xhtml" onclick="clearBreadCrumbs()">
+                    <i class="fa fa-home"></i>
+                    <span>Home</span>
+                </p:link>
+            </li>
+	        <li class="header">
+	            General
+	        </li>
+	        <li>
+	            <p:link href="/car-list.xhtml">
+	                <i class="fa fa-car"></i>
+	                <span>Cars</span>
+	            </p:link>
+	        </li>
+        </ul>
+     </ui:define>
+
+    <ui:define name="top-menu">
+        <ui:include src="/includes/top-bar.xhtml"/>
+    </ui:define>
+
+      <ui:define name="title">
+        <h2 class="align-center">
+            Welcome to the <span class="text-aqua"> <i><a href="https://github.com/adminfaces/admin-starter" target="_blank"
+                                                          style="text-transform: none;text-decoration: none"> AdminFaces Starter</a></i></span> Project!
+            <br/>
+            <small>Integrating <p:link value="Primefaces" href="http://primefaces.org"/>, <p:link value="Bootstrap"
+                                                                                                  href="http://getbootstrap.com/"/> and
+                <p:link value="Admin LTE" href="https://almsaeedstudio.com/themes/AdminLTE/index2.html/"/> into your
+                <p:link value="JSF" href="https://javaserverfaces.java.net/"/> application.
+            </small>
+        </h2>
+    </ui:define>
+
+    <ui:define name="description">
+        A page description
+    </ui:define>
+
+    <ui:define name="body">
+    	<h2>Page body</h2>
+    </ui:define>
+
+
+    <ui:define name="footer">
+          <a target="_blank"
+           href="https://github.com/adminfaces/">
+            Copyright (C) 2017 - AdminFaces
+        </a>
+
+        <div class="pull-right hidden-xs" style="color: gray">
+            <i>1.0.0</i>
+        </div>
+    </ui:define>
+
+
+</ui:composition>
+----
+<1> /admin.xhtml is the location of the template
+
+The above page definition renders as follows:
+
+image::template-example.png[]
+
+There are also other regions defined in admin.xhtml template, https://raw.githubusercontent.com/adminfaces/admin-template/master/admin-template-regions.png[see here^].
+
+== Configuration
+
+Template configuration is made through `admin-config.properties` file present in `src/main/resources` folder.
+
+
+Here are the default values as well as its description:
+
+----
+admin.loginPage=login.xhtml <1>
+admin.indexPage=index.xhtml <2>
+admin.dateFormat=MM/dd/yyyy HH:mm:ss <3>
+admin.templatePath=admin.xhtml <4>
+admin.breadcrumbSize=5 <5>
+admin.renderMessages=true <6>
+admin.renderAjaxStatus=true <7>
+admin.disableFilter=false <8>
+----
+<1> login page location (relative to webapp). It you only be used if you configure <<Admin Session>>.
+<2> index page location. User will be redirected to it when it access app root (contextPath/).
+<3> Date format used in error page (https://raw.githubusercontent.com/adminfaces/admin-template/master/src/main/resources/META-INF/resources/500.xhtml[500.xhtml^]).
+<4> facelets template to be used on build in admin-template pages like 500.xhtml, 404.xhtml, viewexpired.xhtml. By default it uses admin.xhtml but you can define any template (e.g one that extends admin.xhtml).
+<5> Number of breadcrumbs to queue before removing the older ones.
+<6> When false, p:messages defined in admin template will not be rendered.
+<7> When false ajaxStatus, which triggers the loading bar on every ajax request, will not be rendered.
+<8> Disables AdminFilter, responsible for redirecting user after session timeout, sending user to logon page when it is not logged in among other things.
+
+IMPORTANT: You don't need to declare all values in your admin-config.properties, you can specify only the ones you need in order to change.
+
+
+== Admin Session
+
+AdminSession is a simple session scoped bean which controls whether user is logged in or not.
+
+----
+ public boolean isLoggedIn(){
+        return isLoggedIn; //always true by default
+    }
+----
+
+By default the user *is always logged in* and you need to override it (by using https://github.com/adminfaces/admin-starter/blob/2659e762271f9e1864bd2290f3dbf5018087eccd/src/main/java/com/github/adminfaces/starter/infra/security/LogonMB.java#L28[bean specialization^] or via injection and calling `setIsLoggedIn()` method) to change its value, see <<Overriding AdminSession>>.
+
+When isLoggedIn is `false` you got the following mechanisms activated:
+
+. Access to any page, besides the login, redirects user to login;
+. When session is expired user is redirected to logon and current page (before expiration) is saved so user is redirected back to where it was before session expiration.
+
+NOTE: It is up to you to decide whether the user is logged in or not.
+
+=== Overriding AdminSession
+
+There are two ways to override AdminSession default value which is <<AdminSession Specialization, specialization>> and <<AdminSession Injection, injection>>.
+
+==== AdminSession Specialization
+
+A simple way to change AdminSession logged in value is by extending it:
+
+[source,java]
+----
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Specializes;
+import com.github.adminfaces.template.session.AdminSession;
+import org.omnifaces.util.Faces;
+import java.io.Serializable;
+
+@SessionScoped
+@Specializes
+public class LogonMB extends AdminSession implements Serializable {
+
+    private String currentUser;
+    private String email;
+    private String password;
+    private boolean remember;
+
+
+    public void login() throws IOException {
+        currentUser = email;
+        addDetailMessage("Logged in successfully as <b>" + email + "</b>");
+        Faces.getExternalContext().getFlash().setKeepMessages(true);
+        Faces.redirect("index.xhtml");
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+
+        return currentUser != null;
+    }
+
+    //getters&setters
+}
+----
+
+=== AdminSession Injection
+
+Another way is to inject it into your security authentication logic:
+
+
+[source,java]
+----
+import com.github.adminfaces.template.session.AdminSession;
+import org.omnifaces.util.Messages;
+import org.omnifaces.util.Faces;
+
+@SessionScoped
+@Named("authorizer")
+public class CustomAuthorizer implements Serializable {
+
+    private String currentUser;
+
+    @Inject
+    AdminSession adminSession;
+
+    public void login(String username) {
+        currentUser = username;
+        adminSession.setIsLoggedIn(true);
+        Messages.addInfo(null,"Logged in sucessfully as <b>"+username+"</b>");
+        Faces.redirect("index.xhtml");
+    }
+
+}
+----
+
+IMPORTANT: As isLoggedIn is `true by default` you need to set it to false on application startup so user is redirected to login page. This step is not needed when <<AdminSession Specialization>>.
+
+
+== Error Pages
+//TODO document error pages
