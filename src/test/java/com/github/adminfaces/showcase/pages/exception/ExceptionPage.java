@@ -40,11 +40,20 @@ public class ExceptionPage extends BasePage {
 
 
     public void clickBusinessButton() {
-        guardAjax(btnBusiness).click();
+        if(isPhantomjs()) {
+            guardHttp(btnBusiness).click();
+        } else {
+            guardAjax(btnBusiness).click();
+        }
     }
 
     public void clickMultipleBusinessButton() {
-        guardAjax(btnMultipleBusiness).click();
+        if(isPhantomjs()) {
+              guardHttp(btnMultipleBusiness).click();
+        } else {
+            guardAjax(btnMultipleBusiness).click();
+        }
+
     }
 
     public void clickRuntimeButton() {
