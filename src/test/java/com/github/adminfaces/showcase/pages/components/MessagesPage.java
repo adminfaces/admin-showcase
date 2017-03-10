@@ -61,11 +61,7 @@ public class MessagesPage extends BasePage {
     private WebElement fieldMsgIcon;
 
     public void clickBtnSubmit(){
-        if(isPhantomjs()) {
-            guardHttp(btnSubmit).click();
-        } else {
-            guardAjax(btnSubmit).click();
-        }
+        guardAjax(btnSubmit).click();
     }
 
     public void clickBtnInfo(){
