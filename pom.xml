@@ -59,7 +59,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-template</artifactId>
-    <version>0.1-20170310.132404-51</version>
+    <version>0.1-20170310.200144-53</version>
 <!-- end::dep-admin-template[] -->
     <exclusions>
         <exclusion>
