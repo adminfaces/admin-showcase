@@ -146,6 +146,30 @@
                             </td>
                         </tr>
                         <tr>
+                            <td><code>skin-teal</code></td>
+                            <td>
+                                <p:commandLink styleClass="btn btn-teal btn-xs"
+                                               onclick="$('body').removeClass('#{themeMB.theme}');"
+                                               oncomplete="$('body').addClass('skin-teal')"
+                                               process="@this" update="@form" partialSubmit="true"
+                                               actionListener="#{themeMB.changeTheme('skin-teal')}">
+                                    <i class="fa fa-eye"></i>
+                                </p:commandLink>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>skin-teal-light</code></td>
+                            <td>
+                                <p:commandLink styleClass="btn btn-teal btn-xs"
+                                               onclick="$('body').removeClass('#{themeMB.theme}');"
+                                               oncomplete="$('body').addClass('skin-teal-light')"
+                                               process="@this" update="@form" partialSubmit="true"
+                                               actionListener="#{themeMB.changeTheme('skin-teal-light')}">
+                                    <i class="fa fa-eye"></i>
+                                </p:commandLink>
+                            </td>
+                        </tr>
+                        <tr>
                             <td><code>skin-black</code></td>
                             <td>
                                 <p:commandLink styleClass="btn bg-black btn-xs"
