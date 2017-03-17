@@ -79,9 +79,9 @@
 
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-warning">
                         <p:commandButton value="Yes" type="button" styleClass="btn-primary ui-confirmdialog-yes"
-                                         icon="ui-icon-check"/>
+                                         icon="fa fa-check"/>
                         <p:commandButton value="No" type="button" styleClass="btn-danger ui-confirmdialog-no"
-                                         icon="ui-icon-close"/>
+                                         icon="fa fa-close"/>
                     </p:confirmDialog>
                 </h:form>
             </div>
@@ -127,7 +127,7 @@
         </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
-        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" minHeight="500" minWidth="500" responsive="true">
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true"  responsive="true" width="350">
             <h:form>
                 <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="no-border">
                     <h:outputLabel for="username" value="Username:"/>
