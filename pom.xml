@@ -36,46 +36,46 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.0</version>
+            <version>6.1.RC2</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
             <version>6.0.0</version>
         </dependency>
-<!-- tag::dep-webjar[] -->
-<dependency>
-    <groupId>org.webjars</groupId>
-    <artifactId>font-awesome</artifactId>
-    <version>4.7.0</version>
-</dependency>
-<!-- end::dep-webjar[] -->
+        <!-- tag::dep-webjar[] -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.7.0</version>
+        </dependency>
+        <!-- end::dep-webjar[] -->
         <dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
             <version>2.1</version>
         </dependency>
-<!-- tag::dep-admin-template[] -->
-<dependency>
-    <groupId>com.github.adminfaces</groupId>
-    <artifactId>admin-template</artifactId>
-    <version>0.1-20170316.225602-62</version>
-<!-- end::dep-admin-template[] -->
-    <exclusions>
-        <exclusion>
+        <!-- tag::dep-admin-template[] -->
+        <dependency>
+            <groupId>com.github.adminfaces</groupId>
+            <artifactId>admin-template</artifactId>
+            <version>0.1-20170316.225602-62</version>
+            <!-- end::dep-admin-template[] -->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.adminfaces</groupId>
+                    <artifactId>admin-theme</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- tag::dep-admin-theme[] -->
+        <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-<!-- tag::dep-admin-theme[] -->
-<dependency>
-    <groupId>com.github.adminfaces</groupId>
-    <artifactId>admin-theme</artifactId>
-    <version>0.1-20170317.133326-164</version>
-    <!--<classifier>dev</classifier> uncompressed theme.css -->
-</dependency>
-<!-- end::dep-admin-theme[] -->
+            <version>0.1-20170317.174824-166</version>
+            <!--<classifier>dev</classifier> uncompressed theme.css -->
+        </dependency>
+        <!-- end::dep-admin-theme[] -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -633,7 +633,7 @@
 
         <profile>
             <id>openshift</id>
-             <properties>
+            <properties>
                 <showcase-url>http://adminfaces-rpestano.rhcloud.com/showcase</showcase-url>
             </properties>
             <build>
@@ -762,6 +762,12 @@
             <id>snapshots</id>
             <name>libs-snapshot</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
         </repository>
     </repositories>
 
