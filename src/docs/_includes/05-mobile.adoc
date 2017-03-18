@@ -5,7 +5,7 @@ http://github.com/adminfaces/admin-mobile[Admin Mobile^] is a simple https://dev
 
 image::admin-webview.png[]
 
-The app is a prof of concept to check AdminFaces user experience in mobile apps. The following behaviours will be enabled only on mobile devices:
+The app is a proof of concept to check AdminFaces user experience in mobile apps. The following behaviours will be enabled only on this kind of devices:
 
 * Loading bar based on google material design;
 * Go to top link at the bottom right corner of the page;
