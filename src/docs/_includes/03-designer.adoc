@@ -1,3 +1,44 @@
 = Admin Designer
 
+The aim of https://github.com/adminfaces/admin-designer[Admin Designer^] is to make it easier to customize Admin theme and Admin Template.
+
+== What is it?
+
+This the same http://github.com/adminfaces/admin-showcase[Admin Showcase^] application with `admin template` and `admin theme` bundled inside instead of being project dependencies.
+
+It uses http://wildfly-swarm.io/[Wildfly Swarm^] to run the `exploded` application so one can change the theme or template and see the modifications without needing to restart the application.
+
+== Objectives
+
+The initial idea was to speed AdminFaces development but it turns out that it can easy `contributions` from non Java developers (like designers and frontend developers) as the project is about front end components and layout.
+
+== How it works
+
+In application root directory:
+
+. First start the application by running the command:
++
+----
+./mvnw wildfly-swarm:run (or mvnw.cmd wildfly-swarm:run)
+----
++
+. Second edit any less file in directory https://github.com/adminfaces/admin-designer/tree/master/src/main/resources/less[`src/main/resources/less`^].
+. Now to compile the application using:
++
+----
+ ./mvnw compile (or mvnw.cmd compile)
+----
+TIP: If you don't want to compile every time you change a less file, use the flag `-Dlesscss.watch=true`. Or use a tool like http://brackets.io/[brackets^] with https://github.com/jdiehl/brackets-less-autocompile[less extension^] installed.
++
+. Finally when you're done you can download the customized `theme` or `template` packed as jar files;
++
+image::designer.png[]
+
+The changes made to less files should be visible in running application `http://localhost:8080/showcase`
+
+NOTE: There is no need to stop and run the application again.
+
+
+You can see this workflow in the following video: https://www.youtube.com/watch?v=AGo03YqjyDM
+
 
