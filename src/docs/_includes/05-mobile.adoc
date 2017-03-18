@@ -1,0 +1,5 @@
+= Admin Mobile
+
+http://github.com/adminfaces/admin-mobile[Admin Mobile^] is a simple https://developer.android.com/studio/index.html[Android Studio^] project which uses https://developer.android.com/reference/android/webkit/WebView.html[Webview^] to create an https://www.mobiloud.com/blog/native-web-or-hybrid-apps/[hybrid web app^]
+
+
