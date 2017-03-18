@@ -1,5 +1,13 @@
 = Admin Mobile
 
-http://github.com/adminfaces/admin-mobile[Admin Mobile^] is a simple https://developer.android.com/studio/index.html[Android Studio^] project which uses https://developer.android.com/reference/android/webkit/WebView.html[Webview^] to create an https://www.mobiloud.com/blog/native-web-or-hybrid-apps/[hybrid web app^]
+http://github.com/adminfaces/admin-mobile[Admin Mobile^] is a simple https://developer.android.com/studio/index.html[Android Studio^] project which uses https://developer.android.com/reference/android/webkit/WebView.html[Webview^] to create an https://www.mobiloud.com/blog/native-web-or-hybrid-apps/[hybrid web app^] based on Admin Showcase.
 
 
+image::admin-webview.png[]
+
+The app is a prof of concept to check AdminFaces user experience in mobile apps. The following behaviours will be enabled only on mobile devices:
+
+* Loading bar based on google material design;
+* Go to top link at the bottom right corner of the page;
+* Larger icons on panel, dialog and messages;
+* Some components like growl, tabview and datatable are optimized for mobile devices;
