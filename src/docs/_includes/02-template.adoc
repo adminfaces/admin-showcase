@@ -18,11 +18,8 @@ Admin template will bring the following transitive dependencies:
 
 [source,xml]
 ----
-<dependency>
-    <groupId>com.github.adminfaces</groupId>
-    <artifactId>admin-theme</artifactId>
-    <version>version</version>
-</dependency>
+include::{projectRoot}/pom.xml[tags=dep-admin-theme]
+
 <dependency>
     <groupId>org.primefaces</groupId>
     <artifactId>primefaces</artifactId>
@@ -153,7 +150,7 @@ admin.disableFilter=false <8>
 <1> login page location (relative to webapp). It you only be used if you configure <<Admin Session>>.
 <2> index page location. User will be redirected to it when it access app root (contextPath/).
 <3> Date format used in error page (https://raw.githubusercontent.com/adminfaces/admin-template/master/src/main/resources/META-INF/resources/500.xhtml[500.xhtml^]).
-<4> facelets template to be used on build in admin-template pages like 500.xhtml, 404.xhtml, viewexpired.xhtml. By default it uses admin.xhtml but you can define any template (e.g one that extends admin.xhtml).
+<4> facelets template to be used on build in admin-template pages like 500.xhtml, 404.xhtml, viewexpired.xhtml, see <<Error Pages>>. By default it uses admin.xhtml but you can define any template (e.g one that extends admin.xhtml).
 <5> Number of breadcrumbs to queue before removing the older ones.
 <6> When false, p:messages defined in admin template will not be rendered.
 <7> When false ajaxStatus, which triggers the loading bar on every ajax request, will not be rendered.
@@ -258,4 +255,59 @@ IMPORTANT: As isLoggedIn is `true by default` you need to set it to false on app
 
 
 == Error Pages
-//TODO document error pages
+
+The template comes with custom error pages like `403`, `404`, `500`, `ViewExpired` and `OptimisticLock`.
+
+.500
+User is going to be redirected to *500.xhtml* whenever a _500_ response code is returned in a request.
+
+The page will also be triggered when a `Throwable` is raised (and not catch).
+
+Here is how 500 page look like:
+
+image::500.png[]
+
+.403
+User is redirected to *403.xhtml* whenever a _403_ response code is returned in a request. The page will also be triggered when a `com.github.adminfaces.template.exception.AccessDeniedException` is raised.
+
+image::403.png[]
+
+.404
+User will be redirected to *404.xhtml* whenever a 404 response code is returned from a request.
+
+image::404.png[]
+
+.ViewExpired
+When a JSF `javax.faces.application.ViewExpiredException` is raised user will be redirected to *expired.xhtml*.
+
+image::expired.png[]
+
+.OptimisticLock
+When a JPA `javax.persistence.OptimisticLockException` is thrown user will be redirected to *optimistic.xhtml*.
+
+image::optimistic.png[]
+
+=== Providing custom error pages
+
+You can provide your own custom pages (and other status codes) by configuring them in web.xml, example:
+
+[source,xml]
+----
+<error-page>
+    <error-code>404</error-code>
+    <location>/404.xhtml</location>
+</error-page>
+<error-page>
+    <error-code>500</error-code>
+    <location>/500.xhtml</location>
+</error-page>
+<error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/500.xhtml</location>
+</error-page>
+----
+
+=== Overriding error pages
+
+You can also override error pages by placing the pages (with same name) described in <<Error Pages>> section on the root of your application (`webapp/`).
+
