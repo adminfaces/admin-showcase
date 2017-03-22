@@ -311,3 +311,40 @@ You can provide your own custom pages (and other status codes) by configuring th
 
 You can also override error pages by placing the pages (with same name) described in <<Error Pages>> section on the root of your application (`webapp/`).
 
+=== Labels and Messages in error pages
+
+Labels and messages in error pages are provided via http://docs.oracle.com/javaee/6/tutorial/doc/bnaxw.html#bnaxy[JSF resource bundle] mechanism.
+
+Below is `admin.properties` resource bundle which provides messages for error pages:
+
+.src/main/resources/admin.properties
+----
+label.go-back=Go back to
+
+#403
+label.403.header=403
+label.403.message=Access denied! You do not have access to the requested page.
+
+#404
+label.404.header=404
+label.404.message=Oops! Page not found
+
+#500
+label.500.header=500
+label.500.message=Oops! Something went wrong
+label.500.title=Unexpected error
+label.500.detail=Details
+
+#expired
+label.expired.title=View expired
+label.expired.message= The requested page could not be recovered.
+label.expired.click-here= Click here to reload the page.
+
+#optimistic
+label.optimistic.title=Record already updated
+label.optimistic.message= The requested record has been already updated by another user.
+label.optimistic.click-here= Click here to reload the updated record from database.
+
+----
+
+To override labels just provide a file named _admin.properties_ in your application `resources` folder.
