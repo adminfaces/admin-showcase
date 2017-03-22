@@ -4,13 +4,13 @@ The aim of https://github.com/adminfaces/admin-designer[Admin Designer^] is to m
 
 == What is it?
 
-This the same http://github.com/adminfaces/admin-showcase[Admin Showcase^] application with `admin template` and `admin theme` bundled inside instead of being project dependencies.
+This is the same http://github.com/adminfaces/admin-showcase[Admin Showcase^] application with `admin template` and `admin theme` bundled inside instead of being project dependencies.
 
 It uses http://wildfly-swarm.io/[Wildfly Swarm^] to run the `exploded` application so one can change the theme or template and see the modifications without needing to restart the application.
 
 == Objectives
 
-The initial idea was to speed AdminFaces development but it turns out that it can easy `contributions` from non Java developers (like designers and frontend developers) as the project is about front end components and layout.
+The initial idea was to speed AdminFaces development but it turns out that it can easy `contributions` from non Java developers (like designers and frontend developers) as the project is about frontend components and layout.
 
 == How it works
 
