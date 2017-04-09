@@ -22,7 +22,11 @@ li.header {
 }
 
 ul.dropdown-menu > li.user-header {
-      height: auto!important;
+    height: auto!important;
+}
+
+a.dropdown-toggle {
+    background-color: #3c8dbc!important;
 }
 
 a#logout {
