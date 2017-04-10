@@ -128,5 +128,13 @@
         </li>
     </ul>
 
+    <script type="text/javascript">
+        if(isMobile()) {
+           $('ul.sidebar-menu a.ui-link').click(function() {
+                $(this).prop('disabled', true);
+                showBar();
+            })
+        }
+    </script>
 
 </ui:composition>
