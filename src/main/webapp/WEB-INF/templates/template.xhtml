@@ -8,10 +8,11 @@
         <h:outputStylesheet library="css" name="showcase.css"/>
         <h:outputStylesheet library="css" name="prism.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
-        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css"/>
 
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
-        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/apple-touch-icon.png']}" sizes="180x180"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/apple-touch-icon.png']}"
+              sizes="180x180"/>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon-32x32.png']}" sizes="32x32"/>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon-16x16.png']}" sizes="16x16"/>
         <link rel="manifest" href="/manifest.json"/>
@@ -34,14 +35,14 @@
         <ui:include src="/includes/menu-search.xhtml"/>
     </ui:define>
 
-     <ui:define name="menu">
-         <ui:include src="/includes/menu.xhtml"/>
-     </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/includes/menu.xhtml"/>
+    </ui:define>
 
     <ui:define name="top-menu">
         <ui:include src="/includes/top-menu.xhtml"/>
     </ui:define>
-    
+
     <ui:define name="content-end">
         <section class="content">
             <ui:insert name="code"/>
@@ -57,17 +58,17 @@
             <i>#{adm['admin.version']}</i>
         </div>
 
-        <h:outputScript library="js" name="prism.js"  target="head"/>
-    </ui:define>
+        <h:outputScript library="js" name="prism.js" target="head"/>
 
-    <script type="text/javascript">
-        if(isMobile()) {
-            $('a.ui-link').click(function() {
-                $(this).prop('disabled', true);
-                showBar();
-            });
-        }
-    </script>
+        <script type="text/javascript">
+            if (isMobile()) {
+                $('a.ui-link').click(function () {
+                    $(this).prop('disabled', true);
+                    showBar();
+                });
+            }
+        </script>
+    </ui:define>
 
 
 </ui:composition>
