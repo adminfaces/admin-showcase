@@ -61,8 +61,8 @@
         <h:outputScript library="js" name="prism.js" target="head"/>
 
         <script type="text/javascript">
-            if (isMobile()) {
-                $('a.ui-link').click(function () {
+            if(isMobile()) {
+                $('a.ui-link').click(function() {
                     $(this).prop('disabled', true);
                     showBar();
                 });
