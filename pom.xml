@@ -72,7 +72,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-theme</artifactId>
-    <version>1.0.0-20170415.141002-25</version>
+    <version>1.0.0-20170415.155511-27</version>
     <!--<classifier>dev</classifier> uncompressed theme.css -->
 </dependency>
 <!-- end::dep-admin-theme[] -->
