@@ -23,7 +23,7 @@ public class ExceptionPage extends BasePage {
     @FindByJQuery("button.btn-danger")
     protected WebElement btnRuntime;
 
-    @FindByJQuery("button.bg-dark-red")
+    @FindByJQuery("button.btn-fatal")
     protected WebElement btnViewExpired;
 
     @FindByJQuery("button.btn-warning")
