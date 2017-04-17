@@ -1,6 +1,7 @@
 package com.github.adminfaces.showcase;
 
 import com.github.adminfaces.showcase.pages.IndexPage;
+import com.github.adminfaces.showcase.pages.components.ChipsPage;
 import com.github.adminfaces.showcase.pages.components.MessagesPage;
 import com.github.adminfaces.showcase.pages.exception.*;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
@@ -250,6 +251,19 @@ public class AdminFt {
         waitModel();
         assertThat(messagesPage.getTitle().isDisplayed()).isTrue();
 
+    }
+
+    @Test
+    @InSequence(7)
+    public void shouldAddChipsTags(@InitialPage ChipsPage chipsPage){
+        chipsPage.addDefaultChips();
+        chipsPage.addDangerChips();
+        chipsPage.addWarnChips();
+        chipsPage.addSuccessChips();
+        chipsPage.addInfoChips();
+        chipsPage.addFatalChips();
+        chipsPage.addNoColorChips();
+        chipsPage.addCustomChips();
     }
 
 
