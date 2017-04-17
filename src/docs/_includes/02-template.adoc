@@ -2,6 +2,23 @@
 
 https://github.com/adminfaces/admin-template[Admin Template^] is a *fully responsive* https://javaserverfaces.java.net/[_Java Server Faces_] `admin template` based on http://getbootstrap.com/[Bootstrap^] and https://almsaeedstudio.com/themes/AdminLTE/index2.html/[Admin LTE^].
 
+== Features
+
+Below is a, non exhaustive, list of notable features brought out of the box by this template:
+
+* Fully responsive
+** Its based on Bootstrap and AdminLTE two well tested and solid frameworks
+* Mobile and PWA friendly
+* Some functionalities are enabled only on mobile devices, like:
+** Material design load bar
+** Ripple effect (can be disabled)
+** Touch enabled menu to slide in/out (can be disabled)
+** Scroll to top
+* Automatically activates (highlight) menu based on current page
+* Custom <<Error Pages, error pages>>
+* Configurable, see <<Configuration>>
+* http://adminfaces-rpestano.rhcloud.com/showcase/pages/layout/breadcrumb.xhtml[Breadcrumb^] based navigation; (can be disabled)
+
 == Usage
 
 Add the following dependency to your classpath:
@@ -146,6 +163,12 @@ admin.breadcrumbSize=5 <5>
 admin.renderMessages=true <6>
 admin.renderAjaxStatus=true <7>
 admin.disableFilter=false <8>
+admin.renderBreadCrumb=true <9>
+admin.enableSlideMenu=true <10>
+admin.enableRipple=true <11>
+admin.rippleElements= .ripplelink,button.ui-button,.ui-selectlistbox-item,.ui-multiselectlistbox-item,.ui-selectonemenu-label,.ui-selectcheckboxmenu,\
+.ui-autocomplete-dropdown, .ui-autocomplete-item ... (the list goes on) <12>
+
 ----
 <1> login page location (relative to webapp). It you only be used if you configure <<Admin Session>>.
 <2> index page location. User will be redirected to it when it access app root (contextPath/).
@@ -155,6 +178,10 @@ admin.disableFilter=false <8>
 <6> When false, p:messages defined in admin template will not be rendered.
 <7> When false ajaxStatus, which triggers the loading bar on every ajax request, will not be rendered.
 <8> Disables AdminFilter, responsible for redirecting user after session timeout, sending user to logon page when it is not logged in among other things.
+<9> When false, the breadCrumb component, declared in admin template, will not be rendered.
+<10> If true will make left menu touch enable (can be closed or opened via touch)
+<11> When true it will create a http://materializecss.com/waves.html#![wave/ripple effect^] on elements specified by `rippleElements`.
+<12> A list of comma separated list of (jquery) selector which elements will be affected by ripple effect.
 
 IMPORTANT: You don't need to declare all values in your admin-config.properties, you can specify only the ones you need in order to change.
 
