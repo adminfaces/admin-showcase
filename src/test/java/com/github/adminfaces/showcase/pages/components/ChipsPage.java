@@ -47,7 +47,7 @@ public class ChipsPage extends BasePage {
 
     public void addDefaultChips() {
         addChip(defaultChipsInput, "tag1");
-        //addChip(defaultChipsInput,"tag2");
+        /addChip(defaultChipsInput,"tag2");
         chipAssertion( 2);
     }
 
