@@ -256,6 +256,9 @@ public class AdminFt {
     @Test
     @InSequence(7)
     public void shouldAddChipsTags(@InitialPage ChipsPage chipsPage){
+        if(isPhantomjs()) {
+            return;
+        }
         chipsPage.addDefaultChips();
         chipsPage.addDangerChips();
         chipsPage.addWarnChips();
