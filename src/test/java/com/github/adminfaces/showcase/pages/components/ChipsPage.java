@@ -78,7 +78,7 @@ public class ChipsPage extends BasePage {
     public void addFatalChips() {
         addChip(fatalChipsInput, "tag1");
         addChip(fatalChipsInput, "tag2");
-        chipAssertion(fatalChipsInput, 2);
+        chipAssertion(2);
     }
 
     public void addNoColorChips() {
