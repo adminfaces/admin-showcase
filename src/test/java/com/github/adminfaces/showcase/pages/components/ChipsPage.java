@@ -47,7 +47,7 @@ public class ChipsPage extends BasePage {
 
     public void addDefaultChips() {
         addChip(defaultChipsInput, "tag1");
-        /addChip(defaultChipsInput,"tag2");
+        addChip(defaultChipsInput,"tag2");
         chipAssertion( 2);
     }
 
@@ -102,32 +102,11 @@ public class ChipsPage extends BasePage {
         List<WebElement> elements = browser.findElements(By.cssSelector(".ui-autocomplete-token-label"));
         assertThat(elements).size().isEqualTo(numChips);
         for (int i = 0; i < numChips; i++) {
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            /* for some reason graphene is not waiting
-            waitGui();
-            waitGui(browser);*/
             WebElement element = browser.findElement(By.cssSelector(".ui-chips-token-icon"));
             element.click();
+            waitGui().until().element(By.xpath("//span[@class='ui-autocomplete-token-label'][text()='tag" +
+                    (i+1) +"']")).is().not().present();
         }
-        /*
-        elements = browser.findElements(By.cssSelector(".ui-chips-token-icon"));
-        Iterator<WebElement> webElementIterator = elements.iterator();
-        while(webElementIterator.hasNext()) {
-            WebElement element = webElementIterator.next();
-            element.click();
-        }*/
-        try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        /* for some reason graphene is not waiting
-        waitGui();
-        waitGui(browser);*/
         elements = browser.findElements(By.cssSelector(".ui-autocomplete-token-label"));
         assertThat(elements).size().isEqualTo(0);
     }
