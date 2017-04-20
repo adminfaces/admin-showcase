@@ -156,7 +156,7 @@
                 <p:chart type="line" model="#{chartMB.lineModel1}" style="height:300px;margin:20px 0"
                          responsive="true"/>
 
-                <p:dataTable var="car" value="#{datatableMB.cars}" reflow="true" style="margin-top:20px">
+                <p:dataTable var="car" value="#{datatableMB.cars}" reflow="true" style="margin-top:20px" paginator="true" paginatorPosition="bottom" rows="5">
                     <f:facet name="header">
                         DataTable
                     </f:facet>
