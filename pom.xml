@@ -6,8 +6,9 @@
 
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-showcase</artifactId>
-    <version>0.1-SNAPSHOT</version>
-
+<!-- tag::version[] -->
+<version>1.0.0-SNAPSHOT</version>
+<!-- end::version[] -->
     <name>admin-showcase</name>
 
     <packaging>war</packaging>

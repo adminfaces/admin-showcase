@@ -11,3 +11,6 @@ The app is a proof of concept to check AdminFaces user experience in mobile apps
 * Go to top link at the bottom right corner of the page;
 * Larger icons on panel, dialog and messages;
 * Some components like growl, tabview and datatable are optimized for mobile devices;
+* Ripple/waves effect based on http://materializecss.com/waves.html[materialize^];
+* Slideout menu +
+image:https://cloud.githubusercontent.com/assets/1592273/25071807/dd37121e-2296-11e7-855c-8f20b59dcf5f.gif[]

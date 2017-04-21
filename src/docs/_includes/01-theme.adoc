@@ -90,8 +90,72 @@ The theme uses {link-less}[less^] as css pre-processor. Each PrimeFaces componen
 
 After compilation it will generate the theme.css with Admin-LTE, Bootstrap and Primefaces components.
 
-NOTE: Bootstrap.css (from src/META-INF/resources) is included in theme.less, bootstrap less is not maintained in this project only it's mixins.
+NOTE: Bootstrap.css (from src/META-INF/resources) is included in theme.less but can be removed via maven classifiers
 
+NOTE: Bootstrap less is not maintained in this project only it's mixins.
+
+== Theme classifiers
+
+This project uses http://stackoverflow.com/questions/20909634/what-is-the-purpose-of-classifier-tag-in-maven[maven classifiers^] to offer multiple `faces` (pum intended) of Admin Theme. Below is the explanation of each classifier and how to use it.
+
+=== Default (no classifier)
+The default theme comes `compressed`, with `Bootstrap (3.3.7)` embedded and uses `JSF resource handling` for loading images and web fonts.
+
+.Maven usage
+[source,xml]
+----
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+include::{projectRoot}/pom.xml[tags=version]
+</dependency>
+----
+
+=== Dev classifier
+
+The `dev` classifier will bring a theme.css *without minification*.
+
+.Maven usage
+[source,xml]
+----
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+include::{projectRoot}/pom.xml[tags=version]
+<classifier>dev</classifier>
+</dependency>
+----
+
+=== Without Bootstrap classifier
+
+The `without-bootstrap` classifier will bring a theme.css *without bootstrap embedded* so it's up to the developer to provide Bootstrap within the application.
+
+.Maven usage
+[source,xml]
+----
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+include::{projectRoot}/pom.xml[tags=version]
+<classifier>without-bootstrap</classifier>
+</dependency>
+----
+
+=== Without JSF classifier
+
+The `without-jsf` classifier will bring a theme.css *without JSF resource handling* so the theme can be used on projects (derived from PrimeFaces) without JSF like Prime React, PrimeUI or PrimeNG.
+
+
+.Maven usage
+[source,xml]
+----
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+include::{projectRoot}/pom.xml[tags=version]
+<classifier>without-jsf</classifier>
+</dependency>
+----
 
 == Development
 
