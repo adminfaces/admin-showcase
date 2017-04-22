@@ -10,7 +10,16 @@ It uses http://wildfly-swarm.io/[Wildfly Swarm^] to run the `exploded` applicati
 
 == Objectives
 
-The initial idea was to speed AdminFaces development but it turns out that it can easy `contributions` from non Java developers (like designers and frontend developers) as the project is about frontend components and layout.
+The initial idea was to speed AdminFaces development but it turns out that it can easy `contributions` from non Java developers (like designers and frontend developers) as the project is about front end components and layout.
+
+Also another great feature of Admin Designer is the possibility to *download the customized project* as a maven project.
+
+[IMPORTANT]
+====
+The downloaded project is the https://github.com/adminfaces/admin-starter[Admin Starter^] with modified admin theme and template embedded in the project.
+
+NOTE: This is the most flexible approach but at the same time `you lose the updates on Admin Theme and template projects` because you don't depend on them anymore.
+====
 
 == How it works
 

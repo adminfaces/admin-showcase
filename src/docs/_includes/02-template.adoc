@@ -29,7 +29,10 @@ Add the following dependency to your classpath:
 
 [source,xml]
 ----
-include::{projectRoot}/pom.xml[tags=dep-admin-template]
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-template</artifactId>
+include::{projectRoot}/pom.xml[tags=version]
 </dependency>
 ----
 

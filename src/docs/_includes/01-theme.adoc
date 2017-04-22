@@ -21,7 +21,11 @@ and add web jar in your classpath:
 
 [source,xml]
 ----
-include::{projectRoot}/pom.xml[tags=dep-webjar]
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+include::{projectRoot}/pom.xml[tags=version]
+</dependency>
 ----
 
 ====
@@ -34,7 +38,7 @@ To start using the theme you need the following:
 +
 [source,xml]
 ----
-include::{projectRoot}/pom.xml[tags=dep-admin-theme]
+include::{projectRoot}/pom.xml[tags=version]
 ----
 . Activate the theme in `web.xml`
 +
