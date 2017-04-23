@@ -34,9 +34,9 @@ endif::[]
 
 == Introduction
 
-{link-adminfaces}[AdminFaces] is an open source project which brings {link-bootstrap}[Bootstrap^] and {link-adminlte}[AdminLTE^] to your application via {link-primefaces}[Primefaces^] theme and {link-jsf}[JSF^] `responsive` template.
+{link-adminfaces}[AdminFaces] is an open source project which brings {link-bootstrap}[Bootstrap^] and {link-adminlte}[AdminLTE^] to your application via a {link-primefaces}[PrimeFaces^] theme and {link-jsf}[JSF^] `responsive` template.
 
-AdminFaces ecosystem is composed by following projects:
+AdminFaces ecosystem is composed by the following projects:
 
 * {link-admin-theme}[Admin Theme^]: Is a Primefaces theme based on {link-bootstrap}[Bootstrap^] and {link-adminlte}[Admin LTE^] where {link-primefaces}[Primefaces^] components are customized to look like mentioned frameworks.
 * {link-admin-template}[Admin Template^]: It's a *fully responsive* {link-jsf}[Java Server Faces^] `admin` template (used by this Showcase) which is also based on *Bootstrap* and *Admin LTE*.
