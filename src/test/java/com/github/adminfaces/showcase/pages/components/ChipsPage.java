@@ -99,7 +99,7 @@ public class ChipsPage extends BasePage {
     }
 
     private void chipAssertion(int numChips) {
-        List<WebElement> elements = browser.findElements(By.cssSelector(".ui-autocomplete-token-label"));
+        List<WebElement> elements = browser.findElements(By.cssSelector(".ui-chips-token-label"));
         assertThat(elements).size().isEqualTo(numChips);
         for (int i = 0; i < numChips; i++) {
             WebElement element = browser.findElement(By.cssSelector(".ui-chips-token-icon"));
