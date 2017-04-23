@@ -34,7 +34,7 @@ endif::[]
 
 == Introduction
 
-{link-adminfaces}[AdminFaces] is an open source project which brings {link-bootstrap}[Bootstrap^] and {link-adminlte}[AdminLTE^] to your application via a {link-primefaces}[PrimeFaces^] theme and {link-jsf}[JSF^] `responsive` template.
+{link-adminfaces}[AdminFaces] is an open source project which brings {link-bootstrap}[Bootstrap^] and {link-adminlte}[AdminLTE^] to your application via a {link-primefaces}[PrimeFaces^] theme and a {link-jsf}[JSF^] `responsive` template.
 
 AdminFaces ecosystem is composed by the following projects:
 
