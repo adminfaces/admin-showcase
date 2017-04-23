@@ -8,7 +8,7 @@ image::starter.png[]
 
 It should run in any JavaEE 6 or greater application server.
 
-You can also run via http://wildfly-swarm.io/[wildfly-swarm^] with command `mvn wildfly-swarm:run -swarm`.
+You can also run via http://wildfly-swarm.io/[wildfly-swarm^] with command `mvn wildfly-swarm:run -Pswarm`.
 
 == Demo
 
