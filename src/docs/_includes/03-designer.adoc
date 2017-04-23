@@ -48,6 +48,6 @@ The changes made to less files should be visible in running application `http://
 NOTE: There is no need to stop and run the application again.
 
 
-You can see this workflow in the following video: https://www.youtube.com/watch?v=AGo03YqjyDM
+You can see this workflow in the following video: https://youtu.be/X1UEpN942s0
 
 
