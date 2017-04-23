@@ -18,7 +18,7 @@ Since PrimeFaces `5.1.1` font awesome comes embedded, you just need to activate 
 </context-param>
 ----
 
-For previous version or if you need to upgrade FA version you may include it in your pages by using webjars:
+For *previous versions* or if you need to upgrade FA version you may include it in your pages by using webjars:
 
 [source,html]
 ----
