@@ -102,7 +102,7 @@ The theme uses {link-less}[less^] as css pre-processor. Each PrimeFaces componen
 
 After compilation it will generate the theme.css with Admin-LTE, Bootstrap and Primefaces components.
 
-NOTE: Bootstrap.css (from src/META-INF/resources) is included in theme.less but can be removed via maven classifiers
+NOTE: Bootstrap.css (from src/META-INF/resources) is included in theme.less but can be removed via <<Theme classifiers, maven classifiers>>
 
 NOTE: Bootstrap less is not maintained in this project only it's mixins.
 
