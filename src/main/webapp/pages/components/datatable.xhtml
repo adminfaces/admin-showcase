@@ -118,6 +118,31 @@
                         </h:outputText>
                     </p:column>
                 </p:dataTable>
+
+                <p:separator/>
+
+                <p:dataTable id="radioDT" var="car" value="#{datatableMB.cars}"
+                             selection="#{datatableMB.selectedCar}" rowKey="#{car.id}">
+                    <f:facet name="header">
+                        RadioButton
+                    </f:facet>
+                    <p:column selectionMode="single" width="5%"
+                              styleClass="align-center"
+                              priority="1"/>
+
+                    <p:column headerText="Id">
+                        <h:outputText value="#{car.id}" priority="1"/>
+                    </p:column>
+                    <p:column headerText="Year">
+                        <h:outputText value="#{car.year}" priority="2"/>
+                    </p:column>
+                    <p:column headerText="Brand">
+                        <h:outputText value="#{car.brand}"/>
+                    </p:column>
+                    <p:column headerText="Color">
+                        <h:outputText value="#{car.color}"/>
+                    </p:column>
+                </p:dataTable>
             </h:form>
         </p:panel>
 
@@ -165,21 +190,22 @@
         </p:panel>
         <p:separator/>
         <p:panel header="Box colors">
-        <p:dataTable id="boxTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="top" styleClass="box-primary"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" rows="10"
-                             emptyMessage="No cars found with given criteria"
-                              >
+            <p:dataTable id="boxTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="top"
+                         styleClass="box-primary"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" rows="10"
+                         emptyMessage="No cars found with given criteria"
+            >
 
-                    <f:facet name="header">
-                            <h:outputText value="Box primary table"/>
-                    </f:facet>
+                <f:facet name="header">
+                    <h:outputText value="Box primary table"/>
+                </f:facet>
 
-                    <p:column styleClass="align-center" headerText="Id"
-                              priority="1">
-                             <h:outputText value="#{car.id}"/>
-                    </p:column>
-        </p:dataTable>
+                <p:column styleClass="align-center" headerText="Id"
+                          priority="1">
+                    <h:outputText value="#{car.id}"/>
+                </p:column>
+            </p:dataTable>
         </p:panel>
     </ui:define>
 
@@ -196,8 +222,9 @@
             <p:tab title="DatatableMB.java">
               <pre>
                <code class="language-java">
-                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DatatableMB')}"
-                                 escape="false"/>
+                   <h:outputText
+                           value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DatatableMB')}"
+                           escape="false"/>
                </code>
              </pre>
             </p:tab>

@@ -23,6 +23,7 @@ public class DatatableMB implements Serializable {
 
     private List<Team> teams;
     private List<Car> cars;
+    private Car selectedCar;
 
     private List<Car> filteredCars;
 
@@ -94,4 +95,11 @@ public class DatatableMB implements Serializable {
     }
 
 
+    public Car getSelectedCar() {
+        return selectedCar;
+    }
+
+    public void setSelectedCar(Car selectedCar) {
+        this.selectedCar = selectedCar;
+    }
 }
