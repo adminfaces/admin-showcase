@@ -63,7 +63,9 @@
 
                     <p:column filterBy="#{car.id}" sortBy="#{car.id}" headerText="Id" footerText="contains"
                               filterMatchMode="contains" priority="1">
-                        <h:outputText value="#{car.id}"/>
+                        <p:link value="#{car.id}" outcome="/index.xhtml" >
+                                <f:param name="id" value="#{car.id}"/>
+                       </p:link>
                     </p:column>
 
                     <p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
@@ -126,7 +128,7 @@
                     <f:facet name="header">
                         RadioButton
                     </f:facet>
-                    <p:column selectionMode="single" width="5%"
+                    <p:column selectionMode="single" style="width: 42px"
                               styleClass="align-center"
                               priority="1"/>
 
