@@ -60,7 +60,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-template</artifactId>
-    <version>1.0.0-20170426.124953-32</version>
+    <version>1.0.0-20170427.001021-33</version>
 <!-- end::dep-admin-template[] -->
     <exclusions>
         <exclusion>
@@ -73,7 +73,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-theme</artifactId>
-    <version>1.0.0-20170426.132440-224</version>
+    <version>1.0.0-20170427.222405-242</version>
 </dependency>
 <!-- end::dep-admin-theme[] -->
         <dependency>
