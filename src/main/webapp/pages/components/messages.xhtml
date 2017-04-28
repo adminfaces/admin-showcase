@@ -72,6 +72,18 @@
                         <p:message id="msgAutocomplete" for="autocomplete"/>
                     </div>
                     <div class="ui-g-12">
+                        <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple"/>
+                    </div>
+                    <div class="ui-g-8">
+                        <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities" required="true"
+                                              multiple="true" filter="true" filterMatchMode="startsWith">
+                            <f:selectItems value="#{checkboxMB.cities}"/>
+                        </p:selectCheckboxMenu>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:message id="multiple" for="chkmenu-multiple"/>
+                    </div>
+                    <div class="ui-g-12">
                         <p:outputLabel for="txt" value="Text"/>
                     </div>
                     <div class="ui-g-8">
@@ -100,6 +112,7 @@
                     <div class="ui-g-4">
                         <p:message id="msgTt" for="tt" display="tooltip"/>
                     </div>
+
                     <div class="ui-g-4">
                         <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form"
                                          ignoreAutoUpdate="true"/>

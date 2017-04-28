@@ -104,6 +104,12 @@
                         <f:selectItems value="#{checkboxMB.cities}"/>
                     </p:selectCheckboxMenu>
 
+                    <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple"/>
+                    <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities"
+                                          multiple="true" filter="true" filterMatchMode="startsWith">
+                        <f:selectItems value="#{checkboxMB.cities}"/>
+                    </p:selectCheckboxMenu>
+
                     <p:outputLabel for="booleanBtn" value="Boolean Button"/>
                     <p:selectBooleanButton id="booleanBtn" onLabel="Yes" offLabel="No" onIcon="ui-icon-check"
                                            offIcon="ui-icon-close"/>
@@ -148,7 +154,7 @@
                         <p:calendar id="date" showOn="button"/>
 
                         <f:facet name="footer">
-                            <div class="box-footer" >
+                            <div class="box-footer">
                                 <p:commandButton value="Login" type="button" onclick="PF('dlg').hide()"
                                                  styleClass="btn-primary"/>
                             </div>
@@ -159,11 +165,12 @@
                 <p:chart type="line" model="#{chartMB.lineModel1}" style="height:300px;margin:20px 0"
                          responsive="true"/>
 
-                <p:dataTable var="car" value="#{datatableMB.cars}" reflow="true" style="margin-top:20px" paginator="true" paginatorPosition="bottom" rows="5">
+                <p:dataTable var="car" value="#{datatableMB.cars}" reflow="true" style="margin-top:20px"
+                             paginator="true" paginatorPosition="bottom" rows="5">
                     <f:facet name="header">
                         DataTable
                     </f:facet>
-                    <p:column headerText="Id" sortBy="#{car.id}" filterBy="#{car.id}" filterMatchMode="contains">
+                    <p:column headerText="Id">
                         <h:outputText value="#{car.id}"/>
                     </p:column>
 

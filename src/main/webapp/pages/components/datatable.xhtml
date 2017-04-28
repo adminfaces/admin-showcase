@@ -124,7 +124,7 @@
                 <p:separator/>
 
                 <p:dataTable id="radioDT" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
-                             selection="#{datatableMB.selectedCar}" rowKey="#{car.id}">
+                             selection="#{datatableMB.selectedCar}" rowKey="#{car.id}" rows="10">
                     <f:facet name="header">
                         RadioButton
                     </f:facet>
