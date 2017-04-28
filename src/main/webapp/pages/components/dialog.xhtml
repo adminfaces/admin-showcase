@@ -128,7 +128,7 @@
         </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
-        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true"  responsive="true" width="450">
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="500" modal="true" >
             <h:form>
                 <p:messages closable="true"/>
                 <p:panelGrid id="loginGrid" columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
@@ -146,15 +146,12 @@
                         <f:selectItem itemLabel="Cash" itemValue="Cash"/>
                     </p:selectOneMenu>
                     <p:outputLabel for="autocomplete" value="Auto Complete"/>
-                    <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true" required="true" />
+                    <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true" required="true"/>
                     <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple"/>
                     <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities" required="true"
                                           multiple="true" filter="true" filterMatchMode="startsWith">
                         <f:selectItems value="#{checkboxMB.cities}"/>
                     </p:selectCheckboxMenu>
-                    <p:multiSelectListbox id="multilist" required="true" value="#{multiSelectBean.selection}" effect="slide" header="Categories" showHeaders="true">
-                        <f:selectItems value="#{multiSelectBean.categories}" />
-                    </p:multiSelectListbox>
                     <h:outputLabel for="date" value="Date:"/>
                     <p:calendar id="date" showOn="button" required="true"/>
                 </p:panelGrid>
