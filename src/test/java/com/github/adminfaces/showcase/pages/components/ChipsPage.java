@@ -104,10 +104,10 @@ public class ChipsPage extends BasePage {
         for (int i = 0; i < numChips; i++) {
             WebElement element = browser.findElement(By.cssSelector(".ui-chips-token-icon"));
             element.click();
-            waitGui().until().element(By.xpath("//span[@class='ui-autocomplete-token-label'][text()='tag" +
+            waitGui().until().element(By.xpath("//span[@class='ui-chips-token-label'][text()='tag" +
                     (i+1) +"']")).is().not().present();
         }
-        elements = browser.findElements(By.cssSelector(".ui-autocomplete-token-label"));
+        elements = browser.findElements(By.cssSelector(".ui-chips-token-label"));
         assertThat(elements).size().isEqualTo(0);
     }
 }
