@@ -33,9 +33,10 @@
                                      styleClass="btn-primary"/>
                 </div>
                 <div class="col-sm-12 align-center" style="margin-top: 30px">
-                    <h:outputLink value="javascript:void(0)" onclick="PF('dlgLogin').show();" title="login">
+                    <p:commandLink oncomplete="PF('dlgLogin').show();" title="login" update="@(div[id$=loginGrid])">
                         <p:graphicImage name="/demo/images/login.png"/>
-                    </h:outputLink>
+                        <f:setPropertyActionListener target="#{userLoginMB.username}" value="#{null}"/>
+                    </p:commandLink>
                 </div>
             </div>
         </h:form>
@@ -92,7 +93,7 @@
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
 
-        <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" appendTo="@(body)" height="100">
+        <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100" appendTo="@(body)">
             <h:outputText value="This is a Modal Dialog."/>
         </p:dialog>
 
@@ -127,30 +128,52 @@
         </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
-        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true"  responsive="true" width="350">
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true"  responsive="true" width="450">
             <h:form>
-                <p:panelGrid columns="2" cellpadding="5" layout="grid" styleClass="no-border">
+                <p:messages closable="true"/>
+                <p:panelGrid id="loginGrid" columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
                     <h:outputLabel for="username" value="Username:"/>
-                    <p:inputText id="username" value="#{userLoginMB.username}" required="true"
+                    <p:inputText id="username" value="#{userLoginMB.username}" required="true" autocomplete="off"
                                  requiredMessage="Username is required." label="username"/>
                     <h:outputLabel for="password" value="Password:"/>
                     <p:password id="password" value="#{userLoginMB.password}" required="true"
                                 requiredMessage="Password is required." label="password"/>
+                    <p:outputLabel for="select" value="Select"/>
+                    <p:selectOneMenu id="select" value="#{null}" required="true">
+                        <f:selectItem itemLabel="Select"/>
+                        <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
+                        <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
+                        <f:selectItem itemLabel="Cash" itemValue="Cash"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="autocomplete" value="Auto Complete"/>
+                    <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true" required="true" />
+                    <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple"/>
+                    <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities" required="true"
+                                          multiple="true" filter="true" filterMatchMode="startsWith">
+                        <f:selectItems value="#{checkboxMB.cities}"/>
+                    </p:selectCheckboxMenu>
+                    <p:multiSelectListbox id="multilist" required="true" value="#{multiSelectBean.selection}" effect="slide" header="Categories" showHeaders="true">
+                        <f:selectItems value="#{multiSelectBean.categories}" />
+                    </p:multiSelectListbox>
+                    <h:outputLabel for="date" value="Date:"/>
+                    <p:calendar id="date" showOn="button" required="true"/>
                 </p:panelGrid>
                 <p:separator/>
-                <p:commandButton styleClass="btn-primary pull-right" value="Login" update="growl"
+                <p:commandButton styleClass="btn-primary pull-right" value="Login" update="@form"
                                  actionListener="#{userLoginMB.login}"
                                  ignoreAutoUpdate="true"
                                  oncomplete="handleLoginRequest(xhr, status, args)"/>
             </h:form>
         </p:dialog>
+
+
         <script type="text/javascript">
             function handleLoginRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
-                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                    PF('dlgLogin').jq.effect("shake", {times: 5}, 100);
                 }
                 else {
-                    PF('dlg').hide();
+                    PF('dlgLogin').hide();
                     $('#loginLink').fadeOut();
                 }
             }
