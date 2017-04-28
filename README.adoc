@@ -7,6 +7,7 @@ image:https://badges.gitter.im/Join%20Chat.svg[link="https://gitter.im/adminface
 
 image:showcase.png[]
 
+
 == Demo 
 
 Showcase is available on http://adminfaces-rpestano.rhcloud.com/showcase/index.xhtml[Openshift here^].
