@@ -33,7 +33,7 @@
                                      styleClass="btn-primary"/>
                 </div>
                 <div class="col-sm-12 align-center" style="margin-top: 30px">
-                    <p:commandLink oncomplete="PF('dlgLogin').show();" title="login" update="@(div[id$=loginGrid])">
+                    <p:commandLink id="btDialogLogin" oncomplete="PF('dlgLogin').show();" title="login" update="@(div[id$=loginGrid])">
                         <p:graphicImage name="/demo/images/login.png"/>
                         <f:setPropertyActionListener target="#{userLoginMB.username}" value="#{null}"/>
                     </p:commandLink>
@@ -73,7 +73,7 @@
             </div>
             <div class="col-sm-12 col-md-3">
                 <h:form>
-                    <p:commandButton value="Destroy the World" styleClass="bg-black btn-block"
+                    <p:commandButton id="bt-destroy" value="Destroy the World" styleClass="bg-black btn-block"
                                      actionListener="#{dialogMB.destroyWorld}">
                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert"/>
                     </p:commandButton>

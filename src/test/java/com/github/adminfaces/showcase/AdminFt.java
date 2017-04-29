@@ -2,6 +2,7 @@ package com.github.adminfaces.showcase;
 
 import com.github.adminfaces.showcase.pages.IndexPage;
 import com.github.adminfaces.showcase.pages.components.ChipsPage;
+import com.github.adminfaces.showcase.pages.components.DialogPage;
 import com.github.adminfaces.showcase.pages.components.MessagesPage;
 import com.github.adminfaces.showcase.pages.exception.*;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
@@ -55,6 +56,9 @@ public class AdminFt {
 
     @Page
     protected MessagesPage messagesPage;
+
+    @Page
+    protected DialogPage dialogPage;
 
 
     @FindByJQuery("div.ui-growl-message")
@@ -262,13 +266,39 @@ public class AdminFt {
         chipsPage.addDefaultChips();
         chipsPage.addDangerChips();
         chipsPage.addWarnChips();
-        chipsPage.addSuccessChips();
-        chipsPage.addInfoChips();
-        chipsPage.addFatalChips();
-        chipsPage.addNoColorChips();
+        //chipsPage.addSuccessChips();
+        //chipsPage.addInfoChips();
+        //chipsPage.addFatalChips();
+        //chipsPage.addNoColorChips();
         chipsPage.addCustomChips();
     }
 
+    @Test
+    @InSequence(8)
+    public void shouldDestroyTheWorld(@InitialPage IndexPage indexPage){
+        menu.goToDialogPage();
+        dialogPage.destroyTheWorld();
+        WebElement confirmDialog = browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Confirmation']"));
+        assertThat(confirmDialog.isDisplayed()).isTrue();
+        browser.findElement(By.xpath("//span[contains(@class,'ui-button-text') and text()='Yes']")).click();
+        waitModel().until().element(confirmDialog)
+                .is().not().visible();
+    }
+
+    @Test
+    @InSequence(8)
+    public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
+        dialogPage.doLogin();
+        assertThat(browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Login']")).isDisplayed()).isTrue();
+        dialogPage.clickSelecOneMenu();
+        assertThat(browser.findElement(By.xpath("//li[contains(@class,'ui-selectonemenu-item') and text()='Cash']")).isDisplayed()).isTrue();
+        browser.findElement(By.xpath("//li[contains(@class,'ui-selectonemenu-item') and text()='Cash']")).click();
+        waitModel();
+        browser.findElement(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]//span")).click();
+        waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().visible();
+        browser.findElement(By.xpath("//li[contains(@class,'ui-autocomplete-item') and text()='0']")).click();
+        waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().not().visible();
+    }
 
     private boolean isPhantomjs() {
         //some tests doesn't work on phantomjs (conflict with jquery used by primefaces ajax: msg: ReferenceError: Can't find variable: $)

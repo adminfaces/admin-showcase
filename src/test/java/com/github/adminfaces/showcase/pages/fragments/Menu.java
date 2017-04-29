@@ -1,8 +1,12 @@
 package com.github.adminfaces.showcase.pages.fragments;
 
+import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.fragment.Root;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,6 +20,9 @@ public class Menu {
 
     @Root
     private GrapheneElement menu;
+
+    @Drone
+    protected WebDriver browser;
 
     @FindByJQuery("li a[href$='index.xhtml']")
     private GrapheneElement home;
@@ -35,13 +42,11 @@ public class Menu {
     @FindByJQuery("li a[href$='buttons.xhtml']")
     private GrapheneElement buttons;
 
-    @FindByJQuery("li a[href$='dialog.xhtml']")
+    @FindByJQuery("li a[href*='dialog.xhtml']")
     private GrapheneElement dialog;
 
     @FindBy(xpath = "//SPAN[text()='UI Elements']")
     protected WebElement uiElementsMenu;
-
-
 
     public void goToHomePage(){
         guardHttp(home).click();
@@ -65,7 +70,9 @@ public class Menu {
         guardHttp(buttons).click();
     }
 
-    public void goToDialogPage(){
+    public void goToDialogPage() {
+        uiElementsMenu.click();
+        waitModel().until().element(dialog).is().visible();
         guardHttp(dialog).click();
     }
 
