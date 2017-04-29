@@ -128,31 +128,31 @@
         </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
-        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="500" modal="true" >
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="400" modal="true" >
             <h:form>
                 <p:messages closable="true"/>
                 <p:panelGrid id="loginGrid" columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
-                    <h:outputLabel for="username" value="Username:"/>
+                    <p:outputLabel for="username" value="Username:"/>
                     <p:inputText id="username" value="#{userLoginMB.username}" required="true" autocomplete="off"
                                  requiredMessage="Username is required." label="username"/>
-                    <h:outputLabel for="password" value="Password:"/>
+                    <p:outputLabel for="password" value="Password:"/>
                     <p:password id="password" value="#{userLoginMB.password}" required="true"
                                 requiredMessage="Password is required." label="password"/>
-                    <p:outputLabel for="select" value="Select"/>
+                    <p:outputLabel for="select" value="Select:"/>
                     <p:selectOneMenu id="select" value="#{null}" required="true">
                         <f:selectItem itemLabel="Select"/>
                         <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
                         <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
                         <f:selectItem itemLabel="Cash" itemValue="Cash"/>
                     </p:selectOneMenu>
-                    <p:outputLabel for="autocomplete" value="Auto Complete"/>
-                    <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true" required="true"/>
-                    <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple"/>
+                    <p:outputLabel for="autocomplete" value="Auto Complete:"/>
+                    <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true" required="true" />
+                    <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple:"/>
                     <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities" required="true"
                                           multiple="true" filter="true" filterMatchMode="startsWith">
                         <f:selectItems value="#{checkboxMB.cities}"/>
                     </p:selectCheckboxMenu>
-                    <h:outputLabel for="date" value="Date:"/>
+                    <p:outputLabel for="date" value="Date:"/>
                     <p:calendar id="date" showOn="button" required="true"/>
                 </p:panelGrid>
                 <p:separator/>
