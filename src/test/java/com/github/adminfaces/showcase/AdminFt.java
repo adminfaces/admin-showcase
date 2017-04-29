@@ -288,6 +288,7 @@ public class AdminFt {
     @Test
     @InSequence(8)
     public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
+        menu.goToDialogPage();
         dialogPage.doLogin();
         assertThat(browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Login']")).isDisplayed()).isTrue();
         dialogPage.clickSelecOneMenu();
