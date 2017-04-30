@@ -11,7 +11,7 @@
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
                 text-align: right !important;
-            } 
+            }
 
             #boxTable.ui-datatable .ui-datatable-header {
                 text-align: center !important;
@@ -64,8 +64,8 @@
                     <p:column filterBy="#{car.id}" sortBy="#{car.id}" headerText="Id" footerText="contains"
                               filterMatchMode="contains" priority="1">
                         <p:link value="#{car.id}" outcome="/index.xhtml" >
-                                <f:param name="id" value="#{car.id}"/>
-                       </p:link>
+                            <f:param name="id" value="#{car.id}"/>
+                        </p:link>
                     </p:column>
 
                     <p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
@@ -124,7 +124,7 @@
                 <p:separator/>
 
                 <p:dataTable id="radioDT" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
-                             selection="#{datatableMB.selectedCar}" rowKey="#{car.id}" rows="10">
+                             selection="#{datatableMB.selectedCar}" rowKey="#{car.id}" rows="5">
                     <f:facet name="header">
                         RadioButton
                     </f:facet>
@@ -132,7 +132,7 @@
                               styleClass="align-center"
                               priority="1"/>
 
-                    <p:column headerText="Id">
+                    <p:column headerText="Id" sortBy="#{car.id}">
                         <h:outputText value="#{car.id}" priority="1"/>
                     </p:column>
                     <p:column headerText="Year">
@@ -145,6 +145,27 @@
                         <h:outputText value="#{car.color}"/>
                     </p:column>
                 </p:dataTable>
+
+                <p:separator/>
+
+                <p:treeTable value="#{treeTableMB.root}" selectionMode="single"
+                             var="document" paginator="true" paginatorPosition="bottom" rows="2">
+                    <f:facet name="header">
+                        Document Viewer
+                    </f:facet>
+                    <p:column headerText="Name" sortBy="#{document.name}">
+                        <p:link value="#{document.name}" outcome="/index"/>
+                    </p:column>
+                    <p:column headerText="Size (p3)" priority="2">
+                        <h:outputText value="#{document.size}" />
+                    </p:column>
+                    <p:column headerText="Type (p2)"  priority="3">
+                        <h:outputText value="#{document.type}" />
+                    </p:column>
+                    <p:column  headerText="(p4)" priority="4">
+                        <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')" title="View Detail" styleClass="ui-icon ui-icon-search"/>
+                    </p:column>
+                </p:treeTable>
             </h:form>
         </p:panel>
 
