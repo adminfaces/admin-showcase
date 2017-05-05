@@ -2,6 +2,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
                 template="/admin.xhtml">
 
     <ui:define name="head">
@@ -19,7 +21,7 @@
         <!-- See https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android -->
         <meta name="theme-color" content="#444"/>
         <meta name="mobile-web-app-capable" content="yes"/>
-
+        <f:loadBundle var="theme" basename="admin-theme"/>
         <title>AdminFaces Showcase</title>
     </ui:define>
 
@@ -50,12 +52,21 @@
     </ui:define>
 
     <ui:define name="footer">
-        <a target="_blank"
-           href="https://github.com/adminfaces">
-            Copyright (C) 2017 - AdminFaces
-        </a>
-        <div class="pull-right hidden-xs" style="color: gray">
-            <i>#{adm['admin.version']}</i>
+        <div style="display: inline">
+            <p:tooltip for="admin-footer" escape="false" showEvent="mouseover" hideEvent="mouseleave" hideDelay="2000"
+                       value="Using &lt;a href='https://github.com/adminfaces/admin-template'
+                        target='_blank'&gt;Admin Template &lt;span style='font-weight: 600'&gt;
+                        #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt; and
+                        &lt;a href='https://github.com/adminfaces/admin-template'
+                        target='_blank'&gt;Admin theme &lt;span style='font-weight: 600'&gt;
+                        #{theme['theme.version']}&lt;/span&gt;&lt;/a&gt;
+                "/>
+            Powered by  <p:link value="AdminFaces -  © 2017" id="admin-footer" href="https://github.com/adminfaces"  onclick="void(0)" />
+            <div class="pull-right hidden-xs" style="color: gray">
+                Page views: <p:link id="link-stats" href="#"> <span
+                    style="font-weight: 600"> #{analyticsMB.pageViews}</span></p:link>
+            </div>
+
         </div>
 
         <h:outputScript library="js" name="prism.js" target="head"/>

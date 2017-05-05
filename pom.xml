@@ -60,7 +60,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-template</artifactId>
-    <version>1.0.0-RC4</version>
+    <version>1.0.0-20170429.232802-37</version>
 <!-- end::dep-admin-template[] -->
     <exclusions>
         <exclusion>
@@ -82,6 +82,17 @@
             <version>1.7.22</version>
         </dependency>
 
+        <!-- analytics -->
+        <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.0.4</version>
+        </dependency>
 
         <!-- test -->
         <dependency>
