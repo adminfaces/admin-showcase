@@ -128,7 +128,7 @@
         </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
-        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="400" modal="true" >
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="400" modal="true" styleClass="dialog-login">
             <h:form>
                 <p:messages closable="true"/>
                 <p:panelGrid id="loginGrid" columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
@@ -175,6 +175,14 @@
                 }
             }
         </script>
+
+        <style type="text/css">
+            @media (max-width: 480px) {
+                div.ui-dialog.dialog-login {
+                    width:350px!important;
+                }
+            }
+        </style>
     </ui:define>
 
     <ui:define name="code">
