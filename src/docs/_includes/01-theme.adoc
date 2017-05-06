@@ -50,7 +50,8 @@ To start using the theme you need the following:
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-theme</artifactId>
 include::{projectRoot}/pom.xml[tags=version]
-</dependency>----
+</dependency>
+----
 . Activate the theme in `web.xml`
 +
 [source,xml]
