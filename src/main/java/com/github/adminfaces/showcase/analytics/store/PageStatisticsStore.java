@@ -37,6 +37,9 @@ public class PageStatisticsStore implements Serializable {
         log.info("Using {} as page statistics folder store.", pagesStatsFilePath);
         try {
             File statisticsFile = new File(pagesStatsFilePath);
+            if(!statisticsFile.exists()) {
+                statisticsFile.createNewFile();
+            }
             log.info("Loading page statistics from " + pagesStatsFilePath);
             JsonArray persistedPageStats = Json.createReader(new FileReader(statisticsFile)).readObject().getJsonArray("statistics");
             for (JsonValue jsonValue : persistedPageStats) {
