@@ -34,13 +34,12 @@ public class PageStatisticsStore implements Serializable {
     @PostConstruct
     public void initStatistics() {
         pageStatisticsMap = new ConcurrentHashMap<>();
-        log.info("Using {} as page statistics folder store.", pagesStatsFilePath);
+        log.info("Using {} as page statistics file store.", pagesStatsFilePath);
         try {
             File statisticsFile = new File(pagesStatsFilePath);
             if(!statisticsFile.exists()) {
                 statisticsFile.createNewFile();
             }
-            log.info("Loading page statistics from " + pagesStatsFilePath);
             JsonArray persistedPageStats = Json.createReader(new FileReader(statisticsFile)).readObject().getJsonArray("statistics");
             for (JsonValue jsonValue : persistedPageStats) {
                 JsonObject jsonObject = (JsonObject) jsonValue;
@@ -80,7 +79,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour="*/2" , persistent = false)
+    @Schedule(second="*/30" , persistent = false)
     public void persistPageStatistics() {
         if(pageStatisticsMap == null) {
             return;//in some situation the schedule is called before post construct
