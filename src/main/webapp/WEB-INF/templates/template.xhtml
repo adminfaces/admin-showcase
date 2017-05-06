@@ -10,8 +10,6 @@
         <h:outputStylesheet library="css" name="showcase.css"/>
         <h:outputStylesheet library="css" name="prism.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
-        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css"/>
-
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
         <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/apple-touch-icon.png']}"
               sizes="180x180"/>
@@ -53,7 +51,8 @@
 
     <ui:define name="footer">
         <div style="display: inline">
-            <p:tooltip for="admin-footer" escape="false" showEvent="mouseover" hideEvent="mouseleave" hideDelay="2000"
+            <p:tooltip for="admin-footer" escape="false" position="top"
+                       showEvent="mouseover" hideEvent="mouseleave" hideDelay="2000"
                        value="Using &lt;a href='https://github.com/adminfaces/admin-template'
                         target='_blank'&gt;Admin Template &lt;span style='font-weight: 600'&gt;
                         #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt; and
@@ -61,11 +60,16 @@
                         target='_blank'&gt;Admin theme &lt;span style='font-weight: 600'&gt;
                         #{theme['theme.version']}&lt;/span&gt;&lt;/a&gt;
                 "/>
-            Powered by  <p:link value="AdminFaces -  © 2017" id="admin-footer" href="https://github.com/adminfaces"  onclick="void(0)" />
-            <div class="pull-right hidden-xs" style="color: gray">
-                Page views: <p:link id="link-stats" href="#"> <span
-                    style="font-weight: 600"> #{analyticsMB.pageViews}</span></p:link>
+            Powered by  <h:link value="AdminFaces - © 2017" id="admin-footer" href="#"  onclick="void(0);return false"  />
+            <div class="pull-right " style="color: gray">
+                Page views: <h:link id="link-stats" href="#" onclick="void(0);return false"> <span
+                    style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></h:link>
             </div>
+
+            <p:tooltip for="link-stats" escape="false" position="top"
+                       showEvent="mouseover" hideEvent="mouseleave" style="width: 150px"
+                       value="Unique visitors: &lt;div
+                    style='font-weight: 600;color:#3c8dbc;display:inline'&gt; #{analyticsMB.pageStats.uniquePageViews}&lt;/div&gt;"/>
 
         </div>
 

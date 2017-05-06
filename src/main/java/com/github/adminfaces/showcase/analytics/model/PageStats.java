@@ -1,7 +1,9 @@
 package com.github.adminfaces.showcase.analytics.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rmpestano on 01/05/17.
@@ -10,7 +12,6 @@ public class PageStats {
 
     private String viewId;
     private List<PageView> pageViews = new ArrayList<>();
-    private boolean persisted;
 
     public PageStats(String viewId) {
         this.viewId = viewId;
@@ -24,8 +25,14 @@ public class PageStats {
         return pageViews.size();
     }
 
-    public Long getUniquePageViews() {
-        pageViews.stream().d
+    public Integer getUniquePageViews() {
+        Map<String,String> pageIps = new HashMap<>();
+        for (PageView pageView : pageViews) {
+            if(!pageIps.containsKey(pageView.getIp())){
+                pageIps.put(pageView.getIp(),"");
+            }
+        }
+        return pageIps.size();
     }
 
     public String getViewId() {
@@ -44,11 +51,5 @@ public class PageStats {
         this.pageViews = pageViews;
     }
 
-    public boolean isPersisted() {
-        return persisted;
-    }
 
-    public void setPersisted(boolean persisted) {
-        this.persisted = persisted;
-    }
 }

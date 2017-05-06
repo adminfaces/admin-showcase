@@ -1,5 +1,6 @@
 package com.github.adminfaces.showcase.analytics.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Calendar;
  *
  * Informations of a page view
  */
-public class PageView {
+public class PageView implements Serializable {
 
     private String ip;
     private Calendar date;
@@ -15,12 +16,9 @@ public class PageView {
     private String lat;
     private String lon;
 
-    public PageView(String ip, Calendar date, String country, String lat, String lon) {
+    public PageView(String ip) {
         this.ip = ip;
-        this.date = date;
-        this.country = country;
-        this.lat = lat;
-        this.lon = lon;
+        this.date = Calendar.getInstance();
     }
 
     public String getIp() {
@@ -31,15 +29,35 @@ public class PageView {
         return date;
     }
 
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
+    }
+
     public String getCountry() {
         return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getLat() {
         return lat;
     }
 
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
     public String getLon() {
         return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
     }
 }

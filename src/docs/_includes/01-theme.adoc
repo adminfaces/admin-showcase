@@ -25,14 +25,14 @@ For *previous versions* or if you need to upgrade FA version you may include it 
 <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome-jsf.css" />
 ----
 
-and add web jar in your classpath:
+and add fontawesome webjar in your classpath:
 
 [source,xml]
 ----
 <dependency>
-    <groupId>com.github.adminfaces</groupId>
-    <artifactId>admin-theme</artifactId>
-include::{projectRoot}/pom.xml[tags=version]
+    <groupId>org.webjars</groupId>
+    <artifactId>font-awesome</artifactId>
+    <version>4.7.0</version>
 </dependency>
 ----
 
@@ -46,8 +46,11 @@ To start using the theme you need the following:
 +
 [source,xml]
 ----
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
 include::{projectRoot}/pom.xml[tags=version]
-----
+</dependency>----
 . Activate the theme in `web.xml`
 +
 [source,xml]
