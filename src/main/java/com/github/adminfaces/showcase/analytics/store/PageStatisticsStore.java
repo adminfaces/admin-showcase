@@ -79,7 +79,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(second="*/30" , persistent = false)
+    @Schedule(hour="*/2" , persistent = false)
     public void persistPageStatistics() {
         if(pageStatisticsMap == null) {
             return;//in some situation the schedule is called before post construct
