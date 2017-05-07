@@ -28,7 +28,7 @@ public class PageStatisticsStore implements Serializable {
 
     private Map<String, PageStats> pageStatisticsMap; //viewId by statistics map
     private static final Logger log = LoggerFactory.getLogger(PageStatisticsStore.class.getName());
-    private final String pagesStatsFilePath = (System.getenv("OPENSHIFT_DATA_DIR") != null ? (System.getenv("OPENSHIFT_DATA_DIR") : System.getProperty("user.home") + "/page-stats.json").replaceAll("//", "/");
+    private final String pagesStatsFilePath = (System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getProperty("user.home") + "/page-stats.json").replaceAll("//", "/");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @PostConstruct
