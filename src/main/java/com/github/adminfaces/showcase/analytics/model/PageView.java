@@ -13,8 +13,10 @@ public class PageView implements Serializable {
     private String ip;
     private Calendar date;
     private String country;
+    private String city;
     private String lat;
     private String lon;
+    private boolean hasIpInfo;//controls if the page view has ip info (country, lat, lon)
 
     public PageView(String ip) {
         this.ip = ip;
@@ -60,4 +62,22 @@ public class PageView implements Serializable {
     public void setLon(String lon) {
         this.lon = lon;
     }
+
+    public boolean getHasIpInfo() {
+        return hasIpInfo;
+    }
+
+    public void setHasIpInfo(boolean hasIpInfo) {
+        this.hasIpInfo = hasIpInfo;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
 }

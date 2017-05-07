@@ -12,12 +12,17 @@ import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.json.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.Serializable;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static com.github.adminfaces.template.util.Assert.has;
 
 /**
  * Created by rmpestano on 01/05/17.
@@ -48,13 +53,22 @@ public class PageStatisticsStore implements Serializable {
                 List<PageView> pageViews = new ArrayList<>();
                 for (JsonValue value : pageViewsJson) {
                     JsonObject object = (JsonObject) value;
+                    if(object == null || object.get("ip") == null){
+                        continue;
+                    }
                     PageView pageView = new PageView(object.getString("ip"));
+                    queryAdditionalPageViewInfo(pageView);
                     Calendar c = Calendar.getInstance();
                     c.setTime(dateFormat.parse(object.getString("date")));
                     pageView.setDate(c);
                     pageView.setCountry(object.getString("country"));
                     pageView.setLat(object.getString("lat"));
                     pageView.setLon(object.getString("lon"));
+                    if(object.containsKey("hasIpInfo")) { //backward compat
+                        pageView.setHasIpInfo(object.getBoolean("hasIpInfo"));
+                    } else {
+                        pageView.setHasIpInfo(false);
+                    }
                     pageViews.add(pageView);
                 }
                 pageStats.setPageViews(pageViews);
@@ -79,10 +93,10 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour="*/2" , persistent = false)
+    @Schedule(second = "*/30" , persistent = false)
     public void persistPageStatistics() {
-        if(pageStatisticsMap == null) {
-            return;//in some situation the schedule is called before post construct
+        if(pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
+            return;//in some situation the schedule is called before statistics is initialized
         }
         long initial = System.currentTimeMillis();
         try {
@@ -90,12 +104,20 @@ public class PageStatisticsStore implements Serializable {
             for (PageStats pageStats : pageStatisticsMap.values()) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
                 for (PageView pageView : pageStats.getPageViews()) {
+                    if(!has(pageView.getIp())){
+                        continue;
+                    }
+                    queryAdditionalPageViewInfo(pageView);
                     JsonObject pageViewJsonObject = Json.createObjectBuilder()
                             .add("ip", pageView.getIp())
                             .add("date", dateFormat.format(pageView.getDate().getTime()))
                             .add("country", pageView.getCountry() != null ? pageView.getCountry() : "")
+                            .add("city",pageView.getCity() != null ? pageView.getCity(): "")
                             .add("lat", pageView.getLat() != null ? pageView.getLat() : "")
-                            .add("lon", pageView.getLon() != null ? pageView.getLon() : "").build();
+                            .add("lon", pageView.getLon() != null ? pageView.getLon() : "")
+                            .add("hasIpInfo", pageView.getHasIpInfo()).build();
+
+
                     pageViewsJsonArray.add(pageViewJsonObject);
                 }
                 JsonObject pageStatsJson = Json.createObjectBuilder()
@@ -112,8 +134,50 @@ public class PageStatisticsStore implements Serializable {
 
     }
 
-    @PreDestroy
-    public void onShutDown() {
-        persistPageStatistics();
+    private void queryAdditionalPageViewInfo(PageView pageView) {
+        if(pageView.getHasIpInfo()) {
+            return;
+        }
+        String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
+                .append(pageView.getIp()).toString();
+        HttpURLConnection connection = null;//using url connection to be able to avoid (JavaEE 6) servers conflict
+        BufferedReader rd = null;
+        try {
+            URL url = new URL(ipApiQuery);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type",
+                    "application/json");
+
+            connection.setRequestProperty("Accept-Charset", "UTF-8");
+
+            InputStream is = connection.getInputStream();
+            rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder json = new StringBuilder(); // or StringBuffer if Java version 5+
+            String line;
+            while ((line = rd.readLine()) != null) {
+                json.append(line);
+            }
+            JsonObject jsonObject = Json.createReader(new StringReader(json.toString())).readObject();
+            pageView.setCountry(jsonObject.getString("country"));
+            pageView.setCity(jsonObject.getString("city"));
+            pageView.setLat(jsonObject.getJsonNumber("lat").toString());
+            pageView.setLon(jsonObject.getJsonNumber("lon").toString());
+            pageView.setHasIpInfo(true);
+        } catch (Exception e) {
+            log.error("Could not get additional info from IP API request:"+ipApiQuery,e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+            if(rd != null) {
+                try {
+                    rd.close();
+                } catch (IOException e) {
+                    log.error("Problem closing buffered reader",e);
+                }
+            }
+        }
     }
+
 }
