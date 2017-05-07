@@ -93,7 +93,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(second = "*/30" , persistent = false)
+    @Schedule(hour = "*/1" , persistent = false)
     public void persistPageStatistics() {
         if(pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
@@ -135,7 +135,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private void queryAdditionalPageViewInfo(PageView pageView) {
-        if(pageView.getHasIpInfo()) {
+        if(pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
             return;
         }
         String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
