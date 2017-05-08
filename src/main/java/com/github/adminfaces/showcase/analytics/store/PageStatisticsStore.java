@@ -143,7 +143,7 @@ public class PageStatisticsStore implements Serializable {
         try {
             URL url = new URL(ipApiQuery);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(8000);
+            connection.setConnectTimeout(5000);
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type",
                     "application/json");
