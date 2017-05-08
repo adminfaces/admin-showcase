@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">General <span
+                class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a href="/showcase/docs/index.html" target="_blank">
+                    <i class="fa fa-book"></i>
+                    <span>Documentation</span>
+                </a>
+            </li>
+            <li>
+                <p:link href="/showcase/pages/analytics.xhtml">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>Analytics</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/exception/exception.xhtml">
+                    <i class="fa fa-stack-overflow"></i>
+                    <span>Exceptions</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/form/forms.xhtml">
+                    <i class="fa fa-edit"></i>
+                    <span>Forms</span>
+                </p:link>
+            </li>
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ui Elements <span
+                class="caret"></span>
+            <i class="fa fa-laptop"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <p:link href="/pages/components/accordion.xhtml">
+                    <i class="fa fa-bars"></i>
+                    <span>Accordion</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/buttons.xhtml">
+                    <i class="fa fa-th-large"></i>
+                    <span>Buttons</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/chips.xhtml">
+                    <i class="fa fa-ellipsis-h"></i>
+                    <span>Chips</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/datatable.xhtml">
+                    <i class="fa fa-th-list"></i>
+                    <span>DataTable</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/dialog.xhtml">
+                    <i class="fa fa-picture-o"></i>
+                    <span>Dialog</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/messages.xhtml">
+                    <i class="fa fa-envelope-o"></i>
+                    <span>Messages</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/panel.xhtml">
+                    <i class="fa fa-window-maximize"></i>
+                    <span>Panels</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/schedule.xhtml">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span>Schedule</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/components/tabview.xhtml">
+                    <i class="fa fa-folder-o"></i>
+                    <span>TabView</span>
+                </p:link>
+            </li>
+        </ul>
+    </li>
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Custom Pages <span
+                class="caret"></span>
+            <i class="fa fa-files-o"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <p:link href="/login.xhtml" title="Logon page">
+                    <i class="fa fa-users"></i>
+                    <span>Logon</span>
+                </p:link>
+            </li>
+
+            <li>
+                <p:link href="/403.xhtml" title="Access denied page">
+                    <i class="fa fa-circle-o"></i>
+                    <span>403</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/non-existing.xhtml" title="404 page">
+                    <i class="fa fa-circle-o"></i>
+                    <span>404</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/500.xhtml" title="500 page">
+                    <i class="fa fa-circle-o"></i>
+                    <span>500</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/expired.xhtml" title="View expired page">
+                    <i class="fa fa-circle-o"></i>
+                    <span>View expired</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/optmistic.xhtml" title="Optimistic lock page">
+                    <i class="fa fa-circle-o"></i>
+                    <span>Optimistic lock</span>
+                </p:link>
+            </li>
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layout <span
+                class="caret"></span>
+            <i class="fa fa-wpforms"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu" style="width: 180px">
+            <li>
+                <p:link href="/pages/layout/breadcrumb.xhtml">
+                    <i class="fa  fa-ellipsis-h"></i>
+                    <span>Breadcrumbs</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/layout/menu.xhtml">
+                    <i class="fa fa-outdent"></i>
+                    <span>Menu</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/layout/skin.xhtml">
+                    <i class="fa fa-gears"></i>
+                    <span>Skins</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/pages/layout/sidebar.xhtml">
+                    <i class="fa fa-outdent"></i>
+                    <span>Sidebar</span>
+                </p:link>
+            </li>
+            <li>
+                <p:link href="/default-layout" onclick="$('#link-default-layout').click();return false">
+                    <i class="fa fa-list-ul"></i>
+                    <span><b>Default</b> menu layout</span>
+                </p:link>
+                <h:form prependId="false">
+                    <p:commandLink id="link-default-layout" action="#{layoutMB.setDefaultLayout}" ajax="false"/>
+                </h:form>
+
+            </li>
+        </ul>
+    </li>
+
+</ui:composition>

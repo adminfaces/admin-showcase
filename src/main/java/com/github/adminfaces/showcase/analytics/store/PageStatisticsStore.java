@@ -74,7 +74,7 @@ public class PageStatisticsStore implements Serializable {
                 pageStatisticsMap.put(pageStats.getViewId(), pageStats);
             }
         } catch (Exception e) {
-            log.error("Could not load page statistics", e);
+            log.warn("Could not load page statistics", e);
         }
     }
 

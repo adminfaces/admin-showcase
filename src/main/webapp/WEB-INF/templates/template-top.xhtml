@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/admin-top.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="showcase.css"/>
+        <h:outputStylesheet library="css" name="prism.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/apple-touch-icon.png']}"
+              sizes="180x180"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon-32x32.png']}" sizes="32x32"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon-16x16.png']}" sizes="16x16"/>
+        <link rel="manifest" href="/manifest.json"/>
+        <!-- See https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android -->
+        <meta name="theme-color" content="#444"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <f:loadBundle var="theme" basename="admin-theme"/>
+        <title>AdminFaces Showcase</title>
+    </ui:define>
+
+    <ui:define name="logo">
+        <b>Admin</b>Faces
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/includes/menubar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="top-menu">
+        <ui:include src="/includes/top-menu.xhtml"/>
+    </ui:define>
+
+    <ui:define name="search">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" id="navbar-search-input"
+                       placeholder="Search" onkeyup="alert('TO DO')">
+                </input>
+            </div>
+        </form>
+    </ui:define>
+
+    <ui:define name="content-end">
+        <section class="content">
+            <ui:insert name="code"/>
+        </section>
+    </ui:define>
+
+    <ui:define name="footer">
+        <div style="display: inline">
+            <p:tooltip for="admin-footer" escape="false" position="top"
+                       showEvent="mouseover" hideEvent="mouseleave" hideDelay="2000"
+                       value="Using &lt;a href='https://github.com/adminfaces/admin-template'
+                        target='_blank'&gt;Admin Template &lt;span style='font-weight: 600'&gt;
+                        #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt; and
+                        &lt;a href='https://github.com/adminfaces/admin-template'
+                        target='_blank'&gt;Admin theme &lt;span style='font-weight: 600'&gt;
+                        #{theme['theme.version']}&lt;/span&gt;&lt;/a&gt;
+                "/>
+            Powered by <h:link value="AdminFaces - © 2017" id="admin-footer" href="#" onclick="void(0);return false"/>
+            <div class="pull-right " style="color: gray">
+                Page views: <h:link id="link-stats" href="#" onclick="void(0);return false"> <span
+                    style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></h:link>
+            </div>
+
+            <p:tooltip for="link-stats" escape="false" position="top"
+                       showEvent="mouseover" hideEvent="mouseleave" style="width: 150px"
+                       value="Unique visitors: &lt;div
+                    style='font-weight: 600;color:#3c8dbc;display:inline'&gt; #{analyticsMB.pageStats.uniquePageViews}&lt;/div&gt;"/>
+
+        </div>
+
+        <h:outputScript library="js" name="prism.js" target="head"/>
+
+        <script type="text/javascript">
+            if (isMobile()) {
+                $('a.ui-link').click(function () {
+                    $(this).prop('disabled', true);
+                    showBar();
+                });
+            }
+        </script>
+    </ui:define>
+
+</ui:composition>

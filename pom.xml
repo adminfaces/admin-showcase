@@ -53,7 +53,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-template</artifactId>
-    <version>1.0.0-20170429.232802-37</version>
+    <version>1.0.0-20170508.040209-38</version>
 <!-- end::dep-admin-template[] -->
     <exclusions>
         <exclusion>
@@ -415,7 +415,7 @@
         </profile>
 
         <profile>
-            <id>wildfly8-remote</id>
+            <id>wildfly-remote</id>
             <properties>
                 <arquillian.container>wildfly:8.2.0.Final:remote</arquillian.container>
             </properties>
