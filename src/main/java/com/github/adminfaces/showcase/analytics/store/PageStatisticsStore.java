@@ -91,7 +91,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour = "*/2", persistent = false)
+    @Schedule(hour = "*/1", persistent = false)
     public void persistPageStatistics() {
         if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
@@ -164,7 +164,7 @@ public class PageStatisticsStore implements Serializable {
                 pageView.setLat(jsonObject.getJsonNumber("lat").toString());
                 pageView.setLon(jsonObject.getJsonNumber("lon").toString());
                 pageView.setHasIpInfo(true);
-                Thread.sleep(300);//sleep to not exceed query limits (150 per minute)
+                Thread.sleep(200);//sleep to not exceed query limits (150 per minute)
             }
 
         } catch (Exception e) {
