@@ -138,7 +138,7 @@ public class PageStatisticsStore implements Serializable {
         }
         String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
                 .append(pageView.getIp()).toString();
-        HttpURLConnection connection = null;//using url connection to be able to avoid (JavaEE 6) servers conflict
+        HttpURLConnection connection = null;//using url connection to avoid (JavaEE 6) JAX-RS client api conflicts
         BufferedReader rd = null;
         try {
             URL url = new URL(ipApiQuery);
@@ -163,7 +163,7 @@ public class PageStatisticsStore implements Serializable {
             pageView.setLat(jsonObject.getJsonNumber("lat").toString());
             pageView.setLon(jsonObject.getJsonNumber("lon").toString());
             pageView.setHasIpInfo(true);
-            Thread.sleep(500);//sleep to not exceed query limits (150 per minute)
+            Thread.sleep(400);//sleep to not exceed query limits (150 per minute)
         } catch (Exception e) {
             log.error("Could not get additional info from IP API request:"+ipApiQuery,e);
         } finally {
