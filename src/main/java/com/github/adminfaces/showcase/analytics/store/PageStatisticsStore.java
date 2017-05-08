@@ -56,7 +56,7 @@ public class PageStatisticsStore implements Serializable {
                         continue;
                     }
                     PageView pageView = new PageView(object.getString("ip"));
-                    queryAdditionalPageViewInfo(pageView);
+                    //queryAdditionalPageViewInfo(pageView);
                     Calendar c = Calendar.getInstance();
                     c.setTime(dateFormat.parse(object.getString("date")));
                     pageView.setDate(c);
