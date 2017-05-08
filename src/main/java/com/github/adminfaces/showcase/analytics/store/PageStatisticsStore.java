@@ -41,7 +41,7 @@ public class PageStatisticsStore implements Serializable {
         log.info("Using {} as page statistics file store.", pagesStatsFilePath);
         try {
             File statisticsFile = new File(pagesStatsFilePath);
-            if(!statisticsFile.exists()) {
+            if (!statisticsFile.exists()) {
                 statisticsFile.createNewFile();
             }
             JsonArray persistedPageStats = Json.createReader(new FileReader(statisticsFile)).readObject().getJsonArray("statistics");
@@ -52,7 +52,7 @@ public class PageStatisticsStore implements Serializable {
                 List<PageView> pageViews = new ArrayList<>();
                 for (JsonValue value : pageViewsJson) {
                     JsonObject object = (JsonObject) value;
-                    if(object == null || object.get("ip") == null){
+                    if (object == null || object.get("ip") == null) {
                         continue;
                     }
                     PageView pageView = new PageView(object.getString("ip"));
@@ -62,7 +62,7 @@ public class PageStatisticsStore implements Serializable {
                     pageView.setCountry(object.getString("country"));
                     pageView.setLat(object.getString("lat"));
                     pageView.setLon(object.getString("lon"));
-                    if(object.containsKey("hasIpInfo")) { //backward compat
+                    if (object.containsKey("hasIpInfo")) { //backward compat
                         pageView.setHasIpInfo(object.getBoolean("hasIpInfo"));
                     } else {
                         pageView.setHasIpInfo(false);
@@ -91,9 +91,9 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour = "*/2" , persistent = false)
+    @Schedule(hour = "*/2", persistent = false)
     public void persistPageStatistics() {
-        if(pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
+        if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
         }
         long initial = System.currentTimeMillis();
@@ -102,7 +102,7 @@ public class PageStatisticsStore implements Serializable {
             for (PageStats pageStats : pageStatisticsMap.values()) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
                 for (PageView pageView : pageStats.getPageViews()) {
-                    if(!has(pageView.getIp())){
+                    if (!has(pageView.getIp())) {
                         continue;
                     }
                     queryAdditionalPageViewInfo(pageView);
@@ -110,7 +110,7 @@ public class PageStatisticsStore implements Serializable {
                             .add("ip", pageView.getIp())
                             .add("date", dateFormat.format(pageView.getDate().getTime()))
                             .add("country", pageView.getCountry() != null ? pageView.getCountry() : "")
-                            .add("city",pageView.getCity() != null ? pageView.getCity(): "")
+                            .add("city", pageView.getCity() != null ? pageView.getCity() : "")
                             .add("lat", pageView.getLat() != null ? pageView.getLat() : "")
                             .add("lon", pageView.getLon() != null ? pageView.getLon() : "")
                             .add("hasIpInfo", pageView.getHasIpInfo()).build();
@@ -133,7 +133,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private void queryAdditionalPageViewInfo(PageView pageView) {
-        if(pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
+        if (pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
             return;
         }
         String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
@@ -158,23 +158,26 @@ public class PageStatisticsStore implements Serializable {
                 json.append(line);
             }
             JsonObject jsonObject = Json.createReader(new StringReader(json.toString())).readObject();
-            pageView.setCountry(jsonObject.getString("country"));
-            pageView.setCity(jsonObject.getString("city"));
-            pageView.setLat(jsonObject.getJsonNumber("lat").toString());
-            pageView.setLon(jsonObject.getJsonNumber("lon").toString());
-            pageView.setHasIpInfo(true);
-            Thread.sleep(400);//sleep to not exceed query limits (150 per minute)
+            if (jsonObject.containsKey("status") && !jsonObject.getString("status").equals("fail")) {
+                pageView.setCountry(jsonObject.getString("country"));
+                pageView.setCity(jsonObject.getString("city"));
+                pageView.setLat(jsonObject.getJsonNumber("lat").toString());
+                pageView.setLon(jsonObject.getJsonNumber("lon").toString());
+                pageView.setHasIpInfo(true);
+                Thread.sleep(300);//sleep to not exceed query limits (150 per minute)
+            }
+
         } catch (Exception e) {
-            log.error("Could not get additional info from IP API request:"+ipApiQuery,e);
+            log.error("Could not get additional info from IP API request:" + ipApiQuery, e);
         } finally {
             if (connection != null) {
                 connection.disconnect();
             }
-            if(rd != null) {
+            if (rd != null) {
                 try {
                     rd.close();
                 } catch (IOException e) {
-                    log.error("Problem closing buffered reader",e);
+                    log.error("Problem closing buffered reader", e);
                 }
             }
         }
