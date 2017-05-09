@@ -1,9 +1,6 @@
 package com.github.adminfaces.showcase.analytics.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by rmpestano on 01/05/17.
@@ -12,6 +9,7 @@ public class PageStats {
 
     private String viewId;
     private List<PageView> pageViews = new ArrayList<>();
+    private boolean showVisitorsInfo;
 
     public PageStats(String viewId) {
         this.viewId = viewId;
@@ -51,5 +49,11 @@ public class PageStats {
         this.pageViews = pageViews;
     }
 
+    public boolean isShowVisitorsInfo() {
+        return showVisitorsInfo;
+    }
 
+    public void setShowVisitorsInfo(boolean showVisitorsInfo) {
+        this.showVisitorsInfo = showVisitorsInfo;
+    }
 }

@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:of="http://omnifaces.org/functions"
+                xmlns:adm="http://github.com/adminfaces" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="#{layoutMB.layout}">
+
+    <ui:define name="title">
+        Analytics
+    </ui:define>
+
+    <ui:define name="description">
+        Showcase visitors statistics
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Analytics"/>
+        <p:panel styleClass="box-warning" header="Analytics Table">
+            <h:form>
+               <p:dataTable  var="a" value="#{analyticsMB.pageStatsList}" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,25,50" rows="10" rowKey="#{a.viewId}"
+                             emptyMessage="No data found with given criteria" sortBy="#{a.totalPageViews}" sortOrder="descending"
+                             filteredValue="#{analyticsMB.filteredStats}">
+
+                    <p:column filterBy="#{a.viewId}" sortBy="#{a.viewId}" headerText="Page"
+                              filterMatchMode="contains" priority="1">
+                        <p:link value="#{a.viewId}" outcome="#{a.viewId}" />
+                    </p:column>
+
+                    <p:column sortBy="#{a.totalPageViews}" headerText="Total Page views"
+                               priority="1">
+                          #{a.totalPageViews}
+                    </p:column>
+
+                     <p:column sortBy="#{a.uniquePageViews}" headerText="Unique Page views"
+                               priority="2">
+                          #{a.uniquePageViews}
+                    </p:column>
+
+                    <p:column headerText="Visitors" >
+                        <h:panelGroup rendered="#{not a.showVisitorsInfo}" style="text-align: center">
+                            <p:commandLink process="@this" update="@(.ui-datatable)" styleClass="fa fa-plus-square" style="font-size: 20px">
+                                <f:setPropertyActionListener value="#{true}" target="#{a.showVisitorsInfo}"/>
+                            </p:commandLink>
+                        </h:panelGroup>
+                        <p:dataList rendered="#{a.showVisitorsInfo}" value="#{a.pageViews}" paginator="true" rows="5"
+                                    var="pageView"
+                                    emptyMessage="No page view found">
+
+                            #{pageView.country} - #{pageView.city} - #{of:formatDate(pageView.date.time, adminConfig.dateFormat)}
+
+                        </p:dataList>
+                    </p:column>
+               </p:dataTable>
+            </h:form>
+        </p:panel>
+
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="analytics.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="AnalyticsMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.analytics.bean.AnalyticsMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

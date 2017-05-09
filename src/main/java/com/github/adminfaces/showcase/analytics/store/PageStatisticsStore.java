@@ -59,14 +59,11 @@ public class PageStatisticsStore implements Serializable {
                     Calendar c = Calendar.getInstance();
                     c.setTime(dateFormat.parse(object.getString("date")));
                     pageView.setDate(c);
-                    pageView.setCountry(object.getString("country"));
-                    pageView.setLat(object.getString("lat"));
-                    pageView.setLon(object.getString("lon"));
-                    if (object.containsKey("hasIpInfo")) { //backward compat
-                        pageView.setHasIpInfo(object.getBoolean("hasIpInfo"));
-                    } else {
-                        pageView.setHasIpInfo(false);
-                    }
+                    pageView.setCountry(object.containsKey("country") ? object.getString("country"):"");//backward compat
+                    pageView.setCity(object.containsKey("city") ? object.getString("city"):"");//backward compat
+                    pageView.setLat(object.containsKey("lat") ? object.getString("lat"):"");//backward compat
+                    pageView.setLon(object.containsKey("lon") ? object.getString("lon"):"");//backward compat
+                    pageView.setHasIpInfo(object.containsKey("hasIpInfo") ? object.getBoolean("hasIpInfo"):false);//backward compat
                     pageViews.add(pageView);
                 }
                 pageStats.setPageViews(pageViews);
@@ -133,7 +130,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private void queryAdditionalPageViewInfo(PageView pageView) {
-        if (pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
+        if (pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
             return;
         }
         String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
@@ -181,6 +178,11 @@ public class PageStatisticsStore implements Serializable {
                 }
             }
         }
+    }
+
+
+    public List<PageStats> allPageStats(){
+        return new ArrayList<>(pageStatisticsMap.values());
     }
 
 }
