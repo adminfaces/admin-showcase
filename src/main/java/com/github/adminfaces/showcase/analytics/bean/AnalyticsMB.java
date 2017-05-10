@@ -6,12 +6,9 @@ import com.github.adminfaces.showcase.analytics.store.PageStatisticsStore;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.LazyDataModel;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
