@@ -11,6 +11,19 @@
              .ui-datatable .ui-datatable-header {
                 text-align: right !important;
             }
+
+            body div.ui-datalist-content  {
+                border:none;
+                text-align: center;
+            }
+
+             body div.ui-datalist .ui-datalist-data .ui-datalist-item {
+                 font-weight: normal;
+             }
+
+            body div.ui-datalist .ui-paginator {
+                border: none!important;
+            }
         </style>
     </ui:define>
 
@@ -68,15 +81,15 @@
 
                     <p:column headerText="Visitors" width="45%">
                         <h:panelGroup rendered="#{not a.showVisitorsInfo}" style="text-align: center">
-                            <p:commandLink process="@this" update="@(.ui-datatable)" styleClass="fa fa-plus-square" style="font-size: 20px">
+                            <p:commandLink process="@this" update="@(.ui-datatable, .ui-datalist)" styleClass="fa fa-plus-square" style="font-size: 20px">
                                 <f:setPropertyActionListener value="#{true}" target="#{a.showVisitorsInfo}"/>
                             </p:commandLink>
                         </h:panelGroup>
-                        <p:dataList rendered="#{a.showVisitorsInfo}" value="#{a.pageViews}" paginator="true" rows="5"
-                                    var="pageView" paginatorPosition="top"
-                                    emptyMessage="No page view found">
+                        <p:dataList widgetVar="datalistVar" rendered="#{a.showVisitorsInfo}" value="#{a.pageViewCountryList}" paginator="true" rows="5"
+                                    var="pageView" paginatorPosition="top" type="definition"
+                                    emptyMessage="No page views found">
 
-                            #{pageView.country} - #{pageView.city} - #{of:formatDate(pageView.date.time, 'MM/dd/yyyy')}
+                            #{pageView.country} - #{pageView.city}: #{a.totalByCountryAndCity(pageView.country,pageView.city)} views
 
                         </p:dataList>
                     </p:column>
