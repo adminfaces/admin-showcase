@@ -7,9 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.ejb.*;
 import javax.json.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -28,6 +26,8 @@ import static com.github.adminfaces.template.util.Assert.has;
  */
 @Singleton
 @Startup
+@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.BEAN)
 public class PageStatisticsStore implements Serializable {
 
     private Map<String, PageStats> pageStatisticsMap; //viewId by statistics map
@@ -71,6 +71,9 @@ public class PageStatisticsStore implements Serializable {
             }
         } catch (Exception e) {
             log.warn("Could not load page statistics", e);
+        }
+        finally {
+            log.info("Finished reading page statistics store.");
         }
     }
 
@@ -130,7 +133,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private void queryAdditionalPageViewInfo(PageView pageView) {
-        if (pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
+        if (pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
             return;
         }
         String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
