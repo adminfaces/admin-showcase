@@ -52,21 +52,21 @@
                     </f:facet>
 
                     <p:column filterBy="#{a.viewId}" sortBy="#{a.viewId}" headerText="Page"
-                              filterMatchMode="contains" priority="1">
+                              filterMatchMode="contains" priority="1" width="44%">
                         <p:link value="#{a.viewId}" outcome="#{a.viewId}" />
                     </p:column>
 
                     <p:column sortBy="#{a.totalPageViews}" headerText="Total Page views"
-                               priority="1">
+                               priority="1" width="8%">
                           #{a.totalPageViews}
                     </p:column>
 
                      <p:column sortBy="#{a.uniquePageViews}" headerText="Unique Page views"
-                               priority="2">
+                               priority="2" width="8%">
                           #{a.uniquePageViews}
                     </p:column>
 
-                    <p:column headerText="Visitors" >
+                    <p:column headerText="Visitors" width="40%">
                         <h:panelGroup rendered="#{not a.showVisitorsInfo}" style="text-align: center">
                             <p:commandLink process="@this" update="@(.ui-datatable)" styleClass="fa fa-plus-square" style="font-size: 20px">
                                 <f:setPropertyActionListener value="#{true}" target="#{a.showVisitorsInfo}"/>
