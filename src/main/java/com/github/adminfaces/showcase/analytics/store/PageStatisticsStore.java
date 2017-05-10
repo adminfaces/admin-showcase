@@ -13,10 +13,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static com.github.adminfaces.template.util.Assert.has;
@@ -26,8 +23,6 @@ import static com.github.adminfaces.template.util.Assert.has;
  */
 @Singleton
 @Startup
-@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
-@TransactionManagement(TransactionManagementType.BEAN)
 public class PageStatisticsStore implements Serializable {
 
     private Map<String, PageStats> pageStatisticsMap; //viewId by statistics map
@@ -102,7 +97,9 @@ public class PageStatisticsStore implements Serializable {
             JsonArrayBuilder pageStatsJsonArray = Json.createArrayBuilder();
             for (PageStats pageStats : pageStatisticsMap.values()) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
-                for (PageView pageView : pageStats.getPageViews()) {
+                Iterator<PageView> pageViewIterator = pageStats.getPageViews().iterator();//iterator to avoid concurrent modification exc
+                while(pageViewIterator.hasNext()){
+                    PageView pageView = pageViewIterator.next();
                     if (!has(pageView.getIp())) {
                         continue;
                     }
@@ -167,7 +164,7 @@ public class PageStatisticsStore implements Serializable {
 
             InputStream is = connection.getInputStream();
             rd = new BufferedReader(new InputStreamReader(is));
-            StringBuilder json = new StringBuilder(); // or StringBuffer if Java version 5+
+            StringBuilder json = new StringBuilder();
             String line;
             while ((line = rd.readLine()) != null) {
                 json.append(line);
@@ -209,4 +206,21 @@ public class PageStatisticsStore implements Serializable {
         }
         return pageViewCountries;
     }
+
+    public List<PageStats> getPageStatsWithCountries() {
+        List<PageStats> pageStatsWithCountries = new ArrayList<>();
+        for (PageStats stats : allPageStats()) {
+            PageStats pageStats = new PageStats(stats.getViewId());
+            List<PageView> pageViews = new ArrayList<>();
+            for (PageView pageView : stats.getPageViews()) {
+                if (has(pageView.getCountry())) {
+                    pageViews.add(pageView);
+                }
+            }
+            pageStats.setPageViews(pageViews);
+            pageStatsWithCountries.add(pageStats);
+        }
+        return pageStatsWithCountries;
+    }
+
 }

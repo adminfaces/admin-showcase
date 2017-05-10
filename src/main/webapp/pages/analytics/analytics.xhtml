@@ -2,7 +2,6 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:of="http://omnifaces.org/functions"
                 xmlns:adm="http://github.com/adminfaces" xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="#{layoutMB.layout}">
 
@@ -81,9 +80,8 @@
 
                     <p:column headerText="Visitors" width="45%">
                         <h:panelGroup rendered="#{not a.showVisitorsInfo}" style="text-align: center">
-                            <p:commandLink process="@this" update="@(.ui-datatable, .ui-datalist)" styleClass="fa fa-plus-square" style="font-size: 20px">
-                                <f:setPropertyActionListener value="#{true}" target="#{a.showVisitorsInfo}"/>
-                            </p:commandLink>
+                            <p:commandLink action="#{analyticsMB.renderVisitorsInfo(a)}" process="@this" oncomplete="PF('datalistVar').getPaginator().setPage(0);"
+                                           update="@(.ui-datatable)" styleClass="fa fa-plus-square" style="font-size: 20px"/>
                         </h:panelGroup>
                         <p:dataList widgetVar="datalistVar" rendered="#{a.showVisitorsInfo}" value="#{a.pageViewCountryList}" paginator="true" rows="5"
                                     var="pageView" paginatorPosition="top" type="definition"
