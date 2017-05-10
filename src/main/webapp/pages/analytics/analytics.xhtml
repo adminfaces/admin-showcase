@@ -73,7 +73,7 @@
                             </p:commandLink>
                         </h:panelGroup>
                         <p:dataList rendered="#{a.showVisitorsInfo}" value="#{a.pageViews}" paginator="true" rows="5"
-                                    var="pageView"
+                                    var="pageView" paginatorPosition="top"
                                     emptyMessage="No page view found">
 
                             #{pageView.country} - #{pageView.city} - #{of:formatDate(pageView.date.time, 'MM/dd/yyyy')}
