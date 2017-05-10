@@ -34,6 +34,7 @@ public class PageStatisticsStore implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(PageStatisticsStore.class.getName());
     private final String pagesStatsFilePath = (System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getProperty("user.home")) + "/page-stats.json".replaceAll("//", "/");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private List<String> pageViewCountries;
 
     @PostConstruct
     public void initStatistics() {
@@ -124,12 +125,26 @@ public class PageStatisticsStore implements Serializable {
                 pageStatsJsonArray.add(pageStatsJson);
             }
             FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
+            loadPageViewCountries();
         } catch (Exception e) {
             log.error("Could not persist statistics in path " + pagesStatsFilePath, e);
         } finally {
             log.info("Time to persist page statistics: {} seconds.", (System.currentTimeMillis() - initial) / 1000.0d);
         }
 
+    }
+
+    private void loadPageViewCountries() {
+        if(pageViewCountries == null){
+            pageViewCountries = new ArrayList<>();
+        }
+        for (PageStats pageStats : pageStatisticsMap.values()) {
+            for (PageView pageView : pageStats.getPageViews()) {
+                if(has(pageView.getCountry()) && !pageViewCountries.contains(pageView.getCountry())){
+                    pageViewCountries.add(pageView.getCountry());
+                }
+            }
+        }
     }
 
     private void queryAdditionalPageViewInfo(PageView pageView) {
@@ -188,4 +203,10 @@ public class PageStatisticsStore implements Serializable {
         return new ArrayList<>(pageStatisticsMap.values());
     }
 
+    public List<String> getPageViewCountries() {
+        if(pageViewCountries == null){
+            loadPageViewCountries();
+        }
+        return pageViewCountries;
+    }
 }

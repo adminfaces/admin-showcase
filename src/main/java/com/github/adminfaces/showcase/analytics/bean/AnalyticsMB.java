@@ -5,10 +5,13 @@ import com.github.adminfaces.showcase.analytics.model.PageView;
 import com.github.adminfaces.showcase.analytics.store.PageStatisticsStore;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -55,24 +58,64 @@ public class AnalyticsMB implements Serializable {
 
     private void initPageStatsList() {
         pageStatsList = analyticsStore.allPageStats();
-            for (PageStats stats : analyticsStore.allPageStats()) {
-                  Iterator<PageView> pageViewIterator = stats.getPageViews().iterator();
-                  while(pageViewIterator.hasNext()) {
-                      PageView pageView = pageViewIterator.next();
-                      if(!has(pageView.getCountry())) {
-                          pageViewIterator.remove();
-                      }
-                  }
-                  Collections.sort(stats.getPageViews(), new Comparator<PageView>() {
-                            @Override
-                            public int compare(PageView pageView1, PageView pageView2) {
-                                return pageView1.getCountry() != null && pageView2.getCountry() != null ? pageView1.getCountry().compareTo(pageView2.getCountry()):-1;
-                            }
-                 });
-                stats.setShowVisitorsInfo(false);
+        for (PageStats stats : analyticsStore.allPageStats()) {
+            Iterator<PageView> pageViewIterator = stats.getPageViews().iterator();
+            while (pageViewIterator.hasNext()) {
+                PageView pageView = pageViewIterator.next();
+                if (!has(pageView.getCountry())) {
+                    pageViewIterator.remove();
+                }
             }
+            Collections.sort(stats.getPageViews(), new Comparator<PageView>() {
+                @Override
+                public int compare(PageView pageView1, PageView pageView2) {
+                    return pageView1.getCountry() != null && pageView2.getCountry() != null ? pageView1.getCountry().compareTo(pageView2.getCountry()) : -1;
+                }
+            });
+            stats.setShowVisitorsInfo(false);
+        }
 
     }
+
+    public void clearFilter() {
+        initPageStatsList();
+    }
+
+    public List<String> completeCountry(String query) {
+        List<String> results = new ArrayList<>();
+
+        if(has(query) && query.length() >= 2) {
+            List<String> pageViewCountries = analyticsStore.getPageViewCountries();
+            for (String pageViewCountry : pageViewCountries) {
+                if(pageViewCountry.toLowerCase().contains(query.toLowerCase())) {
+                    results.add(pageViewCountry);
+                }
+            }
+        }
+
+        return results;
+    }
+
+    public void onCountrySelect(SelectEvent event) {
+        String selectedCountry = event.getObject().toString();
+        List<PageStats> pageStatsByCountry = new ArrayList<>();
+        for (PageStats stats : analyticsStore.allPageStats()) {
+            List<PageView> filteredPageViews = new ArrayList<>();
+            for (PageView view : stats.getPageViews()) {
+                 if(has(view.getCountry()) && view.getCountry().toLowerCase().contains(selectedCountry.toLowerCase())){
+                    filteredPageViews.add(view);
+                }
+            }
+            if(!filteredPageViews.isEmpty()) {
+                PageStats pageStats = new PageStats(stats.getViewId());
+                pageStats.setPageViews(filteredPageViews);
+                pageStatsByCountry.add(pageStats);
+            }
+        }
+
+        pageStatsList = pageStatsByCountry;
+    }
+
 
     public void setPageStatsList(List<PageStats> pageStatsList) {
         this.pageStatsList = pageStatsList;
@@ -85,5 +128,6 @@ public class AnalyticsMB implements Serializable {
     public void setFilteredStats(List<PageStats> filteredStats) {
         this.filteredStats = filteredStats;
     }
+
 
 }

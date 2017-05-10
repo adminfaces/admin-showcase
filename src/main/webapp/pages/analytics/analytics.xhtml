@@ -6,23 +6,50 @@
                 xmlns:adm="http://github.com/adminfaces" xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="#{layoutMB.layout}">
 
+    <ui:define name="head-end">
+        <style type="text/css">
+             .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+
     <ui:define name="title">
         Analytics
     </ui:define>
 
     <ui:define name="description">
-        Showcase visitors statistics
+        Showcase visitors statistics <h:outputLabel style="font-weight: bold" id="info"><i  class="fa fa2x fa-info-circle"/></h:outputLabel>
+        <p:tooltip for="info" showEvent="mouseover" hideEvent="mouseleave"
+                       value="Statistics are updated on every hour."/>
     </ui:define>
 
     <ui:define name="body">
         <adm:breadcrumb title="Analytics"/>
         <p:panel styleClass="box-warning" header="Analytics Table">
             <h:form>
-               <p:dataTable  var="a" value="#{analyticsMB.pageStatsList}" paginator="true"
+               <p:dataTable  var="a" value="#{analyticsMB.pageStatsList}" paginator="true" widgetVar="analyticsTable"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15,25,50" rows="10" rowKey="#{a.viewId}"
                              emptyMessage="No data found with given criteria" sortBy="#{a.totalPageViews}" sortOrder="descending"
                              filteredValue="#{analyticsMB.filteredStats}">
+
+                     <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Filter page views by country:"/>
+                            <p:spacer height="10"/>
+
+                           <p:autoComplete id="ac" completeMethod="#{analyticsMB.completeCountry}" dropdown="true">
+                                   <p:ajax event="itemSelect" listener="#{analyticsMB.onCountrySelect}"
+                                           update="@(.ui-datatable)"/>
+                           </p:autoComplete>
+                           <p:spacer height="10"/>
+                           <p:commandLink value="Clear" action="#{analyticsMB.clearFilter}"
+                                          process="@this ac" update="@(.ui-datatable)" style="color: #3c8dbc"
+                                          oncomplete="PF('analyticsTable').clearFilters()"/>
+
+                        </p:outputPanel>
+                    </f:facet>
 
                     <p:column filterBy="#{a.viewId}" sortBy="#{a.viewId}" headerText="Page"
                               filterMatchMode="contains" priority="1">
@@ -49,7 +76,7 @@
                                     var="pageView"
                                     emptyMessage="No page view found">
 
-                            #{pageView.country} - #{pageView.city} - #{of:formatDate(pageView.date.time, adminConfig.dateFormat)}
+                            #{pageView.country} - #{pageView.city} - #{of:formatDate(pageView.date.time, 'MM/dd/yyyy')}
 
                         </p:dataList>
                     </p:column>

@@ -24,6 +24,11 @@
         <param-value>6</param-value>
     </context-param>
 
+    <context-param>
+		<param-name>primefaces.SUBMIT</param-name>
+		<param-value>partial</param-value>
+	</context-param>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
