@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.*;
+import javax.ejb.Schedule;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.json.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -93,6 +95,7 @@ public class PageStatisticsStore implements Serializable {
             return;//in some situation the schedule is called before statistics is initialized
         }
         long initial = System.currentTimeMillis();
+        int numRecordsUpdated = 0;
         try {
             JsonArrayBuilder pageStatsJsonArray = Json.createArrayBuilder();
             for (PageStats pageStats : pageStatisticsMap.values()) {
@@ -103,7 +106,11 @@ public class PageStatisticsStore implements Serializable {
                     if (!has(pageView.getIp())) {
                         continue;
                     }
-                    queryAdditionalPageViewInfo(pageView);
+
+                    boolean infoUpdated = queryAdditionalPageViewInfo(pageView);
+                    if(infoUpdated) {
+                        numRecordsUpdated ++;
+                    }
                     JsonObject pageViewJsonObject = Json.createObjectBuilder()
                             .add("ip", pageView.getIp())
                             .add("date", dateFormat.format(pageView.getDate().getTime()))
@@ -126,7 +133,7 @@ public class PageStatisticsStore implements Serializable {
         } catch (Exception e) {
             log.error("Could not persist statistics in path " + pagesStatsFilePath, e);
         } finally {
-            log.info("Time to persist page statistics: {} seconds.", (System.currentTimeMillis() - initial) / 1000.0d);
+            log.info("{} page statistics updated in {} seconds.", numRecordsUpdated,(System.currentTimeMillis() - initial) / 1000.0d);
         }
 
     }
@@ -144,9 +151,14 @@ public class PageStatisticsStore implements Serializable {
         }
     }
 
-    private void queryAdditionalPageViewInfo(PageView pageView) {
+    /**
+     *
+     * @param pageView
+     * @return boolean representing the info was updated
+     */
+    private boolean queryAdditionalPageViewInfo(PageView pageView) {
         if (pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
-            return;
+            return false;
         }
         String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
                 .append(pageView.getIp()).toString();
@@ -177,6 +189,7 @@ public class PageStatisticsStore implements Serializable {
                 pageView.setLon(jsonObject.getJsonNumber("lon").toString());
                 pageView.setHasIpInfo(true);
                 Thread.sleep(200);//sleep to not exceed query limits (150 per minute)
+                return true;
             }
 
         } catch (Exception e) {
@@ -193,6 +206,7 @@ public class PageStatisticsStore implements Serializable {
                 }
             }
         }
+        return false;
     }
 
 
