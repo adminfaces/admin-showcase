@@ -8,12 +8,14 @@ import org.omnifaces.util.Faces;
 import org.primefaces.event.SelectEvent;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static com.github.adminfaces.template.util.Assert.has;
 
@@ -35,9 +37,12 @@ public class AnalyticsMB implements Serializable {
     @PostConstruct
     public void onPageVisited() {
         viewId = Faces.getViewId();
-        ExternalContext ec = Faces.getExternalContext();
-        HttpServletRequest request = (HttpServletRequest) ec.getRequest();
-        analyticsStore.addPageView(viewId, new PageView(request.getRemoteAddr()));
+        HttpServletRequest request = Faces.getRequest();
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (!has(ipAddress)) {
+            ipAddress = request.getRemoteAddr();
+        }
+        analyticsStore.addPageView(viewId, new PageView(ipAddress));
         pageStats = analyticsStore.getPageStats(viewId);
     }
 
