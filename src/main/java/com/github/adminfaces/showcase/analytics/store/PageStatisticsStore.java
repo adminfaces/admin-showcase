@@ -32,6 +32,9 @@ public class PageStatisticsStore implements Serializable {
     private final String pagesStatsFilePath = (System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getProperty("user.home")) + "/page-stats.json".replaceAll("//", "/");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private List<String> pageViewCountries;
+    private Map<Integer,Integer> totalVisitorsByMonth;//key is month and value is total
+    private Map<Integer,Integer> uniqueVisitorsByMonth;//key is month and value is total
+
 
     @PostConstruct
     public void initStatistics() {
@@ -160,8 +163,26 @@ public class PageStatisticsStore implements Serializable {
         if (pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
             return false;
         }
-        String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
-                .append(pageView.getIp()).toString();
+        StringBuilder ipApiQuery = new StringBuilder("http://ip-api.com/json/");
+        boolean result = false;
+        if(!pageView.getIp().contains(",")){//only one ip returned
+            ipApiQuery.append(pageView.getIp());
+            result = callIpApi(ipApiQuery.toString(),pageView);
+        } else { //multiple ips
+            String[] ips = ipApiQuery.toString().split(",");
+            for (String ip : ips) {
+                result = callIpApi(ip.toString()+ip,pageView);
+                if(result) {
+                   pageView.setIp(ip);
+                   break;
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean callIpApi(String ipApiQuery, PageView pageView) {
+
         HttpURLConnection connection = null;//using url connection to avoid (JavaEE 6) JAX-RS client api conflicts
         BufferedReader rd = null;
         try {
@@ -237,4 +258,46 @@ public class PageStatisticsStore implements Serializable {
         return pageStatsWithCountries;
     }
 
+    public Map<Integer,Integer> getTotalVisitorsByMonth() {
+        if(totalVisitorsByMonth == null){
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            totalVisitorsByMonth = new HashMap<>();
+            for (int i = 0; i <= 11; i++) {
+                totalVisitorsByMonth.put(i,0);
+            }
+            for (PageStats pageStats : pageStatisticsMap.values()) {
+                for (PageView pageView : pageStats.getPageViews()) {
+                    if(pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp())){
+                        continue;
+                    }
+                    int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
+                    totalVisitorsByMonth.put(pageViewMonth,totalVisitorsByMonth.get(pageViewMonth)+1);
+                }
+            }
+        }
+
+        return totalVisitorsByMonth;
+    }
+
+    public Map<Integer, Integer> getUniqueVisitorsByMonth() {
+        if(uniqueVisitorsByMonth == null) {
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            List<String> ipList = new ArrayList<>();
+            uniqueVisitorsByMonth = new HashMap<>();
+            for (int i = 0; i <= 11; i++) {
+                uniqueVisitorsByMonth.put(i,0);
+            }
+            for (PageStats pageStats : pageStatisticsMap.values()) {
+                for (PageView pageView : pageStats.getPageViews()) {
+                    if(pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp()) || ipList.contains(pageView.getIp())){
+                        continue;
+                    }
+                    int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
+                    ipList.add(pageView.getIp());
+                    uniqueVisitorsByMonth.put(pageViewMonth,uniqueVisitorsByMonth.get(pageViewMonth)+1);
+                }
+            }
+        }
+        return uniqueVisitorsByMonth;
+    }
 }

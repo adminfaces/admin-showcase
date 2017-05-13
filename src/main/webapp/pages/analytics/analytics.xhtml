@@ -23,6 +23,22 @@
             body div.ui-datalist .ui-paginator {
                 border: none!important;
             }
+
+            #pageViewsByMonthChart {
+                height: 180px;
+            }
+
+            @media (max-width: 768px) {
+                 #pageViewsByMonthChart {
+                     height: 150px;
+                 }
+             }
+
+             @media (max-width: 640px) {
+                 #pageViewsByMonthChart {
+                     height: 175px;
+                 }
+             }
         </style>
     </ui:define>
 
@@ -42,12 +58,12 @@
 
         <p:panel styleClass="box-success" header="Analytics Chart">
                 <p class="text-center">
-                    <strong>Showcase page views by month in current year</strong>
+                    <strong>Showcase page views in current year</strong>
                 </p>
 
                 <div class="chart">
                     <!-- Sales Chart Canvas -->
-                    <canvas id="pageViewsByMonthChart" style="height: 200px"></canvas>
+                    <canvas id="pageViewsByMonthChart" />
                 </div>
                 <!-- /.chart-responsive -->
         </p:panel>
