@@ -12,10 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.io.StringReader;
+import java.util.*;
 
 import static com.github.adminfaces.template.util.Assert.has;
 
@@ -33,6 +31,8 @@ public class AnalyticsMB implements Serializable {
 
     @Inject
     private PageStatisticsStore analyticsStore;
+    private String totalVisitorsByMonth;
+    private String uniqueVisitorsByMonth;
 
     @PostConstruct
     public void onPageVisited() {
@@ -131,5 +131,28 @@ public class AnalyticsMB implements Serializable {
         this.filteredStats = filteredStats;
     }
 
+    public String getTotalVisitorsByMonth() {
+        if(totalVisitorsByMonth == null) {
+            StringBuilder totals = new StringBuilder("[");
+            for (int i=0;i<=11;i++) {
+                Integer totalViewsInMonth = analyticsStore.getTotalVisitorsByMonth().get(i);
+                totals.append(totalViewsInMonth).append(",");
+            }
+            totalVisitorsByMonth = totals.append("]").deleteCharAt(totals.lastIndexOf(",")).toString();
+        }
+        return totalVisitorsByMonth;
+    }
+
+    public String getUniqueVisitorsByMonth() {
+        if(uniqueVisitorsByMonth == null) {
+            StringBuilder totals = new StringBuilder("[");
+            for (int i=0;i<=11;i++) {
+                Integer totalViewsInMonth = analyticsStore.getUniqueVisitorsByMonth().get(i);
+                totals.append(totalViewsInMonth).append(",");
+            }
+            uniqueVisitorsByMonth = totals.append("]").deleteCharAt(totals.lastIndexOf(",")).toString();
+        }
+        return uniqueVisitorsByMonth;
+    }
 
 }
