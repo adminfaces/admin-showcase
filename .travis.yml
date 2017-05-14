@@ -18,8 +18,12 @@ cache:
 before_script:
   - rm -r $HOME/.m2/repository/com/github/adminfaces/
 
-script: mvn -U clean package -DskipTests
-
+script: 
+- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
+- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
+- mvn test -Pglassfish-managed -Dtravisci -Dbrowser=phantomjs
+- mvn test -Ptomee7-remote -Dtravisci -Dbrowser=phantomjs
+- mvn test -Ptomee1.7-remote -Dtravisci -Dbrowser=phantomjs
 
 
 deploy:
