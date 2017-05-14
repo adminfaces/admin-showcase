@@ -56,20 +56,39 @@
         <adm:breadcrumb title="Analytics"/>
 
 
-        <p:panel styleClass="box-success" header="Analytics Chart">
+        <p:panel styleClass="box-success" header="Analytics Chart" toggleable="true">
                 <p class="text-center">
-                    <strong>Showcase page views in current year</strong>
+                    <strong>Showcase visitors in current year</strong>
                 </p>
 
                 <div class="chart">
-                    <!-- Sales Chart Canvas -->
-                    <canvas id="pageViewsByMonthChart" />
+                    <!-- Page views Chart Canvas -->
+                    <canvas id="visitorsByMonthChart" />
                 </div>
-                <!-- /.chart-responsive -->
+
+            <p:separator/>
+            <p class="text-center">
+                <strong>Showcase visitors by page</strong>
+            </p>
+
+            <div class="chart">
+                <!-- Page views Chart Canvas -->
+                <canvas id="visitorsByPageChart" />
+            </div>
+            <p:separator/>
+            <p class="text-center">
+                <strong>Visitors by Country (top 10)</strong>
+            </p>
+
+            <div class="chart">
+                <!-- Visitors by country Chart Canvas -->
+                <canvas id="visitorsByCountryChart" />
+            </div>
+
         </p:panel>
         <p:separator/>
 
-        <p:panel styleClass="box-warning" header="Analytics Table">
+        <p:panel styleClass="box-warning" header="Analytics Table" toggleable="true">
             <h:form>
                <p:dataTable  var="a" value="#{analyticsMB.pageStatsList}" paginator="true" widgetVar="analyticsTable"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -167,9 +186,9 @@
                 //-----------------------
 
                 // Get context with jQuery - using jQuery's .get() method.
-                var viewsByMonthChartCanvas = $("#pageViewsByMonthChart").get(0).getContext("2d");
+                var visitorsByMonthChartCanvas = $("#visitorsByMonthChart").get(0).getContext("2d");
                 // This will get the first returned node in the jQuery collection.
-                var viewsByMonthChartData = {
+                var visitorsByMonthChartData = {
                     labels: ["January", "February", "March", "April", "May", "June", "July","August", "September","October","November", "December"],
                     datasets: [
                         {
@@ -183,7 +202,7 @@
                             data: #{analyticsMB.totalVisitorsByMonth}
                         },
                         {
-                            label: "Unique visitor",
+                            label: "Unique visitors",
                             fillColor: "rgba(60,141,188,0.9)",
                             strokeColor: "rgba(60,141,188,0.8)",
                             pointColor: "#3b8bba",
@@ -198,8 +217,17 @@
 
 
                 //Create the line chart
-                createLineChart(viewsByMonthChartCanvas,viewsByMonthChartData);
+                createLineChart(visitorsByMonthChartCanvas,visitorsByMonthChartData);
 
+                var visitorsByPageCanvas = $("#visitorsByPageChart").get(0).getContext("2d");
+
+                //Create the pie chart
+                createPieChart(visitorsByPageCanvas,#{analyticsMB.visitorsByPage});
+
+                var visitorsByCountryCanvas = $("#visitorsByCountryChart").get(0).getContext("2d");
+
+                //Create the pie chart
+                createBarChart(visitorsByCountryCanvas,#{analyticsMB.visitorsByCountry});
 
 
             });

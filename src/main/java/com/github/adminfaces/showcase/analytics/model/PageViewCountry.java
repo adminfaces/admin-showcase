@@ -1,7 +1,5 @@
 package com.github.adminfaces.showcase.analytics.model;
 
-import java.util.Comparator;
-
 /**
  * Created by rafael-pestano on 10/05/17.
  */

@@ -2,6 +2,7 @@ package com.github.adminfaces.showcase.analytics.store;
 
 import com.github.adminfaces.showcase.analytics.model.PageStats;
 import com.github.adminfaces.showcase.analytics.model.PageView;
+import com.github.adminfaces.showcase.analytics.model.PageViewCountry;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class PageStatisticsStore implements Serializable {
     private List<String> pageViewCountries;
     private Map<Integer,Integer> totalVisitorsByMonth;//key is month and value is total
     private Map<Integer,Integer> uniqueVisitorsByMonth;//key is month and value is total
+    private Map<String,Integer> totalVisitorsByCountry;
 
 
     @PostConstruct
@@ -133,12 +135,20 @@ public class PageStatisticsStore implements Serializable {
             }
             FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
             loadPageViewCountries();
+            resetStatstistics();
         } catch (Exception e) {
             log.error("Could not persist statistics in path " + pagesStatsFilePath, e);
         } finally {
             log.info("{} page statistics updated in {} seconds.", numRecordsUpdated,(System.currentTimeMillis() - initial) / 1000.0d);
         }
 
+    }
+
+    //force statistics reload
+    private void resetStatstistics() {
+        totalVisitorsByCountry = null;
+        totalVisitorsByMonth = null;
+        uniqueVisitorsByMonth = null;
     }
 
     private void loadPageViewCountries() {
@@ -299,5 +309,22 @@ public class PageStatisticsStore implements Serializable {
             }
         }
         return uniqueVisitorsByMonth;
+    }
+
+    public Map<String, Integer> getTotalVisitorsByCountry() {
+        if(totalVisitorsByCountry == null) {
+            totalVisitorsByCountry = new HashMap<>();
+            for (PageStats pageStats : pageStatisticsMap.values()) {
+                List<PageViewCountry> pageViewCountryList = pageStats.getPageViewCountryList();
+                for (PageViewCountry pageViewCountry : pageViewCountryList) {
+                    String country = pageViewCountry.getCountry();
+                    if(!totalVisitorsByCountry.containsKey(country)) {
+                        totalVisitorsByCountry.put(country,0);
+                    }
+                    totalVisitorsByCountry.put(country,totalVisitorsByCountry.get(country)+pageViewCountry.getViewCount());
+                }
+            }
+        }
+        return totalVisitorsByCountry;
     }
 }
