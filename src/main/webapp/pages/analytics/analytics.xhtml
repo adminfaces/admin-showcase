@@ -7,39 +7,93 @@
 
     <ui:define name="head-end">
         <style type="text/css">
-             .ui-datatable .ui-datatable-header {
+            .ui-datatable .ui-datatable-header {
                 text-align: right !important;
             }
 
-            body div.ui-datalist-content  {
-                border:none;
+            body div.ui-datalist-content {
+                border: none;
                 text-align: center;
             }
 
-             body div.ui-datalist .ui-datalist-data .ui-datalist-item {
-                 font-weight: normal;
-             }
-
-            body div.ui-datalist .ui-paginator {
-                border: none!important;
+            body div.ui-datalist .ui-datalist-data .ui-datalist-item {
+                font-weight: normal;
             }
 
-            #pageViewsByMonthChart {
-                height: 180px;
+            body div.ui-datalist .ui-paginator {
+                border: none !important;
+            }
+
+            #visitorsByMonthChart {
+                height: 200px;
+            }
+
+            #visitorsByPageChart {
+                height: 400px;
+            }
+
+            #visitorsByCountryChart {
+                height: 450px;
+            }
+
+
+            .ui-panel .leaflet-container {
+                width: 100%;
+                height: 500px
+            }
+
+            @media (max-width: 1280px) {
+                #visitorsByPageChart {
+                    height: 325px;
+                }
+
+                .ui-panel .leaflet-container {
+                    width: 100%;
+                    height: 400px
+                }
             }
 
             @media (max-width: 768px) {
-                 #pageViewsByMonthChart {
-                     height: 150px;
-                 }
-             }
+                #visitorsByMonthChart {
+                    height: 250px;
+                }
 
-             @media (max-width: 640px) {
-                 #pageViewsByMonthChart {
-                     height: 175px;
-                 }
-             }
+                #visitorsByPageChart {
+                    height: 275px;
+                }
+
+                #visitorsByCountryChart {
+                    height: 350px;
+                }
+
+                .ui-panel .leaflet-container {
+                    height: 300px
+                }
+
+            }
+
+            @media (max-width: 640px) {
+                #visitorsByMonthChart {
+                    height: 275px;
+                }
+
+                #visitorsByPageChart {
+                    height: 200px;
+                }
+
+                #visitorsByCountryChart {
+                    height: 250px;
+                }
+
+                .ui-panel .leaflet-container {
+                    height: 250px
+                }
+            }
+
         </style>
+        <h:outputStylesheet library="css" name="leaflet.css"/>
+        <h:outputStylesheet library="css" name="markercluster.default.css"  />
+        <h:outputStylesheet library="css" name="markercluster.css" />
     </ui:define>
 
     <ui:define name="title">
@@ -54,6 +108,7 @@
 
     <ui:define name="body">
         <adm:breadcrumb title="Analytics"/>
+        <adm:sidebar collapsed="true"/>
 
 
         <p:panel styleClass="box-success" header="Analytics Chart" toggleable="true">
@@ -87,6 +142,38 @@
 
         </p:panel>
         <p:separator/>
+
+        <p:panel styleClass="box-fatal" toggleable="true" header="Analytics Map">
+            <div tabindex="0" class="leaflet-container leaflet-fade-anim" id="map">
+                <div style="transform: translate(0px, 0px);" class="leaflet-map-pane">
+                    <div class="leaflet-tile-pane">
+                        <div class="leaflet-layer">
+                            <div class="leaflet-tile-container"></div>
+                            <div class="leaflet-tile-container leaflet-zoom-animated"></div>
+                            <div class="leaflet-marker-pane"></div>
+                            <div class="leaflet-popup-pane"></div>
+                        </div>
+                    </div>
+                    <div class="leaflet-control-container">
+                        <div class="leaflet-top leaflet-left">
+                            <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+                                <a title="Zoom in" href="#" class="leaflet-control-zoom-in">+</a><a
+                                    title="Zoom out" href="#" class="leaflet-control-zoom-out">-</a>
+                            </div>
+                        </div>
+                        <div class="leaflet-control-attribution leaflet-control">
+                            <a href="http://leafletjs.com/"
+                               title="A JS library for interactive maps">Leaflet</a> | Map data
+                            © <a href="http://openstreetmap.org/">OpenStreetMap</a>
+                            contributors, <a
+                                href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,
+                            Imagery © <a href="http://mapbox.com/">Mapbox</a>, Population data
+                            © <a href="http://census.gov/">US Census Bureau</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p:panel>
 
         <p:panel styleClass="box-warning" header="Analytics Table" toggleable="true">
             <h:form>
@@ -170,9 +257,11 @@
 
     <ui:define name="content-end">
         <h:outputScript library="js" name="chart.min.js"/>
+        <h:outputScript library="js" name="leaflet/leaflet.js"/>
+        <h:outputScript library="js" name="leaflet/markercluster.js"/>
         <script type="text/javascript">
             //<![CDATA[
-            $(function () {
+            $(document).ready(function () {
 
                 'use strict';
 
@@ -230,7 +319,70 @@
                 createBarChart(visitorsByCountryCanvas,#{analyticsMB.visitorsByCountry});
 
 
+                createMap();
             });
+
+            function createMap() {
+                var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors ',
+                    mbUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    mbUrl2 = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+                //base layers
+                var streets  = L.tileLayer(mbUrl, {id: 'examples.map-i875mjb7',   attribution: mbAttr}),
+                    grayscale   = L.tileLayer(mbUrl2, {id: 'examples.map-20v6611k', attribution: mbAttr});
+
+                var map = L.map('map', {
+                    center: [20.55, 15],
+                    zoom: 2,
+                    maxZoom: 18,
+                    minZoom: 1,
+                    layers: [streets] //initial base layer
+                });
+
+                var pageViewsLayer = new L.markerClusterGroup();
+
+
+                var baseLayers = {
+                    "Streets": streets,
+                    "Grayscale": grayscale
+                };
+
+                var overlays = {
+                    "Page views": pageViewsLayer
+                }
+
+
+                map.addLayer(pageViewsLayer);
+                L.control.layers(baseLayers, overlays).addTo(map);
+
+                var data = #{analyticsMB.pageViewsGeoJson};
+
+                var geoJsonPageViewsLayer = L.geoJson(data, {
+                    pointToLayer: function(feature, latlng){
+                        var m = new L.marker(latlng, {title: feature.properties.page});
+                        m.bindPopup(feature.properties.page + ', viewed on '+feature.properties.date);
+                        m.on('click', markerOnClick);
+                        m.setIcon(new L.Icon({iconUrl: '/showcase/javax.faces.resource/marker-icon.png.xhtml?ln=images'}));
+                        return m;
+                    },
+                    onEachFeature: function (feature, layer) {
+                        feature.layer = layer;
+                    }
+                });
+
+                geoJsonPageViewsLayer.addTo(pageViewsLayer);
+
+
+                map.fitBounds(pageViewsLayer.getBounds());
+
+                function markerOnClick(e) {
+                    map.panTo(new L.LatLng(e.latlng.lat, e.latlng.lng));
+                }
+
+
+            }
+
+
             //]]>
         </script>
     </ui:define>

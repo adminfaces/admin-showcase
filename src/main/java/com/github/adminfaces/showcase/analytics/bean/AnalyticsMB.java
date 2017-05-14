@@ -31,7 +31,7 @@ public class AnalyticsMB implements Serializable {
             "#444", "#001F3F", "#B13C2E", "#009688", "#111", "#696969", "#0088cc", "#39CCCC", "#7FB77D", "#F012BE", "#3D9970", "#FF851B", "#1C28B7", "#FF495A", "#31FFB0",
             "#B1CC97", "#3F2A29");
 
-
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     private String viewId;
     private PageStats pageStats;
     private List<PageStats> pageStatsList;
@@ -43,6 +43,7 @@ public class AnalyticsMB implements Serializable {
     private String uniqueVisitorsByMonth;
     private String visitorsByPage;
     private String visitorsByCountry;
+    private String pageViewsGeoJson;
 
     @PostConstruct
     public void onPageVisited() {
@@ -232,5 +233,39 @@ public class AnalyticsMB implements Serializable {
 
 
         return visitorsByCountry;
+    }
+
+    /**
+     * Creates a GeoJson feature layer to be presented in a leaflet web map
+     */
+    public String getPageViewsGeoJson() {
+        if(pageViewsGeoJson == null) {
+            JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
+            for (PageStats stats : analyticsStore.allPageStats()) {
+                for (PageView pageView : stats.getPageViews()) {
+                    if(!has(pageView.getCountry()) || !has(pageView.getLat())){
+                        continue;
+                    }
+                    JsonObjectBuilder geoJson = Json.createObjectBuilder()
+                            .add("type","Feature");
+                    JsonObjectBuilder geometry = Json.createObjectBuilder()
+                            .add("type","Point")
+                            .add("coordinates",Json.createArrayBuilder()
+                                    .add(new Double(pageView.getLon()))
+                                    .add(new Double(pageView.getLat())));
+                    geoJson.add("geometry",geometry);
+                    JsonObjectBuilder properties = Json.createObjectBuilder()
+                            .add("country",pageView.getCountry())
+                            .add("city",pageView.getCity())
+                            .add("page",stats.getViewId())
+                            .add("date",sdf.format(pageView.getDate().getTime()));
+                    geoJson.add("properties",properties);
+                    geoJsonLayer.add(geoJson);
+                }
+            }
+            pageViewsGeoJson = geoJsonLayer.build().toString();
+        }
+
+        return pageViewsGeoJson;
     }
 }
