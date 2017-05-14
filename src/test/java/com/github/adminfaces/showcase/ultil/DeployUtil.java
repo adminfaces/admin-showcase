@@ -36,7 +36,7 @@ public class DeployUtil {
         //WEB-INF
 
         war.addAsWebInfResource(new File(WEB_INF, "beans.xml"), "beans.xml");
-        war.addAsWebInfResource(new File(WEB_INF, "web.xml"), "web.xml");
+        war.addAsWebInfResource("test-web.xml", "web.xml");
         war.addAsWebInfResource("test-faces-config.xml", "faces-config.xml");
         war.addAsDirectory("sources");
 

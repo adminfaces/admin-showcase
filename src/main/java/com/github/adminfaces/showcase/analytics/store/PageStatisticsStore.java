@@ -3,6 +3,7 @@ package com.github.adminfaces.showcase.analytics.store;
 import com.github.adminfaces.showcase.analytics.model.PageStats;
 import com.github.adminfaces.showcase.analytics.model.PageView;
 import com.github.adminfaces.showcase.analytics.model.PageViewCountry;
+import net.bull.javamelody.Monitored;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import static com.github.adminfaces.template.util.Assert.has;
 /**
  * Created by rmpestano on 01/05/17.
  */
+@Monitored
 @Singleton
 @Startup
 public class PageStatisticsStore implements Serializable {
