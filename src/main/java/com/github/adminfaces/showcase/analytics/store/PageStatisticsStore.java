@@ -15,6 +15,7 @@ import javax.json.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,7 +56,7 @@ public class PageStatisticsStore implements Serializable {
                 List<PageView> pageViews = new ArrayList<>();
                 for (JsonValue value : pageViewsJson) {
                     JsonObject object = (JsonObject) value;
-                    if (object == null || object.get("ip") == null) {
+                    if (object == null || object.get("ip") == null || !viewedInCurrentYear(object.getString("date"))) {
                         continue;
                     }
                     PageView pageView = new PageView(object.getString("ip"));
@@ -77,6 +78,20 @@ public class PageStatisticsStore implements Serializable {
         }
         finally {
             log.info("Finished reading page statistics store.");
+        }
+    }
+
+    private boolean viewedInCurrentYear(String date) {
+        if(!has(date)) {
+            return false;
+        }
+        try {
+            Calendar viewedOn = Calendar.getInstance();
+            viewedOn.setTime(dateFormat.parse(date));
+            return viewedOn.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR);
+        } catch (ParseException e) {
+             log.warn("Could not parse page view date {}",date);
+            return false;
         }
     }
 
