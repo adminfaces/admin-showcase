@@ -39,10 +39,6 @@
 		<property name="browser">${browser}</property>
         <!--<property name="browser">chrome,firefox or internetExplorer</property>-->
         <property name="dimensions">1280x1024</property>
-         <property name="chromeDriverBinary">/home/PROCERGS.REDERS/rafael-pestano/Downloads/google-chrome-stable_current_amd64.deb</property>
-
-        <property name="args">--headless --disable-gpu</property>
-        <property name="chromeSwitches">--headless --disable-gpu</property>
 	</extension>
 
 </arquillian>

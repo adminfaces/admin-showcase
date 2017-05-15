@@ -127,6 +127,12 @@
                         <f:selectItem itemLabel="Rio" itemValue="Rio"/>
                     </p:selectOneButton>
 
+                    <p:outputLabel for="menuBtn" value="Menu Button"/>
+                    <p:menuButton value="layout mode"  id="menuBtn" styleClass="btn-primary">
+                        <p:menuitem value="Vertical"  icon="fa fa-list-ul"/>
+                        <p:menuitem value="Horizontal"  icon="fa fa-credit-card"/>
+                    </p:menuButton>
+
                     <p:outputLabel for="listbox" value="Listbox"/>
                     <p:selectOneListbox id="listbox">
                         <f:selectItem itemLabel="Sentinel" itemValue="Sentinel"/>
@@ -136,8 +142,8 @@
                         <f:selectItem itemLabel="Primus" itemValue="Primus"/>
                     </p:selectOneListbox>
 
-                    <p:spacer/>
-                    <p:spacer/>
+                    <p:outputLabel for="cmdBtn" value="Command Button"/>
+                    <p:commandButton value="Action"  id="cmdBtn" styleClass="btn-primary"/>
                 </p:panelGrid>
                 <p:commandButton id="dialog" value="Dialog" icon="ui-icon-extlink" styleClass="btn-success"
                                  type="button" onclick="PF('dlg').show()" style="margin-top:20px;display:block"/>

@@ -2,6 +2,7 @@ package com.github.adminfaces.showcase.analytics.store;
 
 import com.github.adminfaces.showcase.analytics.model.PageStats;
 import com.github.adminfaces.showcase.analytics.model.PageView;
+import com.github.adminfaces.showcase.analytics.model.PageViewCountry;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,10 @@ public class PageStatisticsStore implements Serializable {
     private final String pagesStatsFilePath = (System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getProperty("user.home")) + "/page-stats.json".replaceAll("//", "/");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private List<String> pageViewCountries;
+    private Map<Integer,Integer> totalVisitorsByMonth;//key is month and value is total
+    private Map<Integer,Integer> uniqueVisitorsByMonth;//key is month and value is total
+    private Map<String,Integer> totalVisitorsByCountry;
+
 
     @PostConstruct
     public void initStatistics() {
@@ -130,12 +135,20 @@ public class PageStatisticsStore implements Serializable {
             }
             FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
             loadPageViewCountries();
+            resetStatstistics();
         } catch (Exception e) {
             log.error("Could not persist statistics in path " + pagesStatsFilePath, e);
         } finally {
             log.info("{} page statistics updated in {} seconds.", numRecordsUpdated,(System.currentTimeMillis() - initial) / 1000.0d);
         }
 
+    }
+
+    //force statistics reload
+    private void resetStatstistics() {
+        totalVisitorsByCountry = null;
+        totalVisitorsByMonth = null;
+        uniqueVisitorsByMonth = null;
     }
 
     private void loadPageViewCountries() {
@@ -160,8 +173,26 @@ public class PageStatisticsStore implements Serializable {
         if (pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
             return false;
         }
-        String ipApiQuery = new StringBuilder("http://ip-api.com/json/")
-                .append(pageView.getIp()).toString();
+        StringBuilder ipApiQuery = new StringBuilder("http://ip-api.com/json/");
+        boolean result = false;
+        if(!pageView.getIp().contains(",")){//only one ip returned
+            ipApiQuery.append(pageView.getIp());
+            result = callIpApi(ipApiQuery.toString(),pageView);
+        } else { //multiple ips
+            String[] ips = ipApiQuery.toString().split(",");
+            for (String ip : ips) {
+                result = callIpApi(ip.toString()+ip,pageView);
+                if(result) {
+                   pageView.setIp(ip);
+                   break;
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean callIpApi(String ipApiQuery, PageView pageView) {
+
         HttpURLConnection connection = null;//using url connection to avoid (JavaEE 6) JAX-RS client api conflicts
         BufferedReader rd = null;
         try {
@@ -237,4 +268,63 @@ public class PageStatisticsStore implements Serializable {
         return pageStatsWithCountries;
     }
 
+    public Map<Integer,Integer> getTotalVisitorsByMonth() {
+        if(totalVisitorsByMonth == null){
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            totalVisitorsByMonth = new HashMap<>();
+            for (int i = 0; i <= 11; i++) {
+                totalVisitorsByMonth.put(i,0);
+            }
+            for (PageStats pageStats : pageStatisticsMap.values()) {
+                for (PageView pageView : pageStats.getPageViews()) {
+                    if(pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp())){
+                        continue;
+                    }
+                    int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
+                    totalVisitorsByMonth.put(pageViewMonth,totalVisitorsByMonth.get(pageViewMonth)+1);
+                }
+            }
+        }
+
+        return totalVisitorsByMonth;
+    }
+
+    public Map<Integer, Integer> getUniqueVisitorsByMonth() {
+        if(uniqueVisitorsByMonth == null) {
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            List<String> ipList = new ArrayList<>();
+            uniqueVisitorsByMonth = new HashMap<>();
+            for (int i = 0; i <= 11; i++) {
+                uniqueVisitorsByMonth.put(i,0);
+            }
+            for (PageStats pageStats : pageStatisticsMap.values()) {
+                for (PageView pageView : pageStats.getPageViews()) {
+                    if(pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp()) || ipList.contains(pageView.getIp())){
+                        continue;
+                    }
+                    int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
+                    ipList.add(pageView.getIp());
+                    uniqueVisitorsByMonth.put(pageViewMonth,uniqueVisitorsByMonth.get(pageViewMonth)+1);
+                }
+            }
+        }
+        return uniqueVisitorsByMonth;
+    }
+
+    public Map<String, Integer> getTotalVisitorsByCountry() {
+        if(totalVisitorsByCountry == null) {
+            totalVisitorsByCountry = new HashMap<>();
+            for (PageStats pageStats : pageStatisticsMap.values()) {
+                List<PageViewCountry> pageViewCountryList = pageStats.getPageViewCountryList();
+                for (PageViewCountry pageViewCountry : pageViewCountryList) {
+                    String country = pageViewCountry.getCountry();
+                    if(!totalVisitorsByCountry.containsKey(country)) {
+                        totalVisitorsByCountry.put(country,0);
+                    }
+                    totalVisitorsByCountry.put(country,totalVisitorsByCountry.get(country)+pageViewCountry.getViewCount());
+                }
+            }
+        }
+        return totalVisitorsByCountry;
+    }
 }
