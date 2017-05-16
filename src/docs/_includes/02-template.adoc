@@ -44,6 +44,7 @@ Admin template will bring the following transitive dependencies:
 [source,xml]
 ----
 include::{projectRoot}/pom.xml[tags=dep-admin-theme]
+</dependency>
 
 <dependency>
     <groupId>org.primefaces</groupId>

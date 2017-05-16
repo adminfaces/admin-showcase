@@ -173,6 +173,29 @@ include::{projectRoot}/pom.xml[tags=version]
 </dependency>
 ----
 
+== Avoiding theme caching
+
+Whenever the theme is updated to a new version in the project users may have to clear their browser caches to get the changes of the new theme.
+Sometimes a theme update even introduces conflicts and only clearing browser cache fixes them.
+
+To solve this issues you can use a theme classifier called *no-cache*:
+
+
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-theme</artifactId>
+    <version>1.0.0</version>
+    <classifier>no-cache</classifier>
+</dependency>
+
+This classifier *appends the theme version* to the name of theme so you need to change the theme name in *web.xml*:
+
+<context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>admin-1.0.0</param-value>
+</context-param>
+
+
 == Development
 
 To get your hands dirty with admin theme it is recommended to use <<Admin Designer>> in combination with http://brackets.io/[Brackets] or any tool that `compile less` files to css on save.

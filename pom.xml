@@ -67,8 +67,10 @@
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-theme</artifactId>
     <version>1.0.0-RC5</version>
-    </dependency>
 <!-- end::dep-admin-theme[] -->
+    <classifier>no-cache</classifier>
+</dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

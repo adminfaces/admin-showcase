@@ -47,6 +47,10 @@
         <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>
     </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>admin-1.0.0-RC5</param-value>
+    </context-param>
 
     <filter>
         <filter-name>javamelody</filter-name>
