@@ -60,7 +60,7 @@
                         target='_blank'&gt;Admin theme &lt;span style='font-weight: 600'&gt;
                         #{theme['theme.version']}&lt;/span&gt;&lt;/a&gt;
                 "/>
-            Powered by  <h:link value="AdminFaces - © 2017" id="admin-footer" href="#"  onclick="void(0);return false"  />
+            Powered by <h:link value="AdminFaces - © 2017" id="admin-footer" href="#" onclick="void(0);return false"/>
             <div class="pull-right " style="color: gray">
                 Page views: <h:link id="link-stats" href="#" onclick="void(0);return false"> <span
                     style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></h:link>
@@ -77,8 +77,8 @@
         <h:outputScript library="js" name="showcase.js" target="head"/>
 
         <script type="text/javascript">
-            if(isMobile()) {
-                $('a.ui-link').click(function() {
+            if (isMobile()) {
+                $('a.ui-link').click(function () {
                     $(this).prop('disabled', true);
                     showBar();
                 });
@@ -86,12 +86,12 @@
         </script>
 
         <style type="text/css">
-             /*remove this when issue #14 (from admin-template) becomes fixed*/
-
-            body ul.sidebar-menu>li {
-                overflow:visible;
-            }
-        </style>
+            /*remove this when issue #14 (from admin-template) becomes fixed*/
+            @media (min-width: 769px) {
+                body ul.sidebar-menu > li {
+                    overflow: visible;
+                }
+            }        </style>
     </ui:define>
 
 
