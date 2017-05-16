@@ -61,6 +61,18 @@
                     <p>You don't need to provide <code>link</code> attribute, in this case the component will use <b>current page url</b> (viewId) where component is declared.</p>
                </div>
 
+                 <div class="callout callout-danger">
+                    <h4>Tip!</h4>
+
+                    <p>You can <code>disable</code> breadCrumb in a specific page or in entire project:</p>
+
+                    <p>To disable in a page just use a ui:param like below:</p>
+                    <p><code>&lt;ui:param name="renderBreadCrumb" value="false" </code></p>
+                    <p>Declare the param in the section <code>head-end</code> of the facelets template.</p>
+                     <p>You can set the property <code>admin.renderBreadCrumb=false</code> in <a href="http://adminfaces-rpestano.rhcloud.com/showcase/docs/#configuration" target="_blank">admin-config.properties</a> to disable in <b>all pages</b>.</p>
+                </div>
+
+
             </div>
         </div>
     </ui:define>
