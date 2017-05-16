@@ -180,21 +180,27 @@ Sometimes a theme update even introduces conflicts and only clearing browser cac
 
 To solve this issues you can use a theme classifier called *no-cache*:
 
-
+.pom.xml
+[source,xml]
+----
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-theme</artifactId>
     <version>1.0.0</version>
     <classifier>no-cache</classifier>
 </dependency>
+----
 
-This classifier *appends the theme version* to the name of theme so you need to change the theme name in *web.xml*:
+This classifier *appends the theme version* to the name of theme so you need to change the theme name in web.xml:
 
+.web.xml
+[source,xml]
+----
 <context-param>
     <param-name>primefaces.THEME</param-name>
     <param-value>admin-1.0.0</param-value>
 </context-param>
-
+----
 
 == Development
 
