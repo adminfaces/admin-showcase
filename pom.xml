@@ -25,6 +25,8 @@
         <asciidoctorj.pdf.version>1.5.0-alpha.11</asciidoctorj.pdf.version>
         <asciidoctorj.version>1.5.4</asciidoctorj.version>
         <jruby.version>9.0.5.0</jruby.version>
+        <admin-theme.version>1.0.0-RC5</admin-theme.version>
+        <admin-template.version>1.0.0-RC5</admin-template.version>
     </properties>
 
     <dependencies>
@@ -53,7 +55,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-template</artifactId>
-    <version>1.0.0-RC5</version>
+    <version>${admin-template.version}</version>
 <!-- end::dep-admin-template[] -->
     <exclusions>
         <exclusion>
@@ -66,7 +68,7 @@
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-theme</artifactId>
-    <version>1.0.0-RC5</version>
+    <version>${admin-theme.version}</version>
 <!-- end::dep-admin-theme[] -->
     <classifier>no-cache</classifier>
 </dependency>
@@ -212,6 +214,13 @@
                         <resource>
                             <directory>${build.sourceDirectory}</directory>
                             <targetPath>sources</targetPath>
+                        </resource>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/test/resources</directory>
+                            <includes>
+                                <include>**/web.xml</include>
+                            </includes>
                         </resource>
                     </webResources>
                 </configuration>
