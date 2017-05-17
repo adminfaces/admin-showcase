@@ -221,9 +221,9 @@ public class PageStatisticsStore implements Serializable {
             ipApiQuery.append(pageView.getIp());
             result = callIpApi(ipApiQuery.toString(), pageView);
         } else { //multiple ips
-            String[] ips = ipApiQuery.toString().split(",");
+            String[] ips = pageView.getIp().toString().split(",");
             for (String ip : ips) {
-                result = callIpApi(ip.toString().replace(":",""), pageView);
+                result = callIpApi(ipApiQuery+ip.toString().replace(":",""), pageView);
                 if (result) {
                     pageView.setIp(ip);
                     break;
