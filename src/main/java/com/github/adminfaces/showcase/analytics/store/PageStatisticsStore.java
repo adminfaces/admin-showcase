@@ -36,9 +36,9 @@ public class PageStatisticsStore implements Serializable {
     private final String pagesStatsFilePath = (System.getenv("OPENSHIFT_DATA_DIR") != null ? System.getenv("OPENSHIFT_DATA_DIR") : System.getProperty("user.home")) + "/page-stats.json".replaceAll("//", "/");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private List<String> pageViewCountries;
-    private Map<Integer,Integer> totalVisitorsByMonth;//key is month and value is total
-    private Map<Integer,Integer> uniqueVisitorsByMonth;//key is month and value is total
-    private Map<String,Integer> totalVisitorsByCountry;
+    private Map<Integer, Integer> totalVisitorsByMonth;//key is month and value is total
+    private Map<Integer, Integer> uniqueVisitorsByMonth;//key is month and value is total
+    private Map<String, Integer> totalVisitorsByCountry;
 
 
     @PostConstruct
@@ -65,11 +65,11 @@ public class PageStatisticsStore implements Serializable {
                     Calendar c = Calendar.getInstance();
                     c.setTime(dateFormat.parse(object.getString("date")));
                     pageView.setDate(c);
-                    pageView.setCountry(object.containsKey("country") ? object.getString("country"):"");//backward compat
-                    pageView.setCity(object.containsKey("city") ? object.getString("city"):"");//backward compat
-                    pageView.setLat(object.containsKey("lat") ? object.getString("lat"):"");//backward compat
-                    pageView.setLon(object.containsKey("lon") ? object.getString("lon"):"");//backward compat
-                    pageView.setHasIpInfo(object.containsKey("hasIpInfo") ? object.getBoolean("hasIpInfo"):false);//backward compat
+                    pageView.setCountry(object.containsKey("country") ? object.getString("country") : "");//backward compat
+                    pageView.setCity(object.containsKey("city") ? object.getString("city") : "");//backward compat
+                    pageView.setLat(object.containsKey("lat") ? object.getString("lat") : "");//backward compat
+                    pageView.setLon(object.containsKey("lon") ? object.getString("lon") : "");//backward compat
+                    pageView.setHasIpInfo(object.containsKey("hasIpInfo") ? object.getBoolean("hasIpInfo") : false);//backward compat
                     pageViews.add(pageView);
                 }
                 pageStats.setPageViews(pageViews);
@@ -77,14 +77,13 @@ public class PageStatisticsStore implements Serializable {
             }
         } catch (Exception e) {
             log.warn("Could not load page statistics", e);
-        }
-        finally {
+        } finally {
             log.info("Finished reading page statistics store.");
         }
     }
 
     private boolean viewedInCurrentYear(String date) {
-        if(!has(date)) {
+        if (!has(date)) {
             return false;
         }
         try {
@@ -92,7 +91,7 @@ public class PageStatisticsStore implements Serializable {
             viewedOn.setTime(dateFormat.parse(date));
             return viewedOn.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR);
         } catch (ParseException e) {
-             log.warn("Could not parse page view date {}",date);
+            log.warn("Could not parse page view date {}", date);
             return false;
         }
     }
@@ -102,7 +101,7 @@ public class PageStatisticsStore implements Serializable {
         return pageStatisticsMap.get(viewId);
     }
 
-    public synchronized void addPageView(String viewId, PageView pageView) {
+    public void addPageView(String viewId, PageView pageView) {
         PageStats pageStats = pageStatisticsMap.get(viewId);
         if (pageStats == null) {
             pageStats = new PageStats(viewId);
@@ -117,21 +116,27 @@ public class PageStatisticsStore implements Serializable {
             return;//in some situation the schedule is called before statistics is initialized
         }
         long initial = System.currentTimeMillis();
+
+        List<PageStats> pageStatsCopy = null;
+        synchronized (pageStatisticsMap) {
+            List<PageStats> originalList = new ArrayList<>(pageStatisticsMap.values());
+            pageStatsCopy = copyPageStats(originalList);
+        }
         int numRecordsUpdated = 0;
         try {
             JsonArrayBuilder pageStatsJsonArray = Json.createArrayBuilder();
-            for (PageStats pageStats : pageStatisticsMap.values()) {
+            for (PageStats pageStats : pageStatsCopy) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
                 Iterator<PageView> pageViewIterator = pageStats.getPageViews().iterator();//iterator to avoid concurrent modification exc
-                while(pageViewIterator.hasNext()){
+                while (pageViewIterator.hasNext()) {
                     PageView pageView = pageViewIterator.next();
                     if (!has(pageView.getIp())) {
                         continue;
                     }
 
                     boolean infoUpdated = queryAdditionalPageViewInfo(pageView);
-                    if(infoUpdated) {
-                        numRecordsUpdated ++;
+                    if (infoUpdated) {
+                        numRecordsUpdated++;
                     }
                     JsonObject pageViewJsonObject = Json.createObjectBuilder()
                             .add("ip", pageView.getIp())
@@ -156,9 +161,30 @@ public class PageStatisticsStore implements Serializable {
         } catch (Exception e) {
             log.error("Could not persist statistics in path " + pagesStatsFilePath, e);
         } finally {
-            log.info("{} page statistics updated in {} seconds.", numRecordsUpdated,(System.currentTimeMillis() - initial) / 1000.0d);
+            log.info("{} page statistics updated in {} seconds.", numRecordsUpdated, (System.currentTimeMillis() - initial) / 1000.0d);
         }
+    }
 
+    private List<PageStats> copyPageStats(List<PageStats> originalList) {
+         List<PageStats> pageStatsCopy = new ArrayList<>(originalList.size());
+            for (PageStats stats : originalList) {
+                PageStats pageStats = new PageStats(stats.getViewId());
+                pageStats.setPageViews(new ArrayList<PageView>());
+                for (PageView originalView : stats.getPageViews()) {
+                    PageView pageViewCopy = new PageView(originalView.getIp());
+                    pageViewCopy.setCity(originalView.getCity());
+                    pageViewCopy.setCountry(originalView.getCountry());
+                    pageViewCopy.setDate(originalView.getDate());
+                    pageViewCopy.setHasIpInfo(originalView.getHasIpInfo());
+                    pageViewCopy.setIp(originalView.getIp());
+                    pageViewCopy.setLat(originalView.getLat());
+                    pageViewCopy.setLon(originalView.getLon());
+                    pageStats.addPageView(pageViewCopy);
+                }
+                pageStatsCopy.add(pageStats);
+            }
+
+            return pageStatsCopy;
     }
 
     //force statistics reload
@@ -169,12 +195,12 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private void loadPageViewCountries() {
-        if(pageViewCountries == null){
+        if (pageViewCountries == null) {
             pageViewCountries = new ArrayList<>();
         }
         for (PageStats pageStats : pageStatisticsMap.values()) {
             for (PageView pageView : pageStats.getPageViews()) {
-                if(has(pageView.getCountry()) && !pageViewCountries.contains(pageView.getCountry())){
+                if (has(pageView.getCountry()) && !pageViewCountries.contains(pageView.getCountry())) {
                     pageViewCountries.add(pageView.getCountry());
                 }
             }
@@ -182,7 +208,6 @@ public class PageStatisticsStore implements Serializable {
     }
 
     /**
-     *
      * @param pageView
      * @return boolean representing the info was updated
      */
@@ -192,16 +217,16 @@ public class PageStatisticsStore implements Serializable {
         }
         StringBuilder ipApiQuery = new StringBuilder("http://ip-api.com/json/");
         boolean result = false;
-        if(!pageView.getIp().contains(",")){//only one ip returned
+        if (!pageView.getIp().contains(",")) {//only one ip returned
             ipApiQuery.append(pageView.getIp());
-            result = callIpApi(ipApiQuery.toString(),pageView);
+            result = callIpApi(ipApiQuery.toString(), pageView);
         } else { //multiple ips
             String[] ips = ipApiQuery.toString().split(",");
             for (String ip : ips) {
-                result = callIpApi(ip.toString()+ip,pageView);
-                if(result) {
-                   pageView.setIp(ip);
-                   break;
+                result = callIpApi(ip.toString() + ip, pageView);
+                if (result) {
+                    pageView.setIp(ip);
+                    break;
                 }
             }
         }
@@ -258,12 +283,12 @@ public class PageStatisticsStore implements Serializable {
     }
 
 
-    public List<PageStats> allPageStats(){
+    public List<PageStats> allPageStats() {
         return new ArrayList<>(pageStatisticsMap.values());
     }
 
     public List<String> getPageViewCountries() {
-        if(pageViewCountries == null){
+        if (pageViewCountries == null) {
             loadPageViewCountries();
         }
         return pageViewCountries;
@@ -285,20 +310,20 @@ public class PageStatisticsStore implements Serializable {
         return pageStatsWithCountries;
     }
 
-    public Map<Integer,Integer> getTotalVisitorsByMonth() {
-        if(totalVisitorsByMonth == null){
+    public Map<Integer, Integer> getTotalVisitorsByMonth() {
+        if (totalVisitorsByMonth == null) {
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
             totalVisitorsByMonth = new HashMap<>();
             for (int i = 0; i <= 11; i++) {
-                totalVisitorsByMonth.put(i,0);
+                totalVisitorsByMonth.put(i, 0);
             }
             for (PageStats pageStats : pageStatisticsMap.values()) {
                 for (PageView pageView : pageStats.getPageViews()) {
-                    if(pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp())){
+                    if (pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp())) {
                         continue;
                     }
                     int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
-                    totalVisitorsByMonth.put(pageViewMonth,totalVisitorsByMonth.get(pageViewMonth)+1);
+                    totalVisitorsByMonth.put(pageViewMonth, totalVisitorsByMonth.get(pageViewMonth) + 1);
                 }
             }
         }
@@ -307,21 +332,21 @@ public class PageStatisticsStore implements Serializable {
     }
 
     public Map<Integer, Integer> getUniqueVisitorsByMonth() {
-        if(uniqueVisitorsByMonth == null) {
+        if (uniqueVisitorsByMonth == null) {
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
             List<String> ipList = new ArrayList<>();
             uniqueVisitorsByMonth = new HashMap<>();
             for (int i = 0; i <= 11; i++) {
-                uniqueVisitorsByMonth.put(i,0);
+                uniqueVisitorsByMonth.put(i, 0);
             }
             for (PageStats pageStats : pageStatisticsMap.values()) {
                 for (PageView pageView : pageStats.getPageViews()) {
-                    if(pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp()) || ipList.contains(pageView.getIp())){
+                    if (pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp()) || ipList.contains(pageView.getIp())) {
                         continue;
                     }
                     int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
                     ipList.add(pageView.getIp());
-                    uniqueVisitorsByMonth.put(pageViewMonth,uniqueVisitorsByMonth.get(pageViewMonth)+1);
+                    uniqueVisitorsByMonth.put(pageViewMonth, uniqueVisitorsByMonth.get(pageViewMonth) + 1);
                 }
             }
         }
@@ -329,16 +354,16 @@ public class PageStatisticsStore implements Serializable {
     }
 
     public Map<String, Integer> getTotalVisitorsByCountry() {
-        if(totalVisitorsByCountry == null) {
+        if (totalVisitorsByCountry == null) {
             totalVisitorsByCountry = new HashMap<>();
             for (PageStats pageStats : pageStatisticsMap.values()) {
                 List<PageViewCountry> pageViewCountryList = pageStats.getPageViewCountryList();
                 for (PageViewCountry pageViewCountry : pageViewCountryList) {
                     String country = pageViewCountry.getCountry();
-                    if(!totalVisitorsByCountry.containsKey(country)) {
-                        totalVisitorsByCountry.put(country,0);
+                    if (!totalVisitorsByCountry.containsKey(country)) {
+                        totalVisitorsByCountry.put(country, 0);
                     }
-                    totalVisitorsByCountry.put(country,totalVisitorsByCountry.get(country)+pageViewCountry.getViewCount());
+                    totalVisitorsByCountry.put(country, totalVisitorsByCountry.get(country) + pageViewCountry.getViewCount());
                 }
             }
         }
