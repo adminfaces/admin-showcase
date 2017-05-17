@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import static com.github.adminfaces.template.util.Assert.has;
 
@@ -111,6 +112,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     @Schedule(hour = "*/1", persistent = false)
+    @AccessTimeout(value=2, unit = TimeUnit.MINUTES)
     public void persistPageStatistics() {
         if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
