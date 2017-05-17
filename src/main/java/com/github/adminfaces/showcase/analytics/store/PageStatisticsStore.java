@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import javax.annotation.PostConstruct;
 import javax.ejb.*;
 import javax.json.*;
@@ -17,7 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
+
 
 import static com.github.adminfaces.template.util.Assert.has;
 
@@ -28,7 +29,6 @@ import static com.github.adminfaces.template.util.Assert.has;
 @Startup
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @TransactionManagement(TransactionManagementType.BEAN)
-@Lock(LockType.READ)
 public class PageStatisticsStore implements Serializable {
 
     private Map<String, PageStats> pageStatisticsMap; //viewId by statistics map
@@ -112,7 +112,6 @@ public class PageStatisticsStore implements Serializable {
     }
 
     @Schedule(hour = "*/1", persistent = false)
-    @AccessTimeout(value=2, unit = TimeUnit.MINUTES)
     public void persistPageStatistics() {
         if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
