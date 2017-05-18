@@ -127,13 +127,10 @@ public class PageStatisticsStore implements Serializable {
             JsonArrayBuilder pageStatsJsonArray = Json.createArrayBuilder();
             for (PageStats pageStats : pageStatsCopy) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
-                Iterator<PageView> pageViewIterator = pageStats.getPageViews().iterator();//iterator to avoid concurrent modification exc
-                while (pageViewIterator.hasNext()) {
-                    PageView pageView = pageViewIterator.next();
+                for (PageView pageView : pageStats.getPageViews()) {
                     if (!has(pageView.getIp())) {
                         continue;
                     }
-
                     boolean infoUpdated = queryAdditionalPageViewInfo(pageView);
                     if (infoUpdated) {
                         numRecordsUpdated++;
