@@ -271,7 +271,7 @@ public class PageStatisticsStore implements Serializable {
                 Thread.sleep(250);//sleep to not exceed query limits (150 per minute)
                 return true;
             } else if (jsonObject.containsKey("message")) {
-                log.warn("IpApi query failed with message: "+jsonObject.getString("message"));
+                log.warn("IpApi query {} failed with message: "+jsonObject.getString("message"),ipApiQuery);
             }
 
         } catch (Exception e) {
