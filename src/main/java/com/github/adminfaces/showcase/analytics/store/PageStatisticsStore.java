@@ -110,7 +110,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour = "*/1", persistent = false)
+    @Schedule(hour = "*/1",persistent = false)
     public void persistPageStatistics() {
         if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
@@ -152,6 +152,15 @@ public class PageStatisticsStore implements Serializable {
                         .add("pageViews", pageViewsJsonArray.build()).build();
                 pageStatsJsonArray.add(pageStatsJson);
             }
+
+            if (numRecordsUpdated > 0) {
+                synchronized (pageStatisticsMap) {
+                    for (PageStats pageStats : pageStatsCopy) {
+                        pageStatisticsMap.put(pageStats.getViewId(),pageStats);
+                    }
+                }
+            }
+
             FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
             loadPageViewCountries();
             resetStatstistics();
@@ -163,25 +172,25 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private List<PageStats> copyPageStats(List<PageStats> originalList) {
-         List<PageStats> pageStatsCopy = new ArrayList<>(originalList.size());
-            for (PageStats stats : originalList) {
-                PageStats pageStats = new PageStats(stats.getViewId());
-                pageStats.setPageViews(new ArrayList<PageView>());
-                for (PageView originalView : stats.getPageViews()) {
-                    PageView pageViewCopy = new PageView(originalView.getIp());
-                    pageViewCopy.setCity(originalView.getCity());
-                    pageViewCopy.setCountry(originalView.getCountry());
-                    pageViewCopy.setDate(originalView.getDate());
-                    pageViewCopy.setHasIpInfo(originalView.getHasIpInfo());
-                    pageViewCopy.setIp(originalView.getIp());
-                    pageViewCopy.setLat(originalView.getLat());
-                    pageViewCopy.setLon(originalView.getLon());
-                    pageStats.addPageView(pageViewCopy);
-                }
-                pageStatsCopy.add(pageStats);
+        List<PageStats> pageStatsCopy = new ArrayList<>(originalList.size());
+        for (PageStats stats : originalList) {
+            PageStats pageStats = new PageStats(stats.getViewId());
+            pageStats.setPageViews(new ArrayList<PageView>());
+            for (PageView originalView : stats.getPageViews()) {
+                PageView pageViewCopy = new PageView(originalView.getIp());
+                pageViewCopy.setCity(originalView.getCity());
+                pageViewCopy.setCountry(originalView.getCountry());
+                pageViewCopy.setDate(originalView.getDate());
+                pageViewCopy.setHasIpInfo(originalView.getHasIpInfo());
+                pageViewCopy.setIp(originalView.getIp());
+                pageViewCopy.setLat(originalView.getLat());
+                pageViewCopy.setLon(originalView.getLon());
+                pageStats.addPageView(pageViewCopy);
             }
+            pageStatsCopy.add(pageStats);
+        }
 
-            return pageStatsCopy;
+        return pageStatsCopy;
     }
 
     //force statistics reload
@@ -220,7 +229,7 @@ public class PageStatisticsStore implements Serializable {
         } else { //multiple ips
             String[] ips = pageView.getIp().toString().split(",");
             for (String ip : ips) {
-                result = callIpApi(ipApiQuery+ip.toString().trim(), pageView);
+                result = callIpApi(ipApiQuery + ip.toString().trim(), pageView);
                 if (result) {
                     pageView.setIp(ip);
                     break;
