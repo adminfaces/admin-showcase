@@ -49,7 +49,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>admin-1.0.0-20170518.014916-436</param-value>
+        <param-value>admin-1.0.0-SNAPSHOT</param-value>
     </context-param>
 
     <filter>
