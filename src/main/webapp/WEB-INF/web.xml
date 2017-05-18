@@ -50,7 +50,7 @@
             <description>The threshold size in bytes. Must be a number between 0 and 9999. Defaults to 150.
             </description>
             <param-name>threshold</param-name>
-            <param-value>300</param-value>
+            <param-value>200</param-value>
         </init-param>
     </filter>
     <filter-mapping>
