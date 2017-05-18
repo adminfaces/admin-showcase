@@ -26,7 +26,7 @@
         <asciidoctorj.version>1.5.4</asciidoctorj.version>
         <jruby.version>9.0.5.0</jruby.version>
         <admin-theme.version>1.0.0-RC5</admin-theme.version>
-        <admin-template.version>1.0.0-RC5</admin-template.version>
+        <admin-template.version>1.0.0-20170518.014916-436</admin-template.version>
     </properties>
 
     <dependencies>
