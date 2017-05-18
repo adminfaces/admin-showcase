@@ -159,11 +159,12 @@ public class PageStatisticsStore implements Serializable {
                         pageStatisticsMap.put(pageStats.getViewId(), pageStats);
                     }
                 }
+
+                FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
+                loadPageViewCountries();
+                resetStatstistics();
             }
 
-            FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
-            loadPageViewCountries();
-            resetStatstistics();
         } catch (Exception e) {
             log.error("Could not persist statistics in path " + pagesStatsFilePath, e);
         } finally {
