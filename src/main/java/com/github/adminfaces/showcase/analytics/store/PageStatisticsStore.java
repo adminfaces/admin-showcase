@@ -223,7 +223,7 @@ public class PageStatisticsStore implements Serializable {
         } else { //multiple ips
             String[] ips = pageView.getIp().toString().split(",");
             for (String ip : ips) {
-                result = callIpApi(ipApiQuery+ip.toString().replace(":",""), pageView);
+                result = callIpApi(ipApiQuery+ip.toString().trim(), pageView);
                 if (result) {
                     pageView.setIp(ip);
                     break;
