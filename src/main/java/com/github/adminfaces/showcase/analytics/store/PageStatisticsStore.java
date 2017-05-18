@@ -110,7 +110,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour = "*/1",persistent = false)
+    @Schedule(hour = "*/1", persistent = false)
     public void persistPageStatistics() {
         if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
@@ -156,7 +156,7 @@ public class PageStatisticsStore implements Serializable {
             if (numRecordsUpdated > 0) {
                 synchronized (pageStatisticsMap) {
                     for (PageStats pageStats : pageStatsCopy) {
-                        pageStatisticsMap.put(pageStats.getViewId(),pageStats);
+                        pageStatisticsMap.put(pageStats.getViewId(), pageStats);
                     }
                 }
             }
@@ -269,6 +269,8 @@ public class PageStatisticsStore implements Serializable {
                 pageView.setHasIpInfo(true);
                 Thread.sleep(250);//sleep to not exceed query limits (150 per minute)
                 return true;
+            } else if (jsonObject.containsKey("message")) {
+                log.warn("IpApi query failed with message: "+jsonObject.getString("message"));
             }
 
         } catch (Exception e) {
