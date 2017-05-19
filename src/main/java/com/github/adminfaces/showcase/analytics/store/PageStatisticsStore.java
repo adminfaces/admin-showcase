@@ -271,6 +271,10 @@ public class PageStatisticsStore implements Serializable {
                 Thread.sleep(250);//sleep to not exceed query limits (150 per minute)
                 return true;
             } else if (jsonObject.containsKey("message")) {
+                if(jsonObject.getString("message").contains("private range")) {
+                    pageView.setHasIpInfo(true);
+                    return true;
+                }
                 log.warn("IpApi query {} failed with message: "+jsonObject.getString("message"),ipApiQuery);
             }
 

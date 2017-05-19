@@ -104,6 +104,7 @@ public class AnalyticsMB implements Serializable {
     }
 
     public void onCountrySelect(SelectEvent event) {
+        initPageStatsList();
         String selectedCountry = event.getObject().toString();
         List<PageStats> pageStatsByCountry = new ArrayList<>();
         for (PageStats stats : pageStatsList) {
