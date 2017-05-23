@@ -244,7 +244,9 @@ public class AnalyticsMB implements Serializable {
         if(pageViewsGeoJson == null) {
             JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
             for (PageStats stats : analyticsStore.allPageStats()) {
-                for (PageView pageView : stats.getPageViews()) {
+                Iterator<PageView> pageViewsIterator = stats.getPageViews().iterator();
+                while (pageViewsIterator.hasNext()) {
+                    PageView pageView = pageViewsIterator.next();
                     if(!has(pageView.getCountry()) || !has(pageView.getLat())){
                         continue;
                     }
