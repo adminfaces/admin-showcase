@@ -268,7 +268,7 @@ public class PageStatisticsStore implements Serializable {
                 pageView.setLat(jsonObject.getJsonNumber("lat").toString());
                 pageView.setLon(jsonObject.getJsonNumber("lon").toString());
                 pageView.setHasIpInfo(true);
-                Thread.sleep(250);//sleep to not exceed query limits (150 per minute)
+                Thread.sleep(350);//sleep to not exceed query limits (150 per minute)
                 return true;
             } else if (jsonObject.containsKey("message")) {
                 if(jsonObject.getString("message").contains("private range")) {
