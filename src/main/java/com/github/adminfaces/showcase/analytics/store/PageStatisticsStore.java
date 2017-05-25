@@ -127,13 +127,10 @@ public class PageStatisticsStore implements Serializable {
             JsonArrayBuilder pageStatsJsonArray = Json.createArrayBuilder();
             for (PageStats pageStats : pageStatsCopy) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
-                Iterator<PageView> pageViewIterator = pageStats.getPageViews().iterator();//iterator to avoid concurrent modification exc
-                while (pageViewIterator.hasNext()) {
-                    PageView pageView = pageViewIterator.next();
+                for (PageView pageView : pageStats.getPageViews()) {
                     if (!has(pageView.getIp())) {
                         continue;
                     }
-
                     boolean infoUpdated = queryAdditionalPageViewInfo(pageView);
                     if (infoUpdated) {
                         numRecordsUpdated++;
@@ -155,9 +152,19 @@ public class PageStatisticsStore implements Serializable {
                         .add("pageViews", pageViewsJsonArray.build()).build();
                 pageStatsJsonArray.add(pageStatsJson);
             }
-            FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
-            loadPageViewCountries();
-            resetStatstistics();
+
+            if (numRecordsUpdated > 0) {
+                synchronized (pageStatisticsMap) {
+                    for (PageStats pageStats : pageStatsCopy) {
+                        pageStatisticsMap.put(pageStats.getViewId(), pageStats);
+                    }
+                }
+
+                FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
+                loadPageViewCountries();
+                resetStatstistics();
+            }
+
         } catch (Exception e) {
             log.error("Could not persist statistics in path " + pagesStatsFilePath, e);
         } finally {
@@ -166,25 +173,25 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private List<PageStats> copyPageStats(List<PageStats> originalList) {
-         List<PageStats> pageStatsCopy = new ArrayList<>(originalList.size());
-            for (PageStats stats : originalList) {
-                PageStats pageStats = new PageStats(stats.getViewId());
-                pageStats.setPageViews(new ArrayList<PageView>());
-                for (PageView originalView : stats.getPageViews()) {
-                    PageView pageViewCopy = new PageView(originalView.getIp());
-                    pageViewCopy.setCity(originalView.getCity());
-                    pageViewCopy.setCountry(originalView.getCountry());
-                    pageViewCopy.setDate(originalView.getDate());
-                    pageViewCopy.setHasIpInfo(originalView.getHasIpInfo());
-                    pageViewCopy.setIp(originalView.getIp());
-                    pageViewCopy.setLat(originalView.getLat());
-                    pageViewCopy.setLon(originalView.getLon());
-                    pageStats.addPageView(pageViewCopy);
-                }
-                pageStatsCopy.add(pageStats);
+        List<PageStats> pageStatsCopy = new ArrayList<>(originalList.size());
+        for (PageStats stats : originalList) {
+            PageStats pageStats = new PageStats(stats.getViewId());
+            pageStats.setPageViews(new ArrayList<PageView>());
+            for (PageView originalView : stats.getPageViews()) {
+                PageView pageViewCopy = new PageView(originalView.getIp());
+                pageViewCopy.setCity(originalView.getCity());
+                pageViewCopy.setCountry(originalView.getCountry());
+                pageViewCopy.setDate(originalView.getDate());
+                pageViewCopy.setHasIpInfo(originalView.getHasIpInfo());
+                pageViewCopy.setIp(originalView.getIp());
+                pageViewCopy.setLat(originalView.getLat());
+                pageViewCopy.setLon(originalView.getLon());
+                pageStats.addPageView(pageViewCopy);
             }
+            pageStatsCopy.add(pageStats);
+        }
 
-            return pageStatsCopy;
+        return pageStatsCopy;
     }
 
     //force statistics reload
@@ -223,7 +230,7 @@ public class PageStatisticsStore implements Serializable {
         } else { //multiple ips
             String[] ips = pageView.getIp().toString().split(",");
             for (String ip : ips) {
-                result = callIpApi(ipApiQuery+ip.toString().trim(), pageView);
+                result = callIpApi(ipApiQuery + ip.toString().trim(), pageView);
                 if (result) {
                     pageView.setIp(ip);
                     break;
@@ -261,8 +268,14 @@ public class PageStatisticsStore implements Serializable {
                 pageView.setLat(jsonObject.getJsonNumber("lat").toString());
                 pageView.setLon(jsonObject.getJsonNumber("lon").toString());
                 pageView.setHasIpInfo(true);
-                Thread.sleep(250);//sleep to not exceed query limits (150 per minute)
+                Thread.sleep(350);//sleep to not exceed query limits (150 per minute)
                 return true;
+            } else if (jsonObject.containsKey("message")) {
+                if(jsonObject.getString("message").contains("private range")) {
+                    pageView.setHasIpInfo(true);
+                    return true;
+                }
+                log.warn("IpApi query {} failed with message: "+jsonObject.getString("message"),ipApiQuery);
             }
 
         } catch (Exception e) {

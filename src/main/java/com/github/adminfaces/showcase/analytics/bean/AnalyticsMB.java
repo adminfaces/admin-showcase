@@ -104,6 +104,7 @@ public class AnalyticsMB implements Serializable {
     }
 
     public void onCountrySelect(SelectEvent event) {
+        initPageStatsList();
         String selectedCountry = event.getObject().toString();
         List<PageStats> pageStatsByCountry = new ArrayList<>();
         for (PageStats stats : pageStatsList) {
@@ -243,7 +244,9 @@ public class AnalyticsMB implements Serializable {
         if(pageViewsGeoJson == null) {
             JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
             for (PageStats stats : analyticsStore.allPageStats()) {
-                for (PageView pageView : stats.getPageViews()) {
+                Iterator<PageView> pageViewsIterator = stats.getPageViews().iterator();
+                while (pageViewsIterator.hasNext()) {
+                    PageView pageView = pageViewsIterator.next();
                     if(!has(pageView.getCountry()) || !has(pageView.getLat())){
                         continue;
                     }
