@@ -157,7 +157,7 @@
                 </p:panelGrid>
                 <p:separator/>
                 <p:commandButton styleClass="btn-primary pull-right" value="Login" update="@form"
-                                 actionListener="#{userLoginMB.login}"
+                                 action="#{userLoginMB.login()}" process="@this"
                                  ignoreAutoUpdate="true"
                                  oncomplete="handleLoginRequest(xhr, status, args)"/>
             </h:form>
