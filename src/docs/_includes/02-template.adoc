@@ -28,12 +28,12 @@ NOTE: Most of the above features can be disabled via <<Configuration,configurati
 
 Add the following dependency to your classpath:
 
-[source,xml]
+[source,xml,subs="attributes+"]
 ----
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-template</artifactId>
-include::{projectRoot}/pom.xml[tags=version]
+    <version>{docVersion}</version>
 </dependency>
 ----
 
@@ -41,15 +41,18 @@ include::{projectRoot}/pom.xml[tags=version]
 ====
 Admin template will bring the following transitive dependencies:
 
-[source,xml]
+[source,xml,subs="attributes+"]
 ----
-include::{projectRoot}/pom.xml[tags=dep-admin-theme]
+<dependency>
+    <groupId>com.github.adminfaces</groupId>
+    <artifactId>admin-template</artifactId>
+    <version>{docVersion}</version>
 </dependency>
 
 <dependency>
     <groupId>org.primefaces</groupId>
     <artifactId>primefaces</artifactId>
-    <version>6.0</version>
+    <version>6.1</version>
 </dependency>
 
 <dependency>
@@ -384,3 +387,19 @@ label.optimistic.click-here= Click here to reload the updated record from databa
 ----
 
 To override labels just provide a file named _admin.properties_ in your application `resources` folder.
+
+== Snapshots
+
+Template `Snapshots` are published to https://oss.sonatype.org/content/repositories/snapshots/com/github/adminfaces/admin-template[maven central^] on each commit, to use it just declare the repository below on your `pom.xml`:
+
+[source,xml]
+----
+<repositories>
+    <repository>
+        <snapshots/>
+        <id>snapshots</id>
+        <name>libs-snapshot</name>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+</repositories>
+----
