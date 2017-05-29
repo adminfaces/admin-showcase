@@ -124,20 +124,18 @@
             <artifactId>arquillian-graphene</artifactId>
             <scope>test</scope>
             <type>pom</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.arquillian.universe</groupId>
-                    <artifactId>arquillian-drone</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-
         <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-drone-webdriver-depchain</artifactId>
-            <version>2.1.0.Alpha1</version>
+            <groupId>org.jboss.arquillian.graphene</groupId>
+            <artifactId>arquillian-browser-screenshooter</artifactId>
             <scope>test</scope>
-            <type>pom</type>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -153,19 +151,20 @@
             <dependency>
                 <groupId>org.jboss.arquillian.selenium</groupId>
                 <artifactId>selenium-bom</artifactId>
-                <version>3.0.1</version>
+                <version>3.4.0</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.arquillian</groupId>
                 <artifactId>arquillian-universe</artifactId>
-                <version>1.0.0.Alpha5</version>
+                <version>1.1.13.5</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 
     <build>
         <finalName>showcase</finalName>

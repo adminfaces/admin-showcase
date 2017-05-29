@@ -41,4 +41,11 @@
         <property name="dimensions">1280x1024</property>
 	</extension>
 
+     <extension qualifier="screenshooter">
+        <property name="takeOnEveryAction">true</property>
+        <property name="takeBeforeTest">false</property>
+        <property name="takeAfterTest">false</property>
+        <property name="takeWhenTestFailed">true</property>
+    </extension>
+
 </arquillian>
