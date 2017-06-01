@@ -180,6 +180,7 @@ admin.enableSlideMenu=true <10>
 admin.enableRipple=true <11>
 admin.rippleElements= .ripplelink,button.ui-button,.ui-selectlistbox-item,.ui-multiselectlistbox-item,.ui-selectonemenu-label,.ui-selectcheckboxmenu,\
 .ui-autocomplete-dropdown, .ui-autocomplete-item ... (the list goes on) <12>
+admin.skin=skin-blue <13>
 
 ----
 <1> login page location (relative to webapp). It you only be used if you configure <<Admin Session>>.
@@ -194,6 +195,7 @@ admin.rippleElements= .ripplelink,button.ui-button,.ui-selectlistbox-item,.ui-mu
 <10> If true will make left menu touch enable (can be closed or opened via touch)
 <11> When true it will create a http://materializecss.com/waves.html#![wave/ripple effect^] on elements specified by `rippleElements`.
 <12> A list of comma separated list of (jquery) selector which elements will be affected by ripple effect.
+<13> Default template skin
 
 IMPORTANT: You don't need to declare all values in your admin-config.properties, you can specify only the ones you need in order to change.
 
