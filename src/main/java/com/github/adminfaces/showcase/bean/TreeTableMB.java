@@ -21,6 +21,9 @@ public class TreeTableMB implements Serializable {
 
     private Document selectedDocument;
 
+
+    private TreeNode[] selectedNodes;
+
     @Inject
     private DocumentService service;
 
@@ -31,6 +34,14 @@ public class TreeTableMB implements Serializable {
 
     public TreeNode getRoot() {
         return root;
+    }
+
+    public TreeNode[] getSelectedNodes() {
+        return selectedNodes;
+    }
+
+    public void setSelectedNodes(TreeNode[] selectedNodes1) {
+        this.selectedNodes = selectedNodes1;
     }
 
     public void setService(DocumentService service) {

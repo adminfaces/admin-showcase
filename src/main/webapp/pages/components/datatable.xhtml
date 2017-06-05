@@ -41,131 +41,165 @@
     <ui:define name="body">
         <adm:breadcrumb title="Datatable"/>
         <p:panel styleClass="box-info" header="Datatable">
-            <h:form>
-                <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{car.id}"
-                             emptyMessage="No cars found with given criteria"
-                             filteredValue="#{datatableMB.filteredCars}">
+            <h:form prependId="false">
 
-                    <f:facet name="header">
-                        <p:outputPanel>
-                            <h:outputText value="Search all fields:"/>
-                            <p:spacer height="10"/>
-                            <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:150px"
-                                         placeholder="Enter keyword"/>
-                        </p:outputPanel>
-                    </f:facet>
+                <div id="datatable">
+                    <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{car.id}"
+                                 emptyMessage="No cars found with given criteria"
+                                 filteredValue="#{datatableMB.filteredCars}">
 
-                    <p:column width="5%" selectionMode="multiple"
-                              styleClass="align-center"
-                              priority="1"/>
-
-                    <p:column filterBy="#{car.id}" sortBy="#{car.id}" headerText="Id" footerText="contains"
-                              filterMatchMode="contains" priority="1">
-                        <p:link value="#{car.id}" outcome="/index.xhtml" >
-                            <f:param name="id" value="#{car.id}"/>
-                        </p:link>
-                    </p:column>
-
-                    <p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
-                              priority="2">
-                        <f:facet name="filter">
-                            <p:spinner onchange="PF('carsTable').filter()" styleClass="year-spinner">
-                                <f:converter converterId="javax.faces.Integer"/>
-                            </p:spinner>
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Search all fields:"/>
+                                <p:spacer height="10"/>
+                                <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:150px"
+                                             placeholder="Enter keyword"/>
+                            </p:outputPanel>
                         </f:facet>
-                        <h:outputText value="#{car.year}"/>
-                    </p:column>
 
-                    <p:column filterBy="#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact"
-                              priority="2">
-                        <f:facet name="filter">
-                            <p:selectOneMenu onchange="PF('carsTable').filter()">
-                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                                <f:selectItems value="#{datatableMB.brands}"/>
-                            </p:selectOneMenu>
+                        <p:column width="5%" selectionMode="multiple"
+                                  styleClass="align-center"
+                                  priority="1"/>
+
+                        <p:column filterBy="#{car.id}" sortBy="#{car.id}" headerText="Id" footerText="contains"
+                                  filterMatchMode="contains" priority="1">
+                            <p:link value="#{car.id}" outcome="/index.xhtml">
+                                <f:param name="id" value="#{car.id}"/>
+                            </p:link>
+                        </p:column>
+
+                        <p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
+                                  priority="2">
+                            <f:facet name="filter">
+                                <p:spinner onchange="PF('carsTable').filter()" styleClass="year-spinner">
+                                    <f:converter converterId="javax.faces.Integer"/>
+                                </p:spinner>
+                            </f:facet>
+                            <h:outputText value="#{car.year}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{car.brand}" headerText="Brand" footerText="exact" filterMatchMode="exact"
+                                  priority="2">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('carsTable').filter()">
+                                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItems value="#{datatableMB.brands}"/>
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{car.brand}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{car.color}" headerText="Color" footerText="in" filterMatchMode="in"
+                                  priority="3">
+                            <f:facet name="filter">
+                                <p:selectCheckboxMenu label="Colors" onchange="PF('carsTable').filter()"
+                                                      panelStyle="width:125px" scrollHeight="150">
+                                    <f:selectItems value="#{datatableMB.colors}"/>
+                                </p:selectCheckboxMenu>
+                            </f:facet>
+                            <h:outputText value="#{car.color}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{car.sold}" headerText="Status" footerText="equals"
+                                  filterMatchMode="equals"
+                                  priority="3">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('carsTable').filter()">
+                                    <f:converter converterId="javax.faces.Boolean"/>
+                                    <f:selectItem itemLabel="All" itemValue=""/>
+                                    <f:selectItem itemLabel="Sold" itemValue="true"/>
+                                    <f:selectItem itemLabel="Sale" itemValue="false"/>
+                                </p:selectOneButton>
+                            </f:facet>
+                            <h:outputText value="#{car.sold ? 'Sold': 'Sale'}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{car.price}" headerText="Price" footerText="custom (min)"
+                                  filterFunction="#{datatableMB.filterByPrice}" priority="2">
+                            <h:outputText value="#{car.price}">
+                                <f:convertNumber currencySymbol="$" type="currency"/>
+                            </h:outputText>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+                <p:separator/>
+
+                <div id="datatable-single">
+                    <p:dataTable id="radioDT" var="car" value="#{datatableMB.cars}" paginator="true"
+                                 paginatorPosition="bottom"
+                                 selection="#{datatableMB.selectedCar}" rowKey="#{car.id}" rows="5">
+                        <f:facet name="header">
+                            RadioButton
                         </f:facet>
-                        <h:outputText value="#{car.brand}"/>
-                    </p:column>
+                        <p:column selectionMode="single" style="width: 42px"
+                                  styleClass="align-center"
+                                  priority="1"/>
 
-                    <p:column filterBy="#{car.color}" headerText="Color" footerText="in" filterMatchMode="in"
-                              priority="3">
-                        <f:facet name="filter">
-                            <p:selectCheckboxMenu label="Colors" onchange="PF('carsTable').filter()"
-                                                  panelStyle="width:125px" scrollHeight="150">
-                                <f:selectItems value="#{datatableMB.colors}"/>
-                            </p:selectCheckboxMenu>
-                        </f:facet>
-                        <h:outputText value="#{car.color}"/>
-                    </p:column>
-
-                    <p:column filterBy="#{car.sold}" headerText="Status" footerText="equals" filterMatchMode="equals"
-                              priority="3">
-                        <f:facet name="filter">
-                            <p:selectOneButton onchange="PF('carsTable').filter()">
-                                <f:converter converterId="javax.faces.Boolean"/>
-                                <f:selectItem itemLabel="All" itemValue=""/>
-                                <f:selectItem itemLabel="Sold" itemValue="true"/>
-                                <f:selectItem itemLabel="Sale" itemValue="false"/>
-                            </p:selectOneButton>
-                        </f:facet>
-                        <h:outputText value="#{car.sold ? 'Sold': 'Sale'}"/>
-                    </p:column>
-
-                    <p:column filterBy="#{car.price}" headerText="Price" footerText="custom (min)"
-                              filterFunction="#{datatableMB.filterByPrice}" priority="2">
-                        <h:outputText value="#{car.price}">
-                            <f:convertNumber currencySymbol="$" type="currency"/>
-                        </h:outputText>
-                    </p:column>
-                </p:dataTable>
+                        <p:column headerText="Id" sortBy="#{car.id}">
+                            <h:outputText value="#{car.id}" priority="1"/>
+                        </p:column>
+                        <p:column headerText="Year">
+                            <h:outputText value="#{car.year}" priority="2"/>
+                        </p:column>
+                        <p:column headerText="Brand">
+                            <h:outputText value="#{car.brand}"/>
+                        </p:column>
+                        <p:column headerText="Color">
+                            <h:outputText value="#{car.color}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
 
                 <p:separator/>
 
-                <p:dataTable id="radioDT" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
-                             selection="#{datatableMB.selectedCar}" rowKey="#{car.id}" rows="5">
-                    <f:facet name="header">
-                        RadioButton
-                    </f:facet>
-                    <p:column selectionMode="single" style="width: 42px"
-                              styleClass="align-center"
-                              priority="1"/>
-
-                    <p:column headerText="Id" sortBy="#{car.id}">
-                        <h:outputText value="#{car.id}" priority="1"/>
-                    </p:column>
-                    <p:column headerText="Year">
-                        <h:outputText value="#{car.year}" priority="2"/>
-                    </p:column>
-                    <p:column headerText="Brand">
-                        <h:outputText value="#{car.brand}"/>
-                    </p:column>
-                    <p:column headerText="Color">
-                        <h:outputText value="#{car.color}"/>
-                    </p:column>
-                </p:dataTable>
+                <div id="treetable">
+                    <p:treeTable value="#{treeTableMB.root}" selectionMode="single"
+                                 var="document" paginator="true" paginatorPosition="bottom" rows="2">
+                        <f:facet name="header">
+                            Document Viewer
+                        </f:facet>
+                        <p:column headerText="Name" sortBy="#{document.name}">
+                            <p:link value="#{document.name}" outcome="/index"/>
+                        </p:column>
+                        <p:column headerText="Size (p3)" priority="2">
+                            <h:outputText value="#{document.size}"/>
+                        </p:column>
+                        <p:column headerText="Type (p2)" priority="3">
+                            <h:outputText value="#{document.type}"/>
+                        </p:column>
+                        <p:column headerText="(p4)" priority="4">
+                            <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')"
+                                           title="View Detail" styleClass="ui-icon ui-icon-search"/>
+                        </p:column>
+                    </p:treeTable>
+                </div>
 
                 <p:separator/>
+                <div id="treetable-multiple">
+                    <p:treeTable value="#{treeTableMB.root}" selectionMode="checkbox"
+                                 selection="#{treeTableMB.selectedNodes}"
+                                 var="document" paginator="true" paginatorPosition="bottom" rows="2">
+                        <f:facet name="header">
+                            Document Viewer (multiple selection)
+                        </f:facet>
 
-                <p:treeTable value="#{treeTableMB.root}" selectionMode="single"
-                             var="document" paginator="true" paginatorPosition="bottom" rows="2">
-                    <f:facet name="header">
-                        Document Viewer
-                    </f:facet>
-                    <p:column headerText="Name" sortBy="#{document.name}">
-                        <p:link value="#{document.name}" outcome="/index"/>
-                    </p:column>
-                    <p:column headerText="Size (p3)" priority="2">
-                        <h:outputText value="#{document.size}" />
-                    </p:column>
-                    <p:column headerText="Type (p2)"  priority="3">
-                        <h:outputText value="#{document.type}" />
-                    </p:column>
-                    <p:column  headerText="(p4)" priority="4">
-                        <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')" title="View Detail" styleClass="ui-icon ui-icon-search"/>
-                    </p:column>
-                </p:treeTable>
+                        <p:column headerText="Name" sortBy="#{document.name}">
+                            <p:link value="#{document.name}" outcome="/index"/>
+                        </p:column>
+                        <p:column headerText="Size (p3)" priority="2">
+                            <h:outputText value="#{document.size}"/>
+                        </p:column>
+                        <p:column headerText="Type (p2)" priority="3">
+                            <h:outputText value="#{document.type}"/>
+                        </p:column>
+                        <p:column headerText="(p4)" priority="4">
+                            <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')"
+                                           title="View Detail" styleClass="ui-icon ui-icon-search"/>
+                        </p:column>
+                    </p:treeTable>
+                </div>
             </h:form>
         </p:panel>
 
