@@ -28,6 +28,7 @@ public class DeployUtil {
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.github.adminfaces:admin-template").withoutTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.primefaces.extensions:primefaces-extensions").withTransitivity().asFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.omnifaces:omnifaces").withTransitivity().asSingleFile());
+        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("net.bull.javamelody:javamelody-core").withoutTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("javax.json:javax.json-api").withTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.glassfish:javax.json").withTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("commons-io:commons-io").withTransitivity().asSingleFile());
@@ -36,8 +37,8 @@ public class DeployUtil {
         //WEB-INF
 
         war.addAsWebInfResource(new File(WEB_INF, "beans.xml"), "beans.xml");
-        war.addAsWebInfResource("test-web.xml", "web.xml");
-        war.addAsWebInfResource("test-faces-config.xml", "faces-config.xml");
+        war.addAsWebInfResource(new File(WEB_INF, "web.xml"), "web.xml");
+        war.addAsWebInfResource(new File(WEB_INF, "faces-config.xml"), "faces-config.xml");
         war.addAsDirectory("sources");
 
         //resources

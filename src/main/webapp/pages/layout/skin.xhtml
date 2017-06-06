@@ -198,14 +198,62 @@
                 </div>
             </div>
 
-              <div class="callout callout-success">
-                    <h4>Tip!</h4>
+            <div class="callout callout-info">
+                <h4>Tip!</h4>
 
-                    <p>You can set the default skin in <code>src/main/resources/admin-config.properties</code>:</p>
-                    <p><code>admin.skin=skin-teal</code></p>
-              </div>
+                <p>You can set the default skin in <code>src/main/resources/admin-config.properties</code>:</p>
+                <p><code>admin.skin=skin-teal</code></p>
+            </div>
         </h:form>
 
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="datatable.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText
+                       value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="SkinMB.java">
+              <pre>
+               <code class="language-java">
+@Named
+@SessionScoped
+public class SkinMB implements Serializable {
+
+    private String skin;
+
+    @Inject
+    private AdminConfig adminConfig;
+
+    @PostConstruct
+    public void init() {
+        skin = adminConfig.getSkin();
+        if(!has(skin)) {
+            skin = "skin-blue";
+        }
+    }
+
+    public void changeSkin(String skin){
+        this.skin = skin;
+    }
+
+    public String getSkin() {
+        return skin;
+    }
+
+    public void setSkin(String skin) {
+        this.skin = skin;
+    }
+}
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
     </ui:define>
 
 </ui:composition>
