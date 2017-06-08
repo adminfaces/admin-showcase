@@ -54,7 +54,7 @@ public class AutoCompleteMB implements Serializable {
         
         for (int i = 0; i < allThemes.size(); i++) {
             Theme skin = allThemes.get(i);
-            if(skin.getName().toLowerCase().contains(query)) {
+            if(skin.getName().toLowerCase().contains(query.toLowerCase())) {
                 filteredThemes.add(skin);
             }
         }
@@ -68,7 +68,7 @@ public class AutoCompleteMB implements Serializable {
         
         for (int i = 0; i < allThemes.size(); i++) {
             Theme skin = allThemes.get(i);
-            if(skin.getName().toLowerCase().contains(query)) {
+            if(skin.getName().toLowerCase().contains(query.toLowerCase())) {
                 filteredThemes.add(skin);
             }
         }
