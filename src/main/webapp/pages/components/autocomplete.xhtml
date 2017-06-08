@@ -1,0 +1,110 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.layout}">
+
+    <ui:define name="title">
+        AutoComplete
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link value="AutoComplete"
+                href="http://www.primefaces.org/showcase/ui/panel/accordionPanel.xhtml"/> AutoComplete displays suggestions while the input is being type. AutoComplete features various options, customizable content, multiple selection, effects and events.
+        .
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="AutoComplete"/>
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h:form id="form">
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-6 ui-sm-12">
+                            <div class="ui-g-12">
+                                <p:outputLabel for="ac" value="Auto Complete"/>
+                            </div>
+                            <div class="ui-g-12">
+                                <p:autoComplete id="ac" styleClass="box-danger" completeMethod="#{autoCompleteMB.completeText}" dropdown="true"/>
+                            </div>
+
+                            <div class="ui-g-12">
+                                <p:outputLabel value="Multiple" for="themes" />
+                            </div>
+                            <div class="ui-g-12">
+                                <p:autoComplete id="themes" multiple="true" value="#{autoCompleteMB.selectedThemes}" completeMethod="#{autoCompleteMB.completeTheme}"
+                                                var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" converter="themeConverter" forceSelection="true">
+                                    <p:column style="width:10%">
+                                        <h:outputText styleClass="ui-theme ui-theme-#{theme.name}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{theme.displayName}" />
+                                    </p:column>
+                                </p:autoComplete>
+                            </div>
+                        </div>
+
+                        <div class="ui-g-6 ui-sm-12">
+                            <div class="ui-g-12">
+                                <p:outputLabel value="Itemtip" for="itemTip" />
+                            </div>
+                            <div class="ui-g-12">
+                                <p:autoComplete id="itemTip" value="#{autoCompleteMB.theme}" completeMethod="#{autoCompleteMB.completeTheme}"
+                                                var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" converter="themeConverter" forceSelection="true">
+                                    <f:facet name="itemtip">
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <f:facet name="header">
+                                                <h:outputText styleClass="ui-theme ui-theme-#{theme.name}" style="margin-left:35px" />
+                                            </f:facet>
+
+                                            <p:outputLabel value="Display:" />
+                                            <h:outputText value="#{theme.displayName}" />
+
+                                            <p:outputLabel value="Key:" />
+                                            <h:outputText value="#{theme.name}" />
+                                        </h:panelGrid>
+                                    </f:facet>
+                                </p:autoComplete>
+                            </div>
+
+                            <div class="ui-g-12">
+                                <p:outputLabel value="Autocomplete group" for="ac-group" />
+                            </div>
+                            <div class="ui-g-12">
+                                <p:autoComplete id="ac-group" value="#{autoCompleteMB.theme2}" completeMethod="#{autoCompleteMB.completeThemeContains}"
+                                                var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" converter="themeConverter"
+                                                groupBy="#{autoCompleteMB.getThemeGroup(theme)}" scrollHeight="250"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="autocomplete.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="AutoCompleteMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.AutoCompleteMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>
