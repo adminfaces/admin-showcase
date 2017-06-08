@@ -124,7 +124,7 @@
     </ui:define>
 
     <ui:define name="code">
-        <p:tabView>
+        <p:tabView styleClass="hidden-sm hidden-xs">
             <p:tab title="messages.xhtml">
            <pre>
                <code class="language-html">
@@ -142,5 +142,24 @@
              </pre>
             </p:tab>
         </p:tabView>
+
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="messages.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="MessagesMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.MessagesMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:accordionPanel>
     </ui:define>
 </ui:composition>

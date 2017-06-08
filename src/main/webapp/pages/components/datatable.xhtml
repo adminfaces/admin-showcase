@@ -267,7 +267,7 @@
     </ui:define>
 
     <ui:define name="code">
-        <p:tabView>
+        <p:tabView styleClass="hidden-sm hidden-xs">
             <p:tab title="datatable.xhtml">
            <pre>
                <code class="language-html"><h:outputText
@@ -286,5 +286,25 @@
              </pre>
             </p:tab>
         </p:tabView>
+
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="datatable.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText
+                       value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="DatatableMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText
+                           value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DatatableMB')}"
+                           escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:accordionPanel>
     </ui:define>
 </ui:composition>

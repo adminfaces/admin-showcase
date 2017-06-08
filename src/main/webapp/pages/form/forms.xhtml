@@ -362,7 +362,7 @@
     </ui:define>
 
     <ui:define name="code">
-        <p:tabView>
+        <p:tabView styleClass="hidden-sm hidden-xs">
             <p:tab title="forms.xhtml">
            <pre>
                <code class="language-html">
@@ -372,5 +372,15 @@
             </p:tab>
 
         </p:tabView>
+
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="forms.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+        </p:accordionPanel>
     </ui:define>
 </ui:composition>

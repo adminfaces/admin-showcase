@@ -39,7 +39,7 @@
     </ui:define>
 
     <ui:define name="code">
-        <p:tabView>
+        <p:tabView styleClass="hidden-sm hidden-xs">
             <p:tab title="Default menu layout">
            <pre>
                <code class="language-html"><h:outputText
@@ -86,5 +86,51 @@
 
 
         </p:tabView>
+
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="Default menu layout">
+           <pre>
+               <code class="language-html"><h:outputText
+                       value="#{sourceCodeMB.getPageSource('WEB-INF/templates/template.xhtml')}" escape="true"/></code>
+           </pre>
+            </p:tab>
+            <p:tab title="Horizontal menu layout">
+           <pre>
+               <code class="language-html"><h:outputText
+                       value="#{sourceCodeMB.getPageSource('WEB-INF/templates/template-top.xhtml')}"
+                       escape="true"/></code>
+           </pre>
+            </p:tab>
+            <p:tab title="includes/menu-search.xhtml">
+           <pre>
+               <code class="language-html">
+<h:outputText value="#{sourceCodeMB.getPageSource('includes/menu-search')}" escape="true"/>
+ </code>
+           </pre>
+            </p:tab>
+            <p:tab title="includes/menu.xhtml">
+           <pre>
+               <code class="language-html">
+<h:outputText value="#{sourceCodeMB.getPageSource('includes/menu')}" escape="true"/>
+                </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="top-menu.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('includes/top-menu')}"
+                                                         escape="true"/>
+ </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="/includes/menubar.xhtml (used by Horizontal menu layout)">
+           <pre>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('includes/menubar')}"
+                                                         escape="true"/>
+ </code>
+           </pre>
+            </p:tab>
+        </p:accordionPanel>
     </ui:define>
 </ui:composition>

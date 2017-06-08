@@ -358,7 +358,7 @@
         </script>
 
         <section class="content">
-            <p:tabView>
+            <p:tabView styleClass="hidden-sm hidden-xs">
                 <p:tab title="analytics.xhtml">
            <pre>
                <code class="language-html">
@@ -377,6 +377,26 @@
              </pre>
                 </p:tab>
             </p:tabView>
+
+            <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+                <p:tab title="analytics.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+                </p:tab>
+
+                <p:tab title="AnalyticsMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText
+                           value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.analytics.bean.AnalyticsMB')}"
+                           escape="false"/>
+               </code>
+             </pre>
+                </p:tab>
+            </p:accordionPanel>
         </section>
     </ui:define>
 
