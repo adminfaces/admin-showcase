@@ -212,7 +212,7 @@
 
                 <div class="ui-g-12">
                     <p:panel header="Tree" styleClass="card no-border">
-                        <p:tree value="#{iconMB.root}" var="doc" style="margin-top:20px">
+                        <p:tree value="#{iconMB.root}" var="doc">
                             <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
                                 <h:outputText value="#{doc.name}"/>
                             </p:treeNode>
@@ -235,7 +235,7 @@
                 <div class="ui-g-8 ui-sm-12">
                     <p:panel header="Picklist" styleClass="card no-border">
                         <p:pickList id="PojoPickList" value="#{pickListMB.themes}" var="theme" effect="bounce"
-                                    style="margin-top:20px" showSourceFilter="true" showTargetFilter="true"
+                                    showSourceFilter="true" showTargetFilter="true"
                                     itemValue="#{theme}" itemLabel="#{theme.displayName}" showSourceControls="true"
                                     showTargetControls="true" converter="themeConverter" responsive="true">
 
@@ -256,7 +256,7 @@
                 </div>
 
                 <div class="ui-g-4 ui-sm-12">
-                    <p:panel header="OrderList" styleClass="card no-border"  style="height:354px">
+                    <p:panel header="OrderList" styleClass="card no-border" style="height:354px">
                         <p:orderList value="#{pickListMB.orderThemes}" var="theme" itemValue="#{theme}"
                                      converter="themeConverter" controlsLocation="left" responsive="true">
 
@@ -275,7 +275,7 @@
 
                 <div class="ui-g-12">
                     <p:panel header="Accordion Panel" styleClass="card no-border">
-                        <p:accordionPanel style="margin-top:20px">
+                        <p:accordionPanel>
                             <p:tab title="Godfather Part I">
                                 <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid"
                                              styleClass="ui-panelgrid-blank">
