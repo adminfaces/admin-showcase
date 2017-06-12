@@ -14,14 +14,12 @@
                 margin-left: 10px;
             }
 
-            .ui-orderlist .ui-orderlist-list {
-                height: auto;
+            .ui-g-12 {
+                padding-left: 0;
+                padding-right: 0;
             }
 
-            .ui-orderlist .ui-grid-row .ui-grid-col-2,
-            .ui-orderlist .ui-grid-row .ui-grid-col-10 {
-                padding: 0;
-            }
+
         </style>
     </ui:define>
 
@@ -232,7 +230,7 @@
                     </p:panel>
                 </div>
 
-                <div class="ui-g-8 ui-sm-12">
+                <div class="ui-g-8 ui-sm-12" style="padding-left: 0">
                     <p:panel header="Picklist" styleClass="card no-border">
                         <p:pickList id="PojoPickList" value="#{pickListMB.themes}" var="theme" effect="bounce"
                                     showSourceFilter="true" showTargetFilter="true"
@@ -255,7 +253,7 @@
 
                 </div>
 
-                <div class="ui-g-4 ui-sm-12">
+                <div class="ui-g-4 ui-sm-12" style="padding-right: 0">
                     <p:panel header="OrderList" styleClass="card no-border" style="height:335px">
                         <p:orderList value="#{pickListMB.orderThemes}" var="theme" itemValue="#{theme}"
                                      converter="themeConverter" controlsLocation="left" responsive="true">
@@ -341,7 +339,7 @@
                 </div>
 
 
-                <div class="ui-g-6 ui-sm-12">
+                <div class="ui-g-6 ui-sm-12" style="padding-left: 0">
                     <p:panel header="Menu" styleClass="card no-border">
                         <p:menu toggleable="true">
                             <p:submenu label="File">
@@ -359,7 +357,7 @@
                     </p:panel>
                 </div>
 
-                <div class="ui-g-6 ui-sm-12">
+                <div class="ui-g-6 ui-sm-12" style="padding-right: 0">
                     <p:panel header="PanelMenu" styleClass="card no-border" style="height: 300px">
 
                         <p:panelMenu>
