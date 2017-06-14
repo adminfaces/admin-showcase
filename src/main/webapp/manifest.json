@@ -3,7 +3,7 @@
     "name": "AdminFaces Showcase Application",
     "icons": [
         {
-            "src": "/resources/images/android-chrome-192x192.png",
+            "src": "/resources/images/android-chrome-96x96.png",
             "sizes": "96x96",
             "type": "image/png"
         },
@@ -25,6 +25,7 @@
     ],
     "theme_color": "#3c8dbc",
     "background_color": "#ffffff",
-    "start_url": "/index.xhtml",
+    "start_url": "/showcase/index.xhtml",
+    "scope":"/showcase/",
     "display": "standalone"
 }
