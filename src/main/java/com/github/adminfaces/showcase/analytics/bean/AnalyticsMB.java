@@ -30,7 +30,7 @@ public class AnalyticsMB implements Serializable {
 
     private static final List<String> PIE_CHART_COLORS = Arrays.asList("#f56954", "#00a65a", "#f39c12", "#00c0ef", "#3c8dbc", "#d2d6de", "#d81b60", "#01FF70",
             "#444", "#001F3F", "#B13C2E", "#009688", "#111", "#696969", "#0088cc", "#39CCCC", "#7FB77D", "#F012BE", "#3D9970", "#FF851B", "#1C28B7", "#FF495A", "#31FFB0",
-            "#B1CC97", "#3F2A29","#2F1B22");
+            "#B1CC97", "#3F2A29", "#2F1B22");
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     private String viewId;
@@ -51,7 +51,7 @@ public class AnalyticsMB implements Serializable {
         viewId = Faces.getViewId();
         HttpServletRequest request = Faces.getRequest();
         String browser = request.getHeader("User-Agent");
-        if(!has(browser)) {
+        if (!has(browser)) {
             return;
         }
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -227,14 +227,14 @@ public class AnalyticsMB implements Serializable {
             JsonObjectBuilder dataset = Json.createObjectBuilder()
                     .add("fillCollor", "rgba(151,187,205,0.5)")
                     .add("strokeCollor", "rgba(151,187,205,1)")
-                    .add("data",data);
+                    .add("data", data);
             JsonArrayBuilder datasets = Json.createArrayBuilder()
                     .add(dataset);
             JsonObject visitorsByCountryjsonObject = Json.createObjectBuilder()
                     .add("labels", labels)
                     .add("datasets", datasets).build();
 
-                visitorsByCountry = visitorsByCountryjsonObject.toString();
+            visitorsByCountry = visitorsByCountryjsonObject.toString();
         }
 
 
@@ -245,29 +245,27 @@ public class AnalyticsMB implements Serializable {
      * Creates a GeoJson feature layer to be presented in a leaflet web map
      */
     public String getPageViewsGeoJson() {
-        if(pageViewsGeoJson == null) {
+        if (pageViewsGeoJson == null) {
             JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
             for (PageStats stats : analyticsStore.allPageStats()) {
-                Iterator<PageView> pageViewsIterator = stats.getPageViews().iterator();
-                while (pageViewsIterator.hasNext()) {
-                    PageView pageView = pageViewsIterator.next();
-                    if(!has(pageView.getCountry()) || !has(pageView.getLat())){
+                for (PageView pageView : stats.getPageViews()) {
+                    if (!has(pageView.getCountry()) || !has(pageView.getLat())) {
                         continue;
                     }
                     JsonObjectBuilder geoJson = Json.createObjectBuilder()
-                            .add("type","Feature");
+                            .add("type", "Feature");
                     JsonObjectBuilder geometry = Json.createObjectBuilder()
-                            .add("type","Point")
-                            .add("coordinates",Json.createArrayBuilder()
+                            .add("type", "Point")
+                            .add("coordinates", Json.createArrayBuilder()
                                     .add(new Double(pageView.getLon()))
                                     .add(new Double(pageView.getLat())));
-                    geoJson.add("geometry",geometry);
+                    geoJson.add("geometry", geometry);
                     JsonObjectBuilder properties = Json.createObjectBuilder()
-                            .add("country",pageView.getCountry())
-                            .add("city",pageView.getCity())
-                            .add("page",stats.getViewId())
-                            .add("date",sdf.format(pageView.getDate().getTime()));
-                    geoJson.add("properties",properties);
+                            .add("country", pageView.getCountry())
+                            .add("city", pageView.getCity())
+                            .add("page", stats.getViewId())
+                            .add("date", sdf.format(pageView.getDate().getTime()));
+                    geoJson.add("properties", properties);
                     geoJsonLayer.add(geoJson);
                 }
             }
