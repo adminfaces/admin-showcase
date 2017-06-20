@@ -39,6 +39,9 @@ public class PageStatisticsStore implements Serializable {
     private Map<Integer, Integer> totalVisitorsByMonth;//key is month and value is total
     private Map<Integer, Integer> uniqueVisitorsByMonth;//key is month and value is total
     private Map<String, Integer> totalVisitorsByCountry;
+    private String geoJsonCache;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
 
 
     @PostConstruct
@@ -163,6 +166,7 @@ public class PageStatisticsStore implements Serializable {
                 FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
                 loadPageViewCountries();
                 resetStatstistics();
+                updateGeoJsonCache();
             }
 
         } catch (Exception e) {
@@ -381,5 +385,40 @@ public class PageStatisticsStore implements Serializable {
             }
         }
         return totalVisitorsByCountry;
+    }
+
+    public String getGeoJsonCache() {
+        if(geoJsonCache == null) {
+            JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
+            for (PageStats stats : allPageStats()) {
+                for (PageView pageView : stats.getPageViews()) {
+                    if (!has(pageView.getCountry()) || !has(pageView.getLat())) {
+                        continue;
+                    }
+                    JsonObjectBuilder geoJson = Json.createObjectBuilder()
+                            .add("type", "Feature");
+                    JsonObjectBuilder geometry = Json.createObjectBuilder()
+                            .add("type", "Point")
+                            .add("coordinates", Json.createArrayBuilder()
+                                    .add(new Double(pageView.getLon()))
+                                    .add(new Double(pageView.getLat())));
+                    geoJson.add("geometry", geometry);
+                    JsonObjectBuilder properties = Json.createObjectBuilder()
+                            .add("country", pageView.getCountry())
+                            .add("city", pageView.getCity())
+                            .add("page", stats.getViewId())
+                            .add("date", sdf.format(pageView.getDate().getTime()));
+                    geoJson.add("properties", properties);
+                    geoJsonLayer.add(geoJson);
+                }
+            }
+            geoJsonCache = geoJsonLayer.build().toString();
+        }
+        return geoJsonCache;
+    }
+
+    public void updateGeoJsonCache() {
+        geoJsonCache = null;
+        getGeoJsonCache();
     }
 }

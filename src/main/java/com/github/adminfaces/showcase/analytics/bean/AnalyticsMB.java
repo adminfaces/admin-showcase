@@ -246,32 +246,8 @@ public class AnalyticsMB implements Serializable {
      */
     public String getPageViewsGeoJson() {
         if (pageViewsGeoJson == null) {
-            JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
-            for (PageStats stats : analyticsStore.allPageStats()) {
-                for (PageView pageView : stats.getPageViews()) {
-                    if (!has(pageView.getCountry()) || !has(pageView.getLat())) {
-                        continue;
-                    }
-                    JsonObjectBuilder geoJson = Json.createObjectBuilder()
-                            .add("type", "Feature");
-                    JsonObjectBuilder geometry = Json.createObjectBuilder()
-                            .add("type", "Point")
-                            .add("coordinates", Json.createArrayBuilder()
-                                    .add(new Double(pageView.getLon()))
-                                    .add(new Double(pageView.getLat())));
-                    geoJson.add("geometry", geometry);
-                    JsonObjectBuilder properties = Json.createObjectBuilder()
-                            .add("country", pageView.getCountry())
-                            .add("city", pageView.getCity())
-                            .add("page", stats.getViewId())
-                            .add("date", sdf.format(pageView.getDate().getTime()));
-                    geoJson.add("properties", properties);
-                    geoJsonLayer.add(geoJson);
-                }
-            }
-            pageViewsGeoJson = geoJsonLayer.build().toString();
+            pageViewsGeoJson = analyticsStore.getGeoJsonCache();
         }
-
         return pageViewsGeoJson;
     }
 }
