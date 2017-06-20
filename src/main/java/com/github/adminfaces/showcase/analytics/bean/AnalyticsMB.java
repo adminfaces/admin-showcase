@@ -50,6 +50,10 @@ public class AnalyticsMB implements Serializable {
     public void onPageVisited() {
         viewId = Faces.getViewId();
         HttpServletRequest request = Faces.getRequest();
+        String browser = request.getHeader("User-Agent");
+        if(!has(browser)) {
+            return;
+        }
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
         if (!has(ipAddress)) {
             ipAddress = request.getRemoteAddr();
