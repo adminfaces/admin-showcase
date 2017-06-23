@@ -3,6 +3,7 @@ package com.github.adminfaces.showcase.analytics.store;
 import com.github.adminfaces.showcase.analytics.model.PageStats;
 import com.github.adminfaces.showcase.analytics.model.PageView;
 import com.github.adminfaces.showcase.analytics.model.PageViewCountry;
+import com.github.adminfaces.showcase.filter.BlackListFilter;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,7 +132,7 @@ public class PageStatisticsStore implements Serializable {
             for (PageStats pageStats : pageStatsCopy) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
                 for (PageView pageView : pageStats.getPageViews()) {
-                    if (!has(pageView.getIp())) {
+                    if (!has(pageView.getIp()) && !BlackListFilter.isBlocked(pageView.getIp())) {
                         continue;
                     }
                     boolean infoUpdated = queryAdditionalPageViewInfo(pageView);
