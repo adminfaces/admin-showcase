@@ -29,7 +29,6 @@ public class BlackListFilter implements Filter {
 
         if(isBlocked(ip)) {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
-            //send error or maybe redirect to some error page
             httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
 
