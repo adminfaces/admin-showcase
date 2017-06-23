@@ -20,6 +20,7 @@ import org.primefaces.context.RequestContext;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -30,6 +31,8 @@ public class UserLoginMB implements Serializable {
     private String username;
 
     private String password;
+
+    private String selected;
 
     public String getUsername() {
         return username;
@@ -45,6 +48,14 @@ public class UserLoginMB implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSelected() {
+        return selected;
+    }
+
+    public void setSelected(String selected) {
+        this.selected = selected;
     }
 
     public void login() {

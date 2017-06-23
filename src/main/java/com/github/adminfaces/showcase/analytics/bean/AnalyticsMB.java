@@ -3,6 +3,7 @@ package com.github.adminfaces.showcase.analytics.bean;
 import com.github.adminfaces.showcase.analytics.model.PageStats;
 import com.github.adminfaces.showcase.analytics.model.PageView;
 import com.github.adminfaces.showcase.analytics.store.PageStatisticsStore;
+import com.github.adminfaces.showcase.filter.BlackListFilter;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.primefaces.event.SelectEvent;
@@ -57,6 +58,9 @@ public class AnalyticsMB implements Serializable {
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
         if (!has(ipAddress)) {
             ipAddress = request.getRemoteAddr();
+        }
+        if(BlackListFilter.isBlocked(ipAddress)) {
+            return;
         }
         analyticsStore.addPageView(viewId, new PageView(ipAddress));
         pageStats = analyticsStore.getPageStats(viewId);

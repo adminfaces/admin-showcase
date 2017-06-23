@@ -16,6 +16,7 @@
     </ui:define>
 
     <ui:define name="body">
+
         <adm:breadcrumb title="Dialog"/>
         <h:form>
             <div class="row ui-fluid">
@@ -33,7 +34,8 @@
                                      styleClass="btn-primary"/>
                 </div>
                 <div class="col-sm-12 align-center" style="margin-top: 30px">
-                    <p:commandLink id="btDialogLogin" oncomplete="PF('dlgLogin').show();" title="login" update="@(div[id$=loginGrid])">
+                    <p:commandLink id="btDialogLogin" oncomplete="PF('dlgLogin').show();" title="login"
+                                   update="@(div[id$=loginGrid])">
                         <p:graphicImage name="/demo/images/login.png"/>
                         <f:setPropertyActionListener target="#{userLoginMB.username}" value="#{null}"/>
                     </p:commandLink>
@@ -87,6 +89,15 @@
                 </h:form>
             </div>
 
+            <div class="col-sm-12 col-md-3">
+                <h:form>
+                    <p:commandButton value="Dialog framework" icon="fa fa-link" styleClass="bg-aqua btn-block"
+                                     process="@this" update="@none"
+                                     actionListener="#{dfRootMB.openLevel1}">
+                        <p:ajax event="dialogReturn" listener="#{dfRootMB.onReturnFromLevel1}"/>
+                    </p:commandButton>
+                </h:form>
+            </div>
         </div>
 
         <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40" responsive="true">
@@ -105,31 +116,40 @@
             <h:outputText value="This Dialog can be Maximized an Minimized!"/>
         </p:dialog>
 
-        <p:dialog header="Dialog default" styleClass="box-default" widgetVar="dlgDefault" minHeight="100" modal="true" appendTo="@(body)">
+        <p:dialog header="Dialog default" styleClass="box-default" widgetVar="dlgDefault" minHeight="100" modal="true"
+                  appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
-        <p:dialog header="Dialog primary" styleClass="box-primary" widgetVar="dlgPrimary" minHeight="100" modal="true" appendTo="@(body)">
+        <p:dialog header="Dialog primary" styleClass="box-primary" widgetVar="dlgPrimary" minHeight="100" modal="true"
+                  appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
-        <p:dialog header="Dialog info" styleClass="box-info" widgetVar="dlgInfo" minHeight="100" modal="true" appendTo="@(body)">
+        <p:dialog header="Dialog info" styleClass="box-info" widgetVar="dlgInfo" minHeight="100" modal="true"
+                  appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
-        <p:dialog header="Dialog success" styleClass="box-success" widgetVar="dlgSuccess" minHeight="100" modal="true" appendTo="@(body)">
+        <p:dialog header="Dialog success" styleClass="box-success" widgetVar="dlgSuccess" minHeight="100" modal="true"
+                  appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
-        <p:dialog header="Dialog warning" styleClass="box-warning" widgetVar="dlgWarning" minHeight="100" modal="true" appendTo="@(body)">
+        <p:dialog header="Dialog warning" styleClass="box-warning" widgetVar="dlgWarning" minHeight="100" modal="true"
+                  appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
-        <p:dialog header="Dialog danger" styleClass="box-danger" widgetVar="dlgDanger" minHeight="100" modal="true" appendTo="@(body)">
+        <p:dialog header="Dialog danger" styleClass="box-danger" widgetVar="dlgDanger" minHeight="100" modal="true"
+                  appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
-        <p:dialog header="Dialog fatal" styleClass="box-fatal" widgetVar="dlgFatal" minHeight="100" modal="true" appendTo="@(body)">
+        <p:dialog header="Dialog fatal" styleClass="box-fatal" widgetVar="dlgFatal" minHeight="100" modal="true"
+                  appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
-        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="400" modal="true" styleClass="dialog-login">
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="400"
+                  modal="true" styleClass="dialog-login">
             <h:form>
+                <p:growl/>
                 <p:messages closable="true"/>
                 <p:panelGrid id="loginGrid" columns="2" cellpadding="5" layout="grid" styleClass="no-border ui-fluid">
                     <p:outputLabel for="username" value="Username:"/>
@@ -139,14 +159,15 @@
                     <p:password id="password" value="#{userLoginMB.password}" required="true"
                                 requiredMessage="Password is required." label="password"/>
                     <p:outputLabel for="select" value="Select:"/>
-                    <p:selectOneMenu id="select" value="#{null}" required="true">
+                    <p:selectOneMenu id="select" value="#{userLoginMB.selected}" required="true">
                         <f:selectItem itemLabel="Select"/>
                         <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
                         <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
                         <f:selectItem itemLabel="Cash" itemValue="Cash"/>
                     </p:selectOneMenu>
                     <p:outputLabel for="autocomplete" value="Auto Complete:"/>
-                    <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true" required="true" />
+                    <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true"
+                                    required="true"/>
                     <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple:"/>
                     <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities" required="true"
                                           multiple="true" filter="true" filterMatchMode="startsWith">
@@ -154,10 +175,10 @@
                     </p:selectCheckboxMenu>
                     <p:outputLabel for="date" value="Date:"/>
                     <p:calendar id="date" showOn="button" required="true"/>
-                </p:panelGrid>
+                 </p:panelGrid>
                 <p:separator/>
-                <p:commandButton styleClass="btn-primary pull-right" value="Login" update="@form"
-                                 action="#{userLoginMB.login()}" process="@this"
+                <p:commandButton styleClass="btn-primary pull-right" value="Login" update="@(.ui-growl, div[id$=loginGrid])"
+                                 action="#{userLoginMB.login()}" process="@form"
                                  ignoreAutoUpdate="true"
                                  oncomplete="handleLoginRequest(xhr, status, args)"/>
             </h:form>
@@ -179,7 +200,7 @@
         <style type="text/css">
             @media (max-width: 480px) {
                 div.ui-dialog.dialog-login {
-                    width:350px!important;
+                    width: 350px !important;
                 }
             }
         </style>
