@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.4">
+<title>AdminFaces</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
+</head>
+<body class="book toc2 toc-right">
+<div id="header">
+<h1>AdminFaces</h1>
+<div class="details">
+<span id="revnumber">version 1.0.0-RC6</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#admin_theme">2. Admin Theme</a>
+<ul class="sectlevel2">
+<li><a href="#prerequisites">2.1. Prerequisites</a></li>
+<li><a href="#usage">2.2. Usage</a></li>
+<li><a href="#architecture">2.3. Architecture</a></li>
+<li><a href="#theme_classifiers">2.4. Theme classifiers</a>
+<ul class="sectlevel3">
+<li><a href="#default_no_classifier">2.4.1. Default (no classifier)</a></li>
+<li><a href="#dev_classifier">2.4.2. Dev classifier</a></li>
+<li><a href="#without_bootstrap_classifier">2.4.3. Without Bootstrap classifier</a></li>
+<li><a href="#without_jsf_classifier">2.4.4. Without JSF classifier</a></li>
+</ul>
+</li>
+<li><a href="#avoiding_theme_caching">2.5. Avoiding theme caching</a></li>
+<li><a href="#development">2.6. Development</a></li>
+<li><a href="#snapshots">2.7. Snapshots</a></li>
+</ul>
+</li>
+<li><a href="#admin_template">3. Admin Template</a>
+<ul class="sectlevel2">
+<li><a href="#features">3.1. Features</a></li>
+<li><a href="#usage_2">3.2. Usage</a>
+<ul class="sectlevel3">
+<li><a href="#example">3.2.1. Example</a></li>
+</ul>
+</li>
+<li><a href="#configuration">3.3. Configuration</a></li>
+<li><a href="#admin_session">3.4. Admin Session</a>
+<ul class="sectlevel3">
+<li><a href="#overriding_adminsession">3.4.1. Overriding AdminSession</a></li>
+<li><a href="#adminsession_injection">3.4.2. AdminSession Injection</a></li>
+</ul>
+</li>
+<li><a href="#error_pages">3.5. Error Pages</a>
+<ul class="sectlevel3">
+<li><a href="#providing_custom_error_pages">3.5.1. Providing custom error pages</a></li>
+<li><a href="#overriding_error_pages">3.5.2. Overriding error pages</a></li>
+<li><a href="#labels_and_messages_in_error_pages">3.5.3. Labels and Messages in error pages</a></li>
+</ul>
+</li>
+<li><a href="#snapshots_2">3.6. Snapshots</a></li>
+</ul>
+</li>
+<li><a href="#admin_designer">4. Admin Designer</a>
+<ul class="sectlevel2">
+<li><a href="#what_is_it">4.1. What is it?</a></li>
+<li><a href="#objectives">4.2. Objectives</a></li>
+<li><a href="#how_it_works">4.3. How it works</a></li>
+</ul>
+</li>
+<li><a href="#admin_starter">5. Admin Starter</a>
+<ul class="sectlevel2">
+<li><a href="#running">5.1. Running</a></li>
+<li><a href="#demo">5.2. Demo</a></li>
+</ul>
+</li>
+<li><a href="#admin_mobile">6. Admin Mobile</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><span class="icon"><i class="fa fa-file-pdf-o"></i></span> Read this documentation <a href="http://localhost:8080/showcase/docs/index.pdf" class="external" target="_blank">in PDF here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="anchor" href="#introduction"></a>1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://github.com/adminfaces">AdminFaces</a> is an open source project which brings <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://almsaeedstudio.com/themes/AdminLTE/index2.html" target="_blank">AdminLTE</a> to your application via a <a href="http://primefaces.org" target="_blank">PrimeFaces</a> theme and a <a href="https://javaserverfaces.java.net/" target="_blank">JSF</a> <code>responsive</code> template.</p>
+</div>
+<div class="paragraph">
+<p>AdminFaces ecosystem is composed by the following projects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://github.com/adminfaces/admin-theme" target="_blank">Admin Theme</a>: A Primefaces theme based on <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://almsaeedstudio.com/themes/AdminLTE/index2.html" target="_blank">Admin LTE</a> where <a href="http://primefaces.org" target="_blank">Primefaces</a> components are customized to look like mentioned frameworks.</p>
+</li>
+<li>
+<p><a href="http://github.com/adminfaces/admin-template" target="_blank">Admin Template</a>: A <strong>fully responsive</strong> <a href="https://javaserverfaces.java.net/" target="_blank">Java Server Faces</a> <code>admin</code> template (used by this Showcase) which is also based on <strong>Bootstrap</strong> and <strong>Admin LTE</strong>.</p>
+</li>
+<li>
+<p><a href="http://github.com/adminfaces/admin-showcase" target="_blank">Admin Showcase</a>: A showcase web application, <a href="http://adminfaces-rpestano.rhcloud.com/showcase/" target="_blank">deployed on openshift</a>, which demonstrates AdminFaces main features and components.</p>
+</li>
+<li>
+<p><a href="http://github.com/adminfaces/admin-designer" target="_blank">Admin Designer</a>: The same showcase application with Admin Theme and Admin Template bundled (instead of being library dependencies) in order to make it easier to customize the theme and the template.</p>
+</li>
+<li>
+<p><a href="http://github.com/adminfaces/admin-starter" target="_blank">Admin Starter</a>: A simple starter project to get you started with AdminFaces.</p>
+</li>
+<li>
+<p><a href="http://github.com/adminfaces/admin-mobile" target="_blank">Admin Mobile</a>: A simple <a href="https://developer.android.com/studio/index.html" target="_blank">Android Studio</a> project which uses <a href="https://developer.android.com/reference/android/webkit/WebView.html" target="_blank">Webview</a> to create an <a href="https://www.mobiloud.com/blog/native-web-or-hybrid-apps/" target="_blank">hybrid web app</a> based on Admin Showcase.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In subsequent chapters we will drive through each project in detail.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin_theme"><a class="anchor" href="#admin_theme"></a>2. Admin Theme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/adminfaces/admin-theme" target="_blank">Admin Theme</a> is a <a href="http://primefaces.org/themes" target="_blank">PrimeFaces theme</a> where components are styled to look like AdminLTE ones (which in turn are based on Bootstrap).</p>
+</div>
+<div class="sect2">
+<h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>2.1. Prerequisites</h3>
+<div class="paragraph">
+<p>The only pre-requisite is <code>PrimeFaces</code> and <code>Font Awesome</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since PrimeFaces <code>5.1.1</code> font awesome comes embedded, you just need to activate it in <code>web.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;context-param&gt;</span>
+    <span class="tag">&lt;param-name&gt;</span>primefaces.FONT_AWESOME<span class="tag">&lt;/param-name&gt;</span>
+    <span class="tag">&lt;param-value&gt;</span>true<span class="tag">&lt;/param-value&gt;</span>
+<span class="tag">&lt;/context-param&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For <strong>previous versions</strong> or if you need to upgrade FA version you may include it in your pages by using webjars:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="html"><span class="tag">&lt;h:outputStylesheet</span> <span class="attribute-name">library</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">webjars</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">font-awesome/4.7.0/css/font-awesome-jsf.css</span><span class="delimiter">&quot;</span></span> <span class="tag">/&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and add fontawesome webjar in your classpath:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.webjars<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>font-awesome<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>4.7.0<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage"><a class="anchor" href="#usage"></a>2.2. Usage</h3>
+<div class="paragraph">
+<p>To start using the theme you need the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add admin theme to your classpath:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-theme<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Activate the theme in <code>web.xml</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;context-param&gt;</span>
+    <span class="tag">&lt;param-name&gt;</span>primefaces.THEME<span class="tag">&lt;/param-name&gt;</span>
+    <span class="tag">&lt;param-value&gt;</span>admin<span class="tag">&lt;/param-value&gt;</span>
+<span class="tag">&lt;/context-param&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you use <a href="#admin_template">Admin Template</a> the theme already comes activated.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now PrimeFaces components are styled like Bootstrap and AdminLTE.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/messages.png" alt="messages">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+See <a href="http://adminfaces-rpestano.rhcloud.com/showcase//pages/form/forms.xhtml" target="_blank">showcase forms page</a> to get an idea.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="architecture"><a class="anchor" href="#architecture"></a>2.3. Architecture</h3>
+<div class="paragraph">
+<p>The theme uses <a href="http://lesscss.org/" target="_blank">less</a> as css pre-processor. Each PrimeFaces component has its own less file:</p>
+</div>
+<div class="listingblock">
+<div class="title">src/main/resources/less</div>
+<div class="content">
+<pre>├── admin-lte
+│    |
+│    ├── bootstrap <i class="conum" data-value="1"></i><b>(1)</b>
+│    │
+│    ├── skins <i class="conum" data-value="2"></i><b>(2)</b>
+│    │
+│    └── admin lte less files
+│
+├── primefaces-admin
+│    |
+│    ├─ components <i class="conum" data-value="3"></i><b>(3)</b>
+│    │   |
+│    │   ├── accordeon.less
+│    │   │
+│    │   ├── autocomplete.less
+│    │   │
+│    │   └── etc...
+│    │
+│    ├─ theme.less <i class="conum" data-value="4"></i><b>(4)</b>
+│    │
+     └─ variables.less</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Bootstrap variables and <a href="https://css-tricks.com/snippets/css/useful-css3-less-mixins/" target="_blank">mixins</a> are used as reference in AdminLTE and admin theme less files</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Built in skins</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>PrimeFaces components</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Components and Admin-LTE less files are included in theme.less</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After compilation it will generate the theme.css with Admin-LTE, Bootstrap and Primefaces components.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Bootstrap.css (from src/META-INF/resources) is included in theme.less but can be removed via <a href="#theme_classifiers">maven classifiers</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Bootstrap less is not maintained in this project only it&#8217;s mixins.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="theme_classifiers"><a class="anchor" href="#theme_classifiers"></a>2.4. Theme classifiers</h3>
+<div class="paragraph">
+<p>This project uses <a href="http://stackoverflow.com/questions/20909634/what-is-the-purpose-of-classifier-tag-in-maven" target="_blank">maven classifiers</a> to offer multiple <code>faces</code> (pum intended) of Admin Theme. Below is the description of each classifier and how to use it.</p>
+</div>
+<div class="sect3">
+<h4 id="default_no_classifier"><a class="anchor" href="#default_no_classifier"></a>2.4.1. Default (no classifier)</h4>
+<div class="paragraph">
+<p>The default theme comes <code>compressed</code>, with <code>Bootstrap (3.3.7)</code> embedded and uses <code>JSF resource handling</code> for loading images and web fonts.</p>
+</div>
+<div class="listingblock">
+<div class="title">Maven usage</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-theme<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dev_classifier"><a class="anchor" href="#dev_classifier"></a>2.4.2. Dev classifier</h4>
+<div class="paragraph">
+<p>The <code>dev</code> classifier will bring a theme.css <strong>without minification</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Maven usage</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-theme<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;classifier&gt;</span>dev<span class="tag">&lt;/classifier&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="without_bootstrap_classifier"><a class="anchor" href="#without_bootstrap_classifier"></a>2.4.3. Without Bootstrap classifier</h4>
+<div class="paragraph">
+<p>The <code>without-bootstrap</code> classifier will bring a theme.css <strong>without bootstrap embedded</strong> so it&#8217;s up to the developer to provide Bootstrap within the application.</p>
+</div>
+<div class="listingblock">
+<div class="title">Maven usage</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-theme<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;classifier&gt;</span>without-bootstrap<span class="tag">&lt;/classifier&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="without_jsf_classifier"><a class="anchor" href="#without_jsf_classifier"></a>2.4.4. Without JSF classifier</h4>
+<div class="paragraph">
+<p>The <code>without-jsf</code> classifier will bring a theme.css <strong>without JSF resource handling</strong> so the theme can be used on projects (derived from PrimeFaces) without JSF like Prime React, PrimeUI or PrimeNG.</p>
+</div>
+<div class="listingblock">
+<div class="title">Maven usage</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-theme<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;classifier&gt;</span>without-jsf<span class="tag">&lt;/classifier&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="avoiding_theme_caching"><a class="anchor" href="#avoiding_theme_caching"></a>2.5. Avoiding theme caching</h3>
+<div class="paragraph">
+<p>Whenever the theme is updated to a new version in the project users may have to clear their browser caches to get the changes of the new theme.<br>
+Sometimes a theme update even introduces conflicts and only clearing browser cache fixes them.</p>
+</div>
+<div class="paragraph">
+<p>To solve this issues you can use a theme classifier called <strong>no-cache</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="title">pom.xml</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-theme<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+    <span class="tag">&lt;classifier&gt;</span>no-cache<span class="tag">&lt;/classifier&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This classifier <strong>appends the theme version</strong> to the name of theme so you need to change the theme name in web.xml:</p>
+</div>
+<div class="listingblock">
+<div class="title">web.xml</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;context-param&gt;</span>
+    <span class="tag">&lt;param-name&gt;</span>primefaces.THEME<span class="tag">&lt;/param-name&gt;</span>
+    <span class="tag">&lt;param-value&gt;</span>admin-1.0.0-RC6<span class="tag">&lt;/param-value&gt;</span>
+<span class="tag">&lt;/context-param&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="development"><a class="anchor" href="#development"></a>2.6. Development</h3>
+<div class="paragraph">
+<p>To get your hands dirty with admin theme it is recommended to use <a href="#admin_designer">Admin Designer</a> in combination with <a href="http://brackets.io/">Brackets</a> or any tool that <code>compile less</code> files to css on save.</p>
+</div>
+<div class="paragraph">
+<p>Using designer (which is backed by wildfly swarm) plus brackets will let you change the components less files and see the results instantly.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+theme.less is already brackets aware so you just need to change any component less file, save it and see the results in Admin Designer.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="snapshots"><a class="anchor" href="#snapshots"></a>2.7. Snapshots</h3>
+<div class="paragraph">
+<p>Theme <code>Snapshots</code> are published to <a href="https://oss.sonatype.org/content/repositories/snapshots/com/github/adminfaces/admin-theme" target="_blank">maven central</a> on each commit, to use it just declare the repository below on your <code>pom.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;repositories&gt;</span>
+    <span class="tag">&lt;repository&gt;</span>
+        <span class="tag">&lt;snapshots</span><span class="tag">/&gt;</span>
+        <span class="tag">&lt;id&gt;</span>snapshots<span class="tag">&lt;/id&gt;</span>
+        <span class="tag">&lt;name&gt;</span>libs-snapshot<span class="tag">&lt;/name&gt;</span>
+        <span class="tag">&lt;url&gt;</span>https://oss.sonatype.org/content/repositories/snapshots<span class="tag">&lt;/url&gt;</span>
+    <span class="tag">&lt;/repository&gt;</span>
+<span class="tag">&lt;/repositories&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin_template"><a class="anchor" href="#admin_template"></a>3. Admin Template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/adminfaces/admin-template" target="_blank">Admin Template</a> is a <strong>fully responsive</strong> <a href="https://javaserverfaces.java.net/"><em>Java Server Faces</em></a> <code>admin template</code> based on <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://almsaeedstudio.com/themes/AdminLTE/index2.html/" target="_blank">Admin LTE</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="features"><a class="anchor" href="#features"></a>3.1. Features</h3>
+<div class="paragraph">
+<p>Below is a non exhaustive list of notable features brought out of the box by this template:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fully responsive</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Its based on Bootstrap and AdminLTE two well tested and solid frameworks</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Mobile and PWA friendly</p>
+</li>
+<li>
+<p>Some functionalities are enabled only on mobile devices, like:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Material design load bar</p>
+</li>
+<li>
+<p>Ripple effect based on <a href="http://materializecss.com/waves.html" target="_blank">materialize</a></p>
+</li>
+<li>
+<p>Touch enabled menu to slide in/out<br>
+<span class="image"><img src="https://cloud.githubusercontent.com/assets/1592273/25071807/dd37121e-2296-11e7-855c-8f20b59dcf5f.gif" alt="dd37121e 2296 11e7 855c 8f20b59dcf5f"></span></p>
+</li>
+<li>
+<p>Scroll to top</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Automatically activates (highlight) menu based on current page<br>
+<span class="image"><img src="./images/menu-highlight.png" alt="menu highlight"></span></p>
+</li>
+<li>
+<p>Custom <a href="#error_pages">error pages</a></p>
+</li>
+<li>
+<p>Configurable, see <a href="#configuration">Configuration</a></p>
+</li>
+<li>
+<p><a href="http://adminfaces-rpestano.rhcloud.com/showcase/pages/layout/breadcrumb.xhtml" target="_blank">Breadcrumb</a> based navigation</p>
+</li>
+<li>
+<p>Back to previous screen when logging in again after session expiration (or accessing a page via url without being logged in)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Most of the above features can be disabled via <a href="#configuration">configuration</a> mechanism;
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage_2"><a class="anchor" href="#usage_2"></a>3.2. Usage</h3>
+<div class="paragraph">
+<p>Add the following dependency to your classpath:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-template<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Admin template will bring the following transitive dependencies:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>com.github.adminfaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>admin-template<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>1.0.0-RC6<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+
+<span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.primefaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>primefaces<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>6.1<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span>
+
+<span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.omnifaces<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>omnifaces<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>2.1<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which you can override in your pom.xml as needed.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With the template dependency in classpath now you can use <code>admin</code> facelets template into your JSF pages.</p>
+</div>
+<div class="sect3">
+<h4 id="example"><a class="anchor" href="#example"></a>3.2.1. Example</h4>
+<div class="paragraph">
+<p>Consider the following sample page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="html"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="tag">&lt;ui:composition</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/1999/xhtml</span><span class="delimiter">&quot;</span></span>
+                <span class="attribute-name">xmlns:ui</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://java.sun.com/jsf/facelets</span><span class="delimiter">&quot;</span></span>
+                <span class="attribute-name">xmlns:p</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://primefaces.org/ui</span><span class="delimiter">&quot;</span></span>
+                <span class="attribute-name">template</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/admin.xhtml</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">head</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+        <span class="tag">&lt;title&gt;</span>Admin Starter<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">logo-lg</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+        Admin Starter
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">logo-mini</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+        Admin
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">menu</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+        <span class="tag">&lt;ul</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">sidebar-menu</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+            <span class="tag">&lt;li&gt;</span>
+                <span class="tag">&lt;p:link</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/index.xhtml</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">onclick</span>=<span class="string"><span class="delimiter">&quot;</span>clearBreadCrumbs()<span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;i</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fa fa-home</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><span class="tag">&lt;/i&gt;</span>
+                    <span class="tag">&lt;span&gt;</span>Home<span class="tag">&lt;/span&gt;</span>
+                <span class="tag">&lt;/p:link&gt;</span>
+            <span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">header</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+                    General
+                <span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>
+                    <span class="tag">&lt;p:link</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/car-list.xhtml</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+                        <span class="tag">&lt;i</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">fa fa-car</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><span class="tag">&lt;/i&gt;</span>
+                        <span class="tag">&lt;span&gt;</span>Cars<span class="tag">&lt;/span&gt;</span>
+                    <span class="tag">&lt;/p:link&gt;</span>
+                <span class="tag">&lt;/li&gt;</span>
+        <span class="tag">&lt;/ul&gt;</span>
+     <span class="tag">&lt;/ui:define&gt;</span>
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">top-menu</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+        <span class="tag">&lt;ui:include</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">/includes/top-bar.xhtml</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+      <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h2</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">align-center</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+            Welcome to the <span class="tag">&lt;span</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text-aqua</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span> <span class="tag">&lt;i&gt;</span><span class="tag">&lt;a</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">https://github.com/adminfaces/admin-starter</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">target</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">_blank</span><span class="delimiter">&quot;</span></span>
+                                                          <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="key">text-transform</span>: <span class="value">none</span>;<span class="key">text-decoration</span>: <span class="value">none</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span> AdminFaces Starter<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/i&gt;</span><span class="tag">&lt;/span&gt;</span> Project!
+            <span class="tag">&lt;br</span><span class="tag">/&gt;</span>
+            <span class="tag">&lt;small&gt;</span>Integrating <span class="tag">&lt;p:link</span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Primefaces</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://primefaces.org</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>, <span class="tag">&lt;p:link</span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Bootstrap</span><span class="delimiter">&quot;</span></span>
+                                                                                                  <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://getbootstrap.com/</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span> and
+                <span class="tag">&lt;p:link</span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Admin LTE</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">https://almsaeedstudio.com/themes/AdminLTE/index2.html/</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span> into your
+                <span class="tag">&lt;p:link</span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">JSF</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">https://javaserverfaces.java.net/</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span> application.
+            <span class="tag">&lt;/small&gt;</span>
+        <span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+        A page description
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">body</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>Page body<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+
+    <span class="tag">&lt;ui:define</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">footer</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+          <span class="tag">&lt;a</span> <span class="attribute-name">target</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">_blank</span><span class="delimiter">&quot;</span></span>
+           <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">https://github.com/adminfaces/</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+            Copyright (C) 2017 - AdminFaces
+        <span class="tag">&lt;/a&gt;</span>
+
+        <span class="tag">&lt;div</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pull-right hidden-xs</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">style</span>=<span class="string"><span class="delimiter">&quot;</span><span class="key">color</span>: <span class="value">gray</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+            <span class="tag">&lt;i&gt;</span>1.0.0<span class="tag">&lt;/i&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/ui:define&gt;</span>
+
+
+<span class="tag">&lt;/ui:composition&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>/admin.xhtml is the location of the template</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The above page definition renders as follows:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/template-example.png" alt="template example">
+</div>
+</div>
+<div class="paragraph">
+<p>There are also other regions defined in admin.xhtml template, <a href="https://raw.githubusercontent.com/adminfaces/admin-template/master/admin-template-regions.png" target="_blank">see here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration"><a class="anchor" href="#configuration"></a>3.3. Configuration</h3>
+<div class="paragraph">
+<p>Template configuration is made through <code>admin-config.properties</code> file present in <code>src/main/resources</code> folder.</p>
+</div>
+<div class="paragraph">
+<p>Here are the default values as well as its description:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>admin.loginPage=login.xhtml <i class="conum" data-value="1"></i><b>(1)</b>
+admin.indexPage=index.xhtml <i class="conum" data-value="2"></i><b>(2)</b>
+admin.dateFormat=MM/dd/yyyy HH:mm:ss <i class="conum" data-value="3"></i><b>(3)</b>
+admin.templatePath=admin.xhtml <i class="conum" data-value="4"></i><b>(4)</b>
+admin.breadcrumbSize=5 <i class="conum" data-value="5"></i><b>(5)</b>
+admin.renderMessages=true <i class="conum" data-value="6"></i><b>(6)</b>
+admin.renderAjaxStatus=true <i class="conum" data-value="7"></i><b>(7)</b>
+admin.disableFilter=false <i class="conum" data-value="8"></i><b>(8)</b>
+admin.renderBreadCrumb=true <i class="conum" data-value="9"></i><b>(9)</b>
+admin.enableSlideMenu=true <i class="conum" data-value="10"></i><b>(10)</b>
+admin.enableRipple=true <i class="conum" data-value="11"></i><b>(11)</b>
+admin.rippleElements= .ripplelink,button.ui-button,.ui-selectlistbox-item,.ui-multiselectlistbox-item,.ui-selectonemenu-label,.ui-selectcheckboxmenu,\
+.ui-autocomplete-dropdown, .ui-autocomplete-item ... (the list goes on) <i class="conum" data-value="12"></i><b>(12)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>login page location (relative to webapp). It you only be used if you configure <a href="#admin_session">Admin Session</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>index page location. User will be redirected to it when it access app root (contextPath/).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Date format used in error page (<a href="https://raw.githubusercontent.com/adminfaces/admin-template/master/src/main/resources/META-INF/resources/500.xhtml" target="_blank">500.xhtml</a>).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>facelets template to be used on build in admin-template pages like 500.xhtml, 404.xhtml, viewexpired.xhtml, see <a href="#error_pages">Error Pages</a>. By default it uses admin.xhtml but you can define any template (e.g one that extends admin.xhtml).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Number of breadcrumbs to queue before removing the older ones.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>When false, p:messages defined in admin template will not be rendered.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>When false ajaxStatus, which triggers the loading bar on every ajax request, will not be rendered.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Disables AdminFilter, responsible for redirecting user after session timeout, sending user to logon page when it is not logged in among other things.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>When false, the breadCrumb component, declared in admin template, will not be rendered.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>If true will make left menu touch enable (can be closed or opened via touch)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>When true it will create a <a href="http://materializecss.com/waves.html#!" target="_blank">wave/ripple effect</a> on elements specified by <code>rippleElements</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>A list of comma separated list of (jquery) selector which elements will be affected by ripple effect.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You don&#8217;t need to declare all values in your admin-config.properties, you can specify only the ones you need in order to change.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="admin_session"><a class="anchor" href="#admin_session"></a>3.4. Admin Session</h3>
+<div class="paragraph">
+<p>AdminSession is a simple session scoped bean which controls whether user is logged in or not.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> public boolean isLoggedIn(){
+        return isLoggedIn; //always true by default
+    }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default the user <strong>is always logged in</strong> and you need to override it (by using <a href="https://github.com/adminfaces/admin-starter/blob/2659e762271f9e1864bd2290f3dbf5018087eccd/src/main/java/com/github/adminfaces/starter/infra/security/LogonMB.java#L28" target="_blank">bean specialization</a> or via injection and calling <code>setIsLoggedIn()</code> method) to change its value, see <a href="#overriding_adminsession">Overriding AdminSession</a>.</p>
+</div>
+<div class="paragraph">
+<p>When isLoggedIn is <code>false</code> you got the following mechanisms activated:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Access to any page, besides the login, redirects user to login;</p>
+</li>
+<li>
+<p>When session is expired user is redirected to logon and current page (before expiration) is saved so user is redirected back to where it was before session expiration.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is up to you to decide whether the user is logged in or not.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="overriding_adminsession"><a class="anchor" href="#overriding_adminsession"></a>3.4.1. Overriding AdminSession</h4>
+<div class="paragraph">
+<p>There are two ways to override AdminSession default value which is <a href="#adminsession_specialization">specialization</a> and <a href="#adminsession_injection">injection</a>.</p>
+</div>
+<div class="sect4">
+<h5 id="adminsession_specialization"><a class="anchor" href="#adminsession_specialization"></a>AdminSession Specialization</h5>
+<div class="paragraph">
+<p>A simple way to change AdminSession logged in value is by extending it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">import</span> <span class="include">javax.enterprise.context.SessionScoped</span>;
+<span class="keyword">import</span> <span class="include">javax.enterprise.inject.Specializes</span>;
+<span class="keyword">import</span> <span class="include">com.github.adminfaces.template.session.AdminSession</span>;
+<span class="keyword">import</span> <span class="include">org.omnifaces.util.Faces</span>;
+<span class="keyword">import</span> <span class="include">java.io.Serializable</span>;
+
+<span class="annotation">@SessionScoped</span>
+<span class="annotation">@Specializes</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">LogonMB</span> <span class="directive">extends</span> AdminSession <span class="directive">implements</span> <span class="predefined-type">Serializable</span> {
+
+    <span class="directive">private</span> <span class="predefined-type">String</span> currentUser;
+    <span class="directive">private</span> <span class="predefined-type">String</span> email;
+    <span class="directive">private</span> <span class="predefined-type">String</span> password;
+    <span class="directive">private</span> <span class="type">boolean</span> remember;
+
+
+    <span class="directive">public</span> <span class="type">void</span> login() <span class="directive">throws</span> <span class="exception">IOException</span> {
+        currentUser = email;
+        addDetailMessage(<span class="string"><span class="delimiter">&quot;</span><span class="content">Logged in successfully as &lt;b&gt;</span><span class="delimiter">&quot;</span></span> + email + <span class="string"><span class="delimiter">&quot;</span><span class="content">&lt;/b&gt;</span><span class="delimiter">&quot;</span></span>);
+        Faces.getExternalContext().getFlash().setKeepMessages(<span class="predefined-constant">true</span>);
+        Faces.redirect(<span class="string"><span class="delimiter">&quot;</span><span class="content">index.xhtml</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> isLoggedIn() {
+
+        <span class="keyword">return</span> currentUser != <span class="predefined-constant">null</span>;
+    }
+
+    <span class="comment">//getters&amp;setters</span>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adminsession_injection"><a class="anchor" href="#adminsession_injection"></a>3.4.2. AdminSession Injection</h4>
+<div class="paragraph">
+<p>Another way is to inject it into your security authentication logic:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">import</span> <span class="include">com.github.adminfaces.template.session.AdminSession</span>;
+<span class="keyword">import</span> <span class="include">org.omnifaces.util.Messages</span>;
+<span class="keyword">import</span> <span class="include">org.omnifaces.util.Faces</span>;
+
+<span class="annotation">@SessionScoped</span>
+<span class="annotation">@Named</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">authorizer</span><span class="delimiter">&quot;</span></span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">CustomAuthorizer</span> <span class="directive">implements</span> <span class="predefined-type">Serializable</span> {
+
+    <span class="directive">private</span> <span class="predefined-type">String</span> currentUser;
+
+    <span class="annotation">@Inject</span>
+    AdminSession adminSession;
+
+    <span class="directive">public</span> <span class="type">void</span> login(<span class="predefined-type">String</span> username) {
+        currentUser = username;
+        adminSession.setIsLoggedIn(<span class="predefined-constant">true</span>);
+        Messages.addInfo(<span class="predefined-constant">null</span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">Logged in sucessfully as &lt;b&gt;</span><span class="delimiter">&quot;</span></span>+username+<span class="string"><span class="delimiter">&quot;</span><span class="content">&lt;/b&gt;</span><span class="delimiter">&quot;</span></span>);
+        Faces.redirect(<span class="string"><span class="delimiter">&quot;</span><span class="content">index.xhtml</span><span class="delimiter">&quot;</span></span>);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+As isLoggedIn is <code>true by default</code> you need to set it to false on application startup so user is redirected to login page. This step is not needed when <a href="#adminsession_specialization">AdminSession Specialization</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="error_pages"><a class="anchor" href="#error_pages"></a>3.5. Error Pages</h3>
+<div class="paragraph">
+<p>The template comes with custom error pages like <code>403</code>, <code>404</code>, <code>500</code>, <code>ViewExpired</code> and <code>OptimisticLock</code>.</p>
+</div>
+<div class="paragraph">
+<div class="title">500</div>
+<p>User is going to be redirected to <strong>500.xhtml</strong> whenever a <em>500</em> response code is returned in a request.</p>
+</div>
+<div class="paragraph">
+<p>The page will also be triggered when a <code>Throwable</code> is raised (and not catch).</p>
+</div>
+<div class="paragraph">
+<p>Here is how 500 page look like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/500.png" alt="500">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">403</div>
+<p>User is redirected to <strong>403.xhtml</strong> whenever a <em>403</em> response code is returned in a request. The page will also be triggered when a <code>com.github.adminfaces.template.exception.AccessDeniedException</code> is raised.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/403.png" alt="403">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">404</div>
+<p>User will be redirected to <strong>404.xhtml</strong> whenever a 404 response code is returned from a request.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/404.png" alt="404">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">ViewExpired</div>
+<p>When a JSF <code>javax.faces.application.ViewExpiredException</code> is raised user will be redirected to <strong>expired.xhtml</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/expired.png" alt="expired">
+</div>
+</div>
+<div class="paragraph">
+<div class="title">OptimisticLock</div>
+<p>When a JPA <code>javax.persistence.OptimisticLockException</code> is thrown user will be redirected to <strong>optimistic.xhtml</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/optimistic.png" alt="optimistic">
+</div>
+</div>
+<div class="sect3">
+<h4 id="providing_custom_error_pages"><a class="anchor" href="#providing_custom_error_pages"></a>3.5.1. Providing custom error pages</h4>
+<div class="paragraph">
+<p>You can provide your own custom pages (and other status codes) by configuring them in web.xml, example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;error-page&gt;</span>
+    <span class="tag">&lt;error-code&gt;</span>404<span class="tag">&lt;/error-code&gt;</span>
+    <span class="tag">&lt;location&gt;</span>/404.xhtml<span class="tag">&lt;/location&gt;</span>
+<span class="tag">&lt;/error-page&gt;</span>
+<span class="tag">&lt;error-page&gt;</span>
+    <span class="tag">&lt;error-code&gt;</span>500<span class="tag">&lt;/error-code&gt;</span>
+    <span class="tag">&lt;location&gt;</span>/500.xhtml<span class="tag">&lt;/location&gt;</span>
+<span class="tag">&lt;/error-page&gt;</span>
+<span class="tag">&lt;error-page&gt;</span>
+    <span class="tag">&lt;exception-type&gt;</span>java.lang.Throwable<span class="tag">&lt;/exception-type&gt;</span>
+    <span class="tag">&lt;location&gt;</span>/500.xhtml<span class="tag">&lt;/location&gt;</span>
+<span class="tag">&lt;/error-page&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="overriding_error_pages"><a class="anchor" href="#overriding_error_pages"></a>3.5.2. Overriding error pages</h4>
+<div class="paragraph">
+<p>You can also override error pages by placing the pages (with same name) described in <a href="#error_pages">Error Pages</a> section on the root of your application (<code>webapp/</code>).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="labels_and_messages_in_error_pages"><a class="anchor" href="#labels_and_messages_in_error_pages"></a>3.5.3. Labels and Messages in error pages</h4>
+<div class="paragraph">
+<p>Labels and messages in error pages are provided via <a href="http://docs.oracle.com/javaee/6/tutorial/doc/bnaxw.html#bnaxy">JSF resource bundle</a> mechanism.</p>
+</div>
+<div class="paragraph">
+<p>Below is <code>admin.properties</code> resource bundle which provides messages for error pages:</p>
+</div>
+<div class="listingblock">
+<div class="title">src/main/resources/admin.properties</div>
+<div class="content">
+<pre>label.go-back=Go back to
+
+#403
+label.403.header=403
+label.403.message=Access denied! You do not have access to the requested page.
+
+#404
+label.404.header=404
+label.404.message=Oops! Page not found
+
+#500
+label.500.header=500
+label.500.message=Oops! Something went wrong
+label.500.title=Unexpected error
+label.500.detail=Details
+
+#expired
+label.expired.title=View expired
+label.expired.message= The requested page could not be recovered.
+label.expired.click-here= Click here to reload the page.
+
+#optimistic
+label.optimistic.title=Record already updated
+label.optimistic.message= The requested record has been already updated by another user.
+label.optimistic.click-here= Click here to reload the updated record from database.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To override labels just provide a file named <em>admin.properties</em> in your application <code>resources</code> folder.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="snapshots_2"><a class="anchor" href="#snapshots_2"></a>3.6. Snapshots</h3>
+<div class="paragraph">
+<p>Template <code>Snapshots</code> are published to <a href="https://oss.sonatype.org/content/repositories/snapshots/com/github/adminfaces/admin-template" target="_blank">maven central</a> on each commit, to use it just declare the repository below on your <code>pom.xml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;repositories&gt;</span>
+    <span class="tag">&lt;repository&gt;</span>
+        <span class="tag">&lt;snapshots</span><span class="tag">/&gt;</span>
+        <span class="tag">&lt;id&gt;</span>snapshots<span class="tag">&lt;/id&gt;</span>
+        <span class="tag">&lt;name&gt;</span>libs-snapshot<span class="tag">&lt;/name&gt;</span>
+        <span class="tag">&lt;url&gt;</span>https://oss.sonatype.org/content/repositories/snapshots<span class="tag">&lt;/url&gt;</span>
+    <span class="tag">&lt;/repository&gt;</span>
+<span class="tag">&lt;/repositories&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin_designer"><a class="anchor" href="#admin_designer"></a>4. Admin Designer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The aim of <a href="https://github.com/adminfaces/admin-designer" target="_blank">Admin Designer</a> is to make it easier to customize Admin theme and Admin Template.</p>
+</div>
+<div class="sect2">
+<h3 id="what_is_it"><a class="anchor" href="#what_is_it"></a>4.1. What is it?</h3>
+<div class="paragraph">
+<p>This is the same <a href="http://github.com/adminfaces/admin-showcase" target="_blank">Admin Showcase</a> application with <code>admin template</code> and <code>admin theme</code> bundled inside instead of being project dependencies.</p>
+</div>
+<div class="paragraph">
+<p>It uses <a href="http://wildfly-swarm.io/" target="_blank">Wildfly Swarm</a> to run the <code>exploded</code> application so one can change the theme or template and see the modifications without needing to restart the application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="objectives"><a class="anchor" href="#objectives"></a>4.2. Objectives</h3>
+<div class="paragraph">
+<p>The initial idea was to speed AdminFaces development but it turns out that it can easy <code>contributions</code> from non Java developers (like designers and frontend developers) as the project is about front end components and layout.</p>
+</div>
+<div class="paragraph">
+<p>Also another great feature of Admin Designer is the possibility to <strong>download the customized project</strong> as a maven project.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The downloaded project is the <a href="https://github.com/adminfaces/admin-starter" target="_blank">Admin Starter</a> with modified admin theme and template embedded in the project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This is the most flexible approach but at the same time <code>you lose the updates on Admin Theme and template projects</code> because you don&#8217;t depend on them anymore.
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="how_it_works"><a class="anchor" href="#how_it_works"></a>4.3. How it works</h3>
+<div class="paragraph">
+<p>In application root directory:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>First start the application by running the command:</p>
+<div class="listingblock">
+<div class="content">
+<pre>./mvnw wildfly-swarm:run (or mvnw.cmd wildfly-swarm:run)</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Second edit any less file in directory <a href="https://github.com/adminfaces/admin-designer/tree/master/src/main/resources/less" target="_blank"><code>src/main/resources/less</code></a>.</p>
+</li>
+<li>
+<p>Now to compile the application using:</p>
+<div class="listingblock">
+<div class="content">
+<pre> ./mvnw compile (or mvnw.cmd compile)</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you don&#8217;t want to compile every time you change a less file, use the flag <code>-Dlesscss.watch=true</code>. Or use a tool like <a href="http://brackets.io/" target="_blank">brackets</a> with <a href="https://github.com/jdiehl/brackets-less-autocompile" target="_blank">less extension</a> installed.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Finally when you&#8217;re done you can download the customized <code>theme</code> and <code>template</code> as a <strong>sample maven project</strong> or as separated jar files;</p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/designer.png" alt="designer">
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The changes made to less files should be visible in running application <code><a href="http://localhost:8080/showcase" class="bare">http://localhost:8080/showcase</a></code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There is no need to stop and run the application again.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can see this workflow in the following video: <a href="https://youtu.be/X1UEpN942s0" class="bare">https://youtu.be/X1UEpN942s0</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin_starter"><a class="anchor" href="#admin_starter"></a>5. Admin Starter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/adminfaces/admin-starter" target="_blank">Admin Starter</a> is a simple project to get you started with AdminFaces.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/starter.png" alt="starter">
+</div>
+</div>
+<div class="sect2">
+<h3 id="running"><a class="anchor" href="#running"></a>5.1. Running</h3>
+<div class="paragraph">
+<p>It should run in any JavaEE 6 or greater application server.</p>
+</div>
+<div class="paragraph">
+<p>You can also run via <a href="http://wildfly-swarm.io/" target="_blank">wildfly-swarm</a> with command <code>mvn wildfly-swarm:run -Pswarm</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="demo"><a class="anchor" href="#demo"></a>5.2. Demo</h3>
+<div class="paragraph">
+<p>A live demo is available on Openshift here: <a href="http://starter-adminfaces.rhcloud.com/admin-starter/" class="bare">http://starter-adminfaces.rhcloud.com/admin-starter/</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="admin_mobile"><a class="anchor" href="#admin_mobile"></a>6. Admin Mobile</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://github.com/adminfaces/admin-mobile" target="_blank">Admin Mobile</a> is a simple <a href="https://developer.android.com/studio/index.html" target="_blank">Android Studio</a> project which uses <a href="https://developer.android.com/reference/android/webkit/WebView.html" target="_blank">Webview</a> to create an <a href="https://www.mobiloud.com/blog/native-web-or-hybrid-apps/" target="_blank">hybrid web app</a> based on Admin Showcase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/admin-webview.png" alt="admin webview">
+</div>
+</div>
+<div class="paragraph">
+<p>The app is a proof of concept to check AdminFaces user experience in mobile apps. The following behaviours will be enabled only on this kind of devices:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Loading bar based on google material design;</p>
+</li>
+<li>
+<p>Go to top link at the bottom right corner of the page;</p>
+</li>
+<li>
+<p>Larger icons on panel, dialog and messages;</p>
+</li>
+<li>
+<p>Some components like growl, tabview and datatable are optimized for mobile devices;</p>
+</li>
+<li>
+<p>Ripple/waves effect based on <a href="http://materializecss.com/waves.html" target="_blank">materialize</a>;</p>
+</li>
+<li>
+<p>Slideout menu<br>
+<span class="image"><img src="https://cloud.githubusercontent.com/assets/1592273/25071807/dd37121e-2296-11e7-855c-8f20b59dcf5f.gif" alt="dd37121e 2296 11e7 855c 8f20b59dcf5f"></span></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0.0-RC6<br>
+Last updated 2017-06-24 13:24:06 BRT
+</div>
+</div>
+</body>
+</html>
