@@ -3,3 +3,6 @@ description: Integrating Primefaces, Bootstrap and Admin LTE into your JSF appli
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-dinky
+url: https://adminfaces.github.io
+baseurl: /showcase
+repository: adminfaces/admin-showcase
