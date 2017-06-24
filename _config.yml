@@ -4,5 +4,5 @@ show_downloads: true
 google_analytics:
 theme: jekyll-theme-dinky
 url: https://adminfaces.github.io
-baseurl: /showcase
+baseurl: /admin-showcase
 repository: adminfaces/admin-showcase
