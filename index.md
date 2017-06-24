@@ -17,7 +17,7 @@ AdminFaces is composed by the following projects:
 
 #### Documentation
 
-Current version (under development) of documentation can be [found here]({{site.baseurl}}/latest/index.html.
+Current version (under development) of documentation can be [found here]({{site.baseurl}}/latest/index.html).
 
 Following is documentation for each released version:
 
