@@ -2,122 +2,31 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
 
-[Link to another page](another-page).
-
-There should be whitespace between paragraphs.
-
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
-
-# [](#header-1)Header 1
-
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
-
-## [](#header-2)Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### [](#header-3)Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### [](#header-4)Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### [](#header-5)Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### [](#header-6)Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![](https://assets-cdn.github.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![](https://guides.github.com/activities/hello-world/branching.png)
+[**AdminFaces**](https://github.com/adminfaces) is an open source project which integrates [Primefaces](http://primefaces.org/), [Bootstrap](http://getbootstrap.com/) and [Admin LTE](https://almsaeedstudio.com/themes/AdminLTE/index2.html/) in order to create fully responsive and mobile ready [JSF](https://javaserverfaces.java.net/) applications.
 
 
-### Definition lists can be used with HTML syntax.
+AdminFaces is composed by the following projects:
 
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
+* [Admin Theme](http://github.com/adminfaces/admin-theme): A [Primefaces theme](http://primefaces.org/themes) based on Bootstrap and Admin LTE where Primefaces components are customized to look like and work with mentioned frameworks.
+* [Admin Template](http://github.com/adminfaces/admin-template): It's a fully responsive [Java Server Faces](https://javaserverfaces.java.net/) admin template which is also based on Bootstrap and Admin LTE.
+* [Admin Showcase](http://github.com/adminfaces/admin-showcase): A web application which demonstrates AdminFaces main features and components.
+* [Admin Designer](http://github.com/adminfaces/admin-designer): It's the same showcase application with Admin Theme and Admin Template bundled (instead of being library dependencies) in order to make it easier to customize the theme and the template.
+* [Admin Starter](http://github.com/adminfaces/admin-starter): A simple starter project to get you started with AdminFaces.
+* [Admin Mobile](http://github.com/adminfaces/admin-mobile): Admin showcase mobile application using Android webview.
 
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
+#### Documentation
 
-```
-The final element.
-```
+Current version (under development) of documentation can be [found here]({{site.baseurl}}/latest/index.html.
+
+Following is documentation for each released version:
+
+{% for release in site.github.releases %}
+  * [{{ release.tag_name }}]({{site.baseurl}}/{{ release.tag_name }}/index.html) ([PDF]({{site.baseurl}}/{{ release.tag_name }}/index.pdf))
+{% endfor %}
+
+#### Credits
+* Maintained by:
+  * [Rafael M. Pestano](https://github.com/rmpestano) and community
+
+[rmpestano]: https://github.com/rmpestano

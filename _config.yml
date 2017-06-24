@@ -1,5 +1,5 @@
-title: Dinky theme
-description: Dinky is a red hot theme for GitHub Pages.
+title: AdminFaces 
+description: Integrating Primefaces, Bootstrap and Admin LTE into your JSF application.
 show_downloads: true
 google_analytics:
-theme: 
+theme: jekyll-theme-dinky
