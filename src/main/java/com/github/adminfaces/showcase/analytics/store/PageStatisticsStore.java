@@ -132,7 +132,7 @@ public class PageStatisticsStore implements Serializable {
             for (PageStats pageStats : pageStatsCopy) {
                 JsonArrayBuilder pageViewsJsonArray = Json.createArrayBuilder();
                 for (PageView pageView : pageStats.getPageViews()) {
-                    if (!has(pageView.getIp()) && !BlackListFilter.isBlocked(pageView.getIp())) {
+                    if (!has(pageView.getIp()) || BlackListFilter.isBlocked(pageView.getIp())) {
                         continue;
                     }
                     boolean infoUpdated = queryAdditionalPageViewInfo(pageView);
