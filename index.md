@@ -21,7 +21,7 @@ Current version (under development) of documentation can be [found here]({{site.
 
 Following is documentation for each released version:
 
-{% for release in site.github.releases %}
+{% for release in site.github.releases reversed %}
   * [{{ release.tag_name }}]({{site.baseurl}}/{{ release.tag_name }}/index.html) ([PDF]({{site.baseurl}}/{{ release.tag_name }}/index.pdf))
 {% endfor %}
 
