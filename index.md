@@ -1,5 +1,7 @@
 ---
 layout: default
+title: AdminFaces
+subTitle: A PrimeFaces admin theme and JSF template based on Bootstrap
 ---
 
 
