@@ -52,7 +52,7 @@ public class AnalyticsMB implements Serializable {
         viewId = Faces.getViewId();
         HttpServletRequest request = Faces.getRequest();
         String browser = request.getHeader("User-Agent");
-        if (!has(browser)) {
+        if (!has(browser) || browser.contains("YandexBot")) {
             return;
         }
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
