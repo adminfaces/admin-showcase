@@ -4,6 +4,7 @@
          version="3.0">
     <session-config>
         <session-timeout>30</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
     </session-config>
     <!-- Change to "Production" when you are ready to deploy -->
     <context-param>

@@ -19,6 +19,13 @@
                 padding-right: 0;
             }
 
+            .ui-datagrid-column .ui-panel.ui-widget-content {
+                border: none;
+            }
+
+            .ui-tree .ui-widget .ui-widget-content {
+                border: none;
+            }
 
         </style>
     </ui:define>
@@ -146,7 +153,7 @@
                 <p:commandButton id="dialog" value="Dialog" icon="ui-icon-extlink" styleClass="btn-success"
                                  type="button" onclick="PF('dlg').show()" style="margin-top:20px;display:block"/>
                 <p:dialog header="Login" widgetVar="dlg" resizable="false" responsive="true"
-                          modal="true" appendTo="@(body)" width="350">
+                          modal="true" appendTo="@(body)" width="350" styleClass="card">
                     <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank"
                                  columnClasses="ui-grid-col-4,ui-grid-col-8">
                         <h:outputLabel for="username" value="Username:"/>
@@ -166,52 +173,51 @@
                     </p:panelGrid>
                 </p:dialog>
 
-                <div class="ui-g-12 card">
-                    <p:chart type="line" model="#{chartMB.lineModel1}" style="height:300px;margin:20px 0"
-                             responsive="true"/>
+                <div class="ui-g-12">
+                    <p:panel styleClass="card no-border">
+                        <p:chart type="line" model="#{chartMB.lineModel1}" style="height:300px;margin:20px 0"
+                                 responsive="true"/>
+                    </p:panel>
                 </div>
 
-                <div class="ui-g-12 card">
-                    <p:dataTable var="car" value="#{datatableMB.cars}" reflow="true" style="margin-top:20px"
-                                 paginator="true" paginatorPosition="bottom" rows="5">
-                        <f:facet name="header">
-                            DataTable
-                        </f:facet>
-                        <p:column headerText="Id">
-                            <h:outputText value="#{car.id}"/>
-                        </p:column>
+                <div class="ui-g-12">
+                    <p:panel header="DataTable" styleClass="card no-border">
+                        <p:dataTable var="car" value="#{datatableMB.cars}" reflow="true"
+                                     paginator="true" paginatorPosition="bottom" rows="5">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{car.id}"/>
+                            </p:column>
 
-                        <p:column headerText="Year">
-                            <h:outputText value="#{car.year}"/>
-                        </p:column>
+                            <p:column headerText="Year">
+                                <h:outputText value="#{car.year}"/>
+                            </p:column>
 
-                        <p:column headerText="Brand">
-                            <h:outputText value="#{car.brand}"/>
-                        </p:column>
+                            <p:column headerText="Brand">
+                                <h:outputText value="#{car.brand}"/>
+                            </p:column>
 
-                        <p:column headerText="Color">
-                            <h:outputText value="#{car.color}"/>
-                        </p:column>
-                    </p:dataTable>
-
+                            <p:column headerText="Color">
+                                <h:outputText value="#{car.color}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
                 </div>
-                <div class="ui-g-12 card">
-                    <p:dataGrid var="car" value="#{dataGridMB.cars}" columns="3" layout="grid"
-                                rows="12" paginator="true" style="margin-top:20px">
 
-                        <f:facet name="header">
-                            DataGrid
-                        </f:facet>
+                <div class="ui-g-12">
+                    <p:panel header="DataGrid" styleClass="card no-border">
+                        <p:dataGrid var="car" value="#{dataGridMB.cars}" columns="3" layout="grid" rows="12"
+                                    paginator="true" paginatorPosition="bottom" >
 
-                        <p:panel header="#{car.id}" style="text-align:center">
-                            <h:panelGrid columns="1" style="width:100%">
-                                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/>
+                            <p:panel header="#{car.id}" style="text-align:center">
+                                <h:panelGrid columns="1" style="width:100%">
+                                    <p:graphicImage name="demo/images/car/#{car.brand}.gif"/>
 
-                                <h:outputText value="#{car.brand} - #{car.year}"/>
-                            </h:panelGrid>
-                        </p:panel>
+                                    <h:outputText value="#{car.brand} - #{car.year}"/>
+                                </h:panelGrid>
+                            </p:panel>
 
-                    </p:dataGrid>
+                        </p:dataGrid>
+                    </p:panel>
                 </div>
 
                 <div class="ui-g-12">
