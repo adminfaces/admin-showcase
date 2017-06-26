@@ -8,13 +8,13 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5 col-sm-6">
+                <div id="{{ post.id }}" class="col-lg-5 col-sm-6 wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">{{ post.title }}</h2>
                     <div class="lead">{{ post.content }}</div>
                 </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6 wow fadeIn" data-wow-duration="1500ms" data-wow-delay="500ms">
                     <img class="img-responsive" src="img/services/{{ post.img }}" alt="">
                 </div>
             </div>
@@ -31,13 +31,13 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                <div id="{{ post.id }}" class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6 wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">{{ post.title }}</h2>
                     <div class="lead">{{ post.content }}</div>
                 </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6 wow fadeIn"  data-wow-duration="1500ms" data-wow-delay="500ms">
                   <img class="img-responsive" src="img/services/{{ post.img }}" alt="">
                 </div>
             </div>
@@ -48,5 +48,11 @@
     </div>
     <!-- /.content-section-b -->
     {% endif %}
+<script>
+ 
+
+</script>
 {% endfor %}
 </section>
+
+

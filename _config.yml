@@ -2,7 +2,7 @@ title: AdminFaces
 description: Integrating Primefaces, Bootstrap and Admin LTE into your JSF application.
 google_analytics:
 url: https://adminfaces.github.io
-baseurl: /admin-showcase
+baseurl: /admin-showcase/
 repository: adminfaces/admin-showcase
 
 markdown: kramdown
@@ -13,8 +13,6 @@ permalink: pretty
 # ----------------------- #
 
 social:
-  - title: twitter
-    url: https://twitter.com/realpestano
   - title: github
     url: https://github.com/adminfaces
 
