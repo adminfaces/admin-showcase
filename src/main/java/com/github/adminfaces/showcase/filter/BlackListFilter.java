@@ -14,7 +14,7 @@ import java.util.List;
 @WebFilter(urlPatterns = "/*")
 public class BlackListFilter implements Filter {
 
-    private static final List<String> BLACK_LIST  = Arrays.asList("5.255.250","141.8.143","77.88.47","84.201.133","100.43.85","199.21.99");
+    private static final List<String> BLACK_LIST  = Arrays.asList("5.255.250","141.8.143","77.88.47","84.201.133","100.43.85","199.21.99","66.249.65");
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
