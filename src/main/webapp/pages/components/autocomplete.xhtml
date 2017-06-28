@@ -79,6 +79,10 @@
                                                 var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" converter="themeConverter"
                                                 groupBy="#{autoCompleteMB.getThemeGroup(theme)}" scrollHeight="250"/>
                             </div>
+
+                        </div>
+                        <div class="ui-g-12">
+                            <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" styleClass="material" placeholder="Material Autocomplete" dropdown="true" required="true" />
                         </div>
                     </div>
 
