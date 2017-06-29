@@ -123,8 +123,8 @@
         </p:panel>
         <p:spacer/>
         <p:panel header="Material inputs" styleClass="card no-border">
-            <div class="callout callout-info">
-                <p>To use material design inputs just add <code>material</code> css class to input text, selectone, autocomplete and checkbox menu.</p>
+            <div id="material" class="callout callout-info">
+                  <p>To use material design inputs just add <code>material</code> css class to input text, selectone, autocomplete and checkbox menu.</p>
             </div>
             <h:form>
                 <div class="ui-g ui-fluid">
@@ -151,8 +151,16 @@
                     <div class="ui-g-4">
                         <p:message id="msgAutocomplete" for="autocomplete"/>
                     </div>
+
+                    <div class="ui-g-8">
+                         <p:calendar id="calendar" showOn="both" placeholder="Calendar" styleClass="material" required="true"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <p:message id="msgcalendar" for="calendar"/>
+                    </div>
+
                     <div class="ui-g-12">
-                        <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple"/>
+                        <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple" />
                     </div>
                     <div class="ui-g-8">
                         <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities" required="true" styleClass="material"
