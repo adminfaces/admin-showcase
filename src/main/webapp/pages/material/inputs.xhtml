@@ -24,7 +24,7 @@
             <div class="callout callout-info">
                 <p>Material design inputs must be surrounded by a <code>div</code> with class
                     <code>material</code> and its label must be placed <span
-                            style="text-decoration: underline">after the input</span>.</p>
+                            style="font-weight:bold;text-decoration: underline">after the input</span>.</p>
             </div>
 
             <h:form>
@@ -39,7 +39,7 @@
                     <div class="ui-g-8">
                         <div class="material">
                             <p:selectOneMenu id="select" value="#{userLoginMB.selected}" required="true">
-                                <f:selectItem itemLabel="Select"/>
+                                <f:selectItem itemLabel="Material select"/>
                                 <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
                                 <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
                                 <f:selectItem itemLabel="Cash" itemValue="Cash"/>
@@ -53,18 +53,34 @@
                             <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}"
                                             placeholder="Autocomplete placeholder"
                                             dropdown="true" required="true" />
-                            <p:outputLabel for="autocomplete" value="Autocomplete"/>
+                            <p:outputLabel for="autocomplete" value="Material autocomplete"/>
                             <p:message for="autocomplete"/>
                         </div>
                     </div>
 
                     <div class="ui-g-8">
                         <div class="material">
-                            <p:calendar id="date" showOn="both" placeholder="Calendar placeholder" required="true" >
-                                 <p:ajax event="dateSelect" global="false" onstart="adminMaterial()"/>
+                            <p:calendar id="material-calendar" showOn="both" placeholder="Calendar placeholder" required="true">
+                                <p:ajax event="dateSelect" global="false" onstart="adminMaterial()"/>
                             </p:calendar>
-                            <p:outputLabel for="date" value="Calendar"/>
-                            <p:message for="date"/>
+                            <p:outputLabel for="material-calendar" value="Material calendar"/>
+                            <p:message for="material-calendar"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8">
+                        <div class="material">
+                            <p:password id="password" placeholder="Password placeholder" required="true" />
+                            <p:outputLabel for="password" value="Material password"/>
+                            <p:message for="password"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8">
+                        <div class="material">
+                            <p:inputTextarea id="textarea" placeholder="Textarea placeholder" required="true" />
+                            <p:outputLabel for="textarea" value="Material textarea"/>
+                            <p:message for="textarea"/>
                         </div>
                     </div>
 
