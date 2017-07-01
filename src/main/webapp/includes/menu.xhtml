@@ -4,6 +4,15 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
+    <style type="text/css">
+
+        @-moz-document url-prefix() {
+            li span.label-danger {
+                margin-top: -20px;
+            }
+        }
+    </style>
+
     <ul class="sidebar-menu">
         <li>
             <p:link href="/index.xhtml">
@@ -36,6 +45,13 @@
             <p:link href="/pages/form/forms.xhtml">
                 <i class="fa fa-edit"></i>
                 <span>Forms</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link href="/pages/material/inputs.xhtml">
+                <i class="fa fa-google"></i>
+                <span class="label label-danger pull-right" style="line-height: inherit">NEW</span>
+                <span>Material inputs</span>
             </p:link>
         </li>
         <li class="treeview">
@@ -86,7 +102,6 @@
                 <li>
                     <p:link href="/pages/components/messages.xhtml">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-danger pull-right" style="line-height: inherit">UPDATED</span>
                         <span>Messages</span>
                     </p:link>
                 </li>

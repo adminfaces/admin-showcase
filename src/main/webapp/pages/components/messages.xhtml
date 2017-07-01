@@ -47,11 +47,18 @@
                     <div class="ui-g-4">
                         <p:message id="msgDefault" for="default"/>
                     </div>
+
+                    <div class="ui-g-8 material">
+                        <p:inputText id="material" required="true" placeholder="Material placeholder"  />
+                        <p:outputLabel for="material" value="Material input"/>
+                        <p:message  for="material"/>
+                    </div>
+
                     <div class="ui-g-12">
                         <p:outputLabel for="select" value="Select"/>
                     </div>
                     <div class="ui-g-8">
-                        <p:selectOneMenu id="select" value="#{null}" required="true">
+                        <p:selectOneMenu id="select" value="#{userLoginMB.selected}" required="true">
                             <f:selectItem itemLabel="Select"/>
                             <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
                             <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
@@ -114,61 +121,10 @@
 
                     <div class="ui-g-4">
                         <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form"
-                                         ignoreAutoUpdate="true"/>
+                                         ignoreAutoUpdate="true" />
                     </div>
                 </div>
 
-
-            </h:form>
-        </p:panel>
-        <p:spacer/>
-        <p:panel header="Material inputs" styleClass="card no-border">
-            <div class="callout callout-info">
-                <p>To use material design inputs just add <code>material</code> css class to input text, selectone, autocomplete and checkbox menu.</p>
-            </div>
-            <h:form>
-                <div class="ui-g ui-fluid">
-                    <div class="ui-g-8">
-                        <p:inputText id="default" required="true" placeholder="Input text" styleClass="material"/>
-                    </div>
-                    <div class="ui-g-4">
-                        <p:message id="msgDefault" for="default"/>
-                    </div>
-                    <div class="ui-g-8">
-                        <p:selectOneMenu id="select" value="#{null}" required="true" styleClass="material" >
-                            <f:selectItem itemLabel="Select"/>
-                            <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
-                            <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
-                            <f:selectItem itemLabel="Cash" itemValue="Cash"/>
-                        </p:selectOneMenu>
-                    </div>
-                    <div class="ui-g-4">
-                        <p:message id="msgSelect" for="select"/>
-                    </div>
-                    <div class="ui-g-8">
-                        <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" styleClass="material" placeholder="Autocomplete" dropdown="true" required="true" />
-                    </div>
-                    <div class="ui-g-4">
-                        <p:message id="msgAutocomplete" for="autocomplete"/>
-                    </div>
-                    <div class="ui-g-12">
-                        <p:outputLabel for="chkmenu-multiple" value="Checkbox Menu Multiple"/>
-                    </div>
-                    <div class="ui-g-8">
-                        <p:selectCheckboxMenu id="chkmenu-multiple" label="Cities" required="true" styleClass="material"
-                                              multiple="true" filter="true" filterMatchMode="startsWith">
-                            <f:selectItems value="#{checkboxMB.cities}"/>
-                        </p:selectCheckboxMenu>
-                    </div>
-                    <div class="ui-g-4">
-                        <p:message id="multiple" for="chkmenu-multiple"/>
-                    </div>
-
-                    <div class="ui-g-4">
-                        <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form"
-                                         ignoreAutoUpdate="true"/>
-                    </div>
-                </div>
             </h:form>
         </p:panel>
     </ui:define>

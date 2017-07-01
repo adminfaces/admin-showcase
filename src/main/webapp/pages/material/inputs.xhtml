@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.layout}">
+
+    <ui:define name="title">
+        Material inputs
+    </ui:define>
+
+    <ui:define name="description">
+        This page shows how to apply <p:link value="material design"
+                                             href="https://material.io/guidelines/components/text-fields.html"
+                                             target="_blank"/> style to input components.
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Material inputs"/>
+        <p:panel styleClass="car no-border" header="Material inputs">
+            <p:tooltip/>
+
+            <div class="callout callout-info">
+                <p>Material design inputs must be surrounded by a <code>div</code> with class
+                    <code>material</code> and its label must be placed <span
+                            style="text-decoration: underline">after the input</span>.</p>
+            </div>
+
+            <h:form>
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-8">
+                        <div class="material">
+                            <p:inputText id="input" required="true" placeholder="Material placeholder"/>
+                            <p:outputLabel for="input" value="Material input"/>
+                            <p:message for="input"/>
+                        </div>
+                    </div>
+                    <div class="ui-g-8">
+                        <div class="material">
+                            <p:selectOneMenu id="select" value="#{userLoginMB.selected}" required="true">
+                                <f:selectItem itemLabel="Select"/>
+                                <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
+                                <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
+                                <f:selectItem itemLabel="Cash" itemValue="Cash"/>
+                            </p:selectOneMenu>
+                            <p:message for="select"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8">
+                        <div class="material">
+                            <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}"
+                                            placeholder="Autocomplete placeholder"
+                                            dropdown="true" required="true" />
+                            <p:outputLabel for="autocomplete" value="Autocomplete"/>
+                            <p:message for="autocomplete"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8">
+                        <div class="material">
+                            <p:calendar id="date" showOn="both" placeholder="Calendar placeholder" required="true" >
+                                 <p:ajax event="dateSelect" global="false" onstart="adminMaterial()"/>
+                            </p:calendar>
+                            <p:outputLabel for="date" value="Calendar"/>
+                            <p:message for="date"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-4">
+                    </div>
+                    <div class="ui-g-4">
+                        <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form"
+                                         ignoreAutoUpdate="true"/>
+                    </div>
+                </div>
+            </h:form>
+
+        </p:panel>
+        <div class="callout callout-danger" style="margin-top: 30px">
+            <p>Note that <code>p:calendar</code> needs to call a javascript on date select event, that is needed
+                because Primefaces doesn't trigger any javascript event on date select and we use javascript (adminMaterial function) to make the label <code>float</code>
+                when element value is not empty.</p>
+            <p>This will not be needed when <a href="https://github.com/primefaces/primefaces/issues/2304">this issue</a> is fixed.</p>
+        </div>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView styleClass="hidden-sm hidden-xs">
+            <p:tab title="inputs.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+        </p:tabView>
+
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="inputs.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+        </p:accordionPanel>
+
+    </ui:define>
+</ui:composition>
