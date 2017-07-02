@@ -15,7 +15,6 @@
                                              href="https://material.io/guidelines/components/text-fields.html"
                                              target="_blank"/> style to input components.
     </ui:define>
-
     <ui:define name="body">
         <adm:breadcrumb title="Material inputs"/>
         <p:panel styleClass="car no-border" header="Material inputs">
@@ -29,14 +28,14 @@
 
             <h:form>
                 <div class="ui-g ui-fluid">
-                    <div class="ui-g-8">
+                    <div class="ui-g-8 ui-sm-12">
                         <div class="material">
                             <p:inputText id="input" required="true" placeholder="Material placeholder"/>
                             <p:outputLabel for="input" value="Material input"/>
                             <p:message for="input"/>
                         </div>
                     </div>
-                    <div class="ui-g-8">
+                    <div class="ui-g-8 ui-sm-12">
                         <div class="material">
                             <p:selectOneMenu id="select" value="#{userLoginMB.selected}" required="true">
                                 <f:selectItem itemLabel="Material select"/>
@@ -48,19 +47,20 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8">
+                    <div class="ui-g-8 ui-sm-12">
                         <div class="material">
                             <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}"
                                             placeholder="Autocomplete placeholder"
-                                            dropdown="true" required="true" />
+                                            dropdown="true" required="true"/>
                             <p:outputLabel for="autocomplete" value="Material autocomplete"/>
                             <p:message for="autocomplete"/>
                         </div>
                     </div>
 
-                    <div class="ui-g-8">
+                    <div class="ui-g-8 ui-sm-12">
                         <div class="material">
-                            <p:calendar id="material-calendar" showOn="both" placeholder="Calendar placeholder" required="true">
+                            <p:calendar id="material-calendar" showOn="both" placeholder="Calendar placeholder"
+                                        required="true">
                                 <p:ajax event="dateSelect" global="false" onstart="adminMaterial()"/>
                             </p:calendar>
                             <p:outputLabel for="material-calendar" value="Material calendar"/>
@@ -68,19 +68,40 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8">
+                    <div class="ui-g-8 ui-sm-12">
                         <div class="material">
-                            <p:password id="password" placeholder="Password placeholder" required="true" />
+                            <p:password id="password" placeholder="Password placeholder" required="true"/>
                             <p:outputLabel for="password" value="Material password"/>
                             <p:message for="password"/>
                         </div>
                     </div>
 
-                    <div class="ui-g-8">
+                    <div class="ui-g-8 ui-sm-12">
                         <div class="material">
-                            <p:inputTextarea id="textarea" placeholder="Textarea placeholder" required="true" />
+                            <p:inputTextarea id="textarea" placeholder="Textarea placeholder" required="true"/>
                             <p:outputLabel for="textarea" value="Material textarea"/>
                             <p:message for="textarea"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8 ui-sm-12">
+                        <div class="material">
+                            <p:selectCheckboxMenu id="chkmenu" label="Cities" required="true"
+                                                  multiple="true" filter="true" filterMatchMode="startsWith">
+                                <f:selectItems value="#{checkboxMB.cities}"/>
+                            </p:selectCheckboxMenu>
+                            <p:outputLabel for="chkmenu" value="Material checkbox menu"/>
+                            <p:message for="chkmenu"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8 ui-sm-12">
+                        <div class="material">
+                            <p:inputText id="icon" required="true" placeholder="Material placeholder">
+                                <i class="fa fa-2x fa-user-circle"/>
+                            </p:inputText>
+                            <p:outputLabel for="input" value="Material input with icon"/>
+                            <p:message for="input"/>
                         </div>
                     </div>
 
@@ -96,9 +117,11 @@
         </p:panel>
         <div class="callout callout-danger" style="margin-top: 30px">
             <p>Note that <code>p:calendar</code> needs to call a javascript on date select event, that is needed
-                because Primefaces doesn't trigger any javascript event on date select and we use javascript (adminMaterial function) to make the label <code>float</code>
+                because Primefaces doesn't trigger any javascript event on date select and we use javascript (adminMaterial function) to make the label
+                <code>float</code>
                 when element value is not empty.</p>
-            <p>This will not be needed when <a href="https://github.com/primefaces/primefaces/issues/2304">this issue</a> is fixed.</p>
+            <p>This will not be needed when <a
+                    href="https://github.com/primefaces/primefaces/issues/2304">this issue</a> is fixed.</p>
         </div>
     </ui:define>
 
