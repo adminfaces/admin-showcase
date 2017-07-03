@@ -16,7 +16,7 @@
 
     <ui:define name="body">
         <adm:breadcrumb title="Messages"/>
-        <p:panel styleClass="box-info" header="Messages">
+        <p:panel styleClass="card box-info" header="Messages">
             <p:tooltip/>
 
             <h:form>
@@ -47,10 +47,12 @@
                     <div class="ui-g-4">
                         <p:message id="msgDefault" for="default"/>
                     </div>
-                    <div class="material">
-                        <p:inputText id="material" required="true" placeholder="Material placeholder"/>
-                        <p:outputLabel for="material" value="Material input"/>
-                        <p:message for="material"/>
+                    <div class="ui-g-8 ui-sm-12">
+                        <div class="material">
+                            <p:inputText id="material" required="true" placeholder="Material placeholder"/>
+                            <p:outputLabel for="material" value="Material input *"/>
+                            <p:message for="material"/>
+                        </div>
                     </div>
 
                     <div class="ui-g-12">
@@ -71,7 +73,8 @@
                         <p:outputLabel for="autocomplete" value="Auto Complete"/>
                     </div>
                     <div class="ui-g-8">
-                        <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}" dropdown="true" required="true" />
+                        <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}"
+                                        dropdown="true" required="true"/>
                     </div>
                     <div class="ui-g-4">
                         <p:message id="msgAutocomplete" for="autocomplete"/>
@@ -120,7 +123,7 @@
 
                     <div class="ui-g-4">
                         <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form"
-                                         ignoreAutoUpdate="true" />
+                                         ignoreAutoUpdate="true"/>
                     </div>
                 </div>
 
@@ -128,7 +131,7 @@
         </p:panel>
     </ui:define>
 
-    <ui:define name="code">
+    <ui:define name="codes">
         <p:tabView styleClass="hidden-sm hidden-xs">
             <p:tab title="messages.xhtml">
            <pre>

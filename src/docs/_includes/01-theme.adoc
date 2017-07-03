@@ -71,6 +71,7 @@ image::messages.png[]
 TIP: See {link-admin-showcase-openshift}/pages/form/forms.xhtml[showcase forms page^] to get an idea.
 
 
+
 == Architecture
 
 The theme uses {link-less}[less^] as css pre-processor. Each PrimeFaces component has its own less file:

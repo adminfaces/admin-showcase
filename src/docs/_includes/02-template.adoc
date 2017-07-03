@@ -5,15 +5,13 @@ https://github.com/adminfaces/admin-template[Admin Template^] is a *fully respon
 == Features
 
 Below is a non exhaustive list of notable features brought out of the box by this template:
-
 * Fully responsive
 ** Its based on Bootstrap and AdminLTE two well tested and solid frameworks
-* Mobile and PWA friendly
-* Some functionalities are enabled only on mobile devices, like:
+* Enhanced mobile experience (below features are enabled only on small screens)
 ** Material design load bar
-** Ripple effect based on http://materializecss.com/waves.html[materialize^] +
+** Ripple effect based on http://materializecss.com/waves.html[materialize css^] +
 image:https://user-images.githubusercontent.com/1592273/27104868-d9bfb33e-5063-11e7-83be-2201a3f8cda5.gif[]
-** Touch enabled menu to slide in/out +
+** Touch enabled menu to slide in/out and show navbar on scroll up +
 image:https://cloud.githubusercontent.com/assets/1592273/25071807/dd37121e-2296-11e7-855c-8f20b59dcf5f.gif[]
 ** Scroll to top
 * Automatically activates (highlight) menu based on current page +
@@ -60,6 +58,12 @@ Admin template will bring the following transitive dependencies:
     <groupId>org.omnifaces</groupId>
     <artifactId>omnifaces</artifactId>
     <version>2.1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>1.7.22</version>
 </dependency>
 ----
 
@@ -194,11 +198,11 @@ admin.autoShowNavbar=true <14>
 <7> When false ajaxStatus, which triggers the loading bar on every ajax request, will not be rendered.
 <8> Disables AdminFilter, responsible for redirecting user after session timeout, sending user to logon page when it is not logged in among other things.
 <9> When false, the breadCrumb component, declared in admin template, will not be rendered.
-<10> If true will make left menu touch enable (can be closed or opened via touch)
+<10> If true will make left menu touch enable (can be closed or opened via touch). Can be enable/disabled per page with <ui:param name="autoShowNavbar" value="false".
 <11> When true it will create a http://materializecss.com/waves.html#![wave/ripple effect^] on elements specified by `rippleElements`.
 <12> A list of comma separated list of (jquery) selector which elements will be affected by ripple effect.
 <13> Default template skin
-<14> Automatic shows navbar when users scrolls page up (on small screens)
+<14> Automatic shows navbar when users scrolls page up (on small screens). Can be enable/disabled per page with <ui:param name="enableSlideMenu" value="false".
 
 IMPORTANT: You don't need to declare all values in your admin-config.properties, you can specify only the ones you need in order to change.
 

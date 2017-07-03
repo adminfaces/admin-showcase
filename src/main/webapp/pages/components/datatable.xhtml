@@ -8,6 +8,8 @@
 
 
     <ui:define name="head-end">
+        <ui:param name="enableSlideMenu" value="false"/> <!-- disables slide menu (only on this page) on small screens -->
+        <ui:param name="autoShowNavbar" value="false"/> <!-- disables auto show navbar (only on this page) on small devices -->
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
                 text-align: right !important;
@@ -40,7 +42,7 @@
 
     <ui:define name="body">
         <adm:breadcrumb title="Datatable"/>
-        <p:panel styleClass="box-info" header="Datatable">
+        <p:panel styleClass="card box-info" header="Datatable">
             <h:form prependId="false">
 
                 <div id="datatable">
