@@ -6,6 +6,21 @@
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.layout}">
 
+
+
+    <ui:define name="head-end">
+        <style type="text/css">
+                div.material {
+                    margin-top: 10px;
+                }
+
+                input:-webkit-autofill { 
+                    -webkit-box-shadow: 0 0 0 30px white inset;
+                }
+
+        </style>
+    </ui:define>
+
     <ui:define name="title">
         Material inputs
     </ui:define>
@@ -30,7 +45,7 @@
                 <div class="ui-g ui-fluid">
                     <div class="ui-g-8 ui-sm-12">
                         <div class="material">
-                            <p:inputText id="input" required="true" placeholder="Material placeholder"/>
+                            <p:inputText id="input" value="pre filled value" required="true" placeholder="Material placeholder"/>
                             <p:outputLabel for="input" value="Material input"/>
                             <p:message for="input"/>
                         </div>

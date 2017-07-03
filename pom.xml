@@ -341,7 +341,7 @@
         <profile>
             <id>swarm</id>
             <properties>
-                <version.wildfly-swarm>2017.2.0</version.wildfly-swarm>
+                <version.wildfly-swarm>2017.4.0</version.wildfly-swarm>
             </properties>
 
             <dependencies>
@@ -353,6 +353,11 @@
                 <dependency>
                     <groupId>org.wildfly.swarm</groupId>
                     <artifactId>cdi</artifactId>
+                    <version>${version.wildfly-swarm}</version>
+                </dependency>
+                 <dependency>
+                    <groupId>org.wildfly.swarm</groupId>
+                    <artifactId>ejb</artifactId>
                     <version>${version.wildfly-swarm}</version>
                 </dependency>
             </dependencies>
