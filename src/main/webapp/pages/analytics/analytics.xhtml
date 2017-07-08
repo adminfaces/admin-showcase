@@ -111,7 +111,7 @@
         <adm:sidebar collapsed="true"/>
 
 
-        <p:panel styleClass="box-success" header="Analytics Chart" toggleable="true">
+        <p:panel styleClass="card box-success" header="Analytics Chart" toggleable="true">
             <p class="text-center">
                 <strong>Showcase visitors in current year</strong>
             </p>
@@ -143,7 +143,7 @@
         </p:panel>
         <p:separator/>
 
-        <p:panel styleClass="box-fatal" toggleable="true" header="Analytics Map - Visitors by Cities">
+        <p:panel styleClass="card box-fatal" toggleable="true" header="Analytics Map - Visitors by Cities">
             <div tabindex="0" class="leaflet-container leaflet-fade-anim" id="map">
                 <div style="transform: translate(0px, 0px);" class="leaflet-map-pane">
                     <div class="leaflet-tile-pane">
@@ -175,7 +175,7 @@
             </div>
         </p:panel>
         <p:separator/>
-        <p:panel styleClass="box-warning" header="Analytics Table" toggleable="true">
+        <p:panel styleClass="card box-warning" header="Analytics Table" toggleable="true">
             <h:form>
                 <p:dataTable var="a" value="#{analyticsMB.pageStatsList}" paginator="true" widgetVar="analyticsTable"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
