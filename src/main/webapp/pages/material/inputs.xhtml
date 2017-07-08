@@ -10,13 +10,13 @@
 
     <ui:define name="head-end">
         <style type="text/css">
-                div.material {
-                    margin-top: 10px;
-                }
+            div.material {
+                margin-top: 20px;
+            }
 
-                input:-webkit-autofill { 
-                    -webkit-box-shadow: 0 0 0 30px white inset;
-                }
+            input:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0 30px white inset;
+            }
 
         </style>
     </ui:define>
@@ -32,7 +32,7 @@
     </ui:define>
     <ui:define name="body">
         <adm:breadcrumb title="Material inputs"/>
-        <p:panel styleClass="car no-border" header="Material inputs">
+        <p:panel styleClass="card no-border" header="Material inputs">
             <p:tooltip/>
 
             <div class="callout callout-info">
@@ -43,21 +43,30 @@
 
             <h:form>
                 <div class="ui-g ui-fluid">
+
                     <div class="ui-g-8 ui-sm-12">
                         <div class="material">
-                            <p:inputText id="input" value="pre filled value" required="true" placeholder="Material placeholder"/>
+                            <p:inputText id="input" required="true" placeholder="Material placeholder"/>
                             <p:outputLabel for="input" value="Material input"/>
                             <p:message for="input"/>
                         </div>
                     </div>
                     <div class="ui-g-8 ui-sm-12">
                         <div class="material">
+                            <p:inputText id="disabled" value="pre filled value" disabled="true" />
+                            <p:outputLabel for="disabled" value="Material input disabled"/>
+                            <p:message for="disabled"/>
+                        </div>
+                    </div>
+                    <div class="ui-g-8 ui-sm-12">
+                        <div class="material">
                             <p:selectOneMenu id="select" value="#{userLoginMB.selected}" required="true">
-                                <f:selectItem itemLabel="Material select"/>
+                                <f:selectItem itemLabel="Select"/>
                                 <f:selectItem itemLabel="Credit Card" itemValue="Credit Card"/>
                                 <f:selectItem itemLabel="Deposit" itemValue="Deposit"/>
                                 <f:selectItem itemLabel="Cash" itemValue="Cash"/>
                             </p:selectOneMenu>
+                            <p:outputLabel for="select" value="Material select"/>
                             <p:message for="select"/>
                         </div>
                     </div>
@@ -85,7 +94,9 @@
 
                     <div class="ui-g-8 ui-sm-12">
                         <div class="material">
-                            <p:password id="password" placeholder="Password placeholder" required="true"/>
+                            <p:password id="password" placeholder="Password placeholder" required="true">
+                                <i class="fa fa-2x fa-lock"/>
+                            </p:password>
                             <p:outputLabel for="password" value="Material password"/>
                             <p:message for="password"/>
                         </div>
