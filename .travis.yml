@@ -1,11 +1,12 @@
-sudo: false
+dist: trusty
+addons:
+  chrome: stable
 language: java
 jdk: oraclejdk8
-
 cache:
-  bundler: true
   directories:
   - "$HOME/.m2/repository"
+  - "$HOME/.arquillian"
 
 
 #before_install: Not needed anymore cause theme and template are deployed to central snapshots on each commit
@@ -20,11 +21,11 @@ before_script:
   - git config --global http.postBuffer 157286400
 
 script:
-- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
-- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=phantomjs
-- mvn test -Pglassfish-managed -Dtravisci -Dbrowser=phantomjs
-- mvn test -Ptomee7-remote -Dtravisci -Dbrowser=phantomjs
-- mvn test -Ptomee1.7-remote -Dtravisci -Dbrowser=phantomjs
+- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=chromeheadless
+- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=chromeheadless
+- mvn test -Pglassfish-managed -Dtravisci -Dbrowser=chromeheadless
+- mvn test -Ptomee7-remote -Dtravisci -Dbrowser=chromeheadless
+- mvn test -Ptomee1.7-remote -Dtravisci -Dbrowser=chromeheadless
 
 
 deploy:

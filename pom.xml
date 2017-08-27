@@ -6,9 +6,9 @@
 
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-showcase</artifactId>
-<!-- tag::version[] -->
+    <!-- tag::version[] -->
     <version>1.0.0-RC9</version>
-<!-- end::version[] -->
+    <!-- end::version[] -->
     <name>admin-showcase</name>
 
     <packaging>war</packaging>
@@ -49,27 +49,27 @@
             <artifactId>omnifaces</artifactId>
             <version>2.1</version>
         </dependency>
-<!-- tag::dep-admin-template[] -->
-<dependency>
-    <groupId>com.github.adminfaces</groupId>
-    <artifactId>admin-template</artifactId>
-    <version>1.0.0-RC9</version>
-<!-- end::dep-admin-template[] -->
-    <exclusions>
-        <exclusion>
+        <!-- tag::dep-admin-template[] -->
+        <dependency>
+            <groupId>com.github.adminfaces</groupId>
+            <artifactId>admin-template</artifactId>
+            <version>1.0.0-RC9</version>
+            <!-- end::dep-admin-template[] -->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.adminfaces</groupId>
+                    <artifactId>admin-theme</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- tag::dep-admin-theme[] -->
+        <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-<!-- tag::dep-admin-theme[] -->
-<dependency>
-    <groupId>com.github.adminfaces</groupId>
-    <artifactId>admin-theme</artifactId>
-    <version>1.0.0-RC9</version>
-<!-- end::dep-admin-theme[] -->
-    <classifier>no-cache</classifier>
-</dependency>
+            <version>1.0.0-RC9</version>
+            <!-- end::dep-admin-theme[] -->
+            <classifier>no-cache</classifier>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -123,6 +123,15 @@
             <scope>test</scope>
             <type>pom</type>
         </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-drone-webdriver-depchain</artifactId>
+            <version>2.4.1</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.jboss.arquillian.graphene</groupId>
             <artifactId>arquillian-browser-screenshooter</artifactId>
@@ -355,7 +364,7 @@
                     <artifactId>cdi</artifactId>
                     <version>${version.wildfly-swarm}</version>
                 </dependency>
-                 <dependency>
+                <dependency>
                     <groupId>org.wildfly.swarm</groupId>
                     <artifactId>ejb</artifactId>
                     <version>${version.wildfly-swarm}</version>
