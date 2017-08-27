@@ -58,6 +58,14 @@ mvn wildfly-swarm:run  -Pswarm
 
 and access `http://localhost:8080/showcase`.
 
+== Docker
+
+You can run this showcase via docker through the following command:
+
+----
+docker run -it -p 8080:8080 rmpestano/admin-showcase
+----
+
 == Documentation
 
 Documentation can be found here: http://adminfaces-rpestano.rhcloud.com/showcase/docs/
