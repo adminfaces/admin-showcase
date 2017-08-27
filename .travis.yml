@@ -21,10 +21,10 @@ before_script:
   - git config --global http.postBuffer 157286400
 
 script:
-- mvn -U clean package -Pwildfly8-managed -Dtravisci -Dbrowser=chromeheadless
-- mvn test -Pglassfish-managed -Dtravisci -Dbrowser=chromeheadless
-- mvn test -Ptomee7-remote -Dtravisci -Dbrowser=chromeheadless
-- mvn test -Ptomee1.7-remote -Dtravisci -Dbrowser=chromeheadless
+- mvn -U clean package -Pwildfly8-managed -Dbrowser=chromeheadless
+- mvn test -Pglassfish-managed -Dbrowser=chromeheadless
+- mvn test -Ptomee7-remote -Dbrowser=chromeheadless
+- mvn test -Ptomee1.7-remote -Dbrowser=chromeheadless
 
 
 deploy:
