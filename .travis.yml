@@ -29,6 +29,8 @@ script:
 
 deploy:
   provider: openshift
+  edge:
+    branch: openshift-deps
   user: rmpestano@gmail.com
   skip_cleanup: true
   password:
