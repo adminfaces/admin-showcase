@@ -55,4 +55,6 @@ include::{includedir}/03-designer.adoc[leveloffset=+1]
 
 include::{includedir}/04-starter.adoc[leveloffset=+1]
 
-include::{includedir}/05-mobile.adoc[leveloffset=+1]
+include::{includedir}/05-persistence.adoc[leveloffset=+1]
+
+include::{includedir}/06-mobile.adoc[leveloffset=+1]
