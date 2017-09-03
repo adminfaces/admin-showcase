@@ -15,6 +15,7 @@
 :link-admin-template: {link-adminfaces}/admin-template
 :link-admin-theme: {link-adminfaces}/admin-theme
 :link-admin-designer: {link-adminfaces}/admin-designer
+:link-admin-persistence: {link-adminfaces}/admin-persistence
 :link-admin-mobile: {link-adminfaces}/admin-mobile
 
 :link-jsf: https://javaserverfaces.java.net/
