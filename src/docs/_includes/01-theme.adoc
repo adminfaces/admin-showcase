@@ -1,4 +1,4 @@
-= Admin Theme
+= *Admin Theme*
 
 https://github.com/adminfaces/admin-theme[Admin Theme^] is a http://primefaces.org/themes[PrimeFaces theme^] where components are styled to look like AdminLTE ones (which in turn are based on Bootstrap).
 

@@ -1,6 +1,6 @@
-= Admin Starter
+= *Admin Starter*
 
-https://github.com/adminfaces/admin-starter[Admin Starter^] is a simple project to get you started with AdminFaces.
+https://github.com/adminfaces/admin-starter[Admin Starter^] (and https://github.com/adminfaces/admin-starter-persistence[starter persistence^]) is a simple project to get you started with AdminFaces.
 
 image::starter.png[]
 
@@ -9,6 +9,9 @@ image::starter.png[]
 It should run in any JavaEE 6 or greater application server.
 
 You can also run via http://wildfly-swarm.io/[wildfly-swarm^] with command `mvn wildfly-swarm:run -Pswarm`.
+
+or using docker `docker run -it -p 8080:8080 rmpestano/admin-starter`
+
 
 == Demo
 

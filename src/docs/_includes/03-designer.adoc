@@ -1,4 +1,4 @@
-= Admin Designer
+= *Admin Designer*
 
 The aim of https://github.com/adminfaces/admin-designer[Admin Designer^] is to make it easier to customize Admin theme and Admin Template.
 

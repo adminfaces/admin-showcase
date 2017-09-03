@@ -1,4 +1,4 @@
-= Admin Persistence
+= *Admin Persistence*
 
 The http://github.com/adminfaces/admin-persistence[Admin Persistence^] module aims to simplify CRUD operations on AdminFaces applications.
 

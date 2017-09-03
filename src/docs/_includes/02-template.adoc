@@ -1,4 +1,4 @@
-= Admin Template
+= *Admin Template*
 
 https://github.com/adminfaces/admin-template[Admin Template^] is a *fully responsive* https://javaserverfaces.java.net/[_Java Server Faces_] `admin template` based on http://getbootstrap.com/[Bootstrap^] and https://almsaeedstudio.com/themes/AdminLTE/index2.html/[Admin LTE^].
 
