@@ -35,7 +35,7 @@ First include it in your classpath:
 <dependency>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-persistence</artifactId>
-    <version>1.0.0-RC8</version>
+    <version>1.0.0-RC9</version>
 </dependency>
 ----
 +
@@ -196,6 +196,22 @@ public class CarListMB extends CrudMB<Car> implements Serializable {
 }
 ----
 <1> Needed by CrudMB otherwise it will throw an exception asking for CrudService initialization.
++
+[TIP]
+====
+You can use *@BeanService* annotation (since 1.0.0-RC9) to provide CrudService:
+
+[source,java]
+----
+@Named
+@ViewScoped
+@BeanService(CarService.class)//use annotation instead of setter injection
+public class CarListMB extends CrudMB<Car> implements Serializable {
+
+}
+
+----
+====
 +
 TIP: Full source code for CarListMB can be https://github.com/adminfaces/admin-starter-persistence/blob/master/src/main/java/com/github/adminfaces/starter/bean/CarListMB.java#L24[found here^].
 
