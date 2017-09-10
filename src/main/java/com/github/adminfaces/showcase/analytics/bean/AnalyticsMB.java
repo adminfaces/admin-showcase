@@ -17,6 +17,7 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -33,7 +34,8 @@ public class AnalyticsMB implements Serializable {
             "#444", "#001F3F", "#B13C2E", "#009688", "#111", "#696969", "#0088cc", "#39CCCC", "#7FB77D", "#F012BE", "#3D9970", "#FF851B", "#1C28B7", "#FF495A", "#31FFB0",
             "#B1CC97", "#3F2A29", "#2F1B22");
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    private static final SimpleDateFormat MONTH_YEAR_FORMAT = new SimpleDateFormat("MM/yyyy");
+
     private String viewId;
     private PageStats pageStats;
     private List<PageStats> pageStatsList;
@@ -41,11 +43,14 @@ public class AnalyticsMB implements Serializable {
 
     @Inject
     private PageStatisticsStore analyticsStore;
+
     private String totalVisitorsByMonth;
     private String uniqueVisitorsByMonth;
     private String visitorsByPage;
     private String visitorsByCountry;
     private String pageViewsGeoJson;
+    private Calendar statisticsDate;
+    private String monthYearSelection;
 
     @PostConstruct
     public void onPageVisited() {
@@ -64,6 +69,9 @@ public class AnalyticsMB implements Serializable {
         }
         analyticsStore.addPageView(viewId, new PageView(ipAddress));
         pageStats = analyticsStore.getPageStats(viewId);
+        statisticsDate = Calendar.getInstance();
+        monthYearSelection = MONTH_YEAR_FORMAT.format(statisticsDate.getTime());
+
     }
 
 
@@ -73,13 +81,22 @@ public class AnalyticsMB implements Serializable {
 
     public List<PageStats> getPageStatsList() {
         if (pageStatsList == null) {
-            initPageStatsList();
+            initStatistics();
         }
         return pageStatsList;
     }
 
-    private void initPageStatsList() {
-        pageStatsList = analyticsStore.getPageStatsWithCountries();
+    public void initStatistics() {
+        if(Faces.isAjaxRequest()) {
+            return;
+        }
+        analyticsStore.resetStatstistics();
+        loadStatsList();
+
+    }
+
+    private void loadStatsList() {
+        pageStatsList = analyticsStore.getPageStatsWithCountries(statisticsDate);
         for (PageStats stats : pageStatsList) {
             Collections.sort(stats.getPageViews(), new Comparator<PageView>() {
                 @Override
@@ -89,18 +106,50 @@ public class AnalyticsMB implements Serializable {
             });
             stats.setShowVisitorsInfo(false);
         }
+    }
 
+    public boolean hasPageViews() {
+        boolean hasStats = pageStatsList != null && !pageStatsList.isEmpty();
+        if(!hasStats) {
+            return false;
+        }
+
+        boolean hasPageViews = false;
+        for (PageStats stats : pageStatsList) {
+            if(stats.getPageViews() != null && !stats.getPageViews().isEmpty()) {
+                hasPageViews = true;
+                break;
+            }
+        }
+        return hasPageViews;
+    }
+
+    public void updateStatistics() throws ParseException {
+        analyticsStore.resetStatstistics();
+        statisticsDate = Calendar.getInstance();
+        monthYearSelection = Faces.getRequestParameter("statsDate");
+        if(monthYearSelection != null) {
+            statisticsDate.setTime(MONTH_YEAR_FORMAT.parse(monthYearSelection));
+        } else {
+            statisticsDate = null;
+        }
+        totalVisitorsByMonth = null;
+        uniqueVisitorsByMonth = null;
+        visitorsByCountry = null;
+        visitorsByPage = null;
+        pageViewsGeoJson = null;
+        loadStatsList();
     }
 
     public void clearFilter() {
-        initPageStatsList();
+        initStatistics();
     }
 
     public List<String> completeCountry(String query) {
         List<String> results = new ArrayList<>();
 
         if (has(query) && query.length() >= 2) {
-            List<String> pageViewCountries = analyticsStore.getPageViewCountries();
+            List<String> pageViewCountries = analyticsStore.getPageViewCountries(statisticsDate);
             for (String pageViewCountry : pageViewCountries) {
                 if (pageViewCountry.toLowerCase().contains(query.toLowerCase())) {
                     results.add(pageViewCountry);
@@ -112,7 +161,7 @@ public class AnalyticsMB implements Serializable {
     }
 
     public void onCountrySelect(SelectEvent event) {
-        initPageStatsList();
+        initStatistics();
         String selectedCountry = event.getObject().toString();
         List<PageStats> pageStatsByCountry = new ArrayList<>();
         for (PageStats stats : pageStatsList) {
@@ -222,7 +271,8 @@ public class AnalyticsMB implements Serializable {
             //get the first 10 contries
             JsonArrayBuilder labels = Json.createArrayBuilder();
             JsonArrayBuilder data = Json.createArrayBuilder();
-            for (int i = 0; i < 10; i++) {
+            int size = sortedMap.length > 10 ? 10 : sortedMap.length;
+            for (int i = 0; i < size; i++) {
                 Map.Entry<String, Integer> entry = (Map.Entry<String, Integer>) sortedMap[i];
                 labels.add(entry.getKey());
                 data.add(entry.getValue());
@@ -250,8 +300,33 @@ public class AnalyticsMB implements Serializable {
      */
     public String getPageViewsGeoJson() {
         if (pageViewsGeoJson == null) {
-            pageViewsGeoJson = analyticsStore.getGeoJsonCache();
+            pageViewsGeoJson = analyticsStore.getGeoJsonCache(statisticsDate);
         }
         return pageViewsGeoJson;
+    }
+
+
+    public Calendar getStatisticsDate() {
+        return statisticsDate;
+    }
+
+    public void setStatisticsDate(Calendar statisticsDate) {
+        this.statisticsDate = statisticsDate;
+    }
+
+    public Integer getInitialStatisticsYear() {
+        List<Integer> yearsWithStatistics = analyticsStore.getYearsWithStatistics();
+        if(yearsWithStatistics == null || yearsWithStatistics.isEmpty()) {
+            return Calendar.getInstance().get(Calendar.YEAR);
+        }
+        return yearsWithStatistics.get(0);
+    }
+
+    public String getMonthYearSelection() {
+        return monthYearSelection;
+    }
+
+    public void setMonthYearSelection(String monthYearSelection) {
+        this.monthYearSelection = monthYearSelection;
     }
 }

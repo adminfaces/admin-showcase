@@ -89,10 +89,29 @@
                 }
             }
 
+            .month-picker-month-table a.ui-state-highlight {
+                background: #fff;
+                color: #444;
+            }
+
+            .month-picker-month-table a.ui-state-highlight > span {
+                font-weight: bold;
+            }
+
+            .month-picker-month-table a.ui-state-active {
+                background: #337ab7;
+                color: #fff;
+            }
+
         </style>
         <h:outputStylesheet library="css" name="leaflet.css"/>
         <h:outputStylesheet library="css" name="markercluster.default.css"/>
         <h:outputStylesheet library="css" name="markercluster.css"/>
+        <h:outputStylesheet library="css" name="monthpicker.min.css"/>
+
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{analyticsMB.initStatistics}"/>
+        </f:metadata>
     </ui:define>
 
     <ui:define name="title">
@@ -110,10 +129,39 @@
         <adm:breadcrumb title="Analytics"/>
         <adm:sidebar collapsed="true"/>
 
+        <h:form prependId="false">
+            <p:remoteCommand name="updateStatistics" action="#{analyticsMB.updateStatistics}"
+                             process="@form" update="@(.ui-panel, .analyticsScripts, .statsDate)"
+                             oncomplete="initStats()"/>
+            <div class="ui-g" style="text-align: center;font-size: 1.2em">
+                <div class="ui-g-12">
+                    <p:outputLabel for="statsDate" value="Chose month to view statistics"/>
+                </div>
+                <div class="ui-g-12">
+                    <p:inputText id="statsDate" styleClass="statsDate" readonly="true" placeholder="Click to select month"
+                                 style="cursor: pointer" value="#{analyticsMB.monthYearSelection}"/>
+                    <p:spacer width="5"/>
+                    <p:commandButton value="All times" action="#{analyticsMB.updateStatistics}" style="font-size: 16px"
+                                     update="@(.ui-panel, .analyticsScripts, .statsDate)" styleClass="btn-danger"
+                                     process="@this"
+                                     oncomplete="initStats()">
+                        <p:confirm header="Confirmation" message="Load ALL times statistics?" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                </div>
+            </div>
 
-        <p:panel styleClass="card box-success" header="Analytics Chart" toggleable="true">
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger">
+                <p:commandButton value="Yes" type="button" styleClass="btn-primary ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+                <p:commandButton value="No" type="button" styleClass="btn-danger ui-confirmdialog-no"
+                                 icon="fa fa-close"/>
+            </p:confirmDialog>
+        </h:form>
+        <p:separator/>
+        <p:panel styleClass="card box-success" header="Analytics Chart"
+                 toggleable="true">
             <p class="text-center">
-                <strong>Showcase visitors in current year</strong>
+                <strong>Showcase visitors</strong>
             </p>
 
             <div class="chart">
@@ -143,7 +191,8 @@
         </p:panel>
         <p:separator/>
 
-        <p:panel styleClass="card box-fatal" toggleable="true" header="Analytics Map - Visitors by Cities">
+        <p:panel styleClass="card box-fatal" toggleable="true"
+                 header="Analytics Map - Visitors by Cities">
             <div tabindex="0" class="leaflet-container leaflet-fade-anim" id="map">
                 <div style="transform: translate(0px, 0px);" class="leaflet-map-pane">
                     <div class="leaflet-tile-pane">
@@ -175,7 +224,8 @@
             </div>
         </p:panel>
         <p:separator/>
-        <p:panel styleClass="card box-warning" header="Analytics Table" toggleable="true">
+        <p:panel  styleClass="card box-warning" header="Analytics Table"
+                 toggleable="true">
             <h:form>
                 <p:dataTable var="a" value="#{analyticsMB.pageStatsList}" paginator="true" widgetVar="analyticsTable"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -242,58 +292,30 @@
         <h:outputScript library="js" name="chart.min.js"/>
         <h:outputScript library="js" name="leaflet/leaflet.js"/>
         <h:outputScript library="js" name="leaflet/markercluster.js"/>
+        <h:outputScript library="js" name="jquery-ui.min.js"/>
+        <h:outputScript library="js" name="monthpicker.min.js"/>
+        <h:outputScript library="js" name="maskedinput.min.js"/>
+
         <script type="text/javascript">
-            //<![CDATA[
             $(document).ready(function () {
-
-                'use strict';
-
-                var visitorsByMonthChartCanvas = $("#visitorsByMonthChart").get(0).getContext("2d");
-                var visitorsByMonthChartData = {
-                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                    datasets: [
-                        {
-                            label: "Total visitors",
-                            fillColor: "rgb(210, 214, 222)",
-                            strokeColor: "rgb(210, 214, 222)",
-                            pointColor: "rgb(210, 214, 222)",
-                            pointStrokeColor: "#c1c7d1",
-                            pointHighlightFill: "#fff",
-                            pointHighlightStroke: "rgb(220,220,220)",
-                            data: #{analyticsMB.totalVisitorsByMonth}
-                        },
-                        {
-                            label: "Unique visitors",
-                            fillColor: "rgba(60,141,188,0.9)",
-                            strokeColor: "rgba(60,141,188,0.8)",
-                            pointColor: "#3b8bba",
-                            pointStrokeColor: "rgba(60,141,188,1)",
-                            pointHighlightFill: "#fff",
-                            pointHighlightStroke: "rgba(60,141,188,1)",
-                            data: #{analyticsMB.uniqueVisitorsByMonth}
-                        }
-                    ]
-                };
-
-
-                //Create the line chart
-                createLineChart(visitorsByMonthChartCanvas, visitorsByMonthChartData);
-
-                var visitorsByPageCanvas = $("#visitorsByPageChart").get(0).getContext("2d");
-
-                //Create the pie chart
-                createPieChart(visitorsByPageCanvas, #{analyticsMB.visitorsByPage});
-
-                var visitorsByCountryCanvas = $("#visitorsByCountryChart").get(0).getContext("2d");
-
-                //Create the pie chart
-                createBarChart(visitorsByCountryCanvas, #{analyticsMB.visitorsByCountry});
-
-
-                createMap();
+                $('.statsDate').MonthPicker({
+                    ShowOn: 'click',
+                    ShowIcon: false,
+                    Button: false,
+                    ShowAnim: 'slideDown',
+                    StartYear: #{analyticsMB.initialStatisticsYear},
+                    OnAfterChooseMonth: function (selectedDate) {
+                        updateStatistics({name1: selectedDate});
+                    }
+                });
             });
+        </script>
 
-            function createMap() {
+
+        <p:outputPanel styleClass="analyticsScripts">
+            <script type="text/javascript">
+                //<![CDATA[
+
                 var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors ',
                     mbUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                     mbUrl2 = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -301,14 +323,6 @@
                 //base layers
                 var streets = L.tileLayer(mbUrl, {id: 'examples.map-i875mjb7', attribution: mbAttr}),
                     grayscale = L.tileLayer(mbUrl2, {id: 'examples.map-20v6611k', attribution: mbAttr});
-
-                var map = L.map('map', {
-                    center: [20.55, 15],
-                    zoom: 2,
-                    maxZoom: 18,
-                    minZoom: 1,
-                    layers: [streets] //initial base layer
-                });
 
                 var pageViewsLayer = new L.markerClusterGroup();
 
@@ -322,40 +336,115 @@
                     "Page views": pageViewsLayer
                 }
 
-
-                map.addLayer(pageViewsLayer);
-                L.control.layers(baseLayers, overlays).addTo(map);
-
-                var data = #{analyticsMB.pageViewsGeoJson};
-
-                var geoJsonPageViewsLayer = L.geoJson(data, {
-                    pointToLayer: function (feature, latlng) {
-                        var m = new L.marker(latlng, {title: feature.properties.page});
-                        m.bindPopup(feature.properties.page + ', viewed on ' + feature.properties.date);
-                        m.on('click', markerOnClick);
-                        m.setIcon(new L.Icon({iconUrl: '/showcase/javax.faces.resource/marker-icon.png.xhtml?ln=images'}));
-                        return m;
-                    },
-                    onEachFeature: function (feature, layer) {
-                        feature.layer = layer;
-                    }
+                var map = L.map('map', {
+                    center: [20.55, 15],
+                    zoom: 2,
+                    maxZoom: 18,
+                    minZoom: 1,
+                    layers: [streets] //initial base layer
                 });
 
-                geoJsonPageViewsLayer.addTo(pageViewsLayer);
+                $(document).ready(function () {
+                    initStats();
+                });
+
+                function initStats() {
+                    'use strict';
+
+                    map.invalidateSize();
+                    $('.statsDate').MonthPicker({
+                        ShowOn: 'click',
+                        ShowIcon: false,
+                        Button: false,
+                        ShowAnim: 'slideDown',
+                        StartYear: #{analyticsMB.initialStatisticsYear},
+                        OnAfterChooseMonth: function (selectedDate) {
+                            updateStatistics({name1: selectedDate});
+                        }
+                    });
+
+                    var visitorsByMonthChartCanvas = $("#visitorsByMonthChart").get(0).getContext("2d");
+                    var visitorsByMonthChartData = {
+                        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                        datasets: [
+                            {
+                                label: "Total visitors",
+                                fillColor: "rgb(210, 214, 222)",
+                                strokeColor: "rgb(210, 214, 222)",
+                                pointColor: "rgb(210, 214, 222)",
+                                pointStrokeColor: "#c1c7d1",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgb(220,220,220)",
+                                data: #{analyticsMB.totalVisitorsByMonth}
+                            },
+                            {
+                                label: "Unique visitors",
+                                fillColor: "rgba(60,141,188,0.9)",
+                                strokeColor: "rgba(60,141,188,0.8)",
+                                pointColor: "#3b8bba",
+                                pointStrokeColor: "rgba(60,141,188,1)",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(60,141,188,1)",
+                                data: #{analyticsMB.uniqueVisitorsByMonth}
+                            }
+                        ]
+                    };
 
 
-                map.fitBounds(pageViewsLayer.getBounds());
+                    //Create the line chart
+                    createLineChart(visitorsByMonthChartCanvas, visitorsByMonthChartData);
 
-                function markerOnClick(e) {
-                    map.panTo(new L.LatLng(e.latlng.lat, e.latlng.lng));
+                    var visitorsByPageCanvas = $("#visitorsByPageChart").get(0).getContext("2d");
+
+                    //Create the pie chart
+                    createPieChart(visitorsByPageCanvas, #{analyticsMB.visitorsByPage});
+
+                    var visitorsByCountryCanvas = $("#visitorsByCountryChart").get(0).getContext("2d");
+
+                    //Create the pie chart
+                    createBarChart(visitorsByCountryCanvas, #{analyticsMB.visitorsByCountry});
+
+
+                    createMap();
                 }
 
 
-            }
+                function createMap() {
+
+                    map.addLayer(pageViewsLayer);
+                    L.control.layers(baseLayers, overlays).addTo(map);
+
+                    var data = #{analyticsMB.pageViewsGeoJson};
+
+                    var geoJsonPageViewsLayer = L.geoJson(data, {
+                        pointToLayer: function (feature, latlng) {
+                            var m = new L.marker(latlng, {title: feature.properties.page});
+                            m.bindPopup(feature.properties.page + ', viewed on ' + feature.properties.date);
+                            m.on('click', markerOnClick);
+                            m.setIcon(new L.Icon({iconUrl: '/showcase/javax.faces.resource/marker-icon.png.xhtml?ln=images'}));
+                            return m;
+                        },
+                        onEachFeature: function (feature, layer) {
+                            feature.layer = layer;
+                        }
+                    });
+
+                    geoJsonPageViewsLayer.addTo(pageViewsLayer);
+
+                    if(pageViewsLayer.getBounds().isValid()) {
+                        map.fitBounds(pageViewsLayer.getBounds());
+                    }
+
+                    function markerOnClick(e) {
+                        map.panTo(new L.LatLng(e.latlng.lat, e.latlng.lng));
+                    }
+
+                }
 
 
-            //]]>
-        </script>
+                //]]>
+            </script>
+        </p:outputPanel>
 
         <section class="content">
             <p:tabView styleClass="hidden-sm hidden-xs">

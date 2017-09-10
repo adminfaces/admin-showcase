@@ -30,6 +30,7 @@ public class BlackListFilter implements Filter {
         if(isBlocked(ip)) {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
         }
 
         filterChain.doFilter(request,response);

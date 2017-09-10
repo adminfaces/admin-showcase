@@ -42,7 +42,8 @@ public class PageStatisticsStore implements Serializable {
     private Map<String, Integer> totalVisitorsByCountry;
     private String geoJsonCache;
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-
+    private List<Integer> yearsWithStatistics;
+    private List<PageStats> pageStatsFilteredByDate;
 
 
     @PostConstruct
@@ -62,7 +63,7 @@ public class PageStatisticsStore implements Serializable {
                 List<PageView> pageViews = new ArrayList<>();
                 for (JsonValue value : pageViewsJson) {
                     JsonObject object = (JsonObject) value;
-                    if (object == null || object.get("ip") == null || !viewedInCurrentYear(object.getString("date"))) {
+                    if (object == null || object.get("ip") == null) {
                         continue;
                     }
                     PageView pageView = new PageView(object.getString("ip"));
@@ -76,7 +77,7 @@ public class PageStatisticsStore implements Serializable {
                     pageView.setHasIpInfo(object.containsKey("hasIpInfo") ? object.getBoolean("hasIpInfo") : false);//backward compat
                     pageViews.add(pageView);
                 }
-                pageStats.setPageViews(pageViews);
+                    pageStats.setPageViews(pageViews);
                 pageStatisticsMap.put(pageStats.getViewId(), pageStats);
             }
         } catch (Exception e) {
@@ -86,7 +87,7 @@ public class PageStatisticsStore implements Serializable {
         }
     }
 
-    private boolean viewedInCurrentYear(String date) {
+    private boolean considerDate(String date) {
         if (!has(date)) {
             return false;
         }
@@ -165,7 +166,6 @@ public class PageStatisticsStore implements Serializable {
                 }
 
                 FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
-                loadPageViewCountries();
                 resetStatstistics();
                 updateGeoJsonCache();
             }
@@ -200,17 +200,19 @@ public class PageStatisticsStore implements Serializable {
     }
 
     //force statistics reload
-    private void resetStatstistics() {
+    public void resetStatstistics() {
         totalVisitorsByCountry = null;
         totalVisitorsByMonth = null;
         uniqueVisitorsByMonth = null;
+        pageStatsFilteredByDate = null;
+        geoJsonCache = null;
     }
 
-    private void loadPageViewCountries() {
+    private void loadPageViewCountries(Calendar dateToConsider) {
         if (pageViewCountries == null) {
             pageViewCountries = new ArrayList<>();
         }
-        for (PageStats pageStats : pageStatisticsMap.values()) {
+        for (PageStats pageStats : allPageStatsByDate(dateToConsider)) {
             for (PageView pageView : pageStats.getPageViews()) {
                 if (has(pageView.getCountry()) && !pageViewCountries.contains(pageView.getCountry())) {
                     pageViewCountries.add(pageView.getCountry());
@@ -301,20 +303,51 @@ public class PageStatisticsStore implements Serializable {
     }
 
 
-    public List<PageStats> allPageStats() {
-        return new ArrayList<>(pageStatisticsMap.values());
+    /**
+     * Brings page stats filtered by a given date. Null means all statistics
+     * @param dateToConsider
+     * @return
+     */
+    public List<PageStats> allPageStatsByDate(Calendar dateToConsider) {
+
+        if(pageStatsFilteredByDate == null) {
+            if(dateToConsider == null) {
+                pageStatsFilteredByDate = new ArrayList<>(pageStatisticsMap.values());
+            } else {
+                int yearToConsider = dateToConsider.get(Calendar.YEAR);
+                int monthToConsider = dateToConsider.get(Calendar.MONTH);
+                pageStatsFilteredByDate = new ArrayList<>();
+                for (PageStats pageStats : pageStatisticsMap.values()) {
+                    PageStats filteredPageStats = new PageStats(pageStats.getViewId());
+                    List<PageView> filteredPageViews = new ArrayList<>();
+                    for (PageView pageView : pageStats.getPageViews()) {
+                        int year= pageView.getDate().get(Calendar.YEAR);
+                        int month = pageView.getDate().get(Calendar.MONTH);
+                        if(month == monthToConsider && year == yearToConsider) {
+                            filteredPageViews.add(pageView);
+                        }
+                    }
+
+                    filteredPageStats.setPageViews(filteredPageViews);
+                    pageStatsFilteredByDate.add(filteredPageStats);
+                }
+            }
+        }
+
+
+        return pageStatsFilteredByDate;
     }
 
-    public List<String> getPageViewCountries() {
+    public List<String> getPageViewCountries(Calendar dateToConside) {
         if (pageViewCountries == null) {
-            loadPageViewCountries();
+            loadPageViewCountries(dateToConside);
         }
         return pageViewCountries;
     }
 
-    public List<PageStats> getPageStatsWithCountries() {
+    public List<PageStats> getPageStatsWithCountries(Calendar dateToConsider) {
         List<PageStats> pageStatsWithCountries = new ArrayList<>();
-        for (PageStats stats : allPageStats()) {
+        for (PageStats stats : allPageStatsByDate(dateToConsider)) {
             PageStats pageStats = new PageStats(stats.getViewId());
             List<PageView> pageViews = new ArrayList<>();
             for (PageView pageView : stats.getPageViews()) {
@@ -335,7 +368,7 @@ public class PageStatisticsStore implements Serializable {
             for (int i = 0; i <= 11; i++) {
                 totalVisitorsByMonth.put(i, 0);
             }
-            for (PageStats pageStats : pageStatisticsMap.values()) {
+            for (PageStats pageStats : pageStatsFilteredByDate) {
                 for (PageView pageView : pageStats.getPageViews()) {
                     if (pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp())) {
                         continue;
@@ -357,7 +390,7 @@ public class PageStatisticsStore implements Serializable {
             for (int i = 0; i <= 11; i++) {
                 uniqueVisitorsByMonth.put(i, 0);
             }
-            for (PageStats pageStats : pageStatisticsMap.values()) {
+            for (PageStats pageStats : pageStatsFilteredByDate) {
                 for (PageView pageView : pageStats.getPageViews()) {
                     if (pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp()) || ipList.contains(pageView.getIp())) {
                         continue;
@@ -374,7 +407,7 @@ public class PageStatisticsStore implements Serializable {
     public Map<String, Integer> getTotalVisitorsByCountry() {
         if (totalVisitorsByCountry == null) {
             totalVisitorsByCountry = new HashMap<>();
-            for (PageStats pageStats : pageStatisticsMap.values()) {
+            for (PageStats pageStats : pageStatsFilteredByDate) {
                 List<PageViewCountry> pageViewCountryList = pageStats.getPageViewCountryList();
                 for (PageViewCountry pageViewCountry : pageViewCountryList) {
                     String country = pageViewCountry.getCountry();
@@ -388,10 +421,10 @@ public class PageStatisticsStore implements Serializable {
         return totalVisitorsByCountry;
     }
 
-    public String getGeoJsonCache() {
+    public String getGeoJsonCache(Calendar dateToConside) {
         if(geoJsonCache == null) {
             JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
-            for (PageStats stats : allPageStats()) {
+            for (PageStats stats : allPageStatsByDate(dateToConside)) {
                 for (PageView pageView : stats.getPageViews()) {
                     if (!has(pageView.getCountry()) || !has(pageView.getLat())) {
                         continue;
@@ -420,6 +453,23 @@ public class PageStatisticsStore implements Serializable {
 
     public void updateGeoJsonCache() {
         geoJsonCache = null;
-        getGeoJsonCache();
+    }
+
+    public List<Integer> getYearsWithStatistics() {
+        if(yearsWithStatistics == null) {
+            yearsWithStatistics = new ArrayList<>();
+            yearsWithStatistics.add(Calendar.getInstance().get(Calendar.YEAR));
+            for (PageStats pageStats : allPageStatsByDate(null)) {
+                for (PageView pageView : pageStats.getPageViews()) {
+                    Integer year = pageView.getDate().get(Calendar.YEAR);
+                    if(!yearsWithStatistics.contains(year)) {
+                        yearsWithStatistics.add(year);
+                    }
+                }
+            }
+            Collections.sort(yearsWithStatistics);
+        }
+
+        return yearsWithStatistics;
     }
 }

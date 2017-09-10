@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="#{layoutMB.layout}">
+
+
+    <ui:define name="title">
+        TriStateCheckbox
+    </ui:define>
+
+    <ui:define name="description">
+        TriStateCheckbox add a new state to a checkbox value.
+    </ui:define>
+
+    <ui:define name="body">
+        <style type="text/css">
+
+            div.ui-chkbox.custom span.ui-icon-check:before {
+                content: "\f067" !important;
+                left: 4px;
+            }
+
+            div.ui-chkbox.custom span.ui-icon-closethick:before {
+                content: "\f068" !important;
+                left: -6px;
+            }
+
+        </style>
+        <h:form>
+            <p:panel styleClass="card ui-g-6 ui-fluid">
+                <p:growl id="growl" showDetail="true"/>
+
+                <p:panelGrid id="triStateGrid" columns="2" layout="grid">
+                    <h:outputText value="Basic Usage: "/>
+                    <p:triStateCheckbox value="#{triStateCheckboxMB.value1}"/>
+
+                    <h:outputText value="Ajax Behavior: "/>
+                    <p:triStateCheckbox id="ajaxTriState" value="#{triStateCheckboxMB.value2}">
+                        <p:ajax event="change" update="growl" listener="#{triStateCheckboxMB.addMessage}"/>
+                    </p:triStateCheckbox>
+
+                    <h:outputText value="Customs Icons: "/>
+                    <p:triStateCheckbox styleClass="custom" value="#{triStateCheckboxMB.value3}"
+                    />
+
+                    <h:panelGroup/>
+                    <p:triStateCheckbox value="#{triStateCheckboxMB.value4}" itemLabel="Item Label"/>
+                </p:panelGrid>
+
+                <p:commandButton value="Submit" process="triStateGrid" update="display" styleClass="btn-primary" oncomplete="PF('dlg').show()"
+                                 style="margin-top:10px;"/>
+
+            </p:panel>
+
+            <p:dialog header="Selected Values" showEffect="fade" hideEffect="fade" widgetVar="dlg">
+                <h:panelGrid id="display" columns="1" style="margin: 10px;">
+                    <h:outputText value="Value 1: #{triStateCheckboxMB.value1}"/>
+                    <h:outputText value="Value 2: #{triStateCheckboxMB.value2}"/>
+                    <h:outputText value="Value 3: #{triStateCheckboxMB.value3}"/>
+                    <h:outputText value="Value 4: #{triStateCheckboxMB.value4}"/>
+                </h:panelGrid>
+            </p:dialog>
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="triState.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="TriStateCheckboxMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText
+                           value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.TriStateCheckboxMB')}"
+                           escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+
+        </p:tabView>
+    </ui:define>
+</ui:composition>
