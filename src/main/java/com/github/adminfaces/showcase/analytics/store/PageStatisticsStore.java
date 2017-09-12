@@ -1,9 +1,19 @@
 package com.github.adminfaces.showcase.analytics.store;
 
+import com.github.adminfaces.showcase.analytics.driver.DriverService;
 import com.github.adminfaces.showcase.analytics.model.PageStats;
 import com.github.adminfaces.showcase.analytics.model.PageView;
 import com.github.adminfaces.showcase.analytics.model.PageViewCountry;
 import com.github.adminfaces.showcase.filter.BlackListFilter;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.auth.oauth2.TokenResponse;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.FileContent;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.drive.Drive;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +25,7 @@ import javax.json.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -77,7 +88,7 @@ public class PageStatisticsStore implements Serializable {
                     pageView.setHasIpInfo(object.containsKey("hasIpInfo") ? object.getBoolean("hasIpInfo") : false);//backward compat
                     pageViews.add(pageView);
                 }
-                    pageStats.setPageViews(pageViews);
+                pageStats.setPageViews(pageViews);
                 pageStatisticsMap.put(pageStats.getViewId(), pageStats);
             }
         } catch (Exception e) {
@@ -175,6 +186,25 @@ public class PageStatisticsStore implements Serializable {
         } finally {
             log.info("{} page statistics updated in {} seconds.", numRecordsUpdated, (System.currentTimeMillis() - initial) / 1000.0d);
         }
+    }
+
+    @Schedule(hour = "*/1", minute = "15", persistent = false)
+    public void backupPageStatistics() throws IOException, GeneralSecurityException {
+        if(System.getenv("clientid") == null) {
+            log.warn("Skipping page statistics backup.");
+            return;
+        }
+
+        log.info("Backing up page statistics");
+
+        com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File().setName("page-stats.json");
+        FileContent mediaContent = new FileContent("application/json",  new File(pagesStatsFilePath));
+        com.google.api.services.drive.model.File file = DriverService.getDriveService()
+                .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
+                .setFields("id")
+                .execute();
+
+        log.info("Page statistics backup done.");
     }
 
     private List<PageStats> copyPageStats(List<PageStats> originalList) {
@@ -278,11 +308,11 @@ public class PageStatisticsStore implements Serializable {
                 Thread.sleep(375);//sleep to not exceed query limits (150 per minute)
                 return true;
             } else if (jsonObject.containsKey("message")) {
-                if(jsonObject.getString("message").contains("private range")) {
+                if (jsonObject.getString("message").contains("private range")) {
                     pageView.setHasIpInfo(true);
                     return true;
                 }
-                log.warn("IpApi query {} failed with message: "+jsonObject.getString("message"),ipApiQuery);
+                log.warn("IpApi query {} failed with message: " + jsonObject.getString("message"), ipApiQuery);
             }
 
         } catch (Exception e) {
@@ -305,13 +335,14 @@ public class PageStatisticsStore implements Serializable {
 
     /**
      * Brings page stats filtered by a given date. Null means all statistics
+     *
      * @param dateToConsider
      * @return
      */
     public List<PageStats> allPageStatsByDate(Calendar dateToConsider) {
 
-        if(pageStatsFilteredByDate == null) {
-            if(dateToConsider == null) {
+        if (pageStatsFilteredByDate == null) {
+            if (dateToConsider == null) {
                 pageStatsFilteredByDate = new ArrayList<>(pageStatisticsMap.values());
             } else {
                 int yearToConsider = dateToConsider.get(Calendar.YEAR);
@@ -321,9 +352,9 @@ public class PageStatisticsStore implements Serializable {
                     PageStats filteredPageStats = new PageStats(pageStats.getViewId());
                     List<PageView> filteredPageViews = new ArrayList<>();
                     for (PageView pageView : pageStats.getPageViews()) {
-                        int year= pageView.getDate().get(Calendar.YEAR);
+                        int year = pageView.getDate().get(Calendar.YEAR);
                         int month = pageView.getDate().get(Calendar.MONTH);
-                        if(month == monthToConsider && year == yearToConsider) {
+                        if (month == monthToConsider && year == yearToConsider) {
                             filteredPageViews.add(pageView);
                         }
                     }
@@ -422,7 +453,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     public String getGeoJsonCache(Calendar dateToConside) {
-        if(geoJsonCache == null) {
+        if (geoJsonCache == null) {
             JsonArrayBuilder geoJsonLayer = Json.createArrayBuilder();
             for (PageStats stats : allPageStatsByDate(dateToConside)) {
                 for (PageView pageView : stats.getPageViews()) {
@@ -456,13 +487,13 @@ public class PageStatisticsStore implements Serializable {
     }
 
     public List<Integer> getYearsWithStatistics() {
-        if(yearsWithStatistics == null) {
+        if (yearsWithStatistics == null) {
             yearsWithStatistics = new ArrayList<>();
             yearsWithStatistics.add(Calendar.getInstance().get(Calendar.YEAR));
             for (PageStats pageStats : allPageStatsByDate(null)) {
                 for (PageView pageView : pageStats.getPageViews()) {
                     Integer year = pageView.getDate().get(Calendar.YEAR);
-                    if(!yearsWithStatistics.contains(year)) {
+                    if (!yearsWithStatistics.contains(year)) {
                         yearsWithStatistics.add(year);
                     }
                 }
@@ -472,4 +503,5 @@ public class PageStatisticsStore implements Serializable {
 
         return yearsWithStatistics;
     }
+
 }

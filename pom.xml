@@ -98,6 +98,15 @@
             <artifactId>javamelody-core</artifactId>
             <version>1.59.0</version>
         </dependency>
+
+
+       <!-- page statistics backup on drive -->
+         <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-drive</artifactId>
+            <version>v3-rev81-1.22.0</version>
+        </dependency>
+
         <!-- test -->
         <dependency>
             <groupId>junit</groupId>
