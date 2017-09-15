@@ -188,7 +188,7 @@ public class PageStatisticsStore implements Serializable {
         }
     }
 
-    @Schedule(hour = "*/1", minute = "15", persistent = false)
+    @Schedule(hour = "*/4", minute = "10", persistent = false)
     public void backupPageStatistics() throws IOException, GeneralSecurityException {
         if(System.getenv("clientid") == null) {
             log.warn("Skipping page statistics backup.");
