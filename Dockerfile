@@ -1,2 +1,2 @@
-FROM airhacks/wildfly
-COPY ./target/showcase.war ${DEPLOYMENT_DIR}
+FROM jboss/wildfly
+COPY ./target/showcase.war ${JBOSS_HOME}/standalone/deployments/
