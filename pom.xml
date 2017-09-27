@@ -105,6 +105,12 @@
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-drive</artifactId>
             <version>v3-rev81-1.22.0</version>
+            <exclusions>
+                 <exclusion>
+                     <groupId>com.google.guava</groupId>
+                     <artifactId>guava-jdk5</artifactId>
+                 </exclusion>
+             </exclusions>
         </dependency>
 
         <!-- test -->
@@ -150,7 +156,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>21.0</version>
+            <version>22.0</version>
             <scope>test</scope>
         </dependency>
 

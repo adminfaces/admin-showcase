@@ -5,19 +5,10 @@ import com.github.adminfaces.showcase.analytics.model.PageStats;
 import com.github.adminfaces.showcase.analytics.model.PageView;
 import com.github.adminfaces.showcase.analytics.model.PageViewCountry;
 import com.github.adminfaces.showcase.filter.BlackListFilter;
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.auth.oauth2.TokenResponse;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.FileContent;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.drive.Drive;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 import javax.annotation.PostConstruct;
 import javax.ejb.*;
@@ -30,7 +21,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-
 
 import static com.github.adminfaces.template.util.Assert.has;
 
