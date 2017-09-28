@@ -33,6 +33,10 @@ public class DeployUtil {
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.glassfish:javax.json").withTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("commons-io:commons-io").withTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.slf4j:slf4j-api").withoutTransitivity().asSingleFile());
+        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.google.apis:google-api-services-drive").withoutTransitivity().asSingleFile());
+        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.google.api-client:google-api-client:1.22.0").withoutTransitivity().asSingleFile());
+        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.google.oauth-client:google-oauth-client:1.22.0").withTransitivity().asFile());
+        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.google.http-client:google-http-client-jackson2:1.22.0").withTransitivity().asFile());
 
         //WEB-INF
 
