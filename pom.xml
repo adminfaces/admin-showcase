@@ -22,9 +22,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <arquillian.container>wildfly:8.2.0.Final:managed</arquillian.container>
         <browser>chrome</browser>
-        <asciidoctorj.pdf.version>1.5.0-alpha.11</asciidoctorj.pdf.version>
-        <asciidoctorj.version>1.5.4</asciidoctorj.version>
-        <jruby.version>9.0.5.0</jruby.version>
+        <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
+        <asciidoctorj.version>1.5.6</asciidoctorj.version>
+        <jruby.version>9.1.13.0</jruby.version>
     </properties>
 
     <dependencies>
@@ -256,7 +256,7 @@
                     <plugin>
                         <groupId>org.asciidoctor</groupId>
                         <artifactId>asciidoctor-maven-plugin</artifactId>
-                        <version>1.5.3</version>
+                        <version>1.5.6</version>
                         <configuration>
                             <sourceDirectory>src/docs</sourceDirectory>
                             <sourceDocumentName>index.adoc</sourceDocumentName>
@@ -709,7 +709,7 @@
                     <plugin>
                         <groupId>org.asciidoctor</groupId>
                         <artifactId>asciidoctor-maven-plugin</artifactId>
-                        <version>1.5.3</version>
+                        <version>1.5.5</version>
                         <configuration>
                             <sourceDirectory>src/docs</sourceDirectory>
                             <sourceDocumentName>index.adoc</sourceDocumentName>

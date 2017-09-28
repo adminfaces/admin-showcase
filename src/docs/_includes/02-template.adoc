@@ -5,9 +5,10 @@ https://github.com/adminfaces/admin-template[Admin Template^] is a *fully respon
 == Features
 
 Below is a non exhaustive list of notable features brought out of the box by this template:
+
 * Fully responsive
 ** Its based on Bootstrap and AdminLTE two well tested and solid frameworks
-* Enhanced mobile experience (below features are enabled only on small screens)
+* Enhanced mobile experience, below features are enabled only on small screens:
 ** Material design load bar
 ** Ripple effect based on http://materializecss.com/waves.html[materialize css^] +
 image:https://user-images.githubusercontent.com/1592273/27104868-d9bfb33e-5063-11e7-83be-2201a3f8cda5.gif[]
