@@ -10,7 +10,7 @@
 
 :link-adminfaces: http://github.com/adminfaces
 :link-admin-showcase: {link-adminfaces}/admin-showcase
-:link-admin-showcase-openshift: http://adminfaces-rpestano.rhcloud.com/showcase/
+:link-admin-showcase-openshift: http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase
 :link-admin-starter: {link-adminfaces}/admin-starter
 :link-admin-template: {link-adminfaces}/admin-template
 :link-admin-theme: {link-adminfaces}/admin-theme
