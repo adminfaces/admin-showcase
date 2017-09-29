@@ -10,7 +10,7 @@ image:showcase.png[]
 
 == Demo 
 
-Showcase is available on http://adminfaces-rpestano.rhcloud.com/showcase/index.xhtml[Openshift here^].
+Showcase is available on http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/index.xhtml[Openshift here^].
 
 == Build
 
@@ -68,4 +68,4 @@ docker run -it -p 8080:8080 rmpestano/admin-showcase
 
 == Documentation
 
-Documentation can be found here: http://adminfaces-rpestano.rhcloud.com/showcase/docs/
+Documentation can be found here: http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/docs/
