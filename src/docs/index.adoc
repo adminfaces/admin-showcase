@@ -3,6 +3,7 @@
 :linkattrs:
 :sectanchors:
 :sectlink:
+:docinfo:
 :includedir: _includes
 :experimental:
 

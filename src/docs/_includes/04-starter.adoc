@@ -1,4 +1,4 @@
-= *Admin Starter*
+= Admin Starter
 
 https://github.com/adminfaces/admin-starter[Admin Starter^] (and https://github.com/adminfaces/admin-starter-persistence[starter persistence^]) is a simple project to get you started with AdminFaces.
 
