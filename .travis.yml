@@ -20,7 +20,7 @@ script:
 - mvn test -Ptomee1.7-remote -Dbrowser=chromeheadless
 after_success:
 - mvn clean package -Pdocs -DskipTests
-- docker login -u rmpestano -p ${env.pass}
+- docker login -u rmpestano -p $pass
 - mvn dockerfile:build -Pdocker
 - mvn dockerfile:push -Pdocker
 env:
