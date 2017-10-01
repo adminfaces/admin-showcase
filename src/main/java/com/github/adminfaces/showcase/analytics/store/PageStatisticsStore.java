@@ -246,7 +246,7 @@ public class PageStatisticsStore implements Serializable {
      * @return boolean representing the info was updated
      */
     private boolean queryAdditionalPageViewInfo(PageView pageView) {
-        if (pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost")) {
+        if (shouldIgnorePageInfo(pageView)) {
             return false;
         }
         StringBuilder ipApiQuery = new StringBuilder("http://ip-api.com/json/");
@@ -267,7 +267,14 @@ public class PageStatisticsStore implements Serializable {
         return result;
     }
 
+    private boolean shouldIgnorePageInfo(PageView pageView) {
+        return pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost") || pageView.getIp().contains("unknown");
+    }
+
     private boolean callIpApi(String ipApiQuery, PageView pageView) {
+        if(!has(ipApiQuery)) {
+            return false;
+        }
 
         HttpURLConnection connection = null;//using url connection to avoid (JavaEE 6) JAX-RS client api conflicts
         BufferedReader rd = null;
