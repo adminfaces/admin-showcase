@@ -29,7 +29,9 @@ public class PageStats {
 
     public Integer getUniquePageViews() {
         Map<String, String> pageIps = new HashMap<>();
-        for (PageView pageView : pageViews) {
+        Iterator<PageView> pageViewIterator = pageViews.iterator();
+        while(pageViewIterator.hasNext()) {
+            PageView pageView = pageViewIterator.next();
             if (!pageIps.containsKey(pageView.getIp())) {
                 pageIps.put(pageView.getIp(), "");
             }
