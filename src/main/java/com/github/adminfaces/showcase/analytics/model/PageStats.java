@@ -1,6 +1,7 @@
 package com.github.adminfaces.showcase.analytics.model;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.github.adminfaces.template.util.Assert.has;
 
@@ -14,6 +15,7 @@ public class PageStats {
     private boolean showVisitorsInfo;
     private Map<String, Map<String, List<PageView>>> pageViewsByCountryAndCity;//first map key is country, second key is city
     private List<PageViewCountry> pageViewCountryList;
+    private AtomicInteger uniquePageViews;
 
     public PageStats(String viewId) {
         this.viewId = viewId;
@@ -21,6 +23,10 @@ public class PageStats {
 
     public void addPageView(PageView pageView) {
         pageViews.add(pageView);
+        if(uniquePageViews == null) {
+             initPageViewsCount();
+        }
+        uniquePageViews.incrementAndGet();
     }
 
     public long getTotalPageViews() {
@@ -28,15 +34,23 @@ public class PageStats {
     }
 
     public Integer getUniquePageViews() {
+        if (uniquePageViews == null) {
+            initPageViewsCount();
+        }
+
+        return uniquePageViews.get();
+    }
+
+    private void initPageViewsCount() {
+        List<PageView> pageViewsCopy = new ArrayList<>(pageViews.size());
+        System.arraycopy(pageViews, 0, pageViewsCopy, 0, pageViews.size());
         Map<String, String> pageIps = new HashMap<>();
-        Iterator<PageView> pageViewIterator = pageViews.iterator();
-        while(pageViewIterator.hasNext()) {
-            PageView pageView = pageViewIterator.next();
+        for (PageView pageView : pageViewsCopy) {
             if (!pageIps.containsKey(pageView.getIp())) {
                 pageIps.put(pageView.getIp(), "");
             }
         }
-        return pageIps.size();
+        uniquePageViews = new AtomicInteger(pageIps.size());
     }
 
     public String getViewId() {
@@ -79,9 +93,9 @@ public class PageStats {
                     pageViewsByCountryAndCity.put(pageView.getCountry(), cityPageViews);
                 }
                 List<PageView> cityPageViews = pageViewsByCountryAndCity.get(pageView.getCountry()).get(pageView.getCity());
-                if(cityPageViews == null) {
+                if (cityPageViews == null) {
                     cityPageViews = new ArrayList<>();
-                    pageViewsByCountryAndCity.get(pageView.getCountry()).put(pageView.getCity(),cityPageViews);
+                    pageViewsByCountryAndCity.get(pageView.getCountry()).put(pageView.getCity(), cityPageViews);
                 }
                 cityPageViews.add(pageView);
 
@@ -89,21 +103,21 @@ public class PageStats {
         }
         return pageViewsByCountryAndCity;
     }
-    
+
     public List<PageViewCountry> getPageViewCountryList() {
-        if(pageViewCountryList == null) {
+        if (pageViewCountryList == null) {
             pageViewCountryList = new ArrayList<>();
             //for each country
-             for (Map.Entry<String, Map<String, List<PageView>>> countryPageView : getPageViewsByCountryAndCity().entrySet()) {
-                 //fore each city
-                 for (Map.Entry<String, List<PageView>> cityView : countryPageView.getValue().entrySet()) {
-                      PageViewCountry pageViewCountry = new PageViewCountry(countryPageView.getKey(),cityView.getKey(),cityView.getValue().size());
-                      pageViewCountryList.add(pageViewCountry);
-                 }
+            for (Map.Entry<String, Map<String, List<PageView>>> countryPageView : getPageViewsByCountryAndCity().entrySet()) {
+                //fore each city
+                for (Map.Entry<String, List<PageView>> cityView : countryPageView.getValue().entrySet()) {
+                    PageViewCountry pageViewCountry = new PageViewCountry(countryPageView.getKey(), cityView.getKey(), cityView.getValue().size());
+                    pageViewCountryList.add(pageViewCountry);
+                }
 
-             }
-             Collections.sort(pageViewCountryList);
+            }
+            Collections.sort(pageViewCountryList);
         }
-       return pageViewCountryList;
+        return pageViewCountryList;
     }
 }
