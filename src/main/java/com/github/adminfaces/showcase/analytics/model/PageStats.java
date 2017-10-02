@@ -42,7 +42,7 @@ public class PageStats {
     }
 
     private void initPageViewsCount() {
-        List<PageView> pageViewsCopy = new ArrayList<>(pageViews.size());
+        List<PageView> pageViewsCopy = new ArrayList<>();
         Collections.copy(pageViewsCopy,pageViews);
         Map<String, String> pageIps = new HashMap<>();
         for (PageView pageView : pageViewsCopy) {
