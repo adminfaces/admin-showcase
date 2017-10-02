@@ -42,8 +42,8 @@ public class PageStats {
     }
 
     private void initPageViewsCount() {
-        List<PageView> pageViewsCopy = new ArrayList<>();
-        Collections.copy(pageViewsCopy,pageViews);
+        List<PageView> pageViewsCopy = new ArrayList<>(pageViews.size());
+        pageViewsCopy.addAll(pageViews);
         Map<String, String> pageIps = new HashMap<>();
         for (PageView pageView : pageViewsCopy) {
             if (!pageIps.containsKey(pageView.getIp())) {
