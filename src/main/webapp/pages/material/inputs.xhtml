@@ -18,6 +18,7 @@
                 -webkit-box-shadow: 0 0 0 30px white inset;
             }
 
+
         </style>
     </ui:define>
 
@@ -128,6 +129,16 @@
                             </p:inputText>
                             <p:outputLabel for="icon" value="Material input with icon"/>
                             <p:message for="icon"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8 ui-sm-12">
+                        <div class="material icon-left">
+                            <p:inputText id="user-icon" required="true" placeholder="Icon left">
+                                <i id="fa" class="fa fa-2x fa-user"/>
+                            </p:inputText>
+                            <p:outputLabel id="label" for="user-icon" value="Username"/>
+                            <p:message for="user-icon"/>
                         </div>
                     </div>
 
