@@ -52,6 +52,14 @@
                             <p:message for="input"/>
                         </div>
                     </div>
+
+                    <div class="ui-g-8 ui-sm-12">
+                        <div class="material no-float">
+                            <p:inputText id="input-no-float" required="true" placeholder="Material without floating label"/>
+                            <p:message for="input-no-float"/>
+                        </div>
+                    </div>
+
                     <div class="ui-g-8 ui-sm-12">
                         <div class="material">
                             <p:inputText id="disabled" value="pre filled value" disabled="true" />
@@ -137,8 +145,19 @@
                             <p:inputText id="user-icon" required="true" placeholder="Icon left">
                                 <i id="fa" class="fa fa-2x fa-user"/>
                             </p:inputText>
-                            <p:outputLabel id="label" for="user-icon" value="Username"/>
+                            <p:outputLabel id="label" for="user-icon" value="Icon left"/>
                             <p:message for="user-icon"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-8 ui-sm-12">
+                        <div class="material icon-left">
+                            <p:calendar id="material-calendar-left" showOn="both" placeholder="Icon left calendar"
+                                        required="true">
+                                <p:ajax event="dateSelect" global="false" onstart="adminMaterial()"/>
+                            </p:calendar>
+                            <p:outputLabel for="material-calendar-left" value="Icon left calendar"/>
+                            <p:message for="material-calendar-left"/>
                         </div>
                     </div>
 
