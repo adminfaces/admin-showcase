@@ -180,7 +180,7 @@ public class PageStatisticsStore implements Serializable {
 
     @Schedule(hour = "*/4", minute = "10", persistent = false)
     public void backupPageStatistics() throws IOException, GeneralSecurityException {
-        if(System.getenv("clientid") == null) {
+        if (System.getenv("clientid") == null) {
             log.warn("Skipping page statistics backup.");
             return;
         }
@@ -188,7 +188,11 @@ public class PageStatisticsStore implements Serializable {
         log.info("Backing up page statistics");
 
         com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File().setName("page-stats.json");
-        FileContent mediaContent = new FileContent("application/json",  new File(pagesStatsFilePath));
+        File pageStatsJson = new File(pagesStatsFilePath);
+        if (pageStatsJson.length() < 1024 * 1024) { //doesn't backup if file is less than 1MB
+            return;
+        }
+        FileContent mediaContent = new FileContent("application/json", pageStatsJson);
         com.google.api.services.drive.model.File file = DriverService.getDriveService()
                 .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
                 .setFields("id")
@@ -272,7 +276,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private boolean callIpApi(String ipApiQuery, PageView pageView) {
-        if(!has(ipApiQuery)) {
+        if (!has(ipApiQuery)) {
             return false;
         }
 
