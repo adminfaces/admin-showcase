@@ -187,6 +187,10 @@
             <p>This will not be needed when <a
                     href="https://github.com/primefaces/primefaces/issues/2304">this issue</a> is fixed.</p>
         </div>
+
+        <div class="callout callout-warning" style="margin-top: 30px">
+            <p>Material inputs depend on <code>Admin Template javascript to work</code>, so if you use <b>admin-theme</b> without template you must add <a style="font-weight: bold" href="https://github.com/adminfaces/admin-template/blob/master/src/main/resources/META-INF/resources/js/admintemplate.js">admintemplate.js</a> in you application</p>
+        </div>
     </ui:define>
 
     <ui:define name="code">
