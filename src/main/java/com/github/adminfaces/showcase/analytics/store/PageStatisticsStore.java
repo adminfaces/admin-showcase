@@ -7,15 +7,19 @@ import com.github.adminfaces.showcase.analytics.model.PageViewCountry;
 import com.github.adminfaces.showcase.filter.BlackListFilter;
 import com.google.api.client.http.FileContent;
 import org.apache.commons.io.FileUtils;
+import org.primefaces.event.FileUploadEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.*;
+import javax.inject.Named;
 import javax.json.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +35,7 @@ import static com.github.adminfaces.template.util.Assert.has;
 @Startup
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 @TransactionManagement(TransactionManagementType.BEAN)
+@Named
 public class PageStatisticsStore implements Serializable {
 
     private Map<String, PageStats> pageStatisticsMap; //viewId by statistics map
@@ -503,6 +508,13 @@ public class PageStatisticsStore implements Serializable {
         }
 
         return yearsWithStatistics;
+    }
+
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
+        try (InputStream in = event.getFile().getInputstream()) {
+            Files.copy(in,Paths.get(pagesStatsFilePath));
+            initStatistics();
+        }
     }
 
 }

@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="#{layoutMB.layout}">
+
+
+
+    <ui:define name="body">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h:form>
+                    <p:fileUpload fileUploadListener="#{pageStatisticsStore.handleFileUpload}" mode="advanced"
+                                  dragDropSupport="true" auto="true"
+                                  sizeLimit="50000000" fileLimit="3"
+                                  allowTypes="/(\.|\/)(json)$/"/>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+
+
+</ui:composition>
