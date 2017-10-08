@@ -4,16 +4,32 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="#{layoutMB.layout}">
 
-
-
     <ui:define name="body">
+        <style type="text/css">
+            .ui-fileupload-content {
+                display: none!important;
+            }
+        </style>
         <div class="box box-info">
             <div class="box-header with-border">
                 <h:form>
-                    <p:fileUpload fileUploadListener="#{pageStatisticsStore.handleFileUpload}" mode="advanced"
-                                  dragDropSupport="true" auto="true"
-                                  sizeLimit="50000000" fileLimit="3"
-                                  allowTypes="/(\.|\/)(json)$/"/>
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-6 ui-sm-12">
+                            <p:fileUpload fileUploadListener="#{pageStatisticsStore.handleFileUpload}" mode="advanced"
+                                          dragDropSupport="true" auto="true" label="Upload statistics json"
+                                          sizeLimit="50000000" fileLimit="3"
+                                          allowTypes="/(\.|\/)(json)$/"/>
+                        </div>
+                        <div class="ui-g-6 ui-sm-12">
+
+                            <p:commandButton value="Download statistics"
+                                             actionListener="#{pageStatisticsStore.prepareDownload}" ajax="false"
+                                             styleClass="btn-fatal"
+                                             icon="fa fa-download">
+                                <p:fileDownload value="#{pageStatisticsStore.pageStatsFile}"/>
+                            </p:commandButton>
+                        </div>
+                    </div>
                 </h:form>
             </div>
         </div>

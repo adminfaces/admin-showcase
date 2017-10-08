@@ -8,11 +8,15 @@ import com.github.adminfaces.showcase.filter.BlackListFilter;
 import com.google.api.client.http.FileContent;
 import org.apache.commons.io.FileUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.*;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.json.*;
 import java.io.*;
@@ -20,6 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +55,7 @@ public class PageStatisticsStore implements Serializable {
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     private List<Integer> yearsWithStatistics;
     private List<PageStats> pageStatsFilteredByDate;
+    private StreamedContent pageStatsFile;
 
 
     @PostConstruct
@@ -512,9 +518,19 @@ public class PageStatisticsStore implements Serializable {
 
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         try (InputStream in = event.getFile().getInputstream()) {
-            Files.copy(in,Paths.get(pagesStatsFilePath));
+            Files.copy(in,Paths.get(pagesStatsFilePath), StandardCopyOption.REPLACE_EXISTING);
             initStatistics();
+            FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded. Size (KB): "+event.getFile().getSize()/1024f);
+            FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 
+    public void prepareDownload() throws FileNotFoundException {
+        InputStream stream = new FileInputStream(new File(pagesStatsFilePath));
+        pageStatsFile = new DefaultStreamedContent(stream, "application/json", "page-stats.json");
+    }
+
+    public StreamedContent getPageStatsFile() {
+        return pageStatsFile;
+    }
 }
