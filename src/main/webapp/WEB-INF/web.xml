@@ -74,6 +74,10 @@
         <filter-name>javamelody</filter-name>
         <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
         <async-supported>true</async-supported>
+        <init-param>
+            <param-name>storage-directory</param-name>
+            <param-value>/data</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>javamelody</filter-name>
