@@ -23,7 +23,7 @@ public class LogonMB implements Serializable {
     public String doLogon() {
         Faces.getFlash().setKeepMessages(true);
         Messages.addGlobalInfo("Logged in successfully!");
-        return "index.xhtml?faces-redirect=true";
+        return "/index.xhtml?faces-redirect=true";
     }
 
     public String getEmail() {
