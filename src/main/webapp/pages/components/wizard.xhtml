@@ -1,0 +1,210 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.layout}">
+
+    <ui:define name="title">
+        Wizard
+    </ui:define>
+
+
+    <ui:define name="description">
+        Wizard creates a workflow by creating multiple steps out of a single page form.
+
+        Only current step is processed partially and next step is displayed if current step passes validations.
+
+        Wizard flow is sequential by default and this can be managed using the optional ajax flowListeners, simply outcome of a flowListener defines the next step to display.
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Wizard"/>
+
+        <p:panel styleClass="card box-info">
+            <h:form>
+                <p:wizard flowListener="#{userWizardMB.onFlowProcess}">
+                    <p:tab id="personal" title="Personal">
+                        <p:panel header="Personal Details">
+                            <p:messages closable="true"/>
+                            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4"
+                                         layout="grid" styleClass="ui-fluid">
+                                <p:outputLabel value="Firstname: *" for="username"/>
+                                <p:inputText id="username" value="#{userWizardMB.user.firstname}"
+                                             requiredMessage="Username is required"
+                                             required="true" label="Firstname"/>
+
+                                <p:outputLabel value="Lastname: *" for="lastname"/>
+                                <p:inputText id="lastname" value="#{userWizardMB.user.lastname}"
+                                             requiredMessage="Lastname is required"
+                                             required="true" label="Lastname"/>
+
+                                <p:outputLabel for="age" value="Age: "/>
+                                <p:inputText id="age" value="#{userWizardMB.user.age}"/>
+
+                                <p:outputLabel for="skip" value="Skip to last: "/>
+                                <p:selectBooleanCheckbox id="skip" value="#{userWizardMB.skip}"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="address" title="Address">
+                        <p:panel header="Address Details">
+                            <p:messages closable="true"/>
+                            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4"
+                                         layout="grid" styleClass="ui-fluid">
+                                <h:outputText value="Street: "/>
+                                <p:inputText value="#{userWizardMB.user.street}"/>
+
+                                <h:outputText value="Postal Code: "/>
+                                <p:inputText value="#{userWizardMB.user.postalCode}"/>
+
+                                <h:outputText value="City: "/>
+                                <p:inputText value="#{userWizardMB.user.city}"/>
+
+                                <h:outputText value="Skip to last: "/>
+                                <p:selectBooleanCheckbox value="#{userWizardMB.skip}"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="contact" title="Contact">
+                        <p:panel header="Contact Information">
+                            <p:messages closable="true"/>
+                            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4"
+                                         layout="grid" styleClass="ui-fluid">
+                                <h:outputText value="Email: *"/>
+                                <p:inputText value="#{userWizardMB.user.email}" required="true" label="Email"/>
+
+                                <h:outputText value="Phone: "/>
+                                <p:inputText value="#{userWizardMB.user.phone}"/>
+
+                                <h:outputText value="Additional Info: "/>
+                                <p:inputText value="#{userWizardMB.user.info}"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmation">
+                        <p:panel header="Confirmation" styleClass="box-primary">
+
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12">
+
+                                    <div class="ui-g-4">
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Firstname "/>
+                                        </div>
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.firstname}"/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Lastname "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.lastname}"/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Age "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.age}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="ui-g-4">
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Street "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.street}" styleClass="outputLabel"/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Postal "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.postalCode}"
+                                                          styleClass="outputLabel"/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="City "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.city}" styleClass="outputLabel"/>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="ui-g-4">
+
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Email "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.email}" styleClass="outputLabel"/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Phone "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.phone}" styleClass="outputLabel"/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <p:outputLabel value="Info "/>
+                                        </div>
+
+                                        <div class="ui-g-12">
+                                            <h:outputText value="#{userWizardMB.user.info}" styleClass="outputLabel"/>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <p:commandButton value="Submit" actionListener="#{userWizardMB.save}" styleClass="btn-teal" icon="fa fa-check"
+                                             process="@this"/>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="wizard.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="UserWizardMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText
+                           value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.UserWizardMB')}"
+                           escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>
