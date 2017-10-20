@@ -17,7 +17,7 @@
                         <div class="ui-g-6 ui-sm-12">
                             <p:fileUpload fileUploadListener="#{pageStatisticsStore.handleFileUpload}" mode="advanced"
                                           dragDropSupport="true" auto="true" label="Upload statistics json"
-                                          sizeLimit="50000000" fileLimit="3"
+                                          sizeLimit="50000000" fileLimit="3" onstart="showBar()" oncomplete="hideBar()"
                                           allowTypes="/(\.|\/)(json)$/"/>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
