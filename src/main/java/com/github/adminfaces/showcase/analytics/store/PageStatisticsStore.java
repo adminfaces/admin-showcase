@@ -283,7 +283,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     private boolean shouldIgnorePageInfo(PageView pageView) {
-        return pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost") || pageView.getIp().contains("unknown");
+        return pageView.getHasIpInfo() || pageView.getIp().equals("127.0.0.1") || pageView.getIp().contains("localhost") || pageView.getIp().contains("unknown") || pageView.getIp().startsWith("10.");
     }
 
     private boolean callIpApi(String ipApiQuery, PageView pageView) {
