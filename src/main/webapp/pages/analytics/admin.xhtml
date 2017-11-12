@@ -15,10 +15,10 @@
                 <h:form>
                     <div class="ui-g ui-fluid">
                         <div class="ui-g-6 ui-sm-12">
-                            <p:fileUpload fileUploadListener="#{pageStatisticsStore.handleFileUpload}" mode="advanced"
+                            <p:fileUpload fileUploadListener="#{pageStatisticsStore.handleFileUpload}" mode="advanced" process="@this"
                                           dragDropSupport="true" auto="true" label="Upload statistics json"
                                           sizeLimit="50000000" fileLimit="3" onstart="showBar()" oncomplete="hideBar()"
-                                          allowTypes="/(\.|\/)(json)$/"/>
+                                          allowTypes="/(\.|\/)(zip)$/"/>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
 

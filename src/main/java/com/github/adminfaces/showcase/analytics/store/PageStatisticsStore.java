@@ -22,15 +22,13 @@ import javax.json.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.github.adminfaces.showcase.analytics.util.FileUtils.unzip;
 import static com.github.adminfaces.template.util.Assert.has;
 
 /**
@@ -518,7 +516,8 @@ public class PageStatisticsStore implements Serializable {
 
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         try (InputStream in = event.getFile().getInputstream()) {
-            Files.copy(in,Paths.get(pagesStatsFilePath), StandardCopyOption.REPLACE_EXISTING);
+            unzip(in,pagesStatsFilePath);
+            //Files.copy(in,Paths.get(pagesStatsFilePath), StandardCopyOption.REPLACE_EXISTING);
             initStatistics();
             FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded. Size (KB): "+event.getFile().getSize()/1024f);
             FacesContext.getCurrentInstance().addMessage(null, message);
