@@ -24,9 +24,9 @@ public class PageStats {
     public void addPageView(PageView pageView) {
         pageViews.add(pageView);
         if(uniquePageViews == null) {
-             initPageViewsCount();
+            initPageViewsCount();
+            uniquePageViews.incrementAndGet();
         }
-        uniquePageViews.incrementAndGet();
     }
 
     public long getTotalPageViews() {

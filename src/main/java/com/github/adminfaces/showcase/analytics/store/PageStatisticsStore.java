@@ -125,7 +125,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour = "*/1", persistent = false)
+    @Schedule(hour = "*", minute = "*/1", persistent = false)
     public void persistPageStatistics() {
         if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
@@ -302,13 +302,14 @@ public class PageStatisticsStore implements Serializable {
             connection.setRequestProperty("Accept-Charset", "UTF-8");
 
             InputStream is = connection.getInputStream();
-            rd = new BufferedReader(new InputStreamReader(is));
+            rd = new BufferedReader(new InputStreamReader(is, "UTF-8"));
             StringBuilder json = new StringBuilder();
             String line;
             while ((line = rd.readLine()) != null) {
                 json.append(line);
             }
-            JsonObject jsonObject = Json.createReader(new StringReader(json.toString())).readObject();
+            InputStream jsonStream = new ByteArrayInputStream(json.toString().getBytes("UTF-8"));
+            JsonObject jsonObject = Json.createReader(jsonStream).readObject();
             if (jsonObject.containsKey("status") && !jsonObject.getString("status").equals("fail")) {
                 pageView.setCountry(jsonObject.getString("country"));
                 pageView.setCity(jsonObject.getString("city"));
@@ -516,10 +517,10 @@ public class PageStatisticsStore implements Serializable {
 
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         try (InputStream in = event.getFile().getInputstream()) {
-            unzip(in,pagesStatsFilePath);
+            unzip(in, pagesStatsFilePath);
             //Files.copy(in,Paths.get(pagesStatsFilePath), StandardCopyOption.REPLACE_EXISTING);
             initStatistics();
-            FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded. Size (KB): "+event.getFile().getSize()/1024f);
+            FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded. Size (KB): " + event.getFile().getSize() / 1024f);
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
