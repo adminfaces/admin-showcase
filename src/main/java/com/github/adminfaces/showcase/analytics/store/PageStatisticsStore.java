@@ -68,7 +68,10 @@ public class PageStatisticsStore implements Serializable {
             JsonArray persistedPageStats = Json.createReader(new FileReader(statisticsFile)).readObject().getJsonArray("statistics");
             for (JsonValue jsonValue : persistedPageStats) {
                 JsonObject jsonObject = (JsonObject) jsonValue;
-                PageStats pageStats = new PageStats(jsonObject.getString("viewId"));
+                PageStats pageStats = pageStatisticsMap.get(jsonObject.getString("viewId"));
+                if(pageStats == null) {
+                    pageStats = new PageStats(jsonObject.getString("viewId"));
+                }
                 JsonArray pageViewsJson = jsonObject.getJsonArray("pageViews");
                 List<PageView> pageViews = new ArrayList<>();
                 for (JsonValue value : pageViewsJson) {
@@ -87,7 +90,12 @@ public class PageStatisticsStore implements Serializable {
                     pageView.setHasIpInfo(object.containsKey("hasIpInfo") ? object.getBoolean("hasIpInfo") : false);//backward compat
                     pageViews.add(pageView);
                 }
-                pageStats.setPageViews(pageViews);
+                if(pageStats.getPageViews() != null) {
+                    pageStats.getPageViews().addAll(pageViews);
+                } else {
+                    pageStats.setPageViews(pageViews);
+                }
+
                 pageStatisticsMap.put(pageStats.getViewId(), pageStats);
             }
         } catch (Exception e) {
@@ -125,7 +133,7 @@ public class PageStatisticsStore implements Serializable {
         pageStats.addPageView(pageView);
     }
 
-    @Schedule(hour = "*", minute = "*/1", persistent = false)
+    @Schedule(hour = "*/1", persistent = false)
     public void persistPageStatistics() {
         if (pageStatisticsMap == null || pageStatisticsMap.isEmpty()) {
             return;//in some situation the schedule is called before statistics is initialized
