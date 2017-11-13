@@ -32,7 +32,7 @@ public class AnalyticsMB implements Serializable {
 
     private static final List<String> PIE_CHART_COLORS = Arrays.asList("#f56954", "#00a65a", "#f39c12", "#00c0ef", "#3c8dbc", "#d2d6de", "#d81b60", "#01FF70",
             "#444", "#001F3F", "#B13C2E", "#009688", "#111", "#696969", "#0088cc", "#39CCCC", "#7FB77D", "#F012BE", "#3D9970", "#FF851B", "#1C28B7", "#FF495A", "#31FFB0",
-            "#B1CC97", "#3F2A29", "#2F1B22", "gray","#8A0829","#4000FF");
+            "#B1CC97", "#3F2A29", "#2F1B22", "gray","#8A0829","#4000FF","#01A9DB","#050563","#E3F25B","#D71A4C", "#C28503");
 
     private static final SimpleDateFormat MONTH_YEAR_FORMAT = new SimpleDateFormat("MM/yyyy");
 
