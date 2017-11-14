@@ -65,7 +65,7 @@ public class PageStatisticsStore implements Serializable {
             if (!statisticsFile.exists()) {
                 statisticsFile.createNewFile();
             }
-            JsonArray persistedPageStats = Json.createReader(new FileReader(statisticsFile)).readObject().getJsonArray("statistics");
+            JsonArray persistedPageStats = Json.createReader(new InputStreamReader(new FileInputStream(statisticsFile),"UTF-8")).readObject().getJsonArray("statistics");
             for (JsonValue jsonValue : persistedPageStats) {
                 JsonObject jsonObject = (JsonObject) jsonValue;
                 PageStats pageStats = pageStatisticsMap.get(jsonObject.getString("viewId"));
@@ -183,7 +183,7 @@ public class PageStatisticsStore implements Serializable {
                     }
                 }
 
-                FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString(), "UTF-8");
+                FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString().replaceAll("�",""), "UTF-8");
                 resetStatstistics();
                 updateGeoJsonCache();
             }
