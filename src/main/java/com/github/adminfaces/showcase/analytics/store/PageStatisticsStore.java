@@ -218,6 +218,18 @@ public class PageStatisticsStore implements Serializable {
         log.info("Page statistics backup done.");
     }
 
+    @Schedule(hour = "*/6", minute = "15", persistent = false)
+    public void calculatePageViews(){
+        List<PageStats> pageStatsCopy = null;
+        synchronized (pageStatisticsMap) {
+            List<PageStats> originalList = new ArrayList<>(pageStatisticsMap.values());
+            pageStatsCopy = copyPageStats(originalList);
+            for (PageStats pageStats : pageStatsCopy) {
+                pageStats.initPageViewsCount();
+            }
+        }
+    }
+
     private List<PageStats> copyPageStats(List<PageStats> originalList) {
         List<PageStats> pageStatsCopy = new ArrayList<>(originalList.size());
         for (PageStats stats : originalList) {

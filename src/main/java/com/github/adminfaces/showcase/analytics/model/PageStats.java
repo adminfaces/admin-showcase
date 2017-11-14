@@ -15,7 +15,7 @@ public class PageStats {
     private boolean showVisitorsInfo;
     private Map<String, Map<String, List<PageView>>> pageViewsByCountryAndCity;//first map key is country, second key is city
     private List<PageViewCountry> pageViewCountryList;
-    private AtomicInteger uniquePageViews;
+    private Integer uniquePageViews;
 
     public PageStats(String viewId) {
         this.viewId = viewId;
@@ -23,10 +23,6 @@ public class PageStats {
 
     public void addPageView(PageView pageView) {
         pageViews.add(pageView);
-        if(uniquePageViews == null) {
-            initPageViewsCount();
-            uniquePageViews.incrementAndGet();
-        }
     }
 
     public long getTotalPageViews() {
@@ -38,10 +34,10 @@ public class PageStats {
             initPageViewsCount();
         }
 
-        return uniquePageViews.get();
+        return uniquePageViews;
     }
 
-    private void initPageViewsCount() {
+    public void initPageViewsCount() {
         List<PageView> pageViewsCopy = new ArrayList<>(pageViews.size());
         pageViewsCopy.addAll(pageViews);
         Map<String, String> pageIps = new HashMap<>();
@@ -50,7 +46,7 @@ public class PageStats {
                 pageIps.put(pageView.getIp(), "");
             }
         }
-        uniquePageViews = new AtomicInteger(pageIps.size());
+        uniquePageViews = pageIps.size();
     }
 
     public String getViewId() {

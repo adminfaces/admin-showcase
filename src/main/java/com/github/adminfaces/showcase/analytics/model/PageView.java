@@ -80,4 +80,5 @@ public class PageView implements Serializable {
         this.city = city;
     }
 
+
 }
