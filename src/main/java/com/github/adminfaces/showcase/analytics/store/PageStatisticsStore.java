@@ -423,9 +423,9 @@ public class PageStatisticsStore implements Serializable {
         return pageStatsWithCountries;
     }
 
-    public Map<Integer, Integer> getTotalVisitorsByMonth() {
+    public Map<Integer, Integer> getTotalVisitorsByMonth(Calendar dateToConsider) {
         if (totalVisitorsByMonth == null) {
-            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            int currentYear = dateToConsider.get(Calendar.YEAR);
             totalVisitorsByMonth = new HashMap<>();
             for (int i = 0; i <= 11; i++) {
                 totalVisitorsByMonth.put(i, 0);

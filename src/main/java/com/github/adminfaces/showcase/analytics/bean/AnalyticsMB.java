@@ -205,7 +205,7 @@ public class AnalyticsMB implements Serializable {
         if (totalVisitorsByMonth == null) {
             JsonArrayBuilder totals = Json.createArrayBuilder();
             for (int i = 0; i <= 11; i++) {
-                Integer totalViewsInMonth = analyticsStore.getTotalVisitorsByMonth().get(i);
+                Integer totalViewsInMonth = analyticsStore.getTotalVisitorsByMonth(statisticsDate).get(i);
                 totals.add(totalViewsInMonth);
             }
             totalVisitorsByMonth = totals.build().toString();
