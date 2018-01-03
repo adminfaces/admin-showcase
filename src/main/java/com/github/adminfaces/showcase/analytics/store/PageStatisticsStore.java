@@ -444,9 +444,9 @@ public class PageStatisticsStore implements Serializable {
         return totalVisitorsByMonth;
     }
 
-    public Map<Integer, Integer> getUniqueVisitorsByMonth() {
+    public Map<Integer, Integer> getUniqueVisitorsByMonth(Calendar dateToConsider) { 
         if (uniqueVisitorsByMonth == null) {
-            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            int currentYear = dateToConsider.get(Calendar.YEAR);
             List<String> ipList = new ArrayList<>();
             uniqueVisitorsByMonth = new HashMap<>();
             for (int i = 0; i <= 11; i++) {
