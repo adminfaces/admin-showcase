@@ -376,6 +376,7 @@ public class PageStatisticsStore implements Serializable {
             if (dateToConsider == null) {
                 pageStatsFilteredByDate = new ArrayList<>(pageStatisticsMap.values());
             } else {
+                //-1 means all years/months
                 int yearToConsider = dateToConsider.get(Calendar.YEAR);
                 int monthToConsider = dateToConsider.get(Calendar.MONTH);
                 pageStatsFilteredByDate = new ArrayList<>();
@@ -425,14 +426,15 @@ public class PageStatisticsStore implements Serializable {
 
     public Map<Integer, Integer> getTotalVisitorsByMonth(Calendar dateToConsider) {
         if (totalVisitorsByMonth == null) {
-            int currentYear = dateToConsider.get(Calendar.YEAR);
+            //-1 means all years/months
+            int currentYear = dateToConsider != null ? dateToConsider.get(Calendar.YEAR) : -1;
             totalVisitorsByMonth = new HashMap<>();
             for (int i = 0; i <= 11; i++) {
                 totalVisitorsByMonth.put(i, 0);
             }
             for (PageStats pageStats : pageStatsFilteredByDate) {
                 for (PageView pageView : pageStats.getPageViews()) {
-                    if (pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp())) {
+                    if (currentYear != -1 && pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp())) {
                         continue;
                     }
                     int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
@@ -446,7 +448,8 @@ public class PageStatisticsStore implements Serializable {
 
     public Map<Integer, Integer> getUniqueVisitorsByMonth(Calendar dateToConsider) { 
         if (uniqueVisitorsByMonth == null) {
-            int currentYear = dateToConsider.get(Calendar.YEAR);
+            //currentYear == -1 means all years
+            int currentYear = dateToConsider != null ? dateToConsider.get(Calendar.YEAR):-1;
             List<String> ipList = new ArrayList<>();
             uniqueVisitorsByMonth = new HashMap<>();
             for (int i = 0; i <= 11; i++) {
@@ -454,7 +457,7 @@ public class PageStatisticsStore implements Serializable {
             }
             for (PageStats pageStats : pageStatsFilteredByDate) {
                 for (PageView pageView : pageStats.getPageViews()) {
-                    if (pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp()) || ipList.contains(pageView.getIp())) {
+                    if (currentYear != -1 && pageView.getDate().get(Calendar.YEAR) != currentYear || !has(pageView.getIp()) || ipList.contains(pageView.getIp())) {
                         continue;
                     }
                     int pageViewMonth = pageView.getDate().get(Calendar.MONTH);
