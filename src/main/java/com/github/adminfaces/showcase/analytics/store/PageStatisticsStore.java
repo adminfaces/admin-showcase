@@ -65,11 +65,11 @@ public class PageStatisticsStore implements Serializable {
             if (!statisticsFile.exists()) {
                 statisticsFile.createNewFile();
             }
-            JsonArray persistedPageStats = Json.createReader(new InputStreamReader(new FileInputStream(statisticsFile),"UTF-8")).readObject().getJsonArray("statistics");
+            JsonArray persistedPageStats = Json.createReader(new InputStreamReader(new FileInputStream(statisticsFile), "UTF-8")).readObject().getJsonArray("statistics");
             for (JsonValue jsonValue : persistedPageStats) {
                 JsonObject jsonObject = (JsonObject) jsonValue;
                 PageStats pageStats = pageStatisticsMap.get(jsonObject.getString("viewId"));
-                if(pageStats == null) {
+                if (pageStats == null) {
                     pageStats = new PageStats(jsonObject.getString("viewId"));
                 }
                 JsonArray pageViewsJson = jsonObject.getJsonArray("pageViews");
@@ -90,7 +90,7 @@ public class PageStatisticsStore implements Serializable {
                     pageView.setHasIpInfo(object.containsKey("hasIpInfo") ? object.getBoolean("hasIpInfo") : false);//backward compat
                     pageViews.add(pageView);
                 }
-                if(pageStats.getPageViews() != null) {
+                if (pageStats.getPageViews() != null) {
                     pageStats.getPageViews().addAll(pageViews);
                 } else {
                     pageStats.setPageViews(pageViews);
@@ -183,7 +183,7 @@ public class PageStatisticsStore implements Serializable {
                     }
                 }
 
-                FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString().replaceAll("�",""), "UTF-8");
+                FileUtils.writeStringToFile(new File(pagesStatsFilePath), Json.createObjectBuilder().add("statistics", pageStatsJsonArray.build()).build().toString().replaceAll("�", ""), "UTF-8");
                 resetStatstistics();
                 updateGeoJsonCache();
             }
@@ -206,11 +206,17 @@ public class PageStatisticsStore implements Serializable {
 
         com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File().setName("page-stats.json");
         File pageStatsJson = new File(pagesStatsFilePath);
+        FileContent mediaContent = null;
         if (pageStatsJson.length() < 1024 * 1024) { //doesn't backup if file is less than 1MB
-            return;
+            FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson);
+            DriverService.getDriveService()//try to load from backup
+                    .files().export("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", "application/json").executeMediaAndDownloadTo(fileOutputStream);
+            if (pageStatsJson == null || pageStatsJson.length() < 1024 * 1024) {
+                return;
+            }
+            mediaContent = new FileContent("application/json", pageStatsJson);
         }
-        FileContent mediaContent = new FileContent("application/json", pageStatsJson);
-        com.google.api.services.drive.model.File file = DriverService.getDriveService()
+        DriverService.getDriveService()
                 .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
                 .setFields("id")
                 .execute();
@@ -219,7 +225,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     @Schedule(hour = "*/6", minute = "15", persistent = false)
-    public void calculatePageViews(){
+    public void calculatePageViews() {
         List<PageStats> pageStatsCopy = null;
         synchronized (pageStatisticsMap) {
             List<PageStats> originalList = new ArrayList<>(pageStatisticsMap.values());
@@ -446,10 +452,10 @@ public class PageStatisticsStore implements Serializable {
         return totalVisitorsByMonth;
     }
 
-    public Map<Integer, Integer> getUniqueVisitorsByMonth(Calendar dateToConsider) { 
+    public Map<Integer, Integer> getUniqueVisitorsByMonth(Calendar dateToConsider) {
         if (uniqueVisitorsByMonth == null) {
             //currentYear == -1 means all years
-            int currentYear = dateToConsider != null ? dateToConsider.get(Calendar.YEAR):-1;
+            int currentYear = dateToConsider != null ? dateToConsider.get(Calendar.YEAR) : -1;
             List<String> ipList = new ArrayList<>();
             uniqueVisitorsByMonth = new HashMap<>();
             for (int i = 0; i <= 11; i++) {
