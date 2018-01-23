@@ -214,8 +214,8 @@ public class PageStatisticsStore implements Serializable {
             if (pageStatsJson == null || pageStatsJson.length() < 1024 * 1024) {
                 return;
             }
-            mediaContent = new FileContent("application/json", pageStatsJson);
         }
+        mediaContent = new FileContent("application/json", pageStatsJson);
         DriverService.getDriveService()
                 .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
                 .setFields("id")
