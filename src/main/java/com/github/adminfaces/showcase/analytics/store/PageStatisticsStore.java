@@ -210,7 +210,7 @@ public class PageStatisticsStore implements Serializable {
         if (pageStatsJson.length() < 1024 * 1024) { //doesn't backup if file is less than 1MB
             FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson);
             DriverService.getDriveService()//try to load from backup
-                    .files().export("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", "application/json").executeMediaAndDownloadTo(fileOutputStream);
+                    .files().get("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8").executeMediaAndDownloadTo(fileOutputStream);
             if (pageStatsJson == null || pageStatsJson.length() < 1024 * 1024) {
                 return;
             }
