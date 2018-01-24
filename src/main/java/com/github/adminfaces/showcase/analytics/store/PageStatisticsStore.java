@@ -206,7 +206,6 @@ public class PageStatisticsStore implements Serializable {
 
         com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File().setName("page-stats.json");
         File pageStatsJson = new File(pagesStatsFilePath);
-        FileContent mediaContent = null;
         if (pageStatsJson.length() < 1024 * 1024) { //doesn't backup if file is less than 1MB
             FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson);
             DriverService.getDriveService()//try to load from backup
@@ -214,8 +213,9 @@ public class PageStatisticsStore implements Serializable {
             if (pageStatsJson == null || pageStatsJson.length() < 1024 * 1024) {
                 return;
             }
+            log.info("Statistics loaded from backup.");
         }
-        mediaContent = new FileContent("application/json", pageStatsJson);
+        FileContent mediaContent = new FileContent("application/json", pageStatsJson);
         DriverService.getDriveService()
                 .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
                 .setFields("id")
