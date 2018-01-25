@@ -214,6 +214,7 @@ public class PageStatisticsStore implements Serializable {
                 return;
             }
             log.info("Statistics loaded from backup.");
+            resetStatstistics();
         }
         FileContent mediaContent = new FileContent("application/json", pageStatsJson);
         DriverService.getDriveService()
