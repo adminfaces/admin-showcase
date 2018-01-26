@@ -207,9 +207,7 @@ public class PageStatisticsStore implements Serializable {
         com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File().setName("page-stats.json");
         File pageStatsJson = new File(pagesStatsFilePath);
         if (pageStatsJson.length() < 1024 * 1024) { //doesn't backup if file is less than 1MB
-            FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson);
-            DriverService.getDriveService()//try to load from backup
-                    .files().get("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8").executeMediaAndDownloadTo(fileOutputStream);
+            loadStatisticsFromBackup(pageStatsJson);
             if (pageStatsJson == null || pageStatsJson.length() < 1024 * 1024) {
                 return;
             }
@@ -224,6 +222,21 @@ public class PageStatisticsStore implements Serializable {
                 .execute();
 
         log.info("Page statistics backup done.");
+    }
+
+    public void loadStatisticsFromBackup() {
+        loadStatisticsFromBackup(new File(pagesStatsFilePath));
+    }
+
+    private void loadStatisticsFromBackup(File pageStatsJson) {
+        log.info("Loading statistics from backup...");
+        try (FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson)){
+            DriverService.getDriveService()//try to load from backup
+                    .files().get("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8").executeMediaAndDownloadTo(fileOutputStream);
+        } catch (Exception e) {
+           log.error("Could not load statistica from backup.",e);
+        }
+
     }
 
     @Schedule(hour = "*/6", minute = "15", persistent = false)

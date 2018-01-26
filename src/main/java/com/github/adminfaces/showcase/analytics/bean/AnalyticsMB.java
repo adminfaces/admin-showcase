@@ -6,6 +6,7 @@ import com.github.adminfaces.showcase.analytics.store.PageStatisticsStore;
 import com.github.adminfaces.showcase.filter.BlackListFilter;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
+import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
 import javax.annotation.PostConstruct;
@@ -93,6 +94,12 @@ public class AnalyticsMB implements Serializable {
         analyticsStore.resetStatstistics();
         loadStatsList();
 
+    }
+
+    public void loadStatisticsFromBackup() {
+        analyticsStore.loadStatisticsFromBackup();
+        initStatistics();
+        Messages.addInfo(null,"Page statistics loaded successful");
     }
 
     private void loadStatsList() {
