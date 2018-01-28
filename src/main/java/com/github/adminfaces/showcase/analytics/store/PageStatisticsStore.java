@@ -215,7 +215,7 @@ public class PageStatisticsStore implements Serializable {
             }
             log.info("Statistics loaded from backup.");
             initStatistics();
-            shouldUpdate = false;//does not update backup if it was recently loaded from there
+            shouldUpdate = false;//do not update backup if it was recently loaded from there
 
         }
         if(shouldUpdate) {
