@@ -206,21 +206,39 @@ public class PageStatisticsStore implements Serializable {
 
         com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File().setName("page-stats.json");
         File pageStatsJson = new File(pagesStatsFilePath);
-        if (pageStatsJson.length() < 1024 * 1024) { //doesn't backup if file is less than 1MB
+        boolean shouldUpdate = true;
+        if (!hasStatisticsToBackup(pageStatsJson)) { //if there is no stats data then try to load from backup
             loadStatisticsFromBackup(pageStatsJson);
-            if (pageStatsJson == null || pageStatsJson.length() < 1024 * 1024) {
+            if (!hasStatisticsToBackup(pageStatsJson)) {
+                log.info("No statistics to backup.");
                 return;
             }
             log.info("Statistics loaded from backup.");
             initStatistics();
+            shouldUpdate = false;//does not update backup if it was recently loaded from there
+
         }
-        FileContent mediaContent = new FileContent("application/json", pageStatsJson);
-        DriverService.getDriveService()
-                .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
-                .setFields("id")
-                .execute();
+        if(shouldUpdate) {
+            FileContent mediaContent = new FileContent("application/json", pageStatsJson);
+            DriverService.getDriveService()
+                    .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
+                    .setFields("id")
+                    .execute();
+        }
+
+
 
         log.info("Page statistics backup done.");
+    }
+
+    /**
+     * Stats data must be bigger than 1MB to backup
+     *
+     * @param pageStatsJson
+     * @return
+     */
+    private boolean hasStatisticsToBackup(File pageStatsJson) {
+        return pageStatsJson != null && pageStatsJson.length() > 1024 * 1024;
     }
 
     public void loadStatisticsFromBackup() {
