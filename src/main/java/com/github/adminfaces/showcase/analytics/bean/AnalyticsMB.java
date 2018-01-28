@@ -91,8 +91,7 @@ public class AnalyticsMB implements Serializable {
         if(Faces.isAjaxRequest()) {
             return;
         }
-        analyticsStore.resetStatstistics();
-        loadStatsList();
+        analyticsStore.initStatistics();
 
     }
 
@@ -233,7 +232,7 @@ public class AnalyticsMB implements Serializable {
     }
 
     public String getVisitorsByPage() {
-        if (visitorsByPage == null) {
+        if (visitorsByPage == null && pageStatsList != null) {
             JsonArrayBuilder pageStatsJsonArray = Json.createArrayBuilder();
             for (int i = 0; i < pageStatsList.size(); i++) {
                 //each stats is a page

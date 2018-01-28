@@ -233,6 +233,7 @@ public class PageStatisticsStore implements Serializable {
         try (FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson)){
             DriverService.getDriveService()//try to load from backup
                     .files().get("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8").executeMediaAndDownloadTo(fileOutputStream);
+            log.info("Statistics loaded successfully.");
         } catch (Exception e) {
            log.error("Could not load statistica from backup.",e);
         }
