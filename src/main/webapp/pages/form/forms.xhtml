@@ -203,7 +203,7 @@
                 <div class="ui-g-12">
                     <p:panel header="DataGrid" styleClass="card no-border">
                         <p:dataGrid var="car" value="#{dataGridMB.cars}" columns="3" layout="grid" rows="12"
-                                    paginator="true" paginatorPosition="bottom" >
+                                    paginator="true" paginatorPosition="bottom">
 
                             <p:panel header="#{car.id}" style="text-align:center">
                                 <h:panelGrid columns="1" style="width:100%">
@@ -406,6 +406,33 @@
                 Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
                 but given to ruthless violence whenever anything stands against the good of the family."/>
                         </p:panelGrid>
+                    </p:panel>
+                </div>
+
+                <div class="ui-g-12">
+                    <p:panel header="Carousel" styleClass="card no-border">
+                        <p:carousel value="#{datatableMB.carsCarousel}" var="car" headerText="Header"
+                                    itemStyle="text-align:center" responsive="true">
+                            <p:panelGrid columns="2" style="width:100%;margin:10px 0px"
+                                         columnClasses="ui-grid-col-4,ui-grid-col-8"
+                                         layout="grid" styleClass="ui-panelgrid-blank">
+                                <f:facet name="header">
+                                    <p:graphicImage name="demo/images/car/#{car.brand}.gif"/>
+                                </f:facet>
+
+                                <p:outputLabel value="Id:"/>
+                                <h:outputText value="#{car.id}"/>
+
+                                <p:outputLabel value="Year"/>
+                                <h:outputText value="#{car.year}"/>
+
+                                <p:outputLabel value="Color:"/>
+                                <h:outputText value="#{car.color}" style="color:#{car.color}"/>
+
+                                <p:outputLabel value="Price"/>
+                                <h:outputText value="\$#{car.price}"/>
+                            </p:panelGrid>
+                        </p:carousel>
                     </p:panel>
                 </div>
             </div>
