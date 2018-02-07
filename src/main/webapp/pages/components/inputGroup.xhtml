@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.layout}">
+
+    <ui:define name="title">
+        InputGroup
+    </ui:define>
+
+    <ui:define name="description">
+        Text, icon, buttons and other content can be grouped next to an input by wrapping the addons and input inside .ui-inputgroup element. Multiple addons can be used within the same group as well.
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="InputGroup"/>
+        <h:form>
+            <p:panel header="Addons" styleClass="card no-border">
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i style="font-size: 20px" class="fa fa-user"></i></span>
+                            <p:inputText placeholder="Username"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">$</span>
+                            <p:inputText placeholder="Price"/>
+                            <span class="ui-inputgroup-addon">.00</span>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">www</span>
+                            <p:inputText placeholder="Website"/>
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+            <p:spacer height="5px"/>
+            <p:panel header="Multiple Addons" styleClass="card no-border">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i style="font-size: 20px"
+                                                                 class="fa fa-credit-card"/></span>
+                            <span class="ui-inputgroup-addon"><i style="font-size: 20px" class="fa fa-cc-visa"/></span>
+                            <p:inputText placeholder="Price"/>
+                            <span class="ui-inputgroup-addon">$</span>
+                            <span class="ui-inputgroup-addon">.00</span>
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+            <p:spacer height="5px"/>
+            <p:panel header="Button Addons" styleClass="card no-border">
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <p:commandButton styleClass="btn-primary" value="Search"/>
+                            <p:inputText placeholder="Keyword"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <p:inputText placeholder="Keyboard"/>
+                            <p:commandButton icon="fa fa-search" styleClass="btn-info"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <p:commandButton icon="fa fa-check" styleClass="btn-success"/>
+                            <p:inputText placeholder="Vote"/>
+                            <p:commandButton icon="fa fa-close" styleClass="btn-danger"/>
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+            <p:spacer height="5px"/>
+            <p:panel header="Checkbox" styleClass="card no-border">
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon-checkbox"><p:selectBooleanCheckbox/></span>
+                            <p:inputText placeholder="Username"/>
+                        </div>
+                    </div>
+                </div>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="inputGroup.xhtml">
+               <pre>
+                   <code class="language-html"><h:outputText
+                           value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+                   </code>
+               </pre>
+            </p:tab>
+
+        </p:tabView>
+    </ui:define>
+</ui:composition>
