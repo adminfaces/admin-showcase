@@ -9,7 +9,7 @@ public class Car implements Serializable {
 
     public String id;
     public String brand;
-    public int year;
+    public Integer year;
     public String color;
     public int price;
     public boolean sold;
@@ -23,7 +23,7 @@ public class Car implements Serializable {
         this.color = color;
     }
 
-    public Car(String id, String brand, int year, String color, int price, boolean sold) {
+    public Car(String id, String brand, Integer year, String color, int price, boolean sold) {
         this.id = id;
         this.brand = brand;
         this.year = year;
@@ -46,10 +46,10 @@ public class Car implements Serializable {
         this.brand = brand;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 

@@ -72,12 +72,14 @@
                             </p:link>
                         </p:column>
 
-                        <p:column filterBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
+                        <p:column filterBy="#{car.year}" sortBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
                                   priority="2">
                             <f:facet name="filter">
-                                <p:spinner onchange="PF('carsTable').filter()" styleClass="year-spinner">
-                                    <f:converter converterId="javax.faces.Integer"/>
-                                </p:spinner>
+                                <p:calendar pattern="yyyy" showOn="both" yearRange="c-60:c+0" navigator="true">
+                                   <f:converter converterId="calendarYearConverter"/>
+                                   <p:ajax process="@this" event="change" oncomplete="PF('carsTable').filter()"/>
+                                     <p:ajax process="@this" event="dateSelect" oncomplete="PF('carsTable').filter()"/>
+                                </p:calendar>
                             </f:facet>
                             <h:outputText value="#{car.year}"/>
                         </p:column>
