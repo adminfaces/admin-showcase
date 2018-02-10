@@ -4,7 +4,9 @@ import com.github.adminfaces.showcase.pages.BasePage;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.Location;
 import org.openqa.selenium.WebElement;
-import static org.jboss.arquillian.graphene.Graphene.*;
+
+import static org.jboss.arquillian.graphene.Graphene.guardAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 /**
  * Created by rafael-pestano on 16/01/17.
@@ -12,7 +14,7 @@ import static org.jboss.arquillian.graphene.Graphene.*;
 @Location("pages/components/messages.xhtml")
 public class MessagesPage extends BasePage {
 
-    @FindByJQuery("div.ui-g-4 button.btn-primary")
+    @FindByJQuery("button[id$='submitButton']")
     protected WebElement btnSubmit;
 
     @FindByJQuery("button.btn-primary")
@@ -61,7 +63,9 @@ public class MessagesPage extends BasePage {
     private WebElement fieldMsgIcon;
 
     public void clickBtnSubmit(){
+        waitModel().until().element(btnSubmit).is().visible();
         guardAjax(btnSubmit).click();
+        waitModel(browser).until().element(fieldMsgDefault).is().present();
     }
 
     public void clickBtnInfo(){
