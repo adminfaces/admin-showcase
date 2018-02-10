@@ -86,6 +86,10 @@ public class DatatableMB implements Serializable {
         return cars;
     }
 
+    public List<Car> getCarsCarousel() {
+        return cars.subList(0,8);
+    }
+
     public List<Car> getFilteredCars() {
         return filteredCars;
     }
