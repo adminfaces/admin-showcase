@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -299,8 +300,10 @@ public class AdminFt {
         dialogPage.doLogin();
         assertThat(browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Login']")).isDisplayed()).isTrue();
         dialogPage.clickSelecOneMenu();
-        assertThat(browser.findElement(By.xpath("//li[contains(@class,'ui-selectonemenu-item') and text()='Cash']")).isDisplayed()).isTrue();
-        browser.findElement(By.xpath("//li[contains(@class,'ui-selectonemenu-item') and text()='Cash']")).click();
+        WebElement select = browser.findElement(By.xpath("//li[contains(@class,'ui-selectonemenu-item') and text()='Cash']"));
+        waitModel().until().element(select).is().visible();
+        Actions actions = new Actions(browser);
+        actions.moveToElement(select).click().perform();
         waitModel();
         browser.findElement(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]//span")).click();
         waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().visible();
