@@ -53,7 +53,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>
-            <version>1.0.0-RC12-SNAPSHOT</version>
+            <version>1.0.0-RC12</version>
             <!-- end::dep-admin-template[] -->
             <exclusions>
                 <exclusion>
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
-            <version>1.0.0-RC12-SNAPSHOT</version>
+            <version>1.0.0-RC12</version>
             <!-- end::dep-admin-theme[] -->
             <classifier>no-cache</classifier>
         </dependency>
