@@ -38,7 +38,15 @@
     <ui:define name="body">
         <adm:breadcrumb title="Forms"/>
         <h:form>
-            <div class="ui-fluid">
+            <div>
+                <p:tooltip for="flat-switch" escape="false" position="top" value="Turns flat borders on, just add &lt;code&gt;ui-flat&lt;/code&gt; to a parent div."/>
+                <p:outputLabel value="Flat borders?" for="flat-switch"/>
+                <p:inputSwitch id="flat-switch" value="#{layoutMB.flat}">
+                    <p:ajax update="@form @(.ui-tabs)"/>
+                </p:inputSwitch>
+            </div>
+            <p:spacer height="15px"/>
+            <div class="ui-fluid #{layoutMB.flat ? 'ui-flat':''}">
                 <p:panelGrid columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
                              layout="grid" styleClass="ui-fluid card">
                     <p:outputLabel for="input" value="Input"/>

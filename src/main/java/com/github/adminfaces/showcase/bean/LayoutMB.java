@@ -14,9 +14,12 @@ public class LayoutMB implements Serializable {
 
     private String layout;
 
+    private boolean flat;
+
     @PostConstruct
     public void init() {
         setDefaultLayout();
+        flat = false;
     }
 
     public String getLayout() {
@@ -29,5 +32,13 @@ public class LayoutMB implements Serializable {
 
     public void setDefaultLayout() {
         layout = "/WEB-INF/templates/template.xhtml";
+    }
+
+    public boolean isFlat() {
+        return flat;
+    }
+
+    public void setFlat(boolean flat) {
+        this.flat = flat;
     }
 }
