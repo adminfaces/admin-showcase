@@ -14,6 +14,10 @@
         This page desmonstrates showcase menu and top bar code
     </ui:define>
 
+    <ui:define name="center-header">
+        <h2>AdminFaces Showcase Application2</h2>
+    </ui:define>
+
     <ui:define name="body">
         <adm:breadcrumb title="Menu" clear="true"/>
         <div class="box box-primary">
@@ -33,10 +37,28 @@
                     <h4><i class="icon fa fa-info"></i>Note</h4>
                     To use <b>horizontal menu</b> layout use <code>admin-top.xhtml</code> template.
                 </div>
+
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-info"></i>Note</h4>
+                    To use <b>central title</b>  on top bar (as in this page) just define <code>center-header</code> on you page or template.
+
+                    <hr/>
+                    <div class="callout callout-success">
+                        <h4>Tip!</h4>
+                        <p>You can customize central title by using a <b>css overide</b> on class <code>center-navbar</code>:</p>
+                        <pre class="language-html"><code>
+.body .center-navbar {
+  color: red;
+}
+                        </code></pre>
+                    </div>
+                </div>
             </div>
 
         </div>
     </ui:define>
+
 
     <ui:define name="code">
         <p:tabView styleClass="hidden-sm hidden-xs">

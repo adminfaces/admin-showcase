@@ -67,7 +67,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>admin-1.0.0-RC12-SNAPSHOT</param-value>
+        <param-value>admin-1.0.0-RC13-SNAPSHOT</param-value>
     </context-param>
 
     <filter>
