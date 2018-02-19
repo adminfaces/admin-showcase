@@ -15,7 +15,7 @@
     </ui:define>
 
     <ui:define name="center-header">
-        <h2>AdminFaces Showcase Application2</h2>
+        <h2>AdminFaces Showcase Application</h2>
     </ui:define>
 
     <ui:define name="body">
@@ -106,6 +106,14 @@
            </pre>
             </p:tab>
 
+            <p:tab title="pages/layout/menu.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('pages/layout/menu')}"
+                                                         escape="true"/>
+ </code>
+           </pre>
+            </p:tab>
+
 
         </p:tabView>
 
@@ -149,6 +157,14 @@
             <p:tab title="/includes/menubar.xhtml (used by Horizontal menu layout)">
            <pre>
                <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('includes/menubar')}"
+                                                         escape="true"/>
+ </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="pages/layout/menu.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('pages/layout/menu')}"
                                                          escape="true"/>
  </code>
            </pre>
