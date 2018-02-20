@@ -41,17 +41,24 @@
                 <div class="alert alert-warning alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4><i class="icon fa fa-info"></i>Note</h4>
-                    To use <b>central title</b>  on top bar (as in this page) just define <code>center-header</code> on you page or template.
+                    To use <b>central title</b> on top bar (as in this page) just define
+                    <code>center-header</code> on you page or template.
 
                     <hr/>
                     <div class="callout callout-success">
                         <h4>Tip!</h4>
-                        <p>You can customize central title by using a <b>css overide</b> on class <code>center-navbar</code>:</p>
+                        <p>You can customize central title by using a <b>css overide</b> on class
+                            <code>center-navbar</code>:</p>
                         <pre class="language-html"><code>
 .body .center-navbar {
   color: red;
 }
                         </code></pre>
+                    </div>
+
+                    <div class="callout callout-danger">
+                        <h4>Important!</h4>
+                        <p>Center title is <b>hidden on mobile</b> (small screens).</p>
                     </div>
                 </div>
             </div>
@@ -62,6 +69,15 @@
 
     <ui:define name="code">
         <p:tabView styleClass="hidden-sm hidden-xs">
+
+            <p:tab title="pages/layout/menu.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('pages/layout/menu')}"
+                                                         escape="true"/>
+ </code>
+           </pre>
+            </p:tab>
+
             <p:tab title="Default menu layout">
            <pre>
                <code class="language-html"><h:outputText
@@ -105,19 +121,18 @@
  </code>
            </pre>
             </p:tab>
-
-            <p:tab title="pages/layout/menu.xhtml">
-           <pre>
-               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('pages/layout/menu')}"
-                                                         escape="true"/>
- </code>
-           </pre>
-            </p:tab>
-
 
         </p:tabView>
 
         <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+
+            <p:tab title="pages/layout/menu.xhtml">
+           <pre>
+               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('pages/layout/menu')}"
+                                                         escape="true"/>
+ </code>
+           </pre>
+            </p:tab>
             <p:tab title="Default menu layout">
            <pre>
                <code class="language-html"><h:outputText
@@ -162,13 +177,6 @@
            </pre>
             </p:tab>
 
-            <p:tab title="pages/layout/menu.xhtml">
-           <pre>
-               <code class="language-html"><h:outputText value="#{sourceCodeMB.getPageSource('pages/layout/menu')}"
-                                                         escape="true"/>
- </code>
-           </pre>
-            </p:tab>
         </p:accordionPanel>
     </ui:define>
 </ui:composition>
