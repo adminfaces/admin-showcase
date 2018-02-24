@@ -81,7 +81,11 @@ public class PageStatisticsStore implements Serializable {
                     }
                     PageView pageView = new PageView(object.getString("ip"));
                     Calendar c = Calendar.getInstance();
-                    c.setTime(dateFormat.parse(object.getString("date")));
+                    try {
+                        c.setTime(dateFormat.parse(object.getString("date")));
+                    } catch (NumberFormatException nfe) {
+                        continue; //skip object without date
+                    }
                     pageView.setDate(c);
                     pageView.setCountry(object.containsKey("country") ? object.getString("country") : "");//backward compat
                     pageView.setCity(object.containsKey("city") ? object.getString("city") : "");//backward compat
@@ -218,14 +222,13 @@ public class PageStatisticsStore implements Serializable {
             shouldUpdate = false;//do not update backup if it was recently loaded from there
 
         }
-        if(shouldUpdate) {
+        if (shouldUpdate) {
             FileContent mediaContent = new FileContent("application/json", pageStatsJson);
             DriverService.getDriveService()
                     .files().update("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8", fileMetadata, mediaContent)
                     .setFields("id")
                     .execute();
         }
-
 
 
         log.info("Page statistics backup done.");
@@ -247,12 +250,12 @@ public class PageStatisticsStore implements Serializable {
 
     private void loadStatisticsFromBackup(File pageStatsJson) {
         log.info("Loading statistics from backup...");
-        try (FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson)){
+        try (FileOutputStream fileOutputStream = new FileOutputStream(pageStatsJson)) {
             DriverService.getDriveService()//try to load from backup
                     .files().get("0B5AI4e8AUgGOdlh5Y3hCNm9fOW8").executeMediaAndDownloadTo(fileOutputStream);
             log.info("Statistics loaded successfully.");
         } catch (Exception e) {
-           log.error("Could not load statistica from backup.",e);
+            log.error("Could not load statistica from backup.", e);
         }
 
     }
