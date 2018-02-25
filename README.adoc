@@ -60,10 +60,10 @@ docker run -it -p 8080:8080 rmpestano/admin-showcase
 
 == Testing
 
-To execute functional tests just choose the application server using maven profile, ex:
+To execute functional tests you need to activate the `tests` profile and choose the application server also using a maven profile, ex:
 
 ----
-mvn clean package -P wildfly8-managed
+mvn clean package -P tests -P wildfly8-managed
 ----
 
 NOTE: wildfly8-managed is activated by default.
