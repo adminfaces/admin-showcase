@@ -211,9 +211,9 @@ public class PageStatisticsStore implements Serializable {
         com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File().setName("page-stats.json");
         File pageStatsJson = new File(pagesStatsFilePath);
         boolean shouldUpdate = true;
-        if (!hasStatisticsToBackup(pageStatsJson)) { //if there is no stats data then try to load from backup
+        if (!hasStatistics(pageStatsJson)) { //if there is no stats data then try to load from backup
             loadStatisticsFromBackup(pageStatsJson);
-            if (!hasStatisticsToBackup(pageStatsJson)) {
+            if (!hasStatistics(pageStatsJson)) {
                 log.info("No statistics to backup.");
                 return;
             }
@@ -240,7 +240,7 @@ public class PageStatisticsStore implements Serializable {
      * @param pageStatsJson
      * @return
      */
-    private boolean hasStatisticsToBackup(File pageStatsJson) {
+    private boolean hasStatistics(File pageStatsJson) {
         return pageStatsJson != null && pageStatsJson.length() > 1024 * 1024;
     }
 

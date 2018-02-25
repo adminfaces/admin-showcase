@@ -82,7 +82,7 @@ public class AnalyticsMB implements Serializable {
 
     public List<PageStats> getPageStatsList() {
         if (pageStatsList == null) {
-            initStatistics();
+           loadStatsList();
         }
         return pageStatsList;
     }
