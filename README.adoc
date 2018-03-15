@@ -66,13 +66,13 @@ To execute functional tests you need to activate the `tests` profile and choose 
 mvn clean package -P tests -P wildfly8-managed
 ----
 
-NOTE: wildfly8-managed is activated by default.
-
 By default tests run on chrome, to change the webdriver you need to use the property `browser`:
 
 ----
 mvn test -Ptomee-remote -Dbrowser=phantomjs
 ----
+
+WARNING: See the chrome driver version the tests are https://github.com/adminfaces/admin-showcase/blob/master/src/test/resources/arquillian.xml#L42[using here^] and update your chrome browser according to https://sites.google.com/a/chromium.org/chromedriver/downloads[this page.^] (pay attention to the *supports chrome* label).
 
 
 == Documentation
