@@ -39,7 +39,7 @@
 		<property name="browser">${browser}</property>
         <!--<property name="browser">chrome,firefox or internetExplorer</property>-->
         <property name="dimensions">1366x1024</property>
-        <property name="chromeDriverVersion">2.33</property>
+        <property name="chromeDriverVersion">2.34</property>
         <!--<property name="chromeSwitches">&#45;&#45;headless -&#45;&#45;disable-gpu</property>-->
     </extension>
 
