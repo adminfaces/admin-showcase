@@ -19,27 +19,27 @@
         <h:form>
             <p:sidebar widgetVar="sidebar1" baseZIndex="10000">
                 <h1 style="font-weight:normal">Left Sidebar</h1>
-                <p:commandButton value="Cancel" oncomplete="PF('sidebar1').hide()"/>
+                <p:commandButton value="Cancel" styleClass="btn-default" oncomplete="PF('sidebar1').hide()"/>
             </p:sidebar>
 
             <p:sidebar widgetVar="sidebar2" position="right" baseZIndex="10000">
                 <h1 style="font-weight:normal">Right Sidebar</h1>
-                <p:commandButton value="Cancel" oncomplete="PF('sidebar2').hide()"/>
+                <p:commandButton value="Cancel" styleClass="btn-default" oncomplete="PF('sidebar2').hide()"/>
             </p:sidebar>
 
             <p:sidebar widgetVar="sidebar3" position="top" baseZIndex="10000">
                 <h1 style="font-weight:normal">Top Sidebar</h1>
-                <p:commandButton value="Cancel" oncomplete="PF('sidebar3').hide()"/>
+                <p:commandButton value="Cancel" styleClass="btn-default" oncomplete="PF('sidebar3').hide()"/>
             </p:sidebar>
 
             <p:sidebar widgetVar="sidebar4" position="bottom" baseZIndex="10000">
                 <h1 style="font-weight:normal">Bottom Sidebar</h1>
-                <p:commandButton value="Cancel" oncomplete="PF('sidebar4').hide()"/>
+                <p:commandButton value="Cancel" styleClass="btn-default" oncomplete="PF('sidebar4').hide()"/>
             </p:sidebar>
 
             <p:sidebar widgetVar="sidebar5" fullScreen="true" baseZIndex="10000">
                 <h1 style="font-weight:normal">Full Screen Sidebar</h1>
-                <p:commandButton value="Cancel" oncomplete="PF('sidebar5').hide()"/>
+                <p:commandButton value="Cancel" styleClass="btn-danger" oncomplete="PF('sidebar5').hide()"/>
             </p:sidebar>
 
             <p:commandButton icon="fa fa-arrow-right" oncomplete="PF('sidebar1').show()"/>
