@@ -3,6 +3,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ul class="nav navbar-nav">
@@ -86,7 +87,16 @@
             </ul>
         </li>
 
+        <li>
+            <p:link href="#" id="layout-setup" pt:data-toggle="control-sidebar" class="hidden-sm hidden-xs"><i class="fa fa-gears"></i></p:link>
+        </li>
+
     </ul>
+
+    <p:tooltip for="layout-setup" escape="false" position="top"
+               showEvent="mouseover" hideEvent="mouseleave" style="width: 150px"
+               value="Setup layout options."/>
+
 
 
 </ui:composition>
