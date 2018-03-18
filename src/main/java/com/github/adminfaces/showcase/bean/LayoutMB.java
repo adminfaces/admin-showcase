@@ -42,13 +42,15 @@ public class LayoutMB implements Serializable {
         }
     }
 
+    public boolean isDefaultLayout() {
+        return layout != null && layout.endsWith("template.xhtml");
+    }
+
+
     public boolean isFlat() {
         return flat;
     }
 
-    public boolean isDefaultLayout() {
-        return layout != null && layout.endsWith("template.xhtml");
-    }
 
     public void setFlat(boolean flat) {
         this.flat = flat;
