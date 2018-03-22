@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:adm="http://github.com/adminfaces"
-                template="#{layoutMB.layout}">
+                template="#{layoutMB.template}">
 
     <ui:define name="head-end">
         <style type="text/css">
@@ -63,7 +63,26 @@
                     </p:panel>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
+                    <p:panel header="Box solid default " styleClass="box-solid box-default">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather1.jpg"/>
+                            <h:outputText
+                                    value="The story begins as Don Vito Corleone..."/>
+                        </h:panelGrid>
+                    </p:panel>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
                     <p:panel header="Box info" styleClass="box-info">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather1.jpg"/>
+                            <h:outputText
+                                    value="The story begins as Don Vito Corleone..."/>
+                        </h:panelGrid>
+                    </p:panel>
+                </div>
+
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
+                    <p:panel header="Box solid info" styleClass="box-info box-solid">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage name="demo/images/godfather1.jpg"/>
                             <h:outputText
@@ -73,6 +92,16 @@
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
                     <p:panel header="Box primary" styleClass="box-primary">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather1.jpg"/>
+                            <h:outputText
+                                    value="The story begins as Don Vito Corleone..."/>
+                        </h:panelGrid>
+                    </p:panel>
+                </div>
+
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
+                    <p:panel header="Box solid primary" styleClass="box-primary box-solid">
                         <h:panelGrid columns="2" cellpadding="10">
                             <p:graphicImage name="demo/images/godfather1.jpg"/>
                             <h:outputText
@@ -116,9 +145,39 @@
                         </h:panelGrid>
                     </p:panel>
                 </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
+                    <p:panel header="Box solid fatal" styleClass="box-fatal box-solid">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather1.jpg"/>
+                            <h:outputText
+                                    value="The story begins as Don Vito Corleone..."/>
+                        </h:panelGrid>
+                    </p:panel>
+                </div>
             </div>
             <p:panel id="toggleable" header="Toggleable" toggleable="true" closable="true" toggleSpeed="500"
                      closeSpeed="500" widgetVar="panel">
+
+                <p:ajax event="close" listener="#{panelMB.onClose}" update="msgs" ignoreAutoUpdate="true"/>
+                <p:ajax event="toggle" listener="#{panelMB.onToggle}" update="msgs" ignoreAutoUpdate="true"/>
+
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:graphicImage name="demo/images/godfather2.jpg"/>
+                    <h:outputText value="Francis Ford Coppola's legendary continuation..."/>
+                </h:panelGrid>
+
+                <f:facet name="options">
+                    <p:menu>
+                        <p:submenu label="Settings">
+                            <p:menuitem value="Toggle" url="#" icon="ui-icon-newwin" onclick="PF('panel').toggle()"/>
+                            <p:menuitem value="Remove" url="#" icon="ui-icon-close" onclick="PF('panel').close()"/>
+                        </p:submenu>
+                    </p:menu>
+                </f:facet>
+            </p:panel>
+
+            <p:panel id="toggleable-solid" header="Toggleable solid" toggleable="true" closable="true" toggleSpeed="500"
+                     closeSpeed="500" widgetVar="panel-solid" styleClass="box-danger box-solid">
 
                 <p:ajax event="close" listener="#{panelMB.onClose}" update="msgs" ignoreAutoUpdate="true"/>
                 <p:ajax event="toggle" listener="#{panelMB.onToggle}" update="msgs" ignoreAutoUpdate="true"/>
