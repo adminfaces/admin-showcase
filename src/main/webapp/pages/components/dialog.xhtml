@@ -3,11 +3,10 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.layout}">
 
-    <ui:define name="title">
-        Dialog
+    <ui:define name="body-begin">
+        <ui:param name="title" value="Dialog"/>
     </ui:define>
 
     <ui:define name="description">
@@ -17,7 +16,6 @@
 
     <ui:define name="body">
 
-        <adm:breadcrumb title="Dialog"/>
         <h:form>
             <div class="row ui-fluid">
                 <div class="col-md-3 col-sm-12">
@@ -98,6 +96,20 @@
                     </p:commandButton>
                 </h:form>
             </div>
+
+            <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog primary solid" onclick="PF('dlgPrimarySolid').show();return false"
+                          styleClass="btn-primary btn-block"/>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog fatal solid" onclick="PF('dlgFatalSolid').show();return false"
+                          styleClass="btn-fatal btn-block"/>
+            </div>
+
+            <div class="col-sm-12 col-md-3">
+                <p:button value="Dialog danger solid" onclick="PF('dlgDangerSolid').show();return false"
+                          styleClass="btn-danger btn-block"/>
+            </div>
         </div>
 
         <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40" responsive="true">
@@ -144,6 +156,19 @@
                   appendTo="@(body)">
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
+
+        <p:dialog header="Dialog primary solid" styleClass="box-solid box-primary" widgetVar="dlgPrimarySolid" minHeight="100" modal="true"
+                  appendTo="@(body)">
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog danger solid" styleClass="box-solid box-danger" widgetVar="dlgDangerSolid" minHeight="100" modal="true"
+                  appendTo="@(body)">
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
+        <p:dialog header="Dialog fatal solid" styleClass="box-solid box-fatal" widgetVar="dlgFatalSolid" minHeight="100" modal="true"
+                  appendTo="@(body)">
+            <h:outputText value="Resistance to PrimeFaces is futile!"/>
+        </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
         <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="400"
@@ -175,7 +200,7 @@
                     </p:selectCheckboxMenu>
                     <p:outputLabel for="date" value="Date:"/>
                     <p:calendar id="date" showOn="button" required="true"/>
-                 </p:panelGrid>
+                </p:panelGrid>
                 <p:separator/>
                 <p:commandButton styleClass="btn-primary pull-right" value="Login" update="@(.ui-growl, div[id$=loginGrid])"
                                  action="#{userLoginMB.login()}" process="@form"
