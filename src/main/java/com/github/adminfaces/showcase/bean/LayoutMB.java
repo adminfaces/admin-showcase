@@ -12,38 +12,38 @@ import java.io.Serializable;
 @SessionScoped
 public class LayoutMB implements Serializable {
 
-    private String layout;
+    private String template;
 
     private boolean flat;
 
     @PostConstruct
     public void init() {
-        setDefaultLayout();
+        setDefaultTemplate();
         flat = false;
     }
 
-    public String getLayout() {
-        return layout;
+    public String getTemplate() {
+        return template;
     }
 
-    public void setHorizontalLayout() {
-        layout = "/WEB-INF/templates/template-top.xhtml";
+    public void setTemplateTop() {
+        template = "/WEB-INF/templates/template-top.xhtml";
     }
 
-    public void setDefaultLayout() {
-        layout = "/WEB-INF/templates/template.xhtml";
+    public void setDefaultTemplate() {
+        template = "/WEB-INF/templates/template.xhtml";
     }
 
-    public void toogleLayout() {
-        if(isDefaultLayout()) {
-            setHorizontalLayout();
+    public void toogleTemplate() {
+        if(isDefaultTemplate()) {
+            setTemplateTop();
         } else {
-            setDefaultLayout();
+            setDefaultTemplate();
         }
     }
 
-    public boolean isDefaultLayout() {
-        return layout != null && layout.endsWith("template.xhtml");
+    public boolean isDefaultTemplate() {
+        return template != null && template.endsWith("template.xhtml");
     }
 
 

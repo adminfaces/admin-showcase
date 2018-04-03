@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="#{layoutMB.template}">
+
+    <ui:define name="body-begin">
+        <ui:param name="title" value="Toolbar"/> <!-- Automactly creates breadCrumb and page title-->
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link value="Toolbar"
+                href="https://www.primefaces.org/showcase/ui/panel/toolbar.xhtml"/> is a grouping component for buttons and other content..
+    </ui:define>
+
+    <ui:define name="body">
+        <p:panel styleClass="card">
+            <h:form>
+                <p:growl id="messages" showDetail="true"/>
+
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton type="button" value="New" icon="fa fa-file-text-o" styleClass="btn-primary"/>
+
+                        <p:commandButton type="button" value="Open" icon="fa  fa-folder-open-o" styleClass="btn-info"/>
+
+                        <span class="ui-separator" style="padding: 5px;color: darkgray">
+                           <i class="fa fa-ellipsis-v" />
+                        </span>
+
+                        <p:commandButton type="button" title="Save" icon="fa fa-save" styleClass="btn-success"/>
+                        <p:commandButton type="button" title="Delete" icon="fa fa-trash" styleClass="btn-danger" />
+                        <p:commandButton type="button" title="Print" icon="fa fa-print"/>
+                    </f:facet>
+
+                    <f:facet name="right">
+                        <p:menuButton value="Options" styleClass="btn-danger">
+                            <p:menuitem value="Save" actionListener="#{toolbarMB.save}" update="messages"
+                                        icon="fa fa-save"/>
+                            <p:menuitem value="Update" actionListener="#{toolbarMB.update}" update="messages"
+                                        icon="fa fa-refresh"/>
+                            <p:menuitem value="Delete" actionListener="#{toolbarMB.delete}" ajax="false"
+                                        icon="fa fa-close"/>
+                            <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="fa fa-home"/>
+                        </p:menuButton>
+                    </f:facet>
+
+                </p:toolbar>
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="toolbar.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="TabViewMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ToolbarMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

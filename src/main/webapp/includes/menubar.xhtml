@@ -127,6 +127,12 @@
                     </p:link>
                 </li>
                 <li>
+                    <p:link href="/pages/components/toolbar.xhtml">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Toolbar</span>
+                    </p:link>
+                </li>
+                <li>
                     <p:link href="/pages/components/triState.xhtml">
                         <i class="fa fa-check-square-o"></i>
                         <span>TriStateCheckbox</span>
@@ -223,7 +229,7 @@
                         <span><b>Default</b> menu layout</span>
                     </p:link>
                     <h:form prependId="false">
-                        <p:commandLink id="link-default-layout" action="#{layoutMB.setDefaultLayout}" ajax="false"/>
+                        <p:commandLink id="link-default-layout" action="#{layoutMB.setDefaultTemplate}" ajax="false"/>
                     </h:form>
 
                 </li>

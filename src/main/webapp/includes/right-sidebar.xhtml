@@ -122,7 +122,7 @@
                 <div><h4 class="control-sidebar-heading">Layout Options</h4>
                     <div class="form-group">
                         <h:form prependId="false">
-                            <p:remoteCommand name="changeMenuOrientation" process="@this" action="#{layoutMB.toogleLayout}" oncomplete="location.reload();"/>
+                            <p:remoteCommand name="changeMenuOrientation" process="@this" action="#{layoutMB.toogleTemplate}" oncomplete="location.reload();"/>
                             <label class="control-sidebar-subheading">
                                 <input id="horizontal-layout" type="checkbox" class="pull-right" onclick="changeMenuOrientation()"/>
                                 Left menu layout?
