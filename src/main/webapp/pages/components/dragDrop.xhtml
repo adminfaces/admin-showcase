@@ -1,0 +1,146 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="body-begin">
+        <ui:param name="title" value="DragDrop"/>
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link value="DragDrop"
+                href="https://www.primefaces.org/showcase/ui/dnd/dataTable.xhtml"/> components have special integration with data components. Drag the cars using the drag icon to the drop area..
+    </ui:define>
+
+    <ui:define name="body">
+        <script type="text/javascript">
+            function handleDrop(event, ui) {
+                var droppedCar = ui.draggable;
+                droppedCar.fadeOut('fast');
+            }
+        </script>
+
+        <style>
+            span.fa-arrows:hover {
+                opacity: .6!important
+            }
+        </style>
+
+
+        <h:form id="carForm">
+            <div class="ui-g">
+
+                <div class="ui-g-6">
+
+                    <p:fieldset id="availableCarsField" legend="Available Cars">
+                        <p:dataTable id="availableCars" var="car" value="#{dragDropMB.cars}" rows="6" paginator="true" paginatorPosition="bottom" styleClass="box-primary box-solid">
+                            <p:column style="width:35px">
+                                <h:outputText id="dragIcon" styleClass="fa fa-arrows"/>
+                                <p:draggable for="dragIcon" revert="true" helper="clone"/>
+                            </p:column>
+
+                            <p:column headerText="Id">
+                                <h:outputText value="#{car.id}" />
+                            </p:column>
+
+                            <p:column headerText="Year">
+                                <h:outputText value="#{car.year}" />
+                            </p:column>
+
+                            <p:column headerText="Brand">
+                                <h:outputText value="#{car.brand}" />
+                            </p:column>
+
+                            <p:column headerText="Color">
+                                <h:outputText value="#{car.color}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+
+                </div>
+
+                <div class="ui-g-6 ui-sm-12">
+                    <p:fieldset id="availableCarsFieldGrid" legend="AvailableCars">
+                        <p:dataGrid id="availableCarsGrid" var="car" value="#{dragDropMB.cars}" columns="2" rows="3"  paginator="true" paginatorPosition="bottom" styleClass="box-primary box-solid">
+                            <p:panel id="pnl" header="#{car.id}" style="text-align:center">
+                                <h:panelGrid columns="1" style="width:100%">
+                                    <p:graphicImage name="/demo/images/car/#{car.brand}.gif" />
+                                </h:panelGrid>
+                            </p:panel>
+
+                            <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
+                        </p:dataGrid>
+                    </p:fieldset>
+                </div>
+
+                <div class="ui-g-12 ui-sm-12">
+                    <p:fieldset id="selectedCars" legend="Selected Cars" style="margin-top:20px" toggleable="true" toggleSpeed="500" >
+                        <p:outputPanel id="dropArea">
+                            <h:outputText value="!!!Drop here!!!" rendered="#{empty dragDropMB.droppedCars}" style="font-size:24px;" />
+                            <p:dataTable id="selectedCarsTable" var="car" value="#{dragDropMB.droppedCars}" rendered="#{not empty dragDropMB.droppedCars}" styleClass="box-info box-solid">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{car.id}" />
+                                </p:column>
+
+                                <p:column headerText="Year">
+                                    <h:outputText value="#{car.year}" />
+                                </p:column>
+
+                                <p:column headerText="Brand">
+                                    <h:outputText value="#{car.brand}" />
+                                </p:column>
+
+                                <p:column headerText="Color">
+                                    <h:outputText value="#{car.color}" />
+                                </p:column>
+
+                                <p:column style="width:50px">
+                                    <p:commandButton update=":display" oncomplete="PF('carDialog').show()" styleClass="btn-info" icon="fa fa-search">
+                                        <f:setPropertyActionListener value="#{car}" target="#{dragDropMB.selectedCar}" />
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:outputPanel>
+                    </p:fieldset>
+                </div>
+            </div>
+
+
+            <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCars" onDrop="handleDrop">
+                <p:ajax listener="#{dragDropMB.onCarDrop}" update="dropArea availableCars" />
+            </p:droppable>
+            
+             <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCarsGrid" onDrop="handleDrop">
+                <p:ajax listener="#{dragDropMB.onCarDrop}" update="dropArea availableCarsGrid" />
+            </p:droppable>
+
+        </h:form>
+
+        <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" responsive="true" draggable="false"
+                  showEffect="fade" hideEffect="fade" styleClass="box-primary box-solid card">
+
+            <p:outputPanel id="display">
+                <p:panelGrid id="loginGrid" columns="2" layout="grid">
+                    <f:facet name="header">
+                        <p:graphicImage name="demo/images/car/#{dragDropMB.selectedCar.brand}.gif"/>
+                    </f:facet>
+
+                    <h:outputText value="Id:" />
+                    <p:outputLabel value="#{dragDropMB.selectedCar.id}"/>
+
+                    <h:outputText value="Year:" />
+                    <p:outputLabel value="#{dragDropMB.selectedCar.year}"/>
+
+                    <h:outputText value="Brand:" />
+                    <p:outputLabel value="#{dragDropMB.selectedCar.brand}"/>
+
+                    <h:outputText value="Color:" />
+                    <p:outputLabel value="#{dragDropMB.selectedCar.color}"/>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

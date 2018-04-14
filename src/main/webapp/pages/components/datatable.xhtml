@@ -11,12 +11,8 @@
         <ui:param name="enableSlideMenu" value="false"/> <!-- disables slide menu (only on this page) on small screens -->
         <ui:param name="autoShowNavbar" value="false"/> <!-- disables auto show navbar (only on this page) on small devices -->
         <style type="text/css">
-            .ui-datatable .ui-datatable-header {
+            .header-right.ui-datatable .ui-datatable-header {
                 text-align: right !important;
-            }
-
-            #boxTable.ui-datatable .ui-datatable-header {
-                text-align: center !important;
             }
 
             .year-spinner input {
@@ -46,7 +42,7 @@
             <h:form prependId="false">
 
                 <div id="datatable">
-                    <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true"
+                    <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true" styleClass="header-right"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{car.id}"
                                  emptyMessage="No cars found with given criteria" stickyHeader="true"
@@ -76,9 +72,9 @@
                                   priority="2">
                             <f:facet name="filter">
                                 <p:calendar pattern="yyyy" showOn="both" yearRange="c-60:c+0" navigator="true">
-                                   <f:converter converterId="calendarYearConverter"/>
-                                   <p:ajax process="@this" event="change" oncomplete="PF('carsTable').filter()"/>
-                                     <p:ajax process="@this" event="dateSelect" oncomplete="PF('carsTable').filter()"/>
+                                    <f:converter converterId="calendarYearConverter"/>
+                                    <p:ajax process="@this" event="change" oncomplete="PF('carsTable').filter()"/>
+                                    <p:ajax process="@this" event="dateSelect" oncomplete="PF('carsTable').filter()"/>
                                 </p:calendar>
                             </f:facet>
                             <h:outputText value="#{car.year}"/>
@@ -210,7 +206,7 @@
         <p:separator/>
 
         <p:panel styleClass="box-info" header="SubTable">
-            <p:dataTable var="team" value="#{datatableMB.teams}">
+            <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right">
                 <f:facet name="header">
                     NBA Teams
                 </f:facet>
@@ -251,63 +247,105 @@
         </p:panel>
         <p:separator/>
         <p:panel header="Box colors">
-            <p:dataTable id="boxTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="top"
-                         styleClass="box-primary"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15" rows="10"
-                         emptyMessage="No cars found with given criteria"
-            >
+            <div class="ui-g">
+                <div class="ui-g-6 ui-sm-12">
+                    <p:dataTable id="boxSolidTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
+                                 styleClass="box-primary"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" rows="10"
+                                 emptyMessage="No cars found with given criteria"
+                                 >
 
-                <f:facet name="header">
-                    <h:outputText value="Box primary table"/>
-                </f:facet>
+                        <f:facet name="header">
+                            <h:outputText value="Box primary table"/>
+                        </f:facet>
+                        
+                          <f:facet name="footer">
+                            <h:outputText value="Table footer"/>
+                        </f:facet>
 
-                <p:column styleClass="align-center" headerText="Id"
-                          priority="1">
-                    <h:outputText value="#{car.id}"/>
-                </p:column>
-            </p:dataTable>
+                        <p:column styleClass="align-center" headerText="Id"
+                                  priority="1">
+                            <h:outputText value="#{car.id}"/>
+                        </p:column>
+                        
+                         <p:column styleClass="align-center" headerText="Brand"
+                                  priority="2">
+                            <h:outputText value="#{car.brand}"/>
+                         </p:column>
+                    </p:dataTable>
+                </div>
+                
+                <div class="ui-g-6 ui-sm-12">
+                    <p:dataTable id="boxTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
+                                 styleClass="box-solid box-primary"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" rows="10"
+                                 emptyMessage="No cars found with given criteria"
+                                 >
+
+                        <f:facet name="header">
+                            <h:outputText value="Box solid primary table"/>
+                        </f:facet>
+                        
+                          <f:facet name="footer">
+                            <h:outputText value="Table footer"/>
+                        </f:facet>
+
+                        <p:column styleClass="align-center" headerText="Id"
+                                  priority="1">
+                            <h:outputText value="#{car.id}"/>
+                        </p:column>
+                        
+                           <p:column styleClass="align-center" headerText="Brand"
+                                  priority="2">
+                            <h:outputText value="#{car.brand}"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </div>
+            </div> 
         </p:panel>
     </ui:define>
 
     <ui:define name="code">
         <p:tabView styleClass="hidden-sm hidden-xs">
             <p:tab title="datatable.xhtml">
-           <pre>
+                <pre>
                <code class="language-html"><h:outputText
                        value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-           </pre>
+                </pre>
             </p:tab>
 
             <p:tab title="DatatableMB.java">
-              <pre>
+                <pre>
                <code class="language-java">
                    <h:outputText
                            value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DatatableMB')}"
                            escape="false"/>
                </code>
-             </pre>
+                </pre>
             </p:tab>
         </p:tabView>
 
         <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
             <p:tab title="datatable.xhtml">
-           <pre>
+                <pre>
                <code class="language-html"><h:outputText
                        value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-           </pre>
+                </pre>
             </p:tab>
 
             <p:tab title="DatatableMB.java">
-              <pre>
+                <pre>
                <code class="language-java">
                    <h:outputText
                            value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DatatableMB')}"
                            escape="false"/>
                </code>
-             </pre>
+                </pre>
             </p:tab>
         </p:accordionPanel>
     </ui:define>
