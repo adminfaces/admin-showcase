@@ -16,10 +16,15 @@ public class LayoutMB implements Serializable {
 
     private boolean flat;
 
+    private boolean darkSidebar;
+    
+    private boolean defaultTemplateSelected;
+
     @PostConstruct
     public void init() {
         setDefaultTemplate();
         flat = false;
+        darkSidebar = true;
     }
 
     public String getTemplate() {
@@ -34,7 +39,7 @@ public class LayoutMB implements Serializable {
         template = "/WEB-INF/templates/template.xhtml";
     }
 
-    public void toogleTemplate() {
+    public void toggleTemplate() {
         if(isDefaultTemplate()) {
             setTemplateTop();
         } else {
@@ -46,13 +51,29 @@ public class LayoutMB implements Serializable {
         return template != null && template.endsWith("template.xhtml");
     }
 
+    public boolean isDefaultTemplateSelected() {
+        return isDefaultTemplate();
+    }
+
+    public void setDefaultTemplateSelected(boolean defaultTemplateSelected) {
+        this.defaultTemplateSelected = defaultTemplateSelected;
+    }
+    
+    
 
     public boolean isFlat() {
         return flat;
     }
 
-
     public void setFlat(boolean flat) {
         this.flat = flat;
+    }
+
+    public boolean isDarkSidebar() {
+        return darkSidebar;
+    }
+
+    public void setDarkSidebar(boolean darkSidebar) {
+        this.darkSidebar = darkSidebar;
     }
 }
