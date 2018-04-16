@@ -56,24 +56,24 @@
             <p:tooltip for="admin-footer" escape="false" position="top"
                        showEvent="mouseover" hideEvent="mouseleave" hideDelay="2500"
                        value="Using &lt;a href='https://github.com/adminfaces/admin-template'
-                        target='_blank'&gt;Admin Template &lt;span style='font-weight: 600'&gt;
-                        #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt;,
-                        &lt;a href='https://github.com/adminfaces/admin-theme'
-                        target='_blank'&gt;Admin theme &lt;span style='font-weight: 600'&gt;
-                        #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt; and &lt;a href='https://primefaces.org/'
-                        target='_blank'&gt;PrimeFaces &lt;span style='font-weight: 600'&gt;
-                        6.2&lt;/span&gt;&lt;/a&gt;
-                "/>
+                       target='_blank'&gt;Admin Template &lt;span style='font-weight: 600'&gt;
+                       #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt;,
+                       &lt;a href='https://github.com/adminfaces/admin-theme'
+                       target='_blank'&gt;Admin theme &lt;span style='font-weight: 600'&gt;
+                       #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt; and &lt;a href='https://primefaces.org/'
+                       target='_blank'&gt;PrimeFaces &lt;span style='font-weight: 600'&gt;
+                       6.2&lt;/span&gt;&lt;/a&gt;
+                       "/>
             Powered by <h:link value="AdminFaces - © 2017-2018" id="admin-footer" href="#" onclick="void(0);return false"/>
             <div class="pull-right " style="color: gray">
                 Page views: <h:link id="link-stats" href="#" onclick="void(0);return false"> <span
-                    style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></h:link>
+                        style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></h:link>
             </div>
 
             <p:tooltip for="link-stats" escape="false" position="top"
                        showEvent="mouseover" hideEvent="mouseleave" style="width: 150px"
                        value="Unique visitors: &lt;div
-                    style='font-weight: 600;color:#3c8dbc;display:inline'&gt; #{analyticsMB.pageStats.uniquePageViews}&lt;/div&gt;"/>
+                       style='font-weight: 600;color:#3c8dbc;display:inline'&gt; #{analyticsMB.pageStats.uniquePageViews}&lt;/div&gt;"/>
 
         </div>
 
@@ -86,17 +86,18 @@
                 });
             }
 
-            /*if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('service-worker.js', { scope: '/showcase/' });
-                });
-	        }*/
         </script>
 
     </ui:define>
 
-     <ui:define name="wrapper-end">
-        <ui:include src="/includes/control-sidebar.xhtml"/>
+    <!-- below is just an example on how to define more tabs for control sidebar --> 
+    <ui:define name="controlsidebar-tabs">
+        <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ui:define>
+
+    <ui:define name="controlsidebar-content">
+        <ui:include src="/includes/controlsidebar-tabs-content.xhtml"/>
     </ui:define>
 
     <ui:define name="after-wrapper">

@@ -50,6 +50,16 @@
             <ui:insert name="code"/>
         </section>
     </ui:define>
+    
+    <!-- below is just an example on how to define more tabs for control sidebar --> 
+    <ui:define name="controlsidebar-tabs">
+        <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ui:define>
+     
+   <ui:define name="controlsidebar-content">
+        <ui:include src="/includes/controlsidebar-tabs-content.xhtml"/>
+    </ui:define>
 
     <ui:define name="footer">
         <div style="display: inline">
@@ -91,9 +101,6 @@
         <h:outputScript library="js" name="prism.js"  target="head"/>
         <h:outputScript library="js" name="showcase.js"  target="head"/>
     </ui:define>
-
-    <ui:define name="wrapper-end">
-        <ui:include src="/includes/right-sidebar.xhtml"/>
-    </ui:define>
+ 
 
 </ui:composition>
