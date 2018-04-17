@@ -5,7 +5,7 @@ image:https://badges.gitter.im/Join%20Chat.svg[link="https://gitter.im/adminface
 
 *AdminFaces* showcase application.
 
-image:showcase.png[]
+image:showcase.png[link="https://raw.githubusercontent.com/adminfaces/admin-showcase/master/showcase.png"]
 
 
 == Demo 
