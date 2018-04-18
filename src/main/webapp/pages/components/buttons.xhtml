@@ -67,7 +67,11 @@
                             <p:menuitem value="Homepage" url="/" icon="fa fa-link"/>
                         </p:splitButton>
                     </div>
-                     <div class="col-sm-12 col-md-3">
+                    <div class="col-sm-12 col-md-3">
+                        <p:commandButton value="Teal button" id="teal" update="growl" ignoreAutoUpdate="true"
+                                         actionListener="#{buttonMB.buttonAction}" styleClass="btn-teal btn-block"/>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
                         <p:commandButton value="Small screens only" update="growl" ignoreAutoUpdate="true"
                                          actionListener="#{buttonMB.buttonAction}" styleClass="visible-sm btn-block"/>
                     </div>
@@ -78,134 +82,155 @@
             <p:panel styleClass="box-success no-border" style="overflow: auto">
                 <table class="table table-bordered text-center">
                     <tbody>
-                    <tr>
-                        <th>Normal</th>
-                        <th>Large <code>.btn-lg</code></th>
-                        <th>Small <code>.btn-sm</code></th>
-                        <th>X-Small <code>.btn-xs</code></th>
-                        <th>Flat <code>.btn-flat</code></th>
-                        <th>Disabled <code>disabled="true"</code></th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:button styleClass="btn-block btn-default" value="Default"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-default btn-lg" value="Default"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-default btn-sm" value="Default"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-default btn-xs" value="Default"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-default btn-flat" value="Default"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-default" disabled="true" value="Default"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-primary" value="Primary"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-primary btn-lg" value="Primary"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-primary btn-sm" value="Primary"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-primary btn-xs" value="Primary"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-primary btn-flat" value="Primary"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-primary" disabled="true" value="Primary"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-success" value="Success"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-success btn-lg" value="Success"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-success btn-sm" value="Success"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-success btn-xs" value="Success"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-success btn-flat" value="Success"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-success" disabled="true" value="Success"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-info" value="Info"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-info btn-lg" value="Info"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-info btn-sm" value="Info"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-info btn-xs" value="Info"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-info btn-flat" value="Info"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-info" disabled="true" value="Info"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-danger" value="Danger"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-danger btn-lg" value="Danger"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-danger btn-sm" value="Danger"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-danger btn-xs" value="Danger"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-danger btn-flat" value="Danger"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-danger" disabled="true" value="Danger"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-warning" value="Warning"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-warning btn-lg" value="Warning"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-warning btn-sm" value="Warning"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-warning btn-xs" value="Warning"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-warning btn-flat" value="Warning"/>
-                        </td>
-                        <td>
-                            <p:button type="button" styleClass="btn-block btn-warning" disabled="true" value="Warning"/>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>Normal</th>
+                            <th>Large <code>.btn-lg</code></th>
+                            <th>Small <code>.btn-sm</code></th>
+                            <th>X-Small <code>.btn-xs</code></th>
+                            <th>Flat <code>.btn-flat</code></th>
+                            <th>Disabled <code>disabled="true"</code></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:button styleClass="btn-block btn-default" value="Default"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-default btn-lg" value="Default"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-default btn-sm" value="Default"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-default btn-xs" value="Default"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-default btn-flat" value="Default"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-default" disabled="true" value="Default"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-primary" value="Primary"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-primary btn-lg" value="Primary"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-primary btn-sm" value="Primary"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-primary btn-xs" value="Primary"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-primary btn-flat" value="Primary"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-primary" disabled="true" value="Primary"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-success" value="Success"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-success btn-lg" value="Success"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-success btn-sm" value="Success"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-success btn-xs" value="Success"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-success btn-flat" value="Success"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-success" disabled="true" value="Success"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-info" value="Info"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-info btn-lg" value="Info"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-info btn-sm" value="Info"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-info btn-xs" value="Info"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-info btn-flat" value="Info"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-info" disabled="true" value="Info"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-warning" value="Warning"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-warning btn-lg" value="Warning"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-warning btn-sm" value="Warning"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-warning btn-xs" value="Warning"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-warning btn-flat" value="Warning"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-warning" disabled="true" value="Warning"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-danger" value="Danger"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-danger btn-lg" value="Danger"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-danger btn-sm" value="Danger"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-danger btn-xs" value="Danger"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-danger btn-flat" value="Danger"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-danger" disabled="true" value="Danger"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-fatal" value="Fatal"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-fatal btn-lg" value="Fatal"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-fatal btn-sm" value="Fatal"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-fatal btn-xs" value="Fatal"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-fatal btn-flat" value="Fatal"/>
+                            </td>
+                            <td>
+                                <p:button type="button" styleClass="btn-block btn-fatal" disabled="true" value="Fatal"/>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
             </p:panel>
@@ -215,20 +240,20 @@
     <ui:define name="code">
         <p:tabView>
             <p:tab title="Buttons.xhtml">
-           <pre>
+                <pre>
                <code class="language-html">
                    <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-           </pre>
+                </pre>
             </p:tab>
 
             <p:tab title="ButtonMB.java">
-              <pre>
+                <pre>
                <code class="language-java">
                    <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ButtonMB')}"
                                  escape="false"/>
                </code>
-             </pre>
+                </pre>
             </p:tab>
         </p:tabView>
     </ui:define>
