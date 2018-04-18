@@ -7,7 +7,7 @@
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-showcase</artifactId>
     <!-- tag::version[] -->
-    <version>1.0.0-RC13</version>
+    <version>1.0.0-RC14</version>
     <!-- end::version[] -->
     <name>admin-showcase</name>
 
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>
-            <version>1.0.0-RC14</version>
+            <version>1.0.0-RC15-SNAPSHOT</version>
             <!-- end::dep-admin-template[] -->
             <exclusions>
                 <exclusion>

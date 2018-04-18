@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="#{layoutMB.template}">
+
+    <ui:define name="title">
+        ControlSidebar
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link value="ControlSidebar" href="https://adminlte.io/docs/2.4/control-sidebar"/> is a AdminLTE component which provides a panel so user can <code>customize Admin Template</code>.
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="ControlSidebar"/>
+
+        <p:panel styleClass="card no-border">
+            <h3>Usage</h3>
+            Following are the steps to activate control sidebar:
+            <ol>
+                <li>
+                    <p>First set to following property in <code>src/main/resources/admin-config.properties</code>.</p>
+<pre>
+<code>
+    admin.renderControlSideBar=true
+</code>
+</pre>
+                </li>
+                <li>
+                    After enabling the component now you just need to add a link which opens the sidebar. The link or button must use <code>data-toggle</code> attribute.
+                </li>
+            </ol>
+            <br/>
+            <div class="callout callout-warning">
+                <h4>NOTE</h4>
+                <p><code>admin.renderControlSideBar</code> is <b style="text-decoration: underline;">false</b> by default.</p>
+            </div>
+            <p:separator/>
+            <h3>Example</h3>
+            <p><button data-toggle="control-sidebar" class="btn btn-lg btn-teal">Click to open controlsidebar</button></p>
+            <br/>
+            <br/>
+            <p>On showcase controlsidebar is toggled by this icon on <code>top right</code>: <a href="#" data-toggle="control-sidebar"><i class="fa fa-2x fa-gears"></i></a></p>
+
+            <p:separator/>
+              <div class="callout callout-danger">
+                <h4>IMPORTANT</h4>
+                <p>The controlsidebar is <b  style="text-decoration: underline">hidden on small/mobile devices</b>.</p>
+            </div>
+             <div class="callout callout-info">
+                <h4>INFO</h4>
+                <p>The controlsidebar options are stored on browser <b style="text-decoration: underline">local storage</b>.</p>
+            </div>
+        </p:panel>
+
+
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="controlsidebar.xhtml">
+                <pre>
+               <code class="language-html"><h:outputText
+                       value="#{sourceCodeMB.getPageSource()}" escape="true"/></code>
+                </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>
