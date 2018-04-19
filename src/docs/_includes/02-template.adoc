@@ -19,7 +19,7 @@ image:https://cloud.githubusercontent.com/assets/1592273/25071807/dd37121e-2296-
 image:menu-highlight.png[link="https://raw.githubusercontent.com/adminfaces/admin-showcase/master/src/docs/images/menu-highlight.png"]
 * Custom <<Error Pages, error pages>>
 * Configurable, see <<Configuration>>
-* http://adminfaces-rpestano.rhcloud.com/showcase/pages/layout/breadcrumb.xhtml[Breadcrumb^] based navigation
+* {link-admin-showcase-openshift}/pages/layout/breadcrumb.xhtml[Breadcrumb^] based navigation
 * Back to previous screen when logging in again after session expiration (or accessing a page via url without being logged in)
 * Layout customization via <<Control Sidebar>>
 
@@ -433,7 +433,7 @@ And then add a link or button on your page which opens the sidebar. The link or 
 
 On admin-starter the link is located on https://github.com/adminfaces/admin-starter/blob/c8adbe5e692171b144b93292e14ea203b654a13b/src/main/webapp/includes/top-bar.xhtml#L58[top-bar.xhtml^]. 
 
-http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/pages/layout/controlsidebar.xhtml[Click here^] to see controlsidebar in action on admin showcase.
+{link-admin-showcase-openshift}/pages/layout/controlsidebar.xhtml[Click here^] to see controlsidebar in action on admin showcase.
 
 
 By default the control sidebar comes only with the configuration tab but you can define additional tabs by defining `controlsidebar-tabs` and `controlsidebar-content` on your template. An example can be found on https://github.com/adminfaces/admin-starter/blob/c8adbe5e692171b144b93292e14ea203b654a13b/src/main/webapp/WEB-INF/templates/template.xhtml#L38[admin-starter template^].  
