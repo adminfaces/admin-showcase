@@ -21,6 +21,7 @@ image:menu-highlight.png[link="https://raw.githubusercontent.com/adminfaces/admi
 * Configurable, see <<Configuration>>
 * http://adminfaces-rpestano.rhcloud.com/showcase/pages/layout/breadcrumb.xhtml[Breadcrumb^] based navigation
 * Back to previous screen when logging in again after session expiration (or accessing a page via url without being logged in)
+* Layout customization via <<Control Sidebar>>
 
 NOTE: Most of the above features can be disabled via <<Configuration,configuration>> mechanism.
 
@@ -61,11 +62,6 @@ Admin template will bring the following transitive dependencies:
     <version>2.1</version>
 </dependency>
 
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>1.7.22</version>
-</dependency>
 ----
 
 Which you can override in your pom.xml as needed.
@@ -163,7 +159,14 @@ The above page definition renders as follows:
 
 image::template-example.png[]
 
-There are also other regions defined in admin.xhtml template, https://raw.githubusercontent.com/adminfaces/admin-template/master/admin-template-regions.png[see here^].
+There are also other regions defined in admin.xhtml template, https://github.com/adminfaces/admin-template/blob/master/src/main/resources/META-INF/resources/admin.xhtml[see here^].
+
+[TIP]
+====
+A good practice is to define a template on your application which extends the admin template, see https://github.com/adminfaces/admin-starter/blob/master/src/main/webapp/WEB-INF/templates/template.xhtml[admin-starter application template here^].
+
+So in your pages you use your template instead of admin.
+====
 
 == Configuration
 
@@ -191,12 +194,13 @@ admin.autoShowNavbar=true <14>
 admin.ignoredResources= <15>
 admin.loadingImage=ajaxloadingbar.gif <16>
 admin.extensionLessUrls=false <17>
+admin.renderControlSidebar=false <18>
 
 ----
 <1> login page location (relative to webapp). It you only be used if you configure <<Admin Session>>.
 <2> index page location. User will be redirected to it when it access app root (contextPath/).
 <3> Date format used in error page ({link-admin-showcase-openshift}/500.xhtml[500.xhtml^]), by default it is JVM default format.
-<4> facelets template to be used on build in admin-template pages like 500.xhtml, 404.xhtml, viewexpired.xhtml, see <<Error Pages>>. By default it uses admin.xhtml but you can define any template (e.g one that extends admin.xhtml).
+<4> facelets template to be used on build in admin-template pages like 500.xhtml, 404.xhtml, viewexpired.xhtml, see <<Error Pages>>. By default it uses admin.xhtml but you can define any template, e.g one that extends admin.xhtml, see tip on <<Example>> section.
 <5> Number of breadcrumbs to queue before removing the older ones.
 <6> When false, p:messages defined in admin template will not be rendered.
 <7> When false ajaxStatus, which triggers the loading bar on every ajax request, will not be rendered.
@@ -210,6 +214,7 @@ admin.extensionLessUrls=false <17>
 <15> Comma separated resources (pages or urls) to be skiped by AdminFilter. Ex: /rest,/pages/car-list.xhtml
 <16> image used for the loading popup. It must be under `webapp/resources/images` folder.
 <17> Removes extension suffix from breadCrumb links.
+<18> When true it will activate <<Control Sidebar, control sidebar>> component.
 
 IMPORTANT: You don't need to declare all values in your admin-config.properties, you can specify only the ones you need in order to change.
 
@@ -403,6 +408,53 @@ label.optimistic.click-here= Click here to reload the updated record from databa
 ----
 
 To override labels just provide a file named _admin.properties_ in your application `resources` folder.
+
+== Control Sidebar
+
+ControlSidebar is component which provides a panel so user can `customize` the template layout:
+
+image::controlsidebar.png[]
+
+Options selected by user are stored on `browser local storage` so they are remembered no matter the user logs off the application.
+
+=== Usage
+
+To enable the control sidebar you need to add the following entry in `src/main/resources/admin-config.properties`:
+
+----
+admin.renderControlSidebar=true
+----
+
+And then add a link or button on your page which opens the sidebar. The link or button must use `data-toggle` attribute:
+
+----
+  <a href="#" id="layout-setup" data-toggle="control-sidebar" class="hidden-sm hidden-xs"><i class="fa fa-gears"></i></a>
+----
+
+On admin-starter the link is located on https://github.com/adminfaces/admin-starter/blob/c8adbe5e692171b144b93292e14ea203b654a13b/src/main/webapp/includes/top-bar.xhtml#L58[top-bar.xhtml^]. 
+
+http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/pages/layout/controlsidebar.xhtml[Click here^] to see controlsidebar in action on admin showcase.
+
+
+By default the control sidebar comes only with the configuration tab but you can define additional tabs by defining `controlsidebar-tabs` and `controlsidebar-content` on your template. An example can be found on https://github.com/adminfaces/admin-starter/blob/c8adbe5e692171b144b93292e14ea203b654a13b/src/main/webapp/WEB-INF/templates/template.xhtml#L38[admin-starter template^].  
+
+[IMPORTANT]
+====
+ControlSidebar is hidden on mobile devices but you can override this using the following css on your template:
+
+-----
+  div#controlsidebarPanel {
+           display: block!important;
+      }
+-----
+
+Also don't forget to remove the `hidden-sm hidden-xs` classes from the button/link that opens the sidebar:
+
+----
+   <a  href="#" class="ui-link ui-widget" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+----
+
+====
 
 == Snapshots
 
