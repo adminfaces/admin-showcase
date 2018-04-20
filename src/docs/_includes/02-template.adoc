@@ -411,7 +411,7 @@ To override labels just provide a file named _admin.properties_ in your applicat
 
 == Control Sidebar
 
-ControlSidebar is component which provides a panel so user can `customize` the template layout:
+ControlSidebar is a component which provides a panel so user can `customize` the template layout:
 
 image::controlsidebar.png[]
 
