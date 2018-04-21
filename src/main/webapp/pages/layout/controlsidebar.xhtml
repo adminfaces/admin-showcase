@@ -3,7 +3,9 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:adm="http://github.com/adminfaces"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 template="#{layoutMB.template}">
+
 
     <ui:define name="title">
         ControlSidebar
@@ -22,11 +24,11 @@
             <ol>
                 <li>
                     <p>First set to following property in <code>src/main/resources/admin-config.properties</code>.</p>
-<pre>
+                    <pre>
 <code>
     admin.renderControlSidebar=true
 </code>
-</pre>
+                    </pre>
                 </li>
                 <li>
                     After enabling the component now you just need to add a link which opens the sidebar. The link or button must use <code>data-toggle</code> attribute.
@@ -39,21 +41,23 @@
             </div>
             <p:separator/>
             <h3>Example</h3>
-            <p><button data-toggle="control-sidebar" class="btn btn-lg btn-teal">Click to open controlsidebar</button></p>
-            <br/>
+            <p:button href="#" value="Open Controlsidebar" id="btn-control-sidebar" pt:data-toggle="control-sidebar"
+                      styleClass="btn btn-lg btn-teal hidden-sm hidden-xs" 
+                      icon="fa fa-indent" iconPos="right"/>
+
             <br/>
             <p>On showcase controlsidebar is toggled by this icon on <code>top right</code>: <a href="#" data-toggle="control-sidebar"><i class="fa fa-2x fa-gears"></i></a></p>
 
             <p:separator/>
-              <div class="callout callout-danger">
+            <div class="callout callout-danger">
                 <h4>IMPORTANT</h4>
                 <p>The controlsidebar is <b  style="text-decoration: underline">hidden on small/mobile devices</b>.</p>
             </div>
-             <div class="callout callout-info">
+            <div class="callout callout-info">
                 <h4>INFO</h4>
                 <p>The controlsidebar options are stored on browser <b style="text-decoration: underline">local storage</b>.</p>
             </div>
-            
+
             <div class="callout callout-success">
                 <h4>TIP</h4>
                 <p>See controlsidebar <a href="http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/docs/#control_sidebar" target="_blank"><i class="fa fa-book"></i> docs here</a> for more details.</p>
@@ -61,6 +65,31 @@
         </p:panel>
 
 
+        <script type="text/javascript">
+            function updateControlSidebarStyle() {
+                console.log($('aside.control-sidebar').attr('class'));
+                console.log($('body').attr('class'));
+                if ($('.control-sidebar').hasClass('control-sidebar-open')) {
+                    $('#btn-control-sidebar').addClass('ui-state-disabled');
+                } else {
+                    $('#btn-control-sidebar').removeClass('ui-state-disabled');
+                }
+            }
+
+
+            $(document).ready(function () {
+                setTimeout(function () {
+                    updateControlSidebarStyle();
+                }, 20);
+                $('#content, #layout-setup, #btn-control-sidebar').click(function () {
+                    setTimeout(function () {
+                        updateControlSidebarStyle();
+                    }, 200);
+                });
+
+            });
+
+        </script>
     </ui:define>
 
     <ui:define name="code">

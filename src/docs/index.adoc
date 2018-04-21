@@ -17,6 +17,7 @@
 :link-admin-theme: {link-adminfaces}/admin-theme
 :link-admin-designer: {link-adminfaces}/admin-designer
 :link-admin-persistence: {link-adminfaces}/admin-persistence
+:link-admin-starter-springboot: {link-adminfaces}/admin-starter-springboot
 :link-admin-mobile: {link-adminfaces}/admin-mobile
 
 :link-jsf: https://javaserverfaces.java.net/
@@ -41,11 +42,12 @@ endif::[]
 AdminFaces ecosystem is composed by the following projects:
 
 * {link-admin-theme}[Admin Theme^]: A Primefaces theme based on {link-bootstrap}[Bootstrap^] and {link-adminlte}[Admin LTE^] where {link-primefaces}[Primefaces^] components are customized to look like mentioned frameworks.
-* {link-admin-template}[Admin Template^]: A *fully responsive* {link-jsf}[Java Server Faces^] `admin` template (used by this Showcase) which is also based on *Bootstrap* and *Admin LTE*.
+* {link-admin-template}[Admin Template^]: A *fully responsive* {link-jsf}[Java Server Faces^] `admin` template which is also based on *Bootstrap* and *Admin LTE*.
 * {link-admin-showcase}[Admin Showcase^]: A showcase web application, {link-admin-showcase-openshift}[deployed on openshift^], which demonstrates AdminFaces main features and components.
 * {link-admin-designer}[Admin Designer^]: The same showcase application with Admin Theme and Admin Template bundled (instead of being library dependencies) in order to make it easier to customize the theme and the template.
 * {link-admin-starter}[Admin Starter^]: A simple starter project to get you started with AdminFaces.
-* {link-admin-persistence}[Admin Persistence]: CRUD operations like a breeze for AdminFaces applications based on https://deltaspike.apache.org/[Apache DeltaSpike^] Data module.
+* {link-admin-persistence}[Admin Persistence^]: CRUD operations like a breeze for AdminFaces applications based on https://deltaspike.apache.org/[Apache DeltaSpike^] Data module.
+* {link-admin-starter-springboot}[Admin Starter SpringBoot^]: Admin Starter application using https://github.com/spring-projects/spring-boot[SpringBoot^] and https://github.com/joinfaces/[JoinFaces^].
 * {link-admin-mobile}[Admin Mobile^]: A simple https://developer.android.com/studio/index.html[Android Studio^] project which uses https://developer.android.com/reference/android/webkit/WebView.html[Webview^] to create an https://www.mobiloud.com/blog/native-web-or-hybrid-apps/[hybrid web app^] based on Admin Showcase.
 
 In subsequent chapters we will drive through each project in detail.

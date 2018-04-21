@@ -44,6 +44,12 @@
                                          update="growl" icon="fa fa-floppy-o" styleClass="btn-danger btn-block"
                                          ignoreAutoUpdate="true"/>
                     </div>
+                    
+                    <div class="col-sm-12 col-md-3">
+                        <p:commandButton value="Button large With Icon" id="withIconBig" actionListener="#{buttonMB.buttonAction}"
+                                         update="growl" icon="fa fa-car" iconPos="right" styleClass="btn-lg btn-teal btn-block"
+                                         ignoreAutoUpdate="true"/>
+                    </div>
 
                     <div class="col-sm-12 col-md-3">
                         <p:commandButton value="Disabled" id="disabled" disabled="true" styleClass="btn-fatal btn-block"/>
@@ -66,10 +72,6 @@
                             <p:separator/>
                             <p:menuitem value="Homepage" url="/" icon="fa fa-link"/>
                         </p:splitButton>
-                    </div>
-                    <div class="col-sm-12 col-md-3">
-                        <p:commandButton value="Teal button" id="teal" update="growl" ignoreAutoUpdate="true"
-                                         actionListener="#{buttonMB.buttonAction}" styleClass="btn-teal btn-block"/>
                     </div>
                     <div class="col-sm-12 col-md-3">
                         <p:commandButton value="Small screens only" update="growl" ignoreAutoUpdate="true"
