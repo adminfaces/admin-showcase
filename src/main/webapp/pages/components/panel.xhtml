@@ -32,7 +32,7 @@
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:graphicImage name="demo/images/godfather1.jpg"/>
                     <h:outputText
-                            value="The story begins as Don Vito Corleone..."/>
+                        value="The story begins as Don Vito Corleone..."/>
                 </h:panelGrid>
             </p:panel>
 
@@ -41,7 +41,7 @@
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:graphicImage name="demo/images/godfather1.jpg"/>
                     <h:outputText
-                            value="The story begins as Don Vito Corleone..."/>
+                        value="The story begins as Don Vito Corleone..."/>
                 </h:panelGrid>
             </p:panel>
 
@@ -49,112 +49,41 @@
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:graphicImage name="demo/images/godfather1.jpg"/>
                     <h:outputText
-                            value="The story begins as Don Vito Corleone..."/>
+                        value="The story begins as Don Vito Corleone..."/>
                 </h:panelGrid>
+            </p:panel>  
+
+            <p:panel id="box-colors-panel" header="Box Colors - #{panelMB.selectedColor}" styleClass="#{panelMB.selectedColor} #{panelMB.solid ? 'box-solid':''}">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:graphicImage name="demo/images/godfather1.jpg"/>
+                    <h:outputText
+                        value="The story begins as Don Vito Corleone..."/>
+                </h:panelGrid>
+                <f:facet name="footer">
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12">
+                            <p:outputLabel value="Choice box colors" for="box-colors"/>
+                        </div>
+
+                        <div class="ui-g-12">
+                            <p:selectOneRadio id="box-colors" value="#{panelMB.selectedColor}" >
+                                <f:selectItems value="#{panelMB.boxColors}" var="color" itemLabel="#{color}" itemValue="#{color}"/>
+                                <p:ajax update="box-colors-panel"/>
+                            </p:selectOneRadio>
+                        </div>
+
+                        <div class="ui-g-1">
+                            <p:outputLabel value="Box solid?" for="box-solid"/>
+                        </div>
+
+                        <div class="ui-g-11">
+                            <p:inputSwitch id="box-solid" value="#{panelMB.solid}">
+                                <p:ajax update="box-colors-panel"/>
+                            </p:inputSwitch>
+                        </div>
+                    </div>
+                </f:facet>
             </p:panel>
-            <div class="row">
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box default" styleClass="box-default">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box solid default " styleClass="box-solid box-default">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box info" styleClass="box-info">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box solid info" styleClass="box-info box-solid">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box primary" styleClass="box-primary">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box solid primary" styleClass="box-primary box-solid">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box warning" styleClass="box-warning">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box success" styleClass="box-success">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box danger" styleClass="box-danger">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box fatal" styleClass="box-fatal">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-12">
-                    <p:panel header="Box solid fatal" styleClass="box-fatal box-solid">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather1.jpg"/>
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone..."/>
-                        </h:panelGrid>
-                    </p:panel>
-                </div>
-            </div>
             <p:panel id="toggleable" header="Toggleable" toggleable="true" closable="true" toggleSpeed="500"
                      closeSpeed="500" widgetVar="panel">
 
@@ -215,7 +144,7 @@
                 <h:panelGrid columns="2" cellpadding="10">
                     <p:graphicImage name="demo/images/godfather1.jpg"/>
                     <h:outputText
-                            value="The story begins as Don Vito Corleone..."/>
+                        value="The story begins as Don Vito Corleone..."/>
                 </h:panelGrid>
             </p:panel>
         </h:form>
@@ -224,20 +153,20 @@
     <ui:define name="code">
         <p:tabView>
             <p:tab title="panel.xhtml">
-           <pre>
+                <pre>
                <code class="language-html">
                    <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-           </pre>
+                </pre>
             </p:tab>
 
             <p:tab title="PanelMB.java">
-              <pre>
+                <pre>
                <code class="language-java">
                    <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.PanelMB')}"
                                  escape="false"/>
                </code>
-             </pre>
+                </pre>
             </p:tab>
         </p:tabView>
     </ui:define>
