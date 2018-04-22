@@ -65,7 +65,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
-            <version>1.0.0-RC14</version>
+            <version>1.0.0-RC15-SNAPSHOT</version>
             <!-- end::dep-admin-theme[] -->
             <classifier>no-cache</classifier>
         </dependency>

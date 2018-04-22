@@ -152,8 +152,12 @@
                     </p:dataTable>
                 </div>
 
-                <p:separator/>
+            </h:form>
+        </p:panel>
 
+        <p:separator/>
+        <p:panel header="Tree table" styleClass="card no-border" toggleable="true" toggleSpeed="300">
+            <h:form>
                 <div id="treetable">
                     <p:treeTable value="#{treeTableMB.root}" selectionMode="single"
                                  var="document" paginator="true" paginatorPosition="bottom" rows="2">
@@ -171,12 +175,12 @@
                         </p:column>
                         <p:column headerText="(p4)" priority="4">
                             <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')"
-                                           title="View Detail" styleClass="ui-icon ui-icon-search"/>
+                                           title="View Detail" styleClass="fa fa-search" style="text-decoration: none"/>
                         </p:column>
                     </p:treeTable>
                 </div>
 
-                <p:separator/>
+                <h4>Multiple selection</h4>
                 <div id="treetable-multiple">
                     <p:treeTable value="#{treeTableMB.root}" selectionMode="checkbox"
                                  selection="#{treeTableMB.selectedNodes}"
@@ -196,7 +200,7 @@
                         </p:column>
                         <p:column headerText="(p4)" priority="4">
                             <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')"
-                                           title="View Detail" styleClass="ui-icon ui-icon-search"/>
+                                           title="View Detail" styleClass="fa fa-search" style="text-decoration: none"/>
                         </p:column>
                     </p:treeTable>
                 </div>
@@ -205,7 +209,7 @@
 
         <p:separator/>
 
-        <p:panel styleClass="box-info" header="SubTable">
+        <p:panel styleClass="car box-info" header="SubTable" toggleable="true" toggleSpeed="300">
             <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right">
                 <f:facet name="header">
                     NBA Teams
@@ -246,7 +250,7 @@
             </p:dataTable>
         </p:panel>
         <p:separator/>
-        <p:panel header="Box colors">
+        <p:panel header="Box colors" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <div class="ui-g">
                 <div class="ui-g-6 ui-sm-12">
                     <p:dataTable id="boxSolidTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
@@ -259,8 +263,8 @@
                         <f:facet name="header">
                             <h:outputText value="Box primary table"/>
                         </f:facet>
-                        
-                          <f:facet name="footer">
+
+                        <f:facet name="footer">
                             <h:outputText value="Table footer"/>
                         </f:facet>
 
@@ -268,14 +272,14 @@
                                   priority="1">
                             <h:outputText value="#{car.id}"/>
                         </p:column>
-                        
-                         <p:column styleClass="align-center" headerText="Brand"
+
+                        <p:column styleClass="align-center" headerText="Brand"
                                   priority="2">
                             <h:outputText value="#{car.brand}"/>
-                         </p:column>
+                        </p:column>
                     </p:dataTable>
                 </div>
-                
+
                 <div class="ui-g-6 ui-sm-12">
                     <p:dataTable id="boxTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
                                  styleClass="box-solid box-primary"
@@ -287,8 +291,8 @@
                         <f:facet name="header">
                             <h:outputText value="Box solid primary table"/>
                         </f:facet>
-                        
-                          <f:facet name="footer">
+
+                        <f:facet name="footer">
                             <h:outputText value="Table footer"/>
                         </f:facet>
 
@@ -296,15 +300,128 @@
                                   priority="1">
                             <h:outputText value="#{car.id}"/>
                         </p:column>
-                        
-                           <p:column styleClass="align-center" headerText="Brand"
+
+                        <p:column styleClass="align-center" headerText="Brand"
                                   priority="2">
                             <h:outputText value="#{car.brand}"/>
                         </p:column>
-                        
+
                     </p:dataTable>
                 </div>
             </div> 
+        </p:panel>
+        <p:separator/>
+        <p:panel header="Editable" styleClass="card no-border" toggleable="true" toggleSpeed="300">
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true"/>
+
+                <p:dataTable id="cars1" var="car" value="#{datatableEditMB.cars1}" editable="true" style="margin-bottom:20px">
+                    <f:facet name="header">
+                        Row Editing
+                    </f:facet>
+
+                    <p:ajax event="rowEdit" listener="#{datatableEditMB.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{datatableEditMB.onRowCancel}" update=":form:msgs" />
+
+                    <p:column headerText="Id">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Year">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
+                            <f:facet name="input">
+                                <p:calendar value="#{car.year}" pattern="yyyy" showOn="both" yearRange="c-60:c+0" navigator="true" label="Year">
+                                    <f:converter converterId="calendarYearConverter"/>
+                                </p:calendar>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Brand">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{car.brand}">
+                                    <f:selectItems value="#{datatableEditMB.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Color">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{car.color}">
+                                    <f:selectItems value="#{datatableEditMB.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column style="width:40px">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+
+                <p:dataTable id="cars2" var="car" value="#{datatableEditMB.cars2}" editable="true" editMode="cell" widgetVar="cellCars">
+                    <f:facet name="header">
+                        Cell Editing with Click and RightClick
+                    </f:facet>
+
+                    <p:ajax event="cellEdit" listener="#{datatableEditMB.onCellEdit}" update=":form:msgs" />
+
+                    <p:column headerText="Id">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Year">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
+                           <f:facet name="input">
+                                <p:calendar value="#{car.year}" pattern="yyyy" showOn="both" yearRange="c-60:c+0" navigator="true" label="Year">
+                                    <f:converter converterId="calendarYearConverter"/>
+                                </p:calendar>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Brand">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{car.brand}">
+                                    <f:selectItems value="#{datatableEditMB.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Color">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
+                            <f:facet name="input">
+                                <p:selectOneMenu value="#{car.color}">
+                                    <f:selectItems value="#{datatableEditMB.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                </p:dataTable>
+
+                <p:contextMenu for="cars2" widgetVar="cMenu">   
+                    <p:menuitem value="Edit Cell" icon="fa fa-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
+                    <p:menuitem value="Hide Menu" icon="fa fa-close" onclick="PF('cMenu').hide()"/>  
+                </p:contextMenu> 
+
+            </h:form>
         </p:panel>
     </ui:define>
 
