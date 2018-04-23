@@ -67,8 +67,6 @@
 
         <script type="text/javascript">
             function updateControlSidebarStyle() {
-                console.log($('aside.control-sidebar').attr('class'));
-                console.log($('body').attr('class'));
                 if ($('.control-sidebar').hasClass('control-sidebar-open')) {
                     $('#btn-control-sidebar').addClass('ui-state-disabled');
                 } else {
@@ -76,15 +74,15 @@
                 }
             }
 
-
             $(document).ready(function () {
                 setTimeout(function () {
                     updateControlSidebarStyle();
                 }, 20);
+
                 $('#content, #layout-setup, #btn-control-sidebar').click(function () {
                     setTimeout(function () {
                         updateControlSidebarStyle();
-                    }, 200);
+                    }, 50);
                 });
 
             });
