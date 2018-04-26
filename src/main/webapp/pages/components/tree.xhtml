@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="title">
+        Tree
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link value="Tree"
+                href="https://www.primefaces.org/showcase/ui/data/tree/"/> has two modes, in client mode all nodes are available at client side whereas in ajax mode only expanded nodes are available.
+
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Tree"/>
+        <h:form>
+
+            <p:panel header="Default Tree" styleClass="card box-teal">
+                <p:tree id="docs" value="#{treeMB.root}" var="doc" selectionMode="single" selection="#{treeMB.selectedNode}">
+                    <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+
+                    <p:treeNode type="document" icon="fa fa-file-word-o">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+
+                    <p:treeNode type="picture" icon="fa fa-file-photo-o">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+
+                    <p:treeNode type="mp3" icon="fa fa-file-movie-o">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+                </p:tree>
+
+                <p:contextMenu for="docs">
+                    <p:menuitem value="View" actionListener="#{treeMB.displaySelectedSingle}" icon="fa fa-search" />
+                </p:contextMenu>
+            </p:panel>
+            <p:spacer height="5px"/>
+            <p:panel header="Horizontal Tree" styleClass="card box-success">
+                <p:tree id="docs-hr" value="#{treeMB.root}" var="doc" selectionMode="single" selection="#{treeMB.selectedNode}" orientation="horizontal">                    
+                     <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+
+                    <p:treeNode type="document" icon="fa fa-file-word-o">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+
+                    <p:treeNode type="picture" icon="fa fa-file-photo-o">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+
+                    <p:treeNode type="mp3" icon="fa fa-file-movie-o">
+                        <h:outputText value="#{doc.name}"/>
+                    </p:treeNode>
+                </p:tree>
+
+                <p:contextMenu for="docs-hr">
+                    <p:menuitem value="View" actionListener="#{treeMB.displaySelectedSingle}" icon="fa fa-search" />
+                </p:contextMenu>     
+            </p:panel>
+
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView styleClass="hidden-sm hidden-xs">
+            <p:tab title="tree.xhtml">
+                <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+                </pre>
+            </p:tab>
+
+            <p:tab title="TreeMB.java">
+                <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.TreeMB')}"
+                                 escape="false"/>
+               </code>
+                </pre>
+            </p:tab>
+        </p:tabView>
+
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="tree.xhtml">
+                <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+                </pre>
+            </p:tab>
+
+            <p:tab title="TreeMB.java">
+                <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.TreeMB')}"
+                                 escape="false"/>
+               </code>
+                </pre>
+            </p:tab>
+        </p:accordionPanel>
+    </ui:define>
+</ui:composition>
