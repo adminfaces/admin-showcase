@@ -24,8 +24,11 @@
     </ui:define>
 
     <ui:define name="body">
+         <f:metadata>
+             <f:viewParam name="material" value="#{layoutMB.materialButtons}" converter="javax.faces.Boolean"/>
+         </f:metadata>
         <adm:breadcrumb title="Buttons"/>
-        <h:form>
+        <h:form id="buttons">
             <p:panel styleClass="card no-border" style="min-height: 100px">
                 <p:growl id="growl" life="2000"/>
 
@@ -44,7 +47,7 @@
                                          update="growl" icon="fa fa-floppy-o" styleClass="btn-danger btn-block"
                                          ignoreAutoUpdate="true"/>
                     </div>
-                    
+
                     <div class="col-sm-12 col-md-3">
                         <p:commandButton value="Button large With Icon" id="withIconBig" actionListener="#{buttonMB.buttonAction}"
                                          update="growl" icon="fa fa-car" iconPos="right" styleClass="btn-lg btn-teal btn-block"
@@ -82,6 +85,12 @@
             </p:panel>
             <hr/>
             <p:panel styleClass="box-success no-border" style="overflow: auto">
+
+                <p:tooltip for="material-switch"  escape="false" position="top" value="Turns material flat buttonson. It adds the &lt;code&gt;btn-material&lt;/code&gt; to all buttons."/>
+                <p:outputLabel value="Material flat buttons?" for="material-switch"/>
+                <p:inputSwitch value="#{layoutMB.materialButtons}" id="material-switch" widgetVar="materialSwitch">
+                    <p:ajax update="@this" global="false" oncomplete="styleMaterialInputs()"/>
+                </p:inputSwitch>
                 <table class="table table-bordered text-center">
                     <tbody>
                         <tr>
@@ -97,146 +106,181 @@
                                 <p:button styleClass="btn-block btn-default" value="Default"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-default btn-lg" value="Default"/>
+                                <p:button styleClass="btn-block btn-default btn-lg" value="Default"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-default btn-sm" value="Default"/>
+                                <p:button styleClass="btn-block btn-default btn-sm" value="Default"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-default btn-xs" value="Default"/>
+                                <p:button styleClass="btn-block btn-default btn-xs" value="Default"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-default btn-flat" value="Default"/>
+                                <p:button styleClass="btn-block btn-default btn-flat" value="Default"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-default" disabled="true" value="Default"/>
+                                <p:button styleClass="btn-block btn-default" disabled="true" value="Default"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-primary" value="Primary"/>
+                                <p:button styleClass="btn-block btn-primary" value="Primary"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-primary btn-lg" value="Primary"/>
+                                <p:button styleClass="btn-block btn-primary btn-lg" value="Primary"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-primary btn-sm" value="Primary"/>
+                                <p:button styleClass="btn-block btn-primary btn-sm" value="Primary"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-primary btn-xs" value="Primary"/>
+                                <p:button styleClass="btn-block btn-primary btn-xs" value="Primary"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-primary btn-flat" value="Primary"/>
+                                <p:button styleClass="btn-block btn-primary btn-flat" value="Primary"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-primary" disabled="true" value="Primary"/>
+                                <p:button styleClass="btn-block btn-primary" disabled="true" value="Primary"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-success" value="Success"/>
+                                <p:button styleClass="btn-block btn-success" value="Success"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-success btn-lg" value="Success"/>
+                                <p:button styleClass="btn-block btn-success btn-lg" value="Success"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-success btn-sm" value="Success"/>
+                                <p:button styleClass="btn-block btn-success btn-sm" value="Success"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-success btn-xs" value="Success"/>
+                                <p:button styleClass="btn-block btn-success btn-xs" value="Success"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-success btn-flat" value="Success"/>
+                                <p:button styleClass="btn-block btn-success btn-flat" value="Success"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-success" disabled="true" value="Success"/>
+                                <p:button styleClass="btn-block btn-success" disabled="true" value="Success"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-info" value="Info"/>
+                                <p:button styleClass="btn-block btn-info" value="Info"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-info btn-lg" value="Info"/>
+                                <p:button styleClass="btn-block btn-info btn-lg" value="Info"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-info btn-sm" value="Info"/>
+                                <p:button styleClass="btn-block btn-info btn-sm" value="Info"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-info btn-xs" value="Info"/>
+                                <p:button styleClass="btn-block btn-info btn-xs" value="Info"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-info btn-flat" value="Info"/>
+                                <p:button styleClass="btn-block btn-info btn-flat" value="Info"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-info" disabled="true" value="Info"/>
+                                <p:button styleClass="btn-block btn-info" disabled="true" value="Info"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-warning" value="Warning"/>
+                                <p:button styleClass="btn-block btn-warning" value="Warning"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-warning btn-lg" value="Warning"/>
+                                <p:button styleClass="btn-block btn-warning btn-lg" value="Warning"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-warning btn-sm" value="Warning"/>
+                                <p:button styleClass="btn-block btn-warning btn-sm" value="Warning"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-warning btn-xs" value="Warning"/>
+                                <p:button styleClass="btn-block btn-warning btn-xs" value="Warning"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-warning btn-flat" value="Warning"/>
+                                <p:button styleClass="btn-block btn-warning btn-flat" value="Warning"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-warning" disabled="true" value="Warning"/>
+                                <p:button styleClass="btn-block btn-warning" disabled="true" value="Warning"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-danger" value="Danger"/>
+                                <p:button styleClass="btn-block btn-danger" value="Danger"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-danger btn-lg" value="Danger"/>
+                                <p:button styleClass="btn-block btn-danger btn-lg" value="Danger"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-danger btn-sm" value="Danger"/>
+                                <p:button styleClass="btn-block btn-danger btn-sm" value="Danger"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-danger btn-xs" value="Danger"/>
+                                <p:button styleClass="btn-block btn-danger btn-xs" value="Danger"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-danger btn-flat" value="Danger"/>
+                                <p:button styleClass="btn-block btn-danger btn-flat" value="Danger"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-danger" disabled="true" value="Danger"/>
+                                <p:button styleClass="btn-block btn-danger" disabled="true" value="Danger"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-fatal" value="Fatal"/>
+                                <p:button styleClass="btn-block btn-fatal" value="Fatal"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-fatal btn-lg" value="Fatal"/>
+                                <p:button styleClass="btn-block btn-fatal btn-lg" value="Fatal"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-fatal btn-sm" value="Fatal"/>
+                                <p:button styleClass="btn-block btn-fatal btn-sm" value="Fatal"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-fatal btn-xs" value="Fatal"/>
+                                <p:button styleClass="btn-block btn-fatal btn-xs" value="Fatal"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-fatal btn-flat" value="Fatal"/>
+                                <p:button styleClass="btn-block btn-fatal btn-flat" value="Fatal"/>
                             </td>
                             <td>
-                                <p:button type="button" styleClass="btn-block btn-fatal" disabled="true" value="Fatal"/>
+                                <p:button styleClass="btn-block btn-fatal" disabled="true" value="Fatal"/>
                             </td>
                         </tr>
-
+                        <tr>
+                            <td>
+                                <p:button styleClass="btn-block btn-teal" value="Teal"/>
+                            </td>
+                            <td>
+                                <p:button styleClass="btn-block btn-teal btn-lg" value="Teal"/>
+                            </td>
+                            <td>
+                                <p:button styleClass="btn-block btn-teal btn-sm" value="Teal"/>
+                            </td>
+                            <td>
+                                <p:button styleClass="btn-block btn-teal btn-xs" value="Teal"/>
+                            </td>
+                            <td>
+                                <p:button styleClass="btn-block btn-teal btn-flat" value="Teal"/>
+                            </td>
+                            <td>
+                                <p:button styleClass="btn-block btn-teal" disabled="true" value="Teal"/>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </p:panel>
         </h:form>
+        
+        <script type="text/javascript">
+            
+           function styleMaterialInputs() {
+               var switchOn = PF('materialSwitch').input.attr('checked') === 'checked'; 
+               if(switchOn) {
+                   $('form[id$=buttons').find('.ui-button, div.ui-splitbutton').not(".ui-splitbutton button").addClass('btn-material');
+               } else {
+                   $('form[id$=buttons').find('.ui-button, div.ui-splitbutton').not(".ui-splitbutton button").removeClass('btn-material');
+               }
+           }
+           
+           $(document).ready(function () {
+               styleMaterialInputs();
+           });
+        </script>    
     </ui:define>
 
     <ui:define name="code">

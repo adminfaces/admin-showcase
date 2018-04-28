@@ -36,6 +36,9 @@
     </ui:define>
 
     <ui:define name="body">
+         <f:metadata>
+             <f:viewParam name="flat" value="#{layoutMB.flat}" converter="javax.faces.Boolean"/>
+         </f:metadata>
         <adm:breadcrumb title="Forms"/>
         <h:form>
             <div>
