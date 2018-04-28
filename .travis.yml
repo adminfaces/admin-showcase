@@ -16,7 +16,7 @@ before_script:
 script:
 - mvn -U clean package -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless
 - mvn test -Ptests -Pglassfish-managed -Dbrowser=chromeheadless
-- mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless
+#- mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless
 #- mvn test -Ptests -Ptomee1.7-remote -Dbrowser=chromeheadless
 after_success:
 - mvn clean package -Pdocs -DskipTests
