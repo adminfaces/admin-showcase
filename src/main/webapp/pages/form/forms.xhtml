@@ -5,6 +5,12 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
+    
+     <ui:define name="metadata">
+        <f:metadata>
+             <f:viewParam name="flat" value="#{layoutMB.flat}" converter="javax.faces.Boolean"/>
+         </f:metadata>
+    </ui:define>
 
     <ui:define name="head-end">
         <style type="text/css">
@@ -36,9 +42,6 @@
     </ui:define>
 
     <ui:define name="body">
-         <f:metadata>
-             <f:viewParam name="flat" value="#{layoutMB.flat}" converter="javax.faces.Boolean"/>
-         </f:metadata>
         <adm:breadcrumb title="Forms"/>
         <h:form>
             <div>

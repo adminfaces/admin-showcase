@@ -6,6 +6,11 @@
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
 
+    <ui:define name="metadata">
+         <f:metadata>
+              <f:viewParam name="material" value="#{layoutMB.materialButtons}" converter="javax.faces.Boolean"/>
+          </f:metadata>
+    </ui:define>
 
     <ui:define name="head-end">
         <style type="text/css">
@@ -24,9 +29,6 @@
     </ui:define>
 
     <ui:define name="body">
-         <f:metadata>
-             <f:viewParam name="material" value="#{layoutMB.materialButtons}" converter="javax.faces.Boolean"/>
-         </f:metadata>
         <adm:breadcrumb title="Buttons"/>
         <h:form id="buttons">
             <p:panel styleClass="card no-border" style="min-height: 100px">
@@ -265,21 +267,21 @@
                 </table>
             </p:panel>
         </h:form>
-        
+
         <script type="text/javascript">
-            
-           function styleMaterialInputs() {
-               var switchOn = PF('materialSwitch').input.attr('checked') === 'checked'; 
-               if(switchOn) {
-                   $('form[id$=buttons').find('.ui-button, div.ui-splitbutton').not(".ui-splitbutton button").addClass('btn-material');
-               } else {
-                   $('form[id$=buttons').find('.ui-button, div.ui-splitbutton').not(".ui-splitbutton button").removeClass('btn-material');
-               }
-           }
-           
-           $(document).ready(function () {
-               styleMaterialInputs();
-           });
+
+            function styleMaterialInputs() {
+                var switchOn = PF('materialSwitch').input.attr('checked') === 'checked';
+                if (switchOn) {
+                    $('form[id$=buttons').find('.ui-button, div.ui-splitbutton').not(".ui-splitbutton button").addClass('btn-material');
+                } else {
+                    $('form[id$=buttons').find('.ui-button, div.ui-splitbutton').not(".ui-splitbutton button").removeClass('btn-material');
+                }
+            }
+
+            $(document).ready(function () {
+                styleMaterialInputs();
+            });
         </script>    
     </ui:define>
 
