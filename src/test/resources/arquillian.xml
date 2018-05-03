@@ -1,19 +1,19 @@
 <arquillian xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://jboss.org/schema/arquillian"
-	xsi:schemaLocation="
+            xmlns="http://jboss.org/schema/arquillian"
+            xsi:schemaLocation="
         http://jboss.org/schema/arquillian
         http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
-	<!-- Force the use of the Servlet 3.0 protocol with all containers, as it 
-		is the most mature -->
+    <!-- Force the use of the Servlet 3.0 protocol with all containers, as it 
+    is the most mature -->
 
-	<defaultProtocol type="Servlet 3.0" />
+    <defaultProtocol type="Servlet 3.0" />
 
 
     <container qualifier="chameleon" default="true">
         <configuration>
             <property name="chameleonTarget">${arquillian.container}</property>
-			<property name="javaVmArguments">-Xmx300m -XX:MaxPermSize=256m 
+            <property name="javaVmArguments">-Xmx300m -XX:MaxPermSize=256m 
                 -Duser.country=US -Duser.language=en -Duser.timezone=GMT-03:00
             </property>
         </configuration>
@@ -35,14 +35,14 @@
         </configuration>
     </container>
 
-	<extension qualifier="webdriver">
-		<property name="browser">${browser}</property>
+    <extension qualifier="webdriver">
+        <property name="browser">${browser}</property>
         <!--<property name="browser">chrome,firefox, chromeheadless or internetExplorer</property>-->
         <property name="dimensions">1366x1024</property>
-        <property name="chromeDriverVersion">2.36</property>
+        <property name="chromeDriverVersion">2.38</property>
     </extension>
 
-     <extension qualifier="screenshooter">
+    <extension qualifier="screenshooter">
         <property name="takeOnEveryAction">true</property>
         <property name="takeBeforeTest">false</property>
         <property name="takeAfterTest">false</property>
