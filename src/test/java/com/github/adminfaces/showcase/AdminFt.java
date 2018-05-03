@@ -5,6 +5,7 @@ import com.github.adminfaces.showcase.pages.components.ChipsPage;
 import com.github.adminfaces.showcase.pages.components.DialogPage;
 import com.github.adminfaces.showcase.pages.components.MessagesPage;
 import com.github.adminfaces.showcase.pages.exception.*;
+import com.github.adminfaces.showcase.pages.fragments.ControlSidebar;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
 import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -68,6 +69,9 @@ public class AdminFt {
 
     @FindByJQuery("section.sidebar > ul.sidebar-menu")
     private Menu menu;
+    
+    @FindByJQuery("#controlsidebarPanel")
+    private ControlSidebar controlSidebar;
 
     @Deployment(testable = false)
     public static Archive<?> getDeployment() {
@@ -257,12 +261,23 @@ public class AdminFt {
         breadcrumbPage.getInputTitle().sendKeys("Messages");
         breadcrumbPage.clickBtnAdd();
         WebElement messagesItem = breadcrumbPage.getBreadcrumbItem();//Messages item will be added as second item because "Breadcrumb" item is added in preRenderView
-        assertThat(messagesItem.isDisplayed());
+        assertThat(messagesItem.isDisplayed()).isTrue();
         assertThat(messagesItem.getText()).isEqualTo("Messages");
         messagesItem.click();
         waitModel();
         assertThat(messagesPage.getTitle().isDisplayed()).isTrue();
-
+    }
+    
+    
+    @Test
+    @InSequence(6)
+    public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage){
+        controlSidebar.openControlSidebar();
+        controlSidebar.toggleFixedLayout();
+        controlSidebar.toggleBoxedLayout();
+        controlSidebar.toggleSidebarSkin();
+        controlSidebar.activateSkinBlack();
+        controlSidebar.activateSkinTeal();
     }
 
     @Test
@@ -273,11 +288,6 @@ public class AdminFt {
         }
         chipsPage.addDefaultChips();
         chipsPage.addDangerChips();
-        chipsPage.addWarnChips();
-        //chipsPage.addSuccessChips();
-        //chipsPage.addInfoChips();
-        //chipsPage.addFatalChips();
-        //chipsPage.addNoColorChips();
         chipsPage.addCustomChips();
     }
 
