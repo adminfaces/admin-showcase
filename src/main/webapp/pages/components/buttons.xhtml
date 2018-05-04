@@ -7,9 +7,9 @@
                 template="#{layoutMB.template}">
 
     <ui:define name="metadata">
-         <f:metadata>
-              <f:viewParam name="material" value="#{layoutMB.materialButtons}" converter="javax.faces.Boolean"/>
-          </f:metadata>
+        <f:metadata>
+            <f:viewParam name="material" value="#{layoutMB.materialButtons}" converter="javax.faces.Boolean"/>
+        </f:metadata>
     </ui:define>
 
     <ui:define name="head-end">
@@ -88,11 +88,14 @@
             <hr/>
             <p:panel styleClass="card no-border" style="overflow: auto">
 
-                <p:tooltip for="material-switch"  escape="false" position="top" value="Turns material flat buttonson. It adds the &lt;code&gt;btn-material&lt;/code&gt; to all buttons."/>
-                <p:outputLabel value="Material flat buttons?" for="material-switch"/>
-                <p:inputSwitch value="#{layoutMB.materialButtons}" id="material-switch" widgetVar="materialSwitch">
-                    <p:ajax update="@this" global="false" oncomplete="styleMaterialInputs()"/>
-                </p:inputSwitch>
+                <f:facet name="header">
+                    <p:tooltip for="material-switch"  escape="false" position="top" hideDelay="200" value="Turns material flat buttonson. It adds the &lt;code&gt;btn-material&lt;/code&gt; to all buttons."/>
+                    <p:outputLabel value="Material flat buttons?" for="material-switch"/>
+                    <p:inputSwitch value="#{layoutMB.materialButtons}" id="material-switch" widgetVar="materialSwitch">
+                        <p:ajax update="@(.card)" oncomplete="styleMaterialInputs()"/>
+                    </p:inputSwitch>
+                </f:facet>    
+                
                 <table class="table table-bordered text-center">
                     <tbody>
                         <tr>
