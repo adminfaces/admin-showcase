@@ -1,5 +1,6 @@
 package com.github.adminfaces.showcase.pages.fragments;
 
+import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.GrapheneElement;
@@ -53,7 +54,8 @@ public class ControlSidebar {
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-open")).isFalse();
         browser.findElement(By.id("layout-setup")).click();
-        waitModel(browser);
+        waitModel(browser).withTimeout(500, TimeUnit.MILLISECONDS);
+        waitGui();
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-open")).isTrue();
     }
@@ -64,6 +66,7 @@ public class ControlSidebar {
         waitModel(browser);
         guardNoRequest(fixedLayoutCheckbox).click();
         waitModel(browser);
+        waitGui();
         assertThat(pageBody.getAttribute("class")
                 .contains("fixed")).isTrue();
     }
