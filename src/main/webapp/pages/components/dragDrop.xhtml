@@ -6,9 +6,7 @@
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
 
-    <ui:define name="body-begin">
-        <ui:param name="title" value="DragDrop"/>
-    </ui:define>
+    <ui:param name="title" value="DragDrop"/>
 
     <ui:define name="description">
         <p:link value="DragDrop"
@@ -112,8 +110,8 @@
             <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCars" onDrop="handleDrop">
                 <p:ajax listener="#{dragDropMB.onCarDrop}" update="dropArea availableCars" />
             </p:droppable>
-            
-             <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCarsGrid" onDrop="handleDrop">
+
+            <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCarsGrid" onDrop="handleDrop">
                 <p:ajax listener="#{dragDropMB.onCarDrop}" update="dropArea availableCarsGrid" />
             </p:droppable>
 

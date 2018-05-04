@@ -5,9 +5,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="#{layoutMB.template}">
 
-    <ui:define name="body-begin">
-        <ui:param name="title" value="Toolbar"/> <!-- Automactly creates breadCrumb and page title-->
-    </ui:define>
+    <ui:param name="title" value="Toolbar"/> <!-- Automactly creates breadCrumb and page title-->
 
     <ui:define name="description">
         <p:link value="Toolbar"
@@ -26,7 +24,7 @@
                         <p:commandButton type="button" value="Open" icon="fa  fa-folder-open-o" styleClass="btn-info"/>
 
                         <span style="padding: 5px;color: darkgray">
-                           <i class="fa fa-ellipsis-v" />
+                            <i class="fa fa-ellipsis-v" />
                         </span>
 
                         <p:commandButton type="button" title="Save" icon="fa fa-save" styleClass="btn-success"/>
@@ -54,20 +52,20 @@
     <ui:define name="code">
         <p:tabView>
             <p:tab title="toolbar.xhtml">
-           <pre>
+                <pre>
                <code class="language-html">
                    <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-           </pre>
+                </pre>
             </p:tab>
 
             <p:tab title="TabViewMB.java">
-              <pre>
+                <pre>
                <code class="language-java">
                    <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.ToolbarMB')}"
                                  escape="false"/>
                </code>
-             </pre>
+                </pre>
             </p:tab>
         </p:tabView>
     </ui:define>
