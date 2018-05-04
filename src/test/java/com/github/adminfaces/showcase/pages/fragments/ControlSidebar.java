@@ -55,36 +55,30 @@ public class ControlSidebar {
                 .contains("control-sidebar-open")).isFalse();
         browser.findElement(By.id("layout-setup")).click();
         waitModel(browser).withTimeout(500, TimeUnit.MILLISECONDS);
-        waitGui();
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-open")).isTrue();
     }
 
     public void toggleFixedLayout() {
-        assertThat(pageBody.getAttribute("class")
-                .contains("fixed")).isFalse();
-        waitModel(browser);
+        waitGui().withTimeout(600, TimeUnit.MILLISECONDS);
         guardNoRequest(fixedLayoutCheckbox).click();
-        waitModel(browser);
-        waitGui();
+        waitGui().withTimeout(600, TimeUnit.MILLISECONDS);
         assertThat(pageBody.getAttribute("class")
                 .contains("fixed")).isTrue();
     }
-    
+
     public void toggleBoxedLayout() {
         assertThat(pageBody.getAttribute("class")
                 .contains("layout-boxed")).isFalse();
         guardNoRequest(boxedLayoutCheckbox).click();
-         waitModel(browser);
         assertThat(pageBody.getAttribute("class")
                 .contains("layout-boxed")).isTrue();
     }
-    
-     public void toggleSidebarSkin() {
+
+    public void toggleSidebarSkin() {
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-dark")).isTrue();
         guardNoRequest(sidebarSkinCheckbox).click();
-         waitModel(browser);
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-light")).isTrue();
     }
@@ -96,8 +90,8 @@ public class ControlSidebar {
         assertThat(pageBody.getAttribute("class")
                 .contains("skin-black")).isTrue();
     }
-    
-     public void activateSkinTeal() {
+
+    public void activateSkinTeal() {
         assertThat(pageBody.getAttribute("class")
                 .contains("skin-teal")).isFalse();
         guardAjax(btnSkinTeal).click();
