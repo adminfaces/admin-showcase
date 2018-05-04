@@ -54,7 +54,7 @@ public class ControlSidebar {
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-open")).isFalse();
         browser.findElement(By.id("layout-setup")).click();
-        waitModel(browser).withTimeout(500, TimeUnit.MILLISECONDS);
+        waitModel().withTimeout(500, TimeUnit.MILLISECONDS);
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-open")).isTrue();
     }
