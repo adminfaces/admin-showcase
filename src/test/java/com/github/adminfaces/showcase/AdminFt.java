@@ -269,8 +269,8 @@ public class AdminFt {
     }
     
     
-    @Test
-    @InSequence(6)
+    //@Test
+    //@InSequence(6)
     public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage){
         controlSidebar.openControlSidebar();
         controlSidebar.toggleFixedLayout();
