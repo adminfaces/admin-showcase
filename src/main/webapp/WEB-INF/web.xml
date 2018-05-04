@@ -24,6 +24,11 @@
         <param-name>org.omnifaces.VIEW_SCOPE_MANAGER_MAX_ACTIVE_VIEW_SCOPES</param-name>
         <param-value>6</param-value>
     </context-param>
+    
+    <context-param>
+        <param-name>primefaces.MOVE_SCRIPTS_TO_BOTTOM</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
     <context-param>
         <param-name>primefaces.SUBMIT</param-name>
