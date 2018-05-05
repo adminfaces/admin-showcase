@@ -7,7 +7,7 @@ https://github.com/adminfaces/admin-template[Admin Template^] is a *fully respon
 Below is a non exhaustive list of notable features brought out of the box by this template:
 
 * Fully responsive
-** Its based on Bootstrap and AdminLTE two well tested and solid frameworks
+** Its based on Bootstrap and AdminLTE two well tested and solid frontend frameworks
 * Enhanced mobile experience, below features are enabled only on small screens:
 ** Material design load bar
 ** Ripple effect based on http://materializecss.com/waves.html[materialize css^] +
@@ -501,6 +501,7 @@ There are two ways to use the component, via `adm:breadcrumb` composite componen
 
 To use the composite component just declare the `admin  namespace` and provide a title and the link, following is https://github.com/adminfaces/admin-starter/blob/c85a8a98e7f684b854cc8b5d7371482a5d1eedb5/src/main/webapp/car-form.xhtml#L18[car-form^] breadCrumb declaration in `admin starter`:
 
+.car-form.xhtml
 ----
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:adm="http://github.com/adminfaces">
@@ -512,6 +513,10 @@ To use the composite component just declare the `admin  namespace` and provide a
 </ui:composition>
 
 ----
+
+So when user enters the car-form page a breadCrumb will be created based on currently edited car or 'New Car' label will be used when adding a Car:
+
+image:car-form-bread.png[width=100%, height=300, link="https://raw.githubusercontent.com/adminfaces/admin-showcase/master/src/docs/images/car-form-bread.png"]
 
 The *link* is the page where user will be redirected when clicking the breadCrumb link.
 
