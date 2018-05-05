@@ -6,7 +6,7 @@
                 template="#{layoutMB.template}">
 
     <ui:param name="title" value="Dialog"/> <!-- will be used for breadCrumb and page title -->
-    
+
     <ui:define name="description">
         <p:link value="Dialog"
                 href="http://www.primefaces.org/showcase/ui/overlay/dialog/basic.xhtml"/> is an overlay component used to bring attention while showing content.
@@ -115,14 +115,15 @@
         </p:dialog>
 
         <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100" appendTo="@(body)">
-            <h:outputText value="This is a Modal Dialog."/>
+            <h:outputText escape="false" value="This is a Modal Dialog. "/>
+            <p><h:outputText escape="false" value="All modal dialogs must have &lt;code&gt;appendTo=@(body)&lt;/code&gt; property."/></p>
         </p:dialog>
 
         <p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
             <h:outputText value="This dialog has nice effects."/>
         </p:dialog>
 
-        <p:dialog header="Dialog" widgetVar="dlgMinMax" minimizable="true" maximizable="true">
+        <p:dialog header="Dialog" appendTo="@(body)" widgetVar="dlgMinMax" minimizable="true" maximizable="true">
             <h:outputText value="This Dialog can be Maximized an Minimized!"/>
         </p:dialog>
 
@@ -156,7 +157,7 @@
         </p:dialog>
 
         <p:dialog header="Dialog primary solid" styleClass="box-solid box-primary" widgetVar="dlgPrimarySolid" minHeight="100" modal="true"
-                  appendTo="@(body)">
+                  >
             <h:outputText value="Resistance to PrimeFaces is futile!"/>
         </p:dialog>
         <p:dialog header="Dialog danger solid" styleClass="box-solid box-danger" widgetVar="dlgDangerSolid" minHeight="100" modal="true"
@@ -169,7 +170,7 @@
         </p:dialog>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
-        <p:dialog header="Login" widgetVar="dlgLogin" resizable="true" appendTo="@(body)" responsive="true" width="400"
+        <p:dialog header="Login" widgetVar="dlgLogin" resizable="false" draggable="false" appendTo="@(body)" responsive="true" width="400"
                   modal="true" styleClass="dialog-login">
             <h:form>
                 <p:growl/>
@@ -199,11 +200,14 @@
                     <p:outputLabel for="date" value="Date:"/>
                     <p:calendar id="date" showOn="button" required="true"/>
                 </p:panelGrid>
+
                 <p:separator/>
+                <p:button styleClass="pull-left" value="Close" onclick="PF('dlgLogin').hide()"/>
                 <p:commandButton styleClass="btn-primary pull-right" value="Login" update="@(.ui-growl, div[id$=loginGrid])"
                                  action="#{userLoginMB.login()}" process="@form"
                                  ignoreAutoUpdate="true"
-                                 oncomplete="handleLoginRequest(xhr, status, args)"/>
+                                 oncomplete="handleLoginRequest(xhr, status, args)"/> 
+
             </h:form>
         </p:dialog>
 
@@ -212,8 +216,7 @@
             function handleLoginRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
                     PF('dlgLogin').jq.effect("shake", {times: 5}, 100);
-                }
-                else {
+                } else {
                     PF('dlgLogin').hide();
                     $('#loginLink').fadeOut();
                 }
@@ -232,11 +235,11 @@
     <ui:define name="code">
         <p:tabView>
             <p:tab title="dialog.xhtml">
-           <pre>
+                <pre>
                <code class="language-html">
                    <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-           </pre>
+                </pre>
             </p:tab>
         </p:tabView>
     </ui:define>

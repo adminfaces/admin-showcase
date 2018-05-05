@@ -124,7 +124,7 @@
                         </p:column>
                     </p:dataTable>
                 </div>
-                <p:separator/>
+                <p:spacer/>
 
                 <div id="datatable-single">
                     <p:dataTable id="radioDT" var="car" value="#{datatableMB.cars}" paginator="true"
@@ -155,7 +155,7 @@
             </h:form>
         </p:panel>
 
-        <p:separator/>
+       <p:spacer/>
         <p:panel header="Tree table" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <h:form>
                 <div id="treetable">
@@ -180,7 +180,7 @@
                     </p:treeTable>
                 </div>
 
-                <p:separator/>
+               <p:spacer>
                 <div id="treetable-multiple">
                     <p:treeTable value="#{treeTableMB.root}" selectionMode="checkbox"
                                  selection="#{treeTableMB.selectedNodes}"
@@ -207,7 +207,7 @@
             </h:form>
         </p:panel>
         
-         <p:separator/>
+        <p:spacer>
         <p:panel header="Editable" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <h:form id="form">
                 <p:growl id="msgs" showDetail="true"/>
@@ -321,7 +321,7 @@
             </h:form>
         </p:panel>
 
-        <p:separator/>
+       <p:spacer>
         <p:panel header="Box colors" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <div class="ui-g">
                 <div class="ui-g-6 ui-sm-12">
@@ -383,7 +383,7 @@
             </div> 
         </p:panel>
         
-       <p:separator/>
+      <p:spacer>
 
         <p:panel styleClass="car box-info" header="SubTable" toggleable="true" toggleSpeed="300">
             <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right">

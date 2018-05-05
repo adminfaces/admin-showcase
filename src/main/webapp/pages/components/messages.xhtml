@@ -20,7 +20,6 @@
             <p:tooltip/>
 
             <h:form>
-                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
                 <p:growl autoUpdate="true" showDetail="true" life="3000" severity="info"/>
                 <p:growl autoUpdate="true" showDetail="true" sticky="true" severity="warn,error,fatal"/>
 
@@ -47,6 +46,7 @@
                     <div class="ui-g-4">
                         <p:message id="msgDefault" for="default"/>
                     </div>
+
                     <div class="ui-g-8 ui-sm-12">
                         <div class="material">
                             <p:inputText id="material" required="true" placeholder="Material placeholder"/>
@@ -127,6 +127,7 @@
                     </div>
                 </div>
 
+
             </h:form>
         </p:panel>
     </ui:define>
@@ -169,5 +170,6 @@
              </pre>
             </p:tab>
         </p:accordionPanel>
+
     </ui:define>
 </ui:composition>
