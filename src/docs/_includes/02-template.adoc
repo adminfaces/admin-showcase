@@ -487,7 +487,7 @@ Also don't forget to remove the `hidden-sm hidden-xs` classes from the button/li
 
 == BreadCrumbs 
 
-http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/pages/layout/breadcrumb.xhtml[Breadcrumbs^] based navigation indicates the location of the user within the site’s hierarch.
+{link-admin-showcase-openshift}/pages/layout/breadcrumb.xhtml[Breadcrumbs^] based navigation indicates the location of the user within the site’s hierarch.
 
 AdminFaces provides a composite component which will manage breadCrumbs as user navigates through the pages. 
 
@@ -535,7 +535,7 @@ An easy way, but not so flexible as above, of creating breadCrumbs is to use the
 </ui:composition>
 ---- 
 +
-When the *title* param is present on the page a breadCrumb with title as same name as the ui:param will be added. The breadCrumb link will redirect user to the page where the ui:param is declared.
+When the *title* param is present on the page, a breadCrumb with title as ui:param `value` will be added. The breadCrumb link will redirect user to the page where the ui:param is declared.
 +
 IMPORTANT: Declare the param as direct child of `ui:composion` otherwise it will not work in MyFaces JSF implementation if you e.g declare it inside `body` section.   
 
