@@ -18,8 +18,6 @@ import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -269,8 +267,8 @@ public class AdminFt {
     }
     
     
-    //@Test
-    //@InSequence(6)
+    @Test
+    @InSequence(6)
     public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage){
         controlSidebar.openControlSidebar();
         controlSidebar.toggleFixedLayout();
@@ -307,6 +305,7 @@ public class AdminFt {
     @InSequence(8)
     public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
         menu.goToDialogPage();
+        assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText()).startsWith("Dialog Dialog");
         dialogPage.doLogin();
         assertThat(browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Login']")).isDisplayed()).isTrue();
         dialogPage.clickSelecOneMenu();

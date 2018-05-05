@@ -60,11 +60,8 @@ public class ControlSidebar {
     }
 
     public void toggleFixedLayout() {
-        waitGui().withTimeout(600, TimeUnit.MILLISECONDS);
+        waitGui().until().element(fixedLayoutCheckbox).is().visible();
         guardNoRequest(fixedLayoutCheckbox).click();
-        waitGui().withTimeout(600, TimeUnit.MILLISECONDS);
-        assertThat(pageBody.getAttribute("class")
-                .contains("fixed")).isTrue();
     }
 
     public void toggleBoxedLayout() {
@@ -98,4 +95,10 @@ public class ControlSidebar {
         assertThat(pageBody.getAttribute("class")
                 .contains("skin-teal")).isTrue();
     }
+
+    public GrapheneElement getPageBody() {
+        return pageBody;
+    }
+    
+    
 }
