@@ -68,8 +68,8 @@
 
                     <p>To disable in a page just use a ui:param like below:</p>
                     <p><code>&lt;ui:param name="renderBreadCrumb" value="false" </code></p>
-                    <p>Declare the param in the section <code>head-end</code> of the facelets template.</p>
-                     <p>You can set the property <code>admin.renderBreadCrumb=false</code> in <a href="http://adminfaces-rpestano.rhcloud.com/showcase/docs/#configuration" target="_blank">admin-config.properties</a> to disable in <b>all pages</b>.</p>
+                    <p>Declare the param outside of <code>ui:define</code> tags as a direct child of <code>ui:composition</code>, see <p:link href="https://github.com/adminfaces/admin-showcase/blob/71b972cdb2d609e08ea5084283072ccf753afadc/src/main/webapp/index.xhtml#L8" target="_blank" value="Showcase index page"/> for example.</p>
+                     <p>You can set the property <code>admin.renderBreadCrumb=false</code> in <a href="http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/docs/#configuration" target="_blank">admin-config.properties</a> to disable in <b>all pages</b>.</p>
                 </div>
 
 

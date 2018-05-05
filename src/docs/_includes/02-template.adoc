@@ -485,6 +485,67 @@ Also don't forget to remove the `hidden-sm hidden-xs` classes from the button/li
 
 ====
 
+== BreadCrumbs 
+
+http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/pages/layout/breadcrumb.xhtml[Breadcrumbs^] based navigation indicates the location of the user within the site’s hierarch.
+
+AdminFaces provides a composite component which will manage breadCrumbs as user navigates through the pages. 
+
+image::breadcrumbs.png[link="https://raw.githubusercontent.com/adminfaces/admin-showcase/master/src/docs/images/breadcrumbs.png"]
+
+=== Usage 
+
+There are two ways to use the component, via `adm:breadcrumb` composite component or by using a ui:param. 
+
+=== Using via composite component
+
+To use the composite component just declare the `admin  namespace` and provide a title and the link, following is https://github.com/adminfaces/admin-starter/blob/c85a8a98e7f684b854cc8b5d7371482a5d1eedb5/src/main/webapp/car-form.xhtml#L18[car-form^] breadCrumb declaration in `admin starter`:
+
+----
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:adm="http://github.com/adminfaces">
+
+    <ui:define name="body">
+            <adm:breadcrumb title="#{empty carFormMB.id ? 'New Car' : 'Car '.concat(carFormMB.id)}" link="car-form.jsf?id=#{carFormMB.id}"/>
+            //other page components
+   </ui:define>
+</ui:composition>
+
+----
+
+The *link* is the page where user will be redirected when clicking the breadCrumb link.
+
+TIP: If the *link* is not provided then user will be redirected to the page where the breaCrumb is declared.
+
+=== Usage via `title` ui:param
+
+An easy way, but not so flexible as above, of creating breadCrumbs is to use the `ui:param name="title` on the page, following is admin-starter https://github.com/adminfaces/admin-starter/blob/b72018374266fd2bac0774ddc2f425c970a102c9/src/main/webapp/car-list.xhtml#L8[car-list page^]:
+
+----
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:adm="http://github.com/adminfaces">
+
+     <ui:param name="title" value="Car listing"/> 
+
+</ui:composition>
+---- 
+
+When the *title* param is present on the page a breadCrumb with title as same name as the ui:param will be added. The breadCrumb link will redirect user to the page where the ui:param is declared.
+
+IMPORTANT: Declare the param as direct child of `ui:composion` otherwise it will not work in MyFaces JSF implementation if you e.g declare it inside `body` section.   
+
+=== Disable breadCrumbs
+
+You can disable breadCrumbs *per page* or for *all pages*.
+
+=== Disable per page
+
+To disable breadCrumbs in a page just declare: `<ui:param name="renderBreadCrumbs" value="false"/>`. For an example see admin starter https://github.com/adminfaces/admin-starter/blob/8411f7a8b0f16d40ee1c7990cc26198c7786fbcb/src/main/webapp/index.xhtml#L7[index page^].
+
+=== Disable for all pages
+
+Just add `admin.renderBreadCrumb=false` entry in *admin-config.properties* under `src/main/resources/` folder. For details see <<Configuration, configuration section>>.
+
 == Snapshots
 
 Template `Snapshots` are published to https://oss.sonatype.org/content/repositories/snapshots/com/github/adminfaces/admin-template[maven central^] on each commit, to use it just declare the repository below on your `pom.xml`:
