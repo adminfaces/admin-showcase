@@ -202,7 +202,7 @@
                 </p:panelGrid>
 
                 <p:separator/>
-                <p:button styleClass="btn-material pull-left" value="Close" onclick="PF('dlgLogin').hide()"/>
+                <p:button styleClass="btn-material pull-left" value="Close" onclick="PF('dlgLogin').hide();return false"/>
                 <p:commandButton styleClass="btn-primary btn-material pull-right" value="Login" update="@(.ui-growl, div[id$=loginGrid])"
                                  action="#{userLoginMB.login()}" process="@form"
                                  ignoreAutoUpdate="true"
