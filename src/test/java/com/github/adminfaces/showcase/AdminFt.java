@@ -29,13 +29,11 @@ import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
-
 /**
  * Created by rafael-pestano on 16/01/17.
  */
 @RunWith(Arquillian.class)
 public class AdminFt {
-
 
     @Drone
     protected WebDriver browser;
@@ -61,13 +59,12 @@ public class AdminFt {
     @Page
     protected DialogPage dialogPage;
 
-
     @FindByJQuery("div.ui-growl-message")
     private GrapheneElement growlMessage;
 
     @FindByJQuery("section.sidebar > ul.sidebar-menu")
     private Menu menu;
-    
+
     @FindByJQuery("#controlsidebarPanel")
     private ControlSidebar controlSidebar;
 
@@ -76,13 +73,11 @@ public class AdminFt {
         return deploy();
     }
 
-
     @Test
     @InSequence(1)
     public void shouldLoadIndexPage(@InitialPage IndexPage index) {
         assertThat(index.getPageTitle().getText()).startsWith("Welcome to the AdminFaces Showcase!");
     }
-
 
     @Test
     @InSequence(2)
@@ -97,8 +92,8 @@ public class AdminFt {
     public void shouldMultipleBusinessException(@InitialPage ExceptionPage exception) {
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.clickMultipleBusinessButton();
-        for (int i=1;i <=3;i++) {
-            assertThat(exceptionPage.getErrorMessages().get(i-1).getText()).isEqualTo("Exception "+i);
+        for (int i = 1; i <= 3; i++) {
+            assertThat(exceptionPage.getErrorMessages().get(i - 1).getText()).isEqualTo("Exception " + i);
         }
 
     }
@@ -106,21 +101,14 @@ public class AdminFt {
     @Test
     @InSequence(2)
     public void shouldGoToErrorPage(@InitialPage ExceptionPage exception) {
-        if (isPhantomjs()) {
-            return;
-        }
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.clickRuntimeButton();
         assertThat(errorPage.getTitle().getText()).isEqualTo("500");
     }
 
-
     @Test
     @InSequence(2)
     public void shouldGoToViewExpiredPage(@InitialPage ExceptionPage exception) {
-        if (isPhantomjs()) {
-            return;
-        }
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.clickViewExpiredButton();
         waitModel();
@@ -138,9 +126,6 @@ public class AdminFt {
     @Test
     @InSequence(2)
     public void shouldGoTo403Page(@InitialPage ExceptionPage exception) {
-        if(isPhantomjs()) {
-            return;
-        }
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.click403Button();
         assertThat(accessDeniedPage.getTitle().getText()).isEqualTo("Access denied! You do not have access to the requested page.");
@@ -153,24 +138,18 @@ public class AdminFt {
         assertThat(index.getPageTitle().getText()).startsWith("Welcome to the AdminFaces Showcase!");
         menu.goToExceptionPage();
         assertThat(exceptionPage.getTitle().getText()).contains("Exceptions This page shows how the application behaves when exceptions are raised.");
-        if (!isPhantomjs()) {
-            //TODO investigate why not working in phantom
-            menu.goToDatatablePage();
-            assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Datatable");
-            menu.goToPanelPage();
-            assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Panel");
-            menu.goToButtonsPage();
-            assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Buttons");
-        }
+        //TODO investigate why not working in phantom
+        menu.goToDatatablePage();
+        assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Datatable");
+        menu.goToPanelPage();
+        assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Panel");
+        menu.goToButtonsPage();
+        assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Buttons");
     }
 
     @Test
     @InSequence(4)
     public void shouldFilterMenuItens(@InitialPage IndexPage index) {
-        if (isPhantomjs()) {
-            //this test doesn't work on phantomjs (cannot)
-            return;
-        }
         WebElement menuSearchInput = browser.findElement(By.cssSelector("input.form-control"));
         menuSearchInput.sendKeys("for");
         waitModel();
@@ -194,14 +173,6 @@ public class AdminFt {
     @Test
     @InSequence(4)
     public void shouldShowFacesMessages(@InitialPage MessagesPage messagesPage) {
-
-        if (isPhantomjs()) {
-            //this test doesn't work on phantomjs (conflict with jquery used by primefaces ajax: msg: ReferenceError: Can't find variable: $)
-            // as consequence it doesn't fire ajax request properly: RequestGuardException: Request type 'XHR' was expected, but type 'HTTP' was done instead
-            //works great with chrome driver (tested with version 55)
-            return;
-        }
-
         messagesPage.clickBtnInfo();
         assertThat(growlMessage.getText()).contains("AdminFaces info message.");
         assertThat(messagesPage.getMsgInfoSummary().getText()).isEqualTo("Info");
@@ -229,9 +200,6 @@ public class AdminFt {
     @Test
     @InSequence(5)
     public void shouldShowFieldMessagesAfterFormSubmit(@InitialPage MessagesPage messagesPage) {
-        if(isPhantomjs()) {
-            return;
-        }
         messagesPage.clickBtnSubmit();
         assertThat(messagesPage.getFieldMsgDefault().getText()).isEqualTo("Default: Validation Error: Value is required.");
         assertThat(messagesPage.getFieldMsgTxt().getText()).isEqualTo("Text: Validation Error: Value is required.");
@@ -241,9 +209,6 @@ public class AdminFt {
     @Test
     @InSequence(6)
     public void shouldCreateBreadcrumbs(@InitialPage BreadcrumbPage breadcrumbPage) {
-        if (isPhantomjs()) {
-            return; //TODO investigate why it fails in phantomjs
-        }
         assertThat(breadcrumbPage.getBreadcrumb().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getHomeItem().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getHomeItem().getText()).isEqualTo("Home");
@@ -253,7 +218,6 @@ public class AdminFt {
 
         assertThat(breadcrumbPage.getBreadcrumbItem().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getBreadcrumbItem().getText()).isEqualTo("Breadcrumbs");
-
 
         breadcrumbPage.getInputLink().sendKeys("/pages/messages/messages");
         breadcrumbPage.getInputTitle().sendKeys("Messages");
@@ -265,11 +229,10 @@ public class AdminFt {
         waitModel();
         assertThat(messagesPage.getTitle().isDisplayed()).isTrue();
     }
-    
-    
+
     @Test
     @InSequence(6)
-    public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage){
+    public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage) {
         controlSidebar.openControlSidebar();
         controlSidebar.toggleFixedLayout();
         controlSidebar.toggleBoxedLayout();
@@ -280,10 +243,7 @@ public class AdminFt {
 
     @Test
     @InSequence(7)
-    public void shouldAddChipsTags(@InitialPage ChipsPage chipsPage){
-        if(isPhantomjs()) {
-            return;
-        }
+    public void shouldAddChipsTags(@InitialPage ChipsPage chipsPage) {
         chipsPage.addDefaultChips();
         chipsPage.addDangerChips();
         chipsPage.addCustomChips();
@@ -291,7 +251,7 @@ public class AdminFt {
 
     @Test
     @InSequence(8)
-    public void shouldDestroyTheWorld(@InitialPage IndexPage indexPage){
+    public void shouldDestroyTheWorld(@InitialPage IndexPage indexPage) {
         menu.goToDialogPage();
         dialogPage.destroyTheWorld();
         WebElement confirmDialog = browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Confirmation']"));
@@ -320,10 +280,4 @@ public class AdminFt {
         waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().not().visible();
     }
 
-    private boolean isPhantomjs() {
-        //some tests doesn't work on phantomjs (conflict with jquery used by primefaces ajax: msg: ReferenceError: Can't find variable: $)
-        // as consequence it doesn't fire ajax request properly: RequestGuardException: Request type 'XHR' was expected, but type 'HTTP' was done instead
-        //works great with chrome driver (tested with version 55)
-        return browser.getClass().toString().toLowerCase().contains("phantomjs");
-    }
 }

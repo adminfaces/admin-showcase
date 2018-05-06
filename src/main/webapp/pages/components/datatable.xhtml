@@ -137,11 +137,11 @@
                                   styleClass="align-center"
                                   priority="1"/>
 
-                        <p:column headerText="Id" sortBy="#{car.id}">
-                            <h:outputText value="#{car.id}" priority="1"/>
+                        <p:column headerText="Id" sortBy="#{car.id}" priority="1">
+                            <h:outputText value="#{car.id}" />
                         </p:column>
-                        <p:column headerText="Year">
-                            <h:outputText value="#{car.year}" priority="2"/>
+                        <p:column headerText="Year" priority="2">
+                            <h:outputText value="#{car.year}" />
                         </p:column>
                         <p:column headerText="Brand">
                             <h:outputText value="#{car.brand}"/>
@@ -180,7 +180,7 @@
                     </p:treeTable>
                 </div>
 
-               <p:spacer>
+               <p:spacer/>
                 <div id="treetable-multiple">
                     <p:treeTable value="#{treeTableMB.root}" selectionMode="checkbox"
                                  selection="#{treeTableMB.selectedNodes}"
@@ -207,7 +207,7 @@
             </h:form>
         </p:panel>
         
-        <p:spacer>
+        <p:spacer/>
         <p:panel header="Editable" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <h:form id="form">
                 <p:growl id="msgs" showDetail="true"/>
@@ -321,7 +321,7 @@
             </h:form>
         </p:panel>
 
-       <p:spacer>
+       <p:spacer/>
         <p:panel header="Box colors" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <div class="ui-g">
                 <div class="ui-g-6 ui-sm-12">
@@ -383,7 +383,7 @@
             </div> 
         </p:panel>
         
-      <p:spacer>
+      <p:spacer/>
 
         <p:panel styleClass="car box-info" header="SubTable" toggleable="true" toggleSpeed="300">
             <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right">
