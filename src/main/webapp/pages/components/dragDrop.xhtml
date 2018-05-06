@@ -141,24 +141,23 @@
             </p:outputPanel>
         </p:dialog>
     </ui:define>
-    
-      <ui:define name="code">
+
+    <ui:define name="code">
         <p:tabView styleClass="hidden-sm hidden-xs">
             <p:tab title="dragDrop.xhtml">
                 <pre>
-               <code class="language-html"><h:outputText
-                       value="#{sourceCodeMB.getPageSource()}" escape="true"/>
-               </code>
+                    <code class="language-html">
+                        <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+                    </code>
                 </pre>
             </p:tab>
 
             <p:tab title="DragDropMB.java">
                 <pre>
-               <code class="language-java">
-                   <h:outputText
-                           value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DragDropMB')}"
-                           escape="false"/>
-               </code>
+                    <code class="language-java">
+                        <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DragDropMB')}"
+                                escape="false"/>
+                    </code>
                 </pre>
             </p:tab>
         </p:tabView>
@@ -166,19 +165,18 @@
         <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
             <p:tab title="dragDrop.xhtml">
                 <pre>
-               <code class="language-html"><h:outputText
-                       value="#{sourceCodeMB.getPageSource()}" escape="true"/>
-               </code>
+                    <code class="language-html">
+                        <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+                    </code>
                 </pre>
             </p:tab>
 
-            <p:tab title=DragDropMB.java">
+            <p:tab title="DragDropMB.java">
                 <pre>
-               <code class="language-java">
-                   <h:outputText
-                           value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DragDropMB')}"
-                           escape="false"/>
-               </code>
+                    <code class="language-java">
+                        <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.DragDropMB')}"
+                                escape="false"/>
+                    </code>
                 </pre>
             </p:tab>
         </p:accordionPanel>
