@@ -3,14 +3,8 @@ package com.github.adminfaces.showcase.pages.components;
 import com.github.adminfaces.showcase.pages.BasePage;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.Location;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.jboss.arquillian.graphene.Graphene.*;
 
 /**
