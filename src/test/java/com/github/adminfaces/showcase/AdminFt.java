@@ -251,8 +251,7 @@ public class AdminFt {
 
     @Test
     @InSequence(8)
-    public void shouldDestroyTheWorld(@InitialPage IndexPage indexPage) {
-        menu.goToDialogPage();
+    public void shouldDestroyTheWorld(@InitialPage DialogPage dialogPage) {
         dialogPage.destroyTheWorld();
         WebElement confirmDialog = browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Confirmation']"));
         assertThat(confirmDialog.isDisplayed()).isTrue();
