@@ -272,9 +272,9 @@ public class AdminFt {
         waitModel().until().element(select).is().visible();
         Actions actions = new Actions(browser);
         actions.moveToElement(select).click().perform();
-        waitModel();
+        waitModel().until().element(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]")).is().clickable();
         browser.findElement(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]//span")).click();
-        waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().visible();
+        waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().clickable();
         browser.findElement(By.xpath("//li[contains(@class,'ui-autocomplete-item') and text()='0']")).click();
         waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().not().visible();
     }
