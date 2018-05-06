@@ -5,7 +5,9 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="#{layoutMB.template}">
 
-    <ui:param name="title" value="Dialog"/> <!-- will be used for breadCrumb and page title -->
+    <ui:define name="body-begin">
+        <ui:param name="title" value="Dialog"/> <!-- will be used for bradCrumb and page title -->
+    </ui:define>
 
     <ui:define name="description">
         <p:link value="Dialog"
@@ -198,12 +200,13 @@
                         <f:selectItems value="#{checkboxMB.cities}"/>
                     </p:selectCheckboxMenu>
                     <p:outputLabel for="date" value="Date:"/>
-                    <p:calendar id="date" showOn="button" required="true"/>
+                    <p:calendar id="date" showOn="button" required="true" requiredMessage="Date is required" />
+                    <p:message for="date" display="tooltip"/>
                 </p:panelGrid>
 
                 <p:separator/>
-                <p:button styleClass="pull-left" value="Close" onclick="PF('dlgLogin').hide()"/>
-                <p:commandButton styleClass="btn-primary pull-right" value="Login" update="@(.ui-growl, div[id$=loginGrid])"
+                <p:button styleClass="btn-material pull-left" value="Close" onclick="PF('dlgLogin').hide()"/>
+                <p:commandButton styleClass="btn-primary btn-material pull-right" value="Login" update="@(.ui-growl, div[id$=loginGrid])"
                                  action="#{userLoginMB.login()}" process="@form"
                                  ignoreAutoUpdate="true"
                                  oncomplete="handleLoginRequest(xhr, status, args)"/> 
