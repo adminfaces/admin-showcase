@@ -30,7 +30,7 @@
                                      styleClass="btn-primary"/>
                 </div>
                 <div class="col-sm-12 align-center" style="margin-top: 30px">
-                    <p:commandLink id="btDialogLogin" oncomplete="PF('dlgLogin').show();" title="login"
+                    <p:commandLink id="btDialogLogin" oncomplete="PF('dlgLogin').show();"
                                    update="@(div[id$=loginGrid])">
                         <p:graphicImage name="/demo/images/login.png"/>
                         <f:setPropertyActionListener target="#{userLoginMB.username}" value="#{null}"/>
@@ -198,8 +198,7 @@
                         <f:selectItems value="#{checkboxMB.cities}"/>
                     </p:selectCheckboxMenu>
                     <p:outputLabel for="date" value="Date:"/>
-                    <p:calendar id="date" showOn="button" required="true" requiredMessage="Date is required" />
-                    <p:message for="date" display="tooltip"/>
+                    <p:calendar id="date" showOn="button" required="true" />
                 </p:panelGrid>
 
                 <p:separator/>
