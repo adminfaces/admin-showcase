@@ -26,6 +26,15 @@
     </context-param>
     
     <context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>admin-1.0.0-RC15</param-value>
+    </context-param>
+    
+    <context-param>
         <param-name>primefaces.MOVE_SCRIPTS_TO_BOTTOM</param-name>
         <param-value>true</param-value>
     </context-param>
@@ -65,15 +74,6 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-
-    <context-param>
-        <param-name>primefaces.FONT_AWESOME</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>admin-1.0.0-RC15-SNAPSHOT</param-value>
-    </context-param>
 
     <filter>
         <filter-name>javamelody</filter-name>
