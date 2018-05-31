@@ -31,7 +31,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>admin-1.0.0-RC15</param-value>
+        <param-value>admin-1.0.0-RC16-SNAPSHOT</param-value>
     </context-param>
     
     <context-param>
@@ -94,33 +94,4 @@
         <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
 
-    <mime-mapping>
-        <extension>ico</extension>
-        <mime-type>image/x-icon</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>woff</extension>
-        <mime-type>application/font-woff</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>woff2</extension>
-        <mime-type>application/font-woff2</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>ttf</extension>
-        <mime-type>application/font-sfnt</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>eot</extension>
-        <mime-type>application/vnd.ms-fontobject</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>otf</extension>
-        <mime-type>font/opentype</mime-type>
-    </mime-mapping>
-
-    <mime-mapping>
-        <extension>svg</extension>
-        <mime-type>image/svg+xml</mime-type>
-    </mime-mapping>
 </web-app>
