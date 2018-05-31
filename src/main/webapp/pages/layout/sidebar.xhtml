@@ -7,38 +7,51 @@
 
 
     <ui:define name="title">
-           Sidebar collapsing example
+        Sidebar collapsing example
     </ui:define>
 
     <ui:define name="description">
         This example page shows how to collapse sidebar.
     </ui:define>
 
-   <ui:define name="body">
-       <adm:breadcrumb link="/pages/layout/sidebar" title="Sidebar"/>
-       <adm:sidebar collapsed="true"/>
-       <div class="box box-primary">
-                <div class="box-header with-border">
-                    <div class="callout callout-info">
-                        <h4>Tip!</h4>
-                        <p>In this page the sidebar comes colapsed by using the component adm:sidebar with attribute<code>collapsed=true</code></p>
-                        <p>You can also toggle it by adding/removing the css class <code>sidebar-collapse</code> from <code>page body</code>.</p>
-                    </div>
-                    <p:button styleClass="btn-primary" value="Toggle" onclick="toggleSidebar(); return false"/>
-               </div>
-       </div>
-   </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb link="/pages/layout/sidebar" title="Sidebar"/>
+        <adm:sidebar collapsed="true"/>
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <div class="callout callout-info">
+                    <h4>Tip!</h4>
+                    <p>In this page the sidebar comes colapsed by using the component adm:sidebar with attribute<code>collapsed=true</code></p>
+                    <p>You can also toggle it by adding/removing the css class <code>sidebar-collapse</code> from <code>page body</code>.</p>
+                </div>
+                <p:button styleClass="btn-primary" value="Toggle" onclick="toggleSidebar(); return false"/>
+            </div>
 
-      <ui:define name="code">
-         <p:tabView>
-       <p:tab title="sidebar.xhtml">
-           <pre>
+            <div class="box-header with-border">
+                <div class="callout callout-warning">
+                    <h4>WARNING!</h4>
+                    <p><code>adm:sidebar</code> component will <b>not</b> work on <p:link href="/horizontal-layout" onclick="$('#link-top-layout').click();return false">
+                            <span><b>top-menu</b> layout</span>
+                        </p:link>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <h:form prependId="false">
+            <p:commandLink id="link-top-layout" action="#{layoutMB.setTemplateTop()}" ajax="false"/>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="sidebar.xhtml">
+                <pre>
                <code class="language-html">
 <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                 </code>
-           </pre>
-       </p:tab>
+                </pre>
+            </p:tab>
 
- </p:tabView>
+        </p:tabView>
     </ui:define>
 </ui:composition>
