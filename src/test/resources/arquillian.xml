@@ -41,6 +41,12 @@
         <property name="dimensions">1366x1024</property>
         <property name="chromeDriverVersion">2.38</property>
     </extension>
+    
+    <extension qualifier="graphene">
+        <property name="waitGuiInterval">2</property>
+        <property name="waitAjaxInterval">3</property>
+        <property name="waitModelInterval">6</property>
+    </extension>
 
     <extension qualifier="screenshooter">
         <property name="takeOnEveryAction">true</property>
