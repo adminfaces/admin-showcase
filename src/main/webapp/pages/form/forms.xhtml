@@ -157,14 +157,14 @@
                         <f:selectItem itemLabel="Rio" itemValue="Rio"/>
                         <f:selectItem itemLabel="Primus" itemValue="Primus"/>
                     </p:selectOneListbox>
-                    
+
                     <p:outputLabel for="multListBox" value="Multiselect Listbox"/>
                     <p:multiSelectListbox id="multListBox" value="#{multiSelectBean.selection}" effect="slide" header="Categories" showHeaders="true">
                         <f:selectItems value="#{multiSelectBean.categories}" />
                     </p:multiSelectListbox>
                     <p:outputLabel for="cmdBtn" value="Command Button"/>
                     <p:commandButton value="Action" id="cmdBtn" styleClass="btn-primary"/>
-                     <p:outputLabel for="cmdBtnFlat" value="Material flat button"/>
+                    <p:outputLabel for="cmdBtnFlat" value="Material flat button"/>
                     <p:commandButton value="Action" id="cmdBtnFlat" styleClass="btn-primary btn-material"/>
                 </p:panelGrid>
                 <p:commandButton id="dialog" value="Dialog" icon="ui-icon-extlink" styleClass="btn-success"
