@@ -7,16 +7,17 @@
     </h:head>
     <h:body>
         <h:form id="level3form">
-             <p class="ui-widget">
-                        Welcome to Level 3, enter value and click send to transfer data from level 3 back to level 2.
-                    </p>
 
-                    <h:panelGrid columns="2">
-                        <p:outputLabel for="val" value="Return Value" />
-                        <p:inputText id="val" value="#{dfLevel3MB.val}" />
-                    </h:panelGrid>
+            <p class="ui-widget">
+                Welcome to Level 3, enter value and click send to transfer data from level 3 back to level 2.
+            </p>
 
-                    <p:commandButton value="Send" actionListener="#{dfLevel3MB.closeDialog()}" />
+            <p:panelGrid columns="2" layout="grid">
+                <p:outputLabel for="val" value="Return Value" />
+                <p:inputText id="val" value="#{dfLevel3MB.val}" />
+            </p:panelGrid>
+            <p:separator/>    
+            <p:commandButton styleClass="btn-primary" value="Send" actionListener="#{dfLevel3MB.closeDialog()}" />
         </h:form>
     </h:body>
 </html>
