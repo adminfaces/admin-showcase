@@ -14,7 +14,7 @@ before_script:
 - rm -r $HOME/.m2/repository/com/github/adminfaces/
 - git config --global http.postBuffer 157286400
 script:
-#- mvn -U clean package -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless
+- mvn -U clean package -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless
 - mvn test -Ptests -Pglassfish-managed -Dbrowser=chromeheadless
 - mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless
 - mvn test -Ptests -Ptomee1.7-remote -Dbrowser=chromeheadless
