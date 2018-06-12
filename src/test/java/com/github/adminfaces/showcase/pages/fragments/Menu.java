@@ -42,7 +42,7 @@ public class Menu {
     @FindByJQuery("li a[href$='buttons.xhtml']")
     private GrapheneElement buttons;
 
-    @FindByJQuery("li a[href*='dialog.xhtml']")
+    @FindByJQuery("li a[href$='dialog.xhtml']")
     private GrapheneElement dialog;
 
     @FindBy(xpath = "//SPAN[text()='UI Elements']")

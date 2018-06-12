@@ -218,7 +218,7 @@ public class AdminFt {
         assertThat(breadcrumbPage.getBreadcrumbItem().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getBreadcrumbItem().getText()).isEqualTo("Breadcrumbs");
 
-        breadcrumbPage.getInputLink().sendKeys("/pages/messages/messages");
+        breadcrumbPage.getInputLink().sendKeys("/pages/messages/messages.xhtml");
         breadcrumbPage.getInputTitle().sendKeys("Messages");
         breadcrumbPage.clickBtnAdd();
         WebElement messagesItem = breadcrumbPage.getBreadcrumbItem();//Messages item will be added as second item because "Breadcrumb" item is added in preRenderView

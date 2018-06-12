@@ -8,11 +8,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jboss.arquillian.graphene.Graphene.waitGui;
-import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 /**
  * Created by rafael-pestano on 16/01/17.
