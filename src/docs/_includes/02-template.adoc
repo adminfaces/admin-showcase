@@ -304,7 +304,7 @@ admin.renderBreadCrumb=true <8>
 admin.enableSlideMenu=true <9>
 admin.enableRipple=true <10>
 admin.rippleElements= .ripplelink,button.ui-button,.ui-selectlistbox-item,.ui-multiselectlistbox-item,.ui-selectonemenu-label,.ui-selectcheckboxmenu,\
-.ui-autocomplete-dropdown, .ui-autocomplete-item ... (the list goes on) <12>
+.ui-autocomplete-dropdown, .ui-autocomplete-item ... (the list goes on) <11>
 admin.skin=skin-blue <12>
 admin.autoShowNavbar=true <13>
 admin.ignoredResources= <14>
