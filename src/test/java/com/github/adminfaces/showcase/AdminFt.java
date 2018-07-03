@@ -283,17 +283,18 @@ public class AdminFt {
         assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText()).startsWith("Dialog Dialog");
         dialogPage.doLogin();
         assertThat(browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Login']")).isDisplayed()).isTrue();
-        dialogPage.clickSelecOneMenu();
-        WebElement select = browser.findElement(By.xpath("//li[contains(@class,'ui-selectonemenu-item') and text()='Cash']"));
-        waitModel().until().element(select).is().visible();
-        Actions actions = new Actions(browser);
-        actions.moveToElement(select).click().perform();
         waitModel().until().element(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]")).is().clickable();
+        Actions actions = new Actions(browser);
         actions = new Actions(browser);
         actions.moveToElement(browser.findElement(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]"))).click().perform();
         waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().visible();
         browser.findElement(By.xpath("//li[contains(@class,'ui-autocomplete-item') and text()='0']")).click();
         waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().not().visible();
+        dialogPage.clickSelecOneMenu();
+        WebElement select = browser.findElement(By.xpath("//li[contains(@class,'ui-selectonemenu-item') and text()='Cash']"));
+        waitModel().until().element(select).is().visible();
+        actions.moveToElement(select).click().perform();
+        waitModel().until().element(select).is().not().visible();
     }
 
 }
