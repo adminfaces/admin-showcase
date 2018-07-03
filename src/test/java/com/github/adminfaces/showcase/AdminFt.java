@@ -248,6 +248,7 @@ public class AdminFt {
         controlSidebar.toggleMenuLayout();
         assertThat(pageBody.getAttribute("class")
                 .contains("layout-top-nav")).isTrue();
+        
     }
 
     @Test
@@ -274,6 +275,10 @@ public class AdminFt {
     @Test
     @InSequence(8)
     public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
+        controlSidebar.openControlSidebar();
+        controlSidebar.toggleMenuLayout();
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-top-nav")).isFalse();
         menu.goToDialogPage();
         assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText()).startsWith("Dialog Dialog");
         dialogPage.doLogin();
