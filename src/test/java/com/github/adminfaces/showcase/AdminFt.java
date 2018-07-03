@@ -246,8 +246,8 @@ public class AdminFt {
         assertThat(pageBody.getAttribute("class")
                 .contains("layout-top-nav")).isFalse();
         controlSidebar.toggleMenuLayout();
-        assertThat(pageBody.getAttribute("class")
-                .contains("layout-top-nav")).isTrue();
+        waitModel().until().element(pageBody)
+                .attribute("class").contains("layout-top-nav");
         
     }
 
