@@ -79,6 +79,10 @@ public class ControlSidebar {
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-light")).isTrue();
     }
+    
+     public void toggleMenuLayout() {
+        guardHttp(toggleMenuCheckbox).click();
+    }
 
     public void activateSkinBlack() {
         assertThat(pageBody.getAttribute("class")

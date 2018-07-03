@@ -68,6 +68,9 @@ public class AdminFt {
     @FindByJQuery("#controlsidebarPanel")
     private ControlSidebar controlSidebar;
 
+    @FindByJQuery("body")
+    private GrapheneElement pageBody;
+
     @Deployment(testable = false)
     public static Archive<?> getDeployment() {
         return deploy();
@@ -83,6 +86,8 @@ public class AdminFt {
     @InSequence(2)
     public void shouldThrowBusinessException(@InitialPage ExceptionPage exception) {
         assertThat(exception.getTitle().getText()).contains("Exceptions");
+        assertThat(pageBody.getAttribute("class")
+                .contains("skin-red")).isTrue();//skin-red is 'forced' in exceptions pages via ui:param
         exception.clickBusinessButton();
         assertThat(exceptionPage.getErrorMessages().get(0).getText()).isEqualTo("This kind of exception generates a faces message with severity error.");
     }
@@ -238,6 +243,11 @@ public class AdminFt {
         controlSidebar.toggleSidebarSkin();
         controlSidebar.activateSkinBlack();
         controlSidebar.activateSkinTeal();
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-top-nav")).isFalse();
+        controlSidebar.toggleMenuLayout();
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-top-nav")).isTrue();
     }
 
     @Test
