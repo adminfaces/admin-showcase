@@ -81,7 +81,7 @@ public class ControlSidebar {
     }
     
      public void toggleMenuLayout() {
-        guardHttp(toggleMenuCheckbox).click();
+        guardAjax(toggleMenuCheckbox).click();
     }
 
     public void activateSkinBlack() {

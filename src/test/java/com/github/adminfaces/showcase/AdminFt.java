@@ -253,6 +253,8 @@ public class AdminFt {
     @Test
     @InSequence(7)
     public void shouldAddChipsTags(@InitialPage ChipsPage chipsPage) {
+       assertThat(pageBody.getAttribute("class")
+                .contains("layout-top-nav")).isTrue(); //layout mode must be persisted across pages
         chipsPage.addDefaultChips();
         chipsPage.addDangerChips();
         chipsPage.addCustomChips();
