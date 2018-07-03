@@ -29,7 +29,7 @@ public class ControlSidebar {
     @FindByJQuery("body")
     private GrapheneElement pageBody;
 
-    @FindByJQuery("aside.control-sidebar")
+    @FindByJQuery(".control-sidebar")
     private GrapheneElement controlSidebar;
 
     @FindBy(id = "toggle-menu-layout")
@@ -81,7 +81,9 @@ public class ControlSidebar {
     }
     
      public void toggleMenuLayout() {
-        guardAjax(toggleMenuCheckbox).click();
+        waitModel().until().element(toggleMenuCheckbox).is().clickable();
+        toggleMenuCheckbox.click();
+        waitGui().withTimeout(1, TimeUnit.SECONDS);
     }
 
     public void activateSkinBlack() {
