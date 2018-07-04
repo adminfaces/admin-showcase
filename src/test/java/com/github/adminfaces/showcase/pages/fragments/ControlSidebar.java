@@ -81,9 +81,16 @@ public class ControlSidebar {
     }
     
      public void toggleMenuLayout() {
+        boolean isTopMenu = isTopMenuLayout();
         waitModel().until().element(toggleMenuCheckbox).is().clickable();
         toggleMenuCheckbox.click();
-        waitGui().withTimeout(1, TimeUnit.SECONDS);
+        if(isTopMenu) {
+           waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
+        } else {
+           waitModel().until().element(By.cssSelector("ul.navbar-nav")).is().present(); 
+        }
+        assertThat(pageBody.getAttribute("class")
+          .contains("layout-top-nav")).isEqualTo(!isTopMenu);
     }
 
     public void activateSkinBlack() {
@@ -106,5 +113,8 @@ public class ControlSidebar {
         return pageBody;
     }
     
+    private boolean isTopMenuLayout() {
+        return pageBody.getAttribute("class").contains("layout-top-nav");
+    }
     
 }

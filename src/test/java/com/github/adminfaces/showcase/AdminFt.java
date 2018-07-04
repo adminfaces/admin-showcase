@@ -243,8 +243,6 @@ public class AdminFt {
         controlSidebar.toggleSidebarSkin();
         controlSidebar.activateSkinBlack();
         controlSidebar.activateSkinTeal();
-        assertThat(pageBody.getAttribute("class")
-                .contains("layout-top-nav")).isFalse();
         controlSidebar.toggleMenuLayout();
         waitModel().until().element(pageBody)
                 .attribute("class").contains("layout-top-nav");
