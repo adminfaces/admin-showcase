@@ -61,7 +61,7 @@ public class ControlSidebar {
 
     public void toggleFixedLayout() {
         waitGui().until().element(fixedLayoutCheckbox).is().visible();
-        guardNoRequest(fixedLayoutCheckbox).click();
+        guardAjax(fixedLayoutCheckbox).click();
     }
 
     public void toggleBoxedLayout() {
