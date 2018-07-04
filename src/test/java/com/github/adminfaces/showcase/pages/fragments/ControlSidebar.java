@@ -89,6 +89,7 @@ public class ControlSidebar {
         } else {
            waitModel().until().element(By.cssSelector("ul.navbar-nav")).is().present(); 
         }
+        waitModel(browser);
         assertThat(pageBody.getAttribute("class")
           .contains("layout-top-nav")).isEqualTo(!isTopMenu);
     }
