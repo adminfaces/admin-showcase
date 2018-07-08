@@ -230,7 +230,7 @@ public class AdminFt {
         assertThat(messagesItem.isDisplayed()).isTrue();
         assertThat(messagesItem.getText()).isEqualTo("Messages");
         Graphene.guardHttp(messagesItem).click();
-        assertThat(messagesPage.getTitle().getText()).startsWith("Messages");
+        assertThat(messagesPage.getTitle().getText()).isEqualTo("Messages This page shows how faces messages are rendered.");
     }
 
     @Test
@@ -282,6 +282,8 @@ public class AdminFt {
     @Test
     @InSequence(11)
     public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
+    	controlSidebar.openControlSidebar();
+        controlSidebar.toggleMenuLayout();
         menu.goToDialogPage();
         assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText()).startsWith("Dialog Dialog");
         dialogPage.doLogin();
