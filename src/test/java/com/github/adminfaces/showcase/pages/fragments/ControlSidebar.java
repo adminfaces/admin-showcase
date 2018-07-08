@@ -60,16 +60,23 @@ public class ControlSidebar {
     }
 
     public void toggleFixedLayout() {
-        waitGui().until().element(fixedLayoutCheckbox).is().visible();
-        guardAjax(fixedLayoutCheckbox).click();
+    	waitGui().until().element(fixedLayoutCheckbox).is().visible();
+    	boolean isFixedLayout = pageBody.getAttribute("class")
+                .contains("fixed");
+    	guardAjax(fixedLayoutCheckbox).click();
+        assertThat(pageBody.getAttribute("class")
+                .contains("fixed")).isEqualTo(!isFixedLayout);
+        assertThat(boxedLayoutCheckbox.getAttribute("class").contains("ui-state-disabled")).isEqualTo(!isFixedLayout);//boxed layout is disabled when fixed layout is enabled
     }
 
     public void toggleBoxedLayout() {
+    	waitGui().until().element(boxedLayoutCheckbox).is().visible();
+    	boolean isBoxedLayout = pageBody.getAttribute("class")
+                .contains("layout-boxed");
+        guardAjax(boxedLayoutCheckbox).click();
         assertThat(pageBody.getAttribute("class")
-                .contains("layout-boxed")).isFalse();
-        guardNoRequest(boxedLayoutCheckbox).click();
-        assertThat(pageBody.getAttribute("class")
-                .contains("layout-boxed")).isTrue();
+                .contains("layout-boxed")).isEqualTo(!isBoxedLayout);
+        assertThat(fixedLayoutCheckbox.getAttribute("class").contains("ui-state-disabled")).isEqualTo(!isBoxedLayout);//fixed layout is disabled when boxed layout is enabled
     }
 
     public void toggleSidebarSkin() {

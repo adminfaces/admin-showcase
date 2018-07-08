@@ -223,41 +223,53 @@ public class AdminFt {
         assertThat(breadcrumbPage.getBreadcrumbItem().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getBreadcrumbItem().getText()).isEqualTo("Breadcrumbs");
 
-        breadcrumbPage.getInputLink().sendKeys("/pages/messages/messages.xhtml");
+        breadcrumbPage.getInputLink().sendKeys("/pages/components/messages.xhtml");
         breadcrumbPage.getInputTitle().sendKeys("Messages");
         breadcrumbPage.clickBtnAdd();
         WebElement messagesItem = breadcrumbPage.getBreadcrumbItem();//Messages item will be added as second item because "Breadcrumb" item is added in preRenderView
         assertThat(messagesItem.isDisplayed()).isTrue();
         assertThat(messagesItem.getText()).isEqualTo("Messages");
-        messagesItem.click();
-        waitModel();
-        assertThat(messagesPage.getTitle().isDisplayed()).isTrue();
+        Graphene.guardHttp(messagesItem).click();
+        assertThat(messagesPage.getTitle().getText()).startsWith("Messages");
     }
 
     @Test
-    @InSequence(6)
+    @InSequence(7)
     public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage) {
         controlSidebar.openControlSidebar();
         controlSidebar.toggleFixedLayout();
+        controlSidebar.toggleFixedLayout();//uncheck so we can toogle boxed layout
         controlSidebar.toggleBoxedLayout();
         controlSidebar.toggleSidebarSkin();
         controlSidebar.activateSkinBlack();
         controlSidebar.activateSkinTeal();
         controlSidebar.toggleMenuLayout();
     }
+    
+    @Test
+    @InSequence(8)
+    public void shouldKeepLayoutConfigurationAcrossPages(@InitialPage IndexPage indexPage) {
+    	 assertThat(pageBody.getAttribute("class")
+                 .contains("layout-top-nav")).isTrue(); //layout mode must be persisted across pages
+    	 
+    	 assertThat(pageBody.getAttribute("class")
+                 .contains("layout-boxed")).isTrue();
+    	 
+    	 assertThat(pageBody.getAttribute("class")
+                 .contains("skin-teal")).isTrue();
+    	 
+    }
 
     @Test
-    @InSequence(7)
+    @InSequence(9)
     public void shouldAddChipsTags(@InitialPage ChipsPage chipsPage) {
-       assertThat(pageBody.getAttribute("class")
-                .contains("layout-top-nav")).isTrue(); //layout mode must be persisted across pages
         chipsPage.addDefaultChips();
         chipsPage.addDangerChips();
         chipsPage.addCustomChips();
     }
 
     @Test
-    @InSequence(8)
+    @InSequence(10)
     public void shouldDestroyTheWorld(@InitialPage DialogPage dialogPage) {
         dialogPage.destroyTheWorld();
         WebElement confirmDialog = browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Confirmation']"));
@@ -268,12 +280,8 @@ public class AdminFt {
     }
 
     @Test
-    @InSequence(8)
+    @InSequence(11)
     public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
-        controlSidebar.openControlSidebar();
-        controlSidebar.toggleMenuLayout();
-        assertThat(pageBody.getAttribute("class")
-                .contains("layout-top-nav")).isFalse();
         menu.goToDialogPage();
         assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText()).startsWith("Dialog Dialog");
         dialogPage.doLogin();
