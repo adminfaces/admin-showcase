@@ -313,7 +313,7 @@ admin.extensionLessUrls=false <16>
 admin.renderControlSidebar=false <17>
 
 ----
-<1> login page location (relative to webapp). It you only be used if you configure <<Admin Session>>.
+<1> login page location (relative to webapp). It will only be used if you configure <<Admin Session>>.
 <2> index page location. User will be redirected to it when it access app root (contextPath/).
 <3> Date format used in error page ({link-admin-showcase-openshift}/500.xhtml[500.xhtml^]), by default it is JVM default format.
 <4> Number of breadcrumbs to queue before removing the older ones.
@@ -324,8 +324,8 @@ admin.renderControlSidebar=false <17>
 <9> If true will make left menu touch enable (can be closed or opened via touch). Can be enable/disabled per page with <ui:param name="enableSlideMenu" value="false".
 <10> When true it will create a http://materializecss.com/waves.html#![wave/ripple effect^] on elements specified by `rippleElements`.
 <11> A list of comma separated list of (jquery) selector which elements will be affected by ripple effect.
-<12> Default template skin
-<13> Automatic shows navbar when users scrolls page up (on small screens). Can be enable/disabled per page with <ui:param name="autoShowNavbar" value="false".
+<12> Default template skin.
+<13> Automatic shows navbar when users scrolls page up `on small screens`. Can be enable/disabled per page with <ui:param name="autoShowNavbar" value="false".
 <14> Comma separated resources (pages or urls) to be skiped by AdminFilter. Ex: /rest,/pages/car-list.xhtml. Note that by default the filter skips pages under *CONTEXT/public/* folder.
 <15> image used for the loading popup. It must be under `webapp/resources/images` folder.
 <16> Removes extension suffix from breadCrumb links.
@@ -333,6 +333,7 @@ admin.renderControlSidebar=false <17>
 
 IMPORTANT: You don't need to declare all values in your admin-config.properties, you can specify only the ones you need in order to change.
 
+TIP: Since vRC16 config properties can be passed as Java `system properties`.
 
 == Admin Session
 

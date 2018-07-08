@@ -24,14 +24,11 @@
             <ol>
                 <li>
                     <p>First set to following property in <code>src/main/resources/admin-config.properties</code>.</p>
-                    <pre>
-<code>
-    admin.renderControlSidebar=true
-</code>
-                    </pre>
+<pre><code>admin.renderControlSidebar=true</code></pre>
                 </li>
                 <li>
-                    After enabling the component now you just need to add a link which opens the sidebar. The link or button must use <code>data-toggle</code> attribute.
+                    <p>After enabling the component now you just need to add a link which opens the sidebar. The link or button must use <code>data-toggle</code> attribute:</p>
+<pre><code>&lt;a id="layout-setup" href="#" title="Setup layout options." data-toggle="control-sidebar"&gt;&lt;i class="fa fa-gears"&gt;&lt;/i&gt;&lt;/a&gt;</code></pre>                    
                 </li>
             </ol>
             <br/>
@@ -51,7 +48,7 @@
             <p:separator/>
             <div class="card callout callout-danger">
                 <h4>IMPORTANT</h4>
-                <p>The controlsidebar is <b  style="text-decoration: underline">hidden on small/mobile devices</b>.</p>
+                <p>By default ControlSidebar is <b  style="text-decoration: underline">hidden on small/mobile devices</b>. This behavior can be changed in <a href="http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/docs/#configuration" target="_blank">template configuration</a>.</p>
             </div>
             <div class="card callout callout-info">
                 <h4>INFO</h4>
@@ -78,11 +75,11 @@
                 setTimeout(function () {
                     updateControlSidebarStyle();
                 }, 20);
-
+                
                 $('#content, #layout-setup, #btn-control-sidebar').click(function () {
                     setTimeout(function () {
                         updateControlSidebarStyle();
-                    }, 50);
+                    }, 200);
                 });
 
             });
