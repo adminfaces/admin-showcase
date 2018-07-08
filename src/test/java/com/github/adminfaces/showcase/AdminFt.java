@@ -284,6 +284,7 @@ public class AdminFt {
     public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
     	controlSidebar.openControlSidebar();
         controlSidebar.toggleMenuLayout();
+        waitModel().until().element(By.cssSelector("section.sidebar > ul.sidebar-menu")).is().present();
         menu.goToDialogPage();
         assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText()).startsWith("Dialog Dialog");
         dialogPage.doLogin();
