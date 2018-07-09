@@ -121,6 +121,7 @@ public class ControlSidebar {
     }
     
     public void restoreDefaults() {
+    	waitGui().until().element(restoreDefaults).is().present();	
         restoreDefaults.click();
         waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
     }
