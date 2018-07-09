@@ -257,11 +257,25 @@ public class AdminFt {
     	 
     	 assertThat(pageBody.getAttribute("class")
                  .contains("skin-teal")).isTrue();
+    }
+    
+    @Test
+    @InSequence(9)
+    public void shouldRestoreLayoutConfiguration(@InitialPage IndexPage indexPage) {
+         controlSidebar.openControlSidebar();
+         controlSidebar.restoreDefaults();
+    	 assertThat(pageBody.getAttribute("class")
+                 .contains("layout-top-nav")).isFalse(); 
     	 
+    	 assertThat(pageBody.getAttribute("class")
+                 .contains("layout-boxed")).isFalse();
+    	 
+    	 assertThat(pageBody.getAttribute("class")
+                 .contains("skin-blue")).isTrue();
     }
 
     @Test
-    @InSequence(9)
+    @InSequence(10)
     public void shouldAddChipsTags(@InitialPage ChipsPage chipsPage) {
         chipsPage.addDefaultChips();
         chipsPage.addDangerChips();
@@ -269,7 +283,7 @@ public class AdminFt {
     }
 
     @Test
-    @InSequence(10)
+    @InSequence(11)
     public void shouldDestroyTheWorld(@InitialPage DialogPage dialogPage) {
         dialogPage.destroyTheWorld();
         WebElement confirmDialog = browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Confirmation']"));
@@ -280,10 +294,8 @@ public class AdminFt {
     }
 
     @Test
-    @InSequence(11)
+    @InSequence(12)
     public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
-    	controlSidebar.openControlSidebar();
-        controlSidebar.toggleMenuLayout();
         waitModel().until().element(By.cssSelector("section.sidebar > ul.sidebar-menu")).is().present();
         menu.goToDialogPage();
         assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText()).startsWith("Dialog Dialog");

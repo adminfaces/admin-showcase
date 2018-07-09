@@ -23,7 +23,7 @@
 :link-jsf: https://javaserverfaces.java.net/
 :link-primefaces: http://primefaces.org
 :link-bootstrap: http://getbootstrap.com/
-:link-adminlte: https://almsaeedstudio.com/themes/AdminLTE/index2.html
+:link-adminlte: https://adminlte.io/themes/AdminLTE/
 :link-less: http://lesscss.org/
 
 

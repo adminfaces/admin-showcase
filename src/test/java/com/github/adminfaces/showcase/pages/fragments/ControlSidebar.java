@@ -49,6 +49,9 @@ public class ControlSidebar {
 
     @FindBy(id = "btn-skin-teal")
     private GrapheneElement btnSkinTeal;
+    
+    @FindBy(id = "restore-defaults")
+    private GrapheneElement restoreDefaults;
 
     public void openControlSidebar() {
         assertThat(controlSidebar.getAttribute("class")
@@ -115,6 +118,11 @@ public class ControlSidebar {
         guardAjax(btnSkinTeal).click();
         assertThat(pageBody.getAttribute("class")
                 .contains("skin-teal")).isTrue();
+    }
+    
+    public void restoreDefaults() {
+        restoreDefaults.click();
+        waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
     }
 
     public GrapheneElement getPageBody() {
