@@ -264,6 +264,8 @@ public class AdminFt {
     public void shouldRestoreLayoutConfiguration(@InitialPage IndexPage indexPage) {
          controlSidebar.openControlSidebar();
          controlSidebar.restoreDefaults();
+          assertThat(pageBody.getAttribute("class")
+                 .contains("layout-top-nav")).isTrue(); 
     	 assertThat(pageBody.getAttribute("class")
                  .contains("layout-top-nav")).isFalse(); 
     	 
