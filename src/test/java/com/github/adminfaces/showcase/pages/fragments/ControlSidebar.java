@@ -37,6 +37,9 @@ public class ControlSidebar {
 
     @FindBy(id = "fixed-layout")
     private GrapheneElement fixedLayoutCheckbox;
+    
+    @FindBy(id = "sidebar-collapsed")
+    private GrapheneElement collapsedSidebarCheckbox;
 
     @FindBy(id = "boxed-layout")
     private GrapheneElement boxedLayoutCheckbox;
@@ -133,5 +136,15 @@ public class ControlSidebar {
     private boolean isTopMenuLayout() {
         return pageBody.getAttribute("class").contains("layout-top-nav");
     }
+
+	public void toggleSidebarCollapsed() {
+		waitGui().until().element(collapsedSidebarCheckbox).is().visible();
+    	boolean isSidebarCoppased = pageBody.getAttribute("class")
+                .contains("sidebar-collapse");
+        guardAjax(collapsedSidebarCheckbox).click();
+        assertThat(pageBody.getAttribute("class")
+        		.contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
+		
+	}
     
 }

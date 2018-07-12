@@ -240,6 +240,7 @@ public class AdminFt {
         controlSidebar.toggleFixedLayout();
         controlSidebar.toggleFixedLayout();//uncheck so we can toogle boxed layout
         controlSidebar.toggleBoxedLayout();
+        controlSidebar.toggleSidebarCollapsed();
         controlSidebar.toggleSidebarSkin();
         controlSidebar.activateSkinBlack();
         controlSidebar.activateSkinTeal();
@@ -264,8 +265,9 @@ public class AdminFt {
     public void shouldRestoreLayoutConfiguration(@InitialPage IndexPage indexPage) {
          controlSidebar.openControlSidebar();
          controlSidebar.restoreDefaults();
-          assertThat(pageBody.getAttribute("class")
-                 .contains("layout-top-nav")).isTrue(); 
+         
+         assertThat(pageBody.getAttribute("class")
+                 .contains("layout-top-nav")).isFalse(); 
     	 assertThat(pageBody.getAttribute("class")
                  .contains("layout-top-nav")).isFalse(); 
     	 
