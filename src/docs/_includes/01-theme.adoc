@@ -221,6 +221,8 @@ This classifier *appends the theme version* to the name of theme so you need to 
 </context-param>
 ----
 
+TIP: There is also a `no-cache-no-fonts` classifier combining both approaches.
+
 == Development
 
 To get your hands dirty with admin theme it is recommended to use <<Admin Designer>> in combination with http://brackets.io/[Brackets] or any tool that `compile less` files to css on save.
