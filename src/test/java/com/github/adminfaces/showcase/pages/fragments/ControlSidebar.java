@@ -88,7 +88,7 @@ public class ControlSidebar {
     public void toggleSidebarSkin() {
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-dark")).isTrue();
-        guardNoRequest(sidebarSkinCheckbox).click();
+        guardAjax(sidebarSkinCheckbox).click();
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-light")).isTrue();
     }

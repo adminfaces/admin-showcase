@@ -4,6 +4,22 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="#{layoutMB.template}">
+    
+    <ui:define name="metadata">
+         <style type="text/css">
+         button.bg-black.ui-state-hover {
+            opacity: .9;
+        } 
+        
+        button.bg-black.ui-state-focus {
+             opacity: .8;
+        }
+        
+         button.bg-black.ui-state-active {
+             opacity: .7;
+        }
+    </style>
+    </ui:define>
 
     <ui:param name="title" value="Dialog"/> <!-- will be used for bradCrumb and page title -->
 
@@ -38,8 +54,22 @@
                 </div>
             </div>
         </h:form>
-        <hr/>
         <div class="row">
+            <div class="col-sm-12 col-md-3">
+                <h:form>
+                    <p:commandButton id="bt-destroy" value="Confirm dialog" styleClass="bg-black btn-block"
+                                     actionListener="#{dialogMB.destroyWorld}" icon="fa fa-question">
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-warning">
+                        <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                         icon="fa fa-check"/>
+                        <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                         icon="fa fa-close"/>
+                    </p:confirmDialog>
+                </h:form>
+            </div>
             <div class="col-sm-12 col-md-3">
                 <p:button value="Dialog default" onclick="PF('dlgDefault').show();return false"
                           styleClass="btn-default btn-block"/>
@@ -69,22 +99,6 @@
                 <p:button value="Dialog fatal" onclick="PF('dlgFatal').show();return false"
                           styleClass="btn-fatal btn-block"/>
             </div>
-            <div class="col-sm-12 col-md-3">
-                <h:form>
-                    <p:commandButton id="bt-destroy" value="Destroy the World" styleClass="bg-black btn-block"
-                                     actionListener="#{dialogMB.destroyWorld}">
-                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert"/>
-                    </p:commandButton>
-
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-warning">
-                        <p:commandButton value="Yes" type="button" styleClass="btn-primary ui-confirmdialog-yes"
-                                         icon="fa fa-check"/>
-                        <p:commandButton value="No" type="button" styleClass="btn-danger ui-confirmdialog-no"
-                                         icon="fa fa-close"/>
-                    </p:confirmDialog>
-                </h:form>
-            </div>
-
             <div class="col-sm-12 col-md-3">
                 <h:form>
                     <p:commandButton value="Dialog framework" icon="fa fa-link" styleClass="bg-aqua btn-block"

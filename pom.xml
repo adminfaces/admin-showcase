@@ -7,7 +7,7 @@
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-showcase</artifactId>
     <!-- tag::version[] -->
-    <version>1.0.0-RC15</version>
+    <version>1.0.0-RC16-SNAPSHOT</version>
     <!-- end::version[] -->
     <name>admin-showcase</name>
 
