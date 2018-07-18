@@ -36,7 +36,7 @@
         <p:panel styleClass="card no-border" header="Material inputs">
             <p:tooltip/>
 
-            <div class="callout callout-info">
+            <div class="card callout callout-info">
                 <p>Material design inputs must be surrounded by a <code>div</code> with class
                     <code>ui-material</code> and its label must be placed <span
                             style="font-weight:bold;text-decoration: underline">after the input</span>.</p>
@@ -179,7 +179,7 @@
             </h:form>
 
         </p:panel>
-        <div class="callout callout-danger" style="margin-top: 30px">
+        <div class="card callout callout-danger" style="margin-top: 30px">
             <p>Note that <code>p:calendar</code> needs to call a javascript on date select event, that is needed
                 because Primefaces doesn't trigger any javascript event on date select and we use javascript (adminMaterial function) to make the label
                 <code>float</code>
@@ -189,7 +189,7 @@
         </div>
 
 
-        <div class="callout callout-warning" style="margin-top: 30px">
+        <div class="card callout callout-warning" style="margin-top: 30px">
             <p>Material inputs depend on <code>Admin Template javascript to work</code>, so if you use <b>admin-theme</b> without template you must add <a style="font-weight: bold" href="https://github.com/adminfaces/admin-template/blob/master/src/main/resources/META-INF/resources/js/admintemplate.js">admintemplate.js</a> in you application</p>
         </div>
     </ui:define>
