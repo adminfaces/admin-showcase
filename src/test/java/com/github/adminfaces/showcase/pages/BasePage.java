@@ -28,7 +28,4 @@ public class BasePage {
         return growl.getText();
     }
 
-    public boolean isPhantomjs() {
-        return browser.getClass().toString().toLowerCase().contains("phantomjs");
-    }
 }

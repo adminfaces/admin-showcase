@@ -7,6 +7,7 @@ import com.github.adminfaces.showcase.pages.components.MessagesPage;
 import com.github.adminfaces.showcase.pages.exception.*;
 import com.github.adminfaces.showcase.pages.fragments.ControlSidebar;
 import com.github.adminfaces.showcase.pages.fragments.Menu;
+import com.github.adminfaces.showcase.pages.fragments.MenuSearch;
 import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -28,6 +29,7 @@ import org.openqa.selenium.interactions.Actions;
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by rafael-pestano on 16/01/17.
@@ -64,6 +66,9 @@ public class AdminFt {
 
     @FindByJQuery("section.sidebar > ul.sidebar-menu")
     private Menu menu;
+
+    @FindBy(id = "menu-search")
+    private MenuSearch menuSearch;
 
     @FindByJQuery("#controlsidebarPanel")
     private ControlSidebar controlSidebar;
@@ -157,21 +162,27 @@ public class AdminFt {
         WebElement menuSearchInput = browser.findElement(By.cssSelector("input.form-control"));
         menuSearchInput.sendKeys("for");
         waitModel();
-        assertThat(menu.getForms().isDisplayed()).isTrue();
-        assertThat(menu.getHome().isDisplayed()).isFalse();
-        assertThat(menu.getException().isDisplayed()).isFalse();
+        assertThat(menuSearch.containsMenuItem("forms")).isTrue();
+        assertThat(menuSearch.containsMenuItem("home")).isFalse();
+        assertThat(menuSearch.containsMenuItem("exceptions")).isFalse();
         menuSearchInput.clear();
-        menuSearchInput.sendKeys("hom");
+
+        menuSearchInput.sendKeys("at");
+        assertThat(menuSearch.containsMenuItem("DataTable")).isTrue();
+        assertThat(menuSearch.containsMenuItem("TriStateCheckbox")).isTrue();
+        assertThat(menuSearch.containsMenuItem("Material")).isTrue();
         waitModel();
-        assertThat(menu.getHome().isDisplayed()).isTrue();
-        assertThat(menu.getForms().isDisplayed()).isFalse();
-        assertThat(menu.getException().isDisplayed()).isFalse();
+        menuSearchInput.clear();
+        waitModel();
+        menuSearchInput.sendKeys("hom");
+        assertThat(menuSearch.containsMenuItem("home")).isTrue();
+        waitModel();
         menuSearchInput.clear();
         menuSearchInput.sendKeys("exc");
         waitModel();
-        assertThat(menu.getException().isDisplayed()).isTrue();
-        assertThat(menu.getHome().isDisplayed()).isFalse();
-        assertThat(menu.getForms().isDisplayed()).isFalse();
+        assertThat(menuSearch.containsMenuItem("Exceptions")).isTrue();
+        menuSearch.selectMenuItem("Exceptions");
+        waitModel().until().element(exceptionPage.getTitle()).is().present();
     }
 
     @Test
@@ -246,36 +257,36 @@ public class AdminFt {
         controlSidebar.activateSkinTeal();
         controlSidebar.toggleMenuLayout();
     }
-    
+
     @Test
     @InSequence(8)
     public void shouldKeepLayoutConfigurationAcrossPages(@InitialPage IndexPage indexPage) {
-    	 assertThat(pageBody.getAttribute("class")
-                 .contains("layout-top-nav")).isTrue(); //layout mode must be persisted across pages
-    	 
-    	 assertThat(pageBody.getAttribute("class")
-                 .contains("layout-boxed")).isTrue();
-    	 
-    	 assertThat(pageBody.getAttribute("class")
-                 .contains("skin-teal")).isTrue();
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-top-nav")).isTrue(); //layout mode must be persisted across pages
+
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-boxed")).isTrue();
+
+        assertThat(pageBody.getAttribute("class")
+                .contains("skin-teal")).isTrue();
     }
-    
+
     @Test
     @InSequence(9)
     public void shouldRestoreLayoutConfiguration(@InitialPage IndexPage indexPage) {
-         controlSidebar.openControlSidebar();
-         controlSidebar.restoreDefaults();
-         
-         assertThat(pageBody.getAttribute("class")
-                 .contains("layout-top-nav")).isFalse(); 
-    	 assertThat(pageBody.getAttribute("class")
-                 .contains("layout-top-nav")).isFalse(); 
-    	 
-    	 assertThat(pageBody.getAttribute("class")
-                 .contains("layout-boxed")).isFalse();
-    	 
-    	 assertThat(pageBody.getAttribute("class")
-                 .contains("skin-blue")).isTrue();
+        controlSidebar.openControlSidebar();
+        controlSidebar.restoreDefaults();
+
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-top-nav")).isFalse();
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-top-nav")).isFalse();
+
+        assertThat(pageBody.getAttribute("class")
+                .contains("layout-boxed")).isFalse();
+
+        assertThat(pageBody.getAttribute("class")
+                .contains("skin-blue")).isTrue();
     }
 
     @Test
