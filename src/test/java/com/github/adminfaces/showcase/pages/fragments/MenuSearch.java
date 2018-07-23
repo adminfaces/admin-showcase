@@ -33,7 +33,6 @@ public class MenuSearch {
         List<GrapheneElement> itens = menuItens.findGrapheneElements(By.cssSelector("li a  span"));
         
         for (GrapheneElement menuItem : itens) {
-        	System.out.println(menuItem.getText());
             if(menuItem.getText().equalsIgnoreCase(menu)) {
             	return true;
             }
