@@ -5,22 +5,6 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="#{layoutMB.template}">
     
-    <ui:define name="metadata">
-         <style type="text/css">
-         button.bg-black.ui-state-hover {
-            opacity: .9;
-        } 
-        
-        button.bg-black.ui-state-focus {
-             opacity: .8;
-        }
-        
-         button.bg-black.ui-state-active {
-             opacity: .7;
-        }
-    </style>
-    </ui:define>
-
     <ui:param name="title" value="Dialog"/> <!-- will be used for bradCrumb and page title -->
 
     <ui:define name="description">
@@ -57,12 +41,12 @@
         <div class="row">
             <div class="col-sm-12 col-md-3">
                 <h:form>
-                    <p:commandButton id="bt-destroy" value="Confirm dialog" styleClass="bg-black btn-block"
+                    <p:commandButton id="bt-destroy" value="Confirm dialog" styleClass="bg-black btn-states btn-block"
                                      actionListener="#{dialogMB.destroyWorld}" icon="fa fa-question">
                         <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert"/>
                     </p:commandButton>
 
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-warning">
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger">
                         <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
                                          icon="fa fa-check"/>
                         <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
@@ -101,7 +85,7 @@
             </div>
             <div class="col-sm-12 col-md-3">
                 <h:form>
-                    <p:commandButton value="Dialog framework" icon="fa fa-link" styleClass="bg-aqua btn-block"
+                    <p:commandButton value="Dialog framework" icon="fa fa-link" styleClass="bg-aqua btn-states btn-block"
                                      process="@this" update="@none"
                                      actionListener="#{dfRootMB.openLevel1}">
                         <p:ajax event="dialogReturn" listener="#{dfRootMB.onReturnFromLevel1}"/>

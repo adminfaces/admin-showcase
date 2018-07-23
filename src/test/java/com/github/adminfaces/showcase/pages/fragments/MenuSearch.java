@@ -44,7 +44,7 @@ public class MenuSearch {
          List<GrapheneElement> itens = menuItens.findGrapheneElements(By.cssSelector("li a"));
            for (GrapheneElement item : itens) {
                if(item.getText().contains(menuItem)) {
-                   guardHttp(item).click();
+                   item.click();
                }
            }
     }
