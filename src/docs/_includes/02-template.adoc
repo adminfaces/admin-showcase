@@ -20,6 +20,8 @@ image:menu-highlight.png[link="https://raw.githubusercontent.com/adminfaces/admi
 * Custom <<Error Pages, error pages>>
 * Configurable, see <<Configuration>>
 * {link-admin-showcase-openshift}/pages/layout/breadcrumb.xhtml[Breadcrumb^] based navigation
+* Menu itens search +
+image:menu-search.png[link="https://raw.githubusercontent.com/adminfaces/admin-showcase/master/src/docs/images/menu-search.png"]
 * Back to previous screen when logging in again after session expiration (or accessing a page via url without being logged in)
 * Layout customization via <<Control Sidebar>>
 
