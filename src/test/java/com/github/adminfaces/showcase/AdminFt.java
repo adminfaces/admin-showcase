@@ -270,7 +270,6 @@ public class AdminFt {
 	@InSequence(8)
 	public void shouldKeepLayoutConfigurationAcrossPages(@InitialPage IndexPage indexPage) {
 		assertThat(pageBody.getAttribute("class").contains("layout-top-nav")).isTrue(); // layout mode must be persisted
-																						// across pages
 
 		assertThat(pageBody.getAttribute("class").contains("layout-boxed")).isTrue();
 

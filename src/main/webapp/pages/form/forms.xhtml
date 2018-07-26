@@ -109,10 +109,12 @@
 
                     <p:outputLabel for="spbtn" value="SplitButton"/>
                     <p:splitButton id="spbtn" value="Save" type="button" icon="fa fa-save" styleClass="btn-primary">
-                        <p:menuitem value="Update" url="#" icon="ui-icon-arrowrefresh-1-w"/>
-                        <p:menuitem value="Delete" url="#" icon="ui-icon-close"/>
+                        <p:menuitem value="Update" actionListener="#{buttonMB.update}" update="growl" ignoreAutoUpdate="true"
+                                    icon="fa fa-refresh"/>
+                        <p:menuitem value="Delete" actionListener="#{buttonMB.delete}" ajax="false"
+                                    icon="fa fa-close"/>
                         <p:separator/>
-                        <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink"/>
+                        <p:menuitem value="Homepage" url="/" icon="fa fa-link"/>
                     </p:splitButton>
 
                     <p:outputLabel for="chkmenu" value="Checkbox Menu"/>
