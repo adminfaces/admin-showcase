@@ -25,7 +25,11 @@ public class TreeMB implements Serializable {
 
     private TreeNode root;
 
+    private TreeNode root2;
+
     private TreeNode selectedNode;
+
+    private TreeNode[] selectedNodes;
 
     @Inject
     private DocumentService service;
@@ -33,10 +37,15 @@ public class TreeMB implements Serializable {
     @PostConstruct
     public void init() {
         root = service.createDocuments();
+        root2 = service.createDocuments();
     }
 
     public TreeNode getRoot() {
         return root;
+    }
+
+    public TreeNode getRoot2() {
+        return root2;
     }
 
     public TreeNode getSelectedNode() {
@@ -47,6 +56,14 @@ public class TreeMB implements Serializable {
         this.selectedNode = selectedNode;
     }
 
+    public TreeNode[] getSelectedNodes() {
+        return selectedNodes;
+    }
+
+    public void setSelectedNodes(TreeNode[] selectedNodes) {
+        this.selectedNodes = selectedNodes;
+    }
+
     public void setService(DocumentService service) {
         this.service = service;
     }
@@ -54,6 +71,20 @@ public class TreeMB implements Serializable {
     public void displaySelectedSingle() {
         if (selectedNode != null) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", selectedNode.getData().toString());
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
+    public void displaySelectedMultiple(TreeNode[] nodes) {
+        if (nodes != null && nodes.length > 0) {
+            StringBuilder builder = new StringBuilder();
+
+            for (TreeNode node : nodes) {
+                builder.append(node.getData().toString());
+                builder.append("<br />");
+            }
+
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", builder.toString());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
