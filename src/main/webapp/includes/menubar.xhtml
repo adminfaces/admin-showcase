@@ -284,14 +284,10 @@
                     </p:link>
                 </li>
                 <li>
-                    <p:link href="/default-layout" onclick="$('#link-default-layout').click();return false">
+                    <p:link href="/default-layout" onclick="$('#toggle-menu-layout-label').click();return false">
                         <i class="fa fa-list-ul"></i>
                         <span><b>Default</b> menu layout</span>
                     </p:link>
-                    <h:form prependId="false">
-                        <p:commandLink id="link-default-layout" action="#{layoutMB.toggleTemplate()}" ajax="false"/>
-                    </h:form>
-
                 </li>
             </ul>
         </li>
