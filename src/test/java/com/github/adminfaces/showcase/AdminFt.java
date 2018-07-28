@@ -264,6 +264,8 @@ public class AdminFt {
 		controlSidebar.activateSkinBlack();
 		controlSidebar.activateSkinTeal();
 		controlSidebar.toggleMenuLayout();
+                assertThat(pageBody.getAttribute("class")
+                    .contains("layout-top-nav")).isEqualTo(true);
 	}
 
 	@Test

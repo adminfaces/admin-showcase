@@ -99,13 +99,9 @@ public class ControlSidebar {
         toggleMenuCheckbox.click();
         if (isTopMenu) {
             waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
-            assertThat(pageBody.getAttribute("class")
-                    .contains("layout-top-nav")).isEqualTo(true);
 
         } else {
             waitModel().until().element(By.cssSelector("ul.navbar-nav")).is().present();
-            assertThat(pageBody.getAttribute("class")
-                    .contains("layout-top-nav")).isEqualTo(false);
         }
     }
 
