@@ -37,7 +37,7 @@ public class ControlSidebar {
 
     @FindBy(id = "fixed-layout")
     private GrapheneElement fixedLayoutCheckbox;
-    
+
     @FindBy(id = "sidebar-collapsed")
     private GrapheneElement collapsedSidebarCheckbox;
 
@@ -52,7 +52,7 @@ public class ControlSidebar {
 
     @FindBy(id = "btn-skin-teal")
     private GrapheneElement btnSkinTeal;
-    
+
     @FindBy(id = "restore-defaults")
     private GrapheneElement restoreDefaults;
 
@@ -66,18 +66,18 @@ public class ControlSidebar {
     }
 
     public void toggleFixedLayout() {
-    	waitGui().until().element(fixedLayoutCheckbox).is().visible();
-    	boolean isFixedLayout = pageBody.getAttribute("class")
+        waitGui().until().element(fixedLayoutCheckbox).is().visible();
+        boolean isFixedLayout = pageBody.getAttribute("class")
                 .contains("fixed");
-    	guardAjax(fixedLayoutCheckbox).click();
+        guardAjax(fixedLayoutCheckbox).click();
         assertThat(pageBody.getAttribute("class")
                 .contains("fixed")).isEqualTo(!isFixedLayout);
         assertThat(boxedLayoutCheckbox.getAttribute("class").contains("ui-state-disabled")).isEqualTo(!isFixedLayout);//boxed layout is disabled when fixed layout is enabled
     }
 
     public void toggleBoxedLayout() {
-    	waitGui().until().element(boxedLayoutCheckbox).is().visible();
-    	boolean isBoxedLayout = pageBody.getAttribute("class")
+        waitGui().until().element(boxedLayoutCheckbox).is().visible();
+        boolean isBoxedLayout = pageBody.getAttribute("class")
                 .contains("layout-boxed");
         guardAjax(boxedLayoutCheckbox).click();
         assertThat(pageBody.getAttribute("class")
@@ -92,19 +92,21 @@ public class ControlSidebar {
         assertThat(controlSidebar.getAttribute("class")
                 .contains("control-sidebar-light")).isTrue();
     }
-    
-     public void toggleMenuLayout() {
+
+    public void toggleMenuLayout() {
         boolean isTopMenu = isTopMenuLayout();
         waitModel().until().element(toggleMenuCheckbox).is().clickable();
         toggleMenuCheckbox.click();
-        if(isTopMenu) {
-           waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
+        if (isTopMenu) {
+            waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
+            assertThat(pageBody.getAttribute("class")
+                    .contains("layout-top-nav")).isEqualTo(true);
+
         } else {
-           waitModel().until().element(By.cssSelector("ul.navbar-nav")).is().present(); 
+            waitModel().until().element(By.cssSelector("ul.navbar-nav")).is().present();
+            assertThat(pageBody.getAttribute("class")
+                    .contains("layout-top-nav")).isEqualTo(false);
         }
-        waitModel(browser);
-        assertThat(pageBody.getAttribute("class")
-          .contains("layout-top-nav")).isEqualTo(!isTopMenu);
     }
 
     public void activateSkinBlack() {
@@ -122,9 +124,9 @@ public class ControlSidebar {
         assertThat(pageBody.getAttribute("class")
                 .contains("skin-teal")).isTrue();
     }
-    
+
     public void restoreDefaults() {
-    	waitGui().until().element(restoreDefaults).is().present();	
+        waitGui().until().element(restoreDefaults).is().present();
         restoreDefaults.click();
         waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
     }
@@ -132,19 +134,19 @@ public class ControlSidebar {
     public GrapheneElement getPageBody() {
         return pageBody;
     }
-    
+
     private boolean isTopMenuLayout() {
         return pageBody.getAttribute("class").contains("layout-top-nav");
     }
 
-	public void toggleSidebarCollapsed() {
-		waitGui().until().element(collapsedSidebarCheckbox).is().visible();
-    	boolean isSidebarCoppased = pageBody.getAttribute("class")
+    public void toggleSidebarCollapsed() {
+        waitGui().until().element(collapsedSidebarCheckbox).is().visible();
+        boolean isSidebarCoppased = pageBody.getAttribute("class")
                 .contains("sidebar-collapse");
         guardAjax(collapsedSidebarCheckbox).click();
         assertThat(pageBody.getAttribute("class")
-        		.contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
-		
-	}
-    
+                .contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
+
+    }
+
 }
