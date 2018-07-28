@@ -17,19 +17,26 @@
         <style type="text/css">
 
             div.ui-chkbox.custom span.ui-icon-check:before {
-                content: "\f067" !important;
-                left: 2px;
+                content: "\2b" !important;
+                font-style: normal;
+                left: 3px;
+                margin-left: 2px;
             }
 
             div.ui-chkbox.custom span.ui-icon-closethick:before {
-                content: "\f068" !important;
-                left: -5px;
+                content: "\2212" !important;
+                left: -6px;
                 top: -1px;
+                font-size: 13px;
+            }
+            
+            div.ui-panelgrid-content .ui-g:nth-child(4) .ui-panelgrid-cell {
+                width: 100%!important;
             }
 
         </style>
         <h:form>
-            <p:panel styleClass="card ui-g-6 ui-fluid">
+            <p:panel styleClass="card ui-g-8 ui-fluid">
                 <p:growl id="growl" showDetail="true"/>
 
                 <p:panelGrid id="triStateGrid" columns="2" layout="grid">
@@ -42,9 +49,14 @@
                     </p:triStateCheckbox>
 
                     <h:outputText value="Customs Icons: "/>
-                    <p:triStateCheckbox styleClass="custom" value="#{triStateCheckboxMB.value3}"
-                    />
-
+                    <p:triStateCheckbox styleClass="custom" value="#{triStateCheckboxMB.value3}"/>
+                    <div class="callout-card callout-info">
+                        <h4>
+                            <span class="glyphicon glyphicon-info-sign"/> NOTE
+                        </h4>
+                        <p>By default the <code>content</code> in custom icons comes from <a href="https://glyphicons.bootstrapcheatsheets.com/" target="_blank">Glyphicon icons</a>.</p>
+                        <p>You can also use FontAwesome but in this case change the custom icon <code>font-family</code> to 'FontAwesome'.</p>
+                    </div>
                     <h:panelGroup/>
                     <p:triStateCheckbox value="#{triStateCheckboxMB.value4}" itemLabel="Item Label"/>
                 </p:panelGrid>
@@ -69,21 +81,21 @@
     <ui:define name="code">
         <p:tabView>
             <p:tab title="triState.xhtml">
-           <pre>
+                <pre>
                <code class="language-html">
                    <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-           </pre>
+                </pre>
             </p:tab>
 
             <p:tab title="TriStateCheckboxMB.java">
-              <pre>
+                <pre>
                <code class="language-java">
                    <h:outputText
                            value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.TriStateCheckboxMB')}"
                            escape="false"/>
                </code>
-             </pre>
+                </pre>
             </p:tab>
 
         </p:tabView>
