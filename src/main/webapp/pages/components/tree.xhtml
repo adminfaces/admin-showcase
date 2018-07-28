@@ -70,9 +70,8 @@
             <p:spacer height="5px"/>
             <p:panel header="Checkbox" styleClass="card box-solid box-primary" toggleable="true">
                 <p:tree value="#{treeMB.root2}" var="doc"
-                        selectionMode="checkbox"
+                        selectionMode="checkbox" filterBy="#{doc.name}"
                         selection="#{treeMB.selectedNodes}">
-
                     <p:ajax event="select"  update="@(.btn-primary)" />
                     <p:ajax event="unselect" update="@(.btn-primary)" />
                     
