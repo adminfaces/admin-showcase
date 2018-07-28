@@ -69,7 +69,6 @@
 
             <p:spacer height="5px"/>
             <p:panel header="Checkbox" styleClass="card box-solid box-primary" toggleable="true">
-                <h3>Checkbox</h3>
                 <p:tree value="#{treeMB.root2}" var="doc"
                         selectionMode="checkbox"
                         selection="#{treeMB.selectedNodes}">
@@ -80,13 +79,13 @@
                     <p:treeNode icon="ui-icon-note">
                         <h:outputText value="#{doc.name}"/>
                     </p:treeNode>
-                    <p:treeNode type="document" icon="ui-icon-document">
+                    <p:treeNode type="document" icon="fa fa-file-word-o">
                         <h:outputText value="#{doc.name}" />
                     </p:treeNode>
-                    <p:treeNode type="picture" icon="ui-icon-image">
+                    <p:treeNode type="picture" icon="fa fa-file-photo-o">
                         <h:outputText value="#{doc.name}" />
                     </p:treeNode>
-                    <p:treeNode type="mp3" icon="ui-icon-video">
+                    <p:treeNode type="mp3" icon="fa fa-file-movie-o">
                         <h:outputText value="#{doc.name}" />
                     </p:treeNode>
                 </p:tree>
