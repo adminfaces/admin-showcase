@@ -1,6 +1,7 @@
 package com.github.adminfaces.showcase;
 
 import com.github.adminfaces.showcase.pages.IndexPage;
+import com.github.adminfaces.showcase.pages.LoginPage;
 import com.github.adminfaces.showcase.pages.components.ChipsPage;
 import com.github.adminfaces.showcase.pages.components.DialogPage;
 import com.github.adminfaces.showcase.pages.components.MessagesPage;
@@ -351,5 +352,13 @@ public class AdminFt {
 		actions.moveToElement(select).click().perform();
 		waitModel().until().element(select).is().not().visible();
 	}
+        
+        @Test
+        @InSequence(14)
+        public void shouldDoLogon(@InitialPage LoginPage loginPage) {
+            assertThat(loginPage.getPageTitle().getText()).isEqualTo("Sign in to start your session");
+            loginPage.doLogon("admin@faces.org", "adminfaces");
+            assertThat(loginPage.getMessages().getText()).isEqualTo("Logged in successfully!");
+        }
 
 }
