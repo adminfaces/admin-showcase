@@ -1,7 +1,3 @@
-li.header {
-    text-transform: uppercase;
-}
-
 .sidebar-form {
     border-radius: 3px;
     border: 1px solid #374850;
@@ -32,6 +28,12 @@ a.dropdown-toggle {
 a#logout {
     color: #3c8dbc!important;
     background: transparent;
+}
+
+@media (max-width: @screen-md) {
+    body .control-sidebar {
+        padding-top:100px;
+    }
 }
 
 .ui-theme {background: url("#{resource['demo/images/themes.png']}") no-repeat top left;display: block;}
