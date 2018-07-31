@@ -317,7 +317,6 @@ public class AdminFt {
 		controlSidebar.restoreDefaults();
 
 		assertThat(pageBody.getAttribute("class").contains("layout-top-nav")).isFalse();
-		assertThat(pageBody.getAttribute("class").contains("layout-top-nav")).isFalse();
 
 		assertThat(pageBody.getAttribute("class").contains("layout-boxed")).isFalse();
 
