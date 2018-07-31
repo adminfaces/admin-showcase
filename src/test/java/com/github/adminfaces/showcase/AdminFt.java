@@ -1,15 +1,9 @@
 package com.github.adminfaces.showcase;
 
-import com.github.adminfaces.showcase.pages.IndexPage;
-import com.github.adminfaces.showcase.pages.LoginPage;
-import com.github.adminfaces.showcase.pages.components.ChipsPage;
-import com.github.adminfaces.showcase.pages.components.DialogPage;
-import com.github.adminfaces.showcase.pages.components.MessagesPage;
-import com.github.adminfaces.showcase.pages.exception.*;
-import com.github.adminfaces.showcase.pages.fragments.ControlSidebar;
-import com.github.adminfaces.showcase.pages.fragments.Menu;
-import com.github.adminfaces.showcase.pages.fragments.MenuSearch;
-import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
+import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
@@ -27,14 +21,23 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.jboss.arquillian.graphene.Graphene.waitModel;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.support.FindBy;
+
+import com.github.adminfaces.showcase.pages.DataTablePage;
+import com.github.adminfaces.showcase.pages.IndexPage;
+import com.github.adminfaces.showcase.pages.LoginPage;
+import com.github.adminfaces.showcase.pages.components.ChipsPage;
+import com.github.adminfaces.showcase.pages.components.DialogPage;
+import com.github.adminfaces.showcase.pages.components.MessagesPage;
+import com.github.adminfaces.showcase.pages.exception.AccessDeniedPage;
+import com.github.adminfaces.showcase.pages.exception.ErrorPage;
+import com.github.adminfaces.showcase.pages.exception.ExceptionPage;
+import com.github.adminfaces.showcase.pages.exception.NotFoundPage;
+import com.github.adminfaces.showcase.pages.exception.ViewExpiredPage;
+import com.github.adminfaces.showcase.pages.fragments.ControlSidebar;
+import com.github.adminfaces.showcase.pages.fragments.Menu;
+import com.github.adminfaces.showcase.pages.fragments.MenuSearch;
+import com.github.adminfaces.showcase.pages.layout.BreadcrumbPage;
 
 /**
  * Created by rafael-pestano on 16/01/17.
@@ -65,6 +68,9 @@ public class AdminFt {
 
 	@Page
 	protected DialogPage dialogPage;
+    
+    @Page
+	protected DataTablePage dataTablePage;
 
 	@FindByJQuery("div.ui-growl-message")
 	private GrapheneElement growlMessage;
@@ -111,7 +117,6 @@ public class AdminFt {
 		for (int i = 1; i <= 3; i++) {
 			assertThat(exceptionPage.getErrorMessages().get(i - 1).getText()).isEqualTo("Exception " + i);
 		}
-
 	}
 
 	@Test
@@ -155,7 +160,7 @@ public class AdminFt {
 		browser.manage().window().setSize(new Dimension(480, 640));
 		waitModel().until().element(By.cssSelector("input.form-control")).is().not().visible();
 		assertThat(isSidebarCollapsed()).isTrue();
-		browser.manage().window().setSize(new Dimension(1366, 1024));
+		browser.manage().window().setSize(new Dimension(1920, 1080));
 	}
 
 	@Test
@@ -168,6 +173,8 @@ public class AdminFt {
 				.contains("Exceptions This page shows how the application behaves when exceptions are raised.");
 		menu.goToDatatablePage();
 		assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Datatable");
+        dataTablePage.filterByColor();
+        dataTablePage.selectRows();
 		menu.goToPanelPage();
 		assertThat(browser.findElement(By.tagName("h1")).getText()).startsWith("Panel");
 		menu.goToButtonsPage();
