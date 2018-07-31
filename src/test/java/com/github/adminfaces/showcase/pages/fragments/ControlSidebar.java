@@ -1,16 +1,18 @@
 package com.github.adminfaces.showcase.pages.fragments;
 
-import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.jboss.arquillian.graphene.Graphene.guardAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitGui;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
+
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.fragment.Root;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
-
-import static org.jboss.arquillian.graphene.Graphene.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by rafael-pestano on 16/01/17.
@@ -43,6 +45,9 @@ public class ControlSidebar {
 
     @FindBy(id = "boxed-layout")
     private GrapheneElement boxedLayoutCheckbox;
+    
+    @FindBy(id = "sidebar-expand-hover-label")
+    private GrapheneElement expandOnHoverLabel;
 
     @FindBy(id = "sidebar-skin")
     private GrapheneElement sidebarSkinCheckbox;
@@ -55,42 +60,46 @@ public class ControlSidebar {
 
     @FindBy(id = "restore-defaults")
     private GrapheneElement restoreDefaults;
+    
+    @FindByJQuery("a#layout-setup")
+    private GrapheneElement openControlSidebarBtn;
 
     public void openControlSidebar() {
         assertThat(controlSidebar.getAttribute("class")
-                .contains("control-sidebar-open")).isFalse();
-        browser.findElement(By.id("layout-setup")).click();
-        waitModel().withTimeout(500, TimeUnit.MILLISECONDS);
+            .contains("control-sidebar-open")).isFalse();
+        WebElement openControlSidebarLink = browser.findElement(By.id("layout-setup"));
+        openControlSidebarLink.click();
+        waitModel().until().element(restoreDefaults).is().present();
         assertThat(controlSidebar.getAttribute("class")
-                .contains("control-sidebar-open")).isTrue();
+            .contains("control-sidebar-open")).isTrue();
     }
 
     public void toggleFixedLayout() {
         waitGui().until().element(fixedLayoutCheckbox).is().visible();
         boolean isFixedLayout = pageBody.getAttribute("class")
-                .contains("fixed");
+            .contains("fixed");
         guardAjax(fixedLayoutCheckbox).click();
         assertThat(pageBody.getAttribute("class")
-                .contains("fixed")).isEqualTo(!isFixedLayout);
+            .contains("fixed")).isEqualTo(!isFixedLayout);
         assertThat(boxedLayoutCheckbox.getAttribute("class").contains("ui-state-disabled")).isEqualTo(!isFixedLayout);//boxed layout is disabled when fixed layout is enabled
     }
 
     public void toggleBoxedLayout() {
         waitGui().until().element(boxedLayoutCheckbox).is().visible();
         boolean isBoxedLayout = pageBody.getAttribute("class")
-                .contains("layout-boxed");
+            .contains("layout-boxed");
         guardAjax(boxedLayoutCheckbox).click();
         assertThat(pageBody.getAttribute("class")
-                .contains("layout-boxed")).isEqualTo(!isBoxedLayout);
+            .contains("layout-boxed")).isEqualTo(!isBoxedLayout);
         assertThat(fixedLayoutCheckbox.getAttribute("class").contains("ui-state-disabled")).isEqualTo(!isBoxedLayout);//fixed layout is disabled when boxed layout is enabled
     }
 
     public void toggleSidebarSkin() {
         assertThat(controlSidebar.getAttribute("class")
-                .contains("control-sidebar-dark")).isTrue();
+            .contains("control-sidebar-dark")).isTrue();
         guardAjax(sidebarSkinCheckbox).click();
         assertThat(controlSidebar.getAttribute("class")
-                .contains("control-sidebar-light")).isTrue();
+            .contains("control-sidebar-light")).isTrue();
     }
 
     public void toggleMenuLayout() {
@@ -107,23 +116,22 @@ public class ControlSidebar {
 
     public void activateSkinBlack() {
         assertThat(pageBody.getAttribute("class")
-                .contains("skin-black")).isFalse();
+            .contains("skin-black")).isFalse();
         guardAjax(btnSkinBlack).click();
         assertThat(pageBody.getAttribute("class")
-                .contains("skin-black")).isTrue();
+            .contains("skin-black")).isTrue();
     }
 
     public void activateSkinTeal() {
         assertThat(pageBody.getAttribute("class")
-                .contains("skin-teal")).isFalse();
+            .contains("skin-teal")).isFalse();
         guardAjax(btnSkinTeal).click();
         assertThat(pageBody.getAttribute("class")
-                .contains("skin-teal")).isTrue();
+            .contains("skin-teal")).isTrue();
     }
 
     public void restoreDefaults() {
-        waitGui().until().element(restoreDefaults).is().present();
-        restoreDefaults.click();
+        browser.findElement(By.id("restore-defaults")).click();
         waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
     }
 
@@ -138,10 +146,19 @@ public class ControlSidebar {
     public void toggleSidebarCollapsed() {
         waitGui().until().element(collapsedSidebarCheckbox).is().visible();
         boolean isSidebarCoppased = pageBody.getAttribute("class")
-                .contains("sidebar-collapse");
+            .contains("sidebar-collapse");
         guardAjax(collapsedSidebarCheckbox).click();
         assertThat(pageBody.getAttribute("class")
-                .contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
+            .contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
+    }
+
+    public void toggleExpandOnHover() {
+        waitGui().until().element(expandOnHoverLabel).is().visible();
+        boolean isSidebarCoppased = pageBody.getAttribute("class")
+            .contains("sidebar-collapse");
+        guardAjax(expandOnHoverLabel).click();
+        assertThat(pageBody.getAttribute("class")
+            .contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
 
     }
 

@@ -23,6 +23,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -30,6 +31,9 @@ import org.openqa.selenium.interactions.Actions;
 import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
+
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -143,6 +147,16 @@ public class AdminFt {
 		assertThat(accessDeniedPage.getTitle().getText())
 				.isEqualTo("Access denied! You do not have access to the requested page.");
 	}
+	
+	@Test
+	@InSequence(2)
+	public void shouldCollapseSideMenuOnSmallScreens(@InitialPage ExceptionPage exceptionPage) {
+		assertThat(isSidebarCollapsed()).isFalse();
+		browser.manage().window().setSize(new Dimension(480, 640));
+		waitModel().until().element(By.cssSelector("input.form-control")).is().not().visible();
+		assertThat(isSidebarCollapsed()).isTrue();
+		browser.manage().window().setSize(new Dimension(1366, 1024));
+	}
 
 	@Test
 	@InSequence(3)
@@ -226,7 +240,7 @@ public class AdminFt {
 		assertThat(messagesPage.getFieldMsgIcon().getAttribute("title"))
 				.isEqualTo("Icon: Validation Error: Value is required.");
 	}
-
+	
 	@Test
 	@InSequence(6)
 	public void shouldCreateBreadcrumbs(@InitialPage BreadcrumbPage breadcrumbPage) {
@@ -261,6 +275,8 @@ public class AdminFt {
 		controlSidebar.toggleFixedLayout();// uncheck so we can toogle boxed layout
 		controlSidebar.toggleBoxedLayout();
 		controlSidebar.toggleSidebarCollapsed();
+        controlSidebar.toggleSidebarCollapsed();//untoggle because expandOnHover will toggoe again
+        controlSidebar.toggleExpandOnHover();
 		controlSidebar.toggleSidebarSkin();
 		controlSidebar.activateSkinBlack();
 		controlSidebar.activateSkinTeal();
@@ -359,6 +375,11 @@ public class AdminFt {
             assertThat(loginPage.getPageTitle().getText()).isEqualTo("Sign in to start your session");
             loginPage.doLogon("admin@faces.org", "adminfaces");
             assertThat(loginPage.getMessages().getText()).isEqualTo("Logged in successfully!");
+        }
+        
+        
+        private boolean isSidebarCollapsed() {
+        	return browser.findElement(By.cssSelector("aside.main-sidebar")).getLocation().getX() == -230;
         }
 
 }
