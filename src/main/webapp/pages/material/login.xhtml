@@ -2,143 +2,140 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:adm="http://github.com/adminfaces"
       xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
-        <h:head>
-            <meta charset="utf-8"/>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-            <meta name="mobile-web-app-capable" content="yes"/>
-            <h:outputStylesheet library="css" name="prism.css"/>
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet library="css" name="prism.css"/>
 
-            <style type="text/css">
-                body .load-bar {
-                    margin-top: -20px;
-                }
+        <style type="text/css">
+            body .load-bar {
+                margin-top: -20px;
+            }
 
-                body.login-page {
-                    background-color: transparent;
-                }
+            body.login-page {
+                background-color: transparent;
+            }
 
-                html {
-                    background: url(#{resource[ 'images:login-bg.jpg' ]}) no-repeat center center fixed;
-                    -webkit-background-size: cover;
-                    -moz-background-size: cover;
-                    -o-background-size: cover;
-                    background-size: cover;
-                }
+            html {
+                background: url(#{resource[ 'images:login-bg.jpg' ]}) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
 
+            body .login-logo {
+                margin: 20px;
+                text-align: right;
+                font-size: 60px;
+                font-weight: 500
+            }
+
+            @media (max-width: 1024px) {
                 body .login-logo {
-                    margin: 20px;
-                    text-align: right;
-                    font-size: 60px;
-                    font-weight: 500
+                    text-align: center;
                 }
-
-                @media (max-width: 1024px) {
-                    body .login-logo {
-                        text-align: center;
-                    }
-                }
-            </style>
-        </h:head>
+            }
+        </style>
+    </h:head>
 
 
-        <h:body styleClass="hold-transition login-page">
-            <p:growl autoUpdate="true" sticky="true"/>
-            <div id="loader" class="load-bar" style="display: none">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+    <h:body styleClass="hold-transition login-page">
+        <p:growl autoUpdate="true" sticky="true"/>
+        <div id="loader" class="load-bar" style="display: none">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <div class="login-box">
+            <div class="login-logo">
+                <p:link href="index.xhtml"><b>Admin</b>Faces</p:link>
             </div>
+            <!-- /.login-logo -->
+            <div class="box login-box-body">
+                <h:form>
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12">
+                            <p class="login-box-msg">Sign in to start your session</p>
+                            <p:messages escape="false" closable="true" showDetail="true" showSummary="false"/>
+                        </div>
 
-            <div class="login-box">
-                <div class="login-logo">
-                    <p:link href="index.xhtml"><b>Admin</b>Faces</p:link>
-                </div>
-                <!-- /.login-logo -->
-                <div class="box login-box-body">
-                    <h:form>
-                        <div class="ui-g ui-fluid">
-                            <div class="ui-g-12">
-                                <p class="login-box-msg">Sign in to start your session</p>
-                                <p:messages escape="false" closable="true" showDetail="true" showSummary="false"/>
-                            </div>
-
-                            <div class="ui-g-12">
-                                <div class="material icon-left">
-                                    <p:inputText id="email" value="#{logonMB.email}" required="true" requiredMessage="Please provide your email" placeholder="Provide your e-mail">
-                                        <i class="fa fa-envelope" style="font-size: 16px;margin-top: 10px;"/>
-                                    </p:inputText>
-                                    <p:outputLabel for="email" value="Provide your e-mail"/>
-                                    <p:message for="email"/>
-                                </div>
-                            </div>
-
-                            <div class="ui-g-12">
-                                <div class="material icon-left">
-                                    <p:password id="password" value="#{logonMB.password}" required="true" autocomplete="new-password" requiredMessage="Please provide your password" placeholder="Provide your password">
-                                        <i class="fa fa-lock" style="font-size: 20px;margin-top: 10px"/>
-                                    </p:password>
-                                    <p:outputLabel for="password" value="Provide your password"/>
-                                    <p:message for="password"/>
-                                </div>
-                            </div>
-
-
-                            <div class="ui-g-12">
-                                <p:selectBooleanCheckbox itemLabel="Remember Me" value="#{logonMB.remember}"/>
-                            </div>
-                            <p:spacer height="10"/>
-                            <div class="ui-g-12">
-                                <p:commandButton styleClass="btn btn-success btn-block" action="#{logonMB.doLogon}"
-                                                 onclick="showBar()" oncomplete="if(args.validationFailed){hideBar()}"
-                                                 value="Sign In" update="@form"/>
+                        <div class="ui-g-12">
+                            <div class="material icon-left">
+                                <p:inputText id="email" value="#{logonMB.email}" required="true" requiredMessage="Please provide your email" placeholder="Provide your e-mail">
+                                    <i class="fa fa-envelope" style="font-size: 16px;margin-top: 10px;"/>
+                                </p:inputText>
+                                <p:outputLabel for="email" value="Provide your e-mail"/>
+                                <p:message for="email"/>
                             </div>
                         </div>
-                    </h:form>
 
-                    <div class="social-auth-links text-center">
-                        <p>- OR -</p>
-                        <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i
-                                class="fa fa-facebook"></i> Sign in using
-                            Facebook</a>
-                        <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i
-                                class="fa fa-google-plus"></i> Sign in using
-                            Google+</a>
+                        <div class="ui-g-12">
+                            <div class="material icon-left">
+                                <p:password id="password" value="#{logonMB.password}" required="true" autocomplete="new-password" requiredMessage="Please provide your password" placeholder="Provide your password">
+                                    <i class="fa fa-lock" style="font-size: 20px;margin-top: 10px"/>
+                                </p:password>
+                                <p:outputLabel for="password" value="Provide your password"/>
+                                <p:message for="password"/>
+                            </div>
+                        </div>
+
+
+                        <div class="ui-g-12">
+                            <p:selectBooleanCheckbox itemLabel="Remember Me" value="#{logonMB.remember}"/>
+                        </div>
+                        <p:spacer height="10"/>
+                        <div class="ui-g-12">
+                            <p:commandButton styleClass="btn btn-success btn-block" action="#{logonMB.doLogon}"
+                                             onclick="showBar()" oncomplete="if(args.validationFailed){hideBar()}"
+                                             value="Sign In" update="@form"/>
+                        </div>
                     </div>
-                    <!-- /.social-auth-links -->
+                </h:form>
 
-                    <a href="#">I forgot my password</a><br/>
-                    <a href="#" class="text-center">Register a new membership</a>
-
+                <div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i
+                            class="fa fa-facebook"></i> Sign in using
+                        Facebook</a>
+                    <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i
+                            class="fa fa-google-plus"></i> Sign in using
+                        Google+</a>
                 </div>
-                <!-- /.login-box-body -->
+                <!-- /.social-auth-links -->
+
+                <a href="#">I forgot my password</a><br/>
+                <a href="#" class="text-center">Register a new membership</a>
+
             </div>
+            <!-- /.login-box-body -->
+        </div>
 
-            <section class="content">
-                <div class="pull-right" style="color: gray;margin-top: -20px">
-                    Page views: <p:link id="link-stats" href="#"> <span
-                            style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></p:link>
-                </div>
-                <p:tabView>
-                    <p:tab title="logon.xhtml">
-                        <pre>
+        <section class="content">
+            <div class="pull-right" style="color: gray;margin-top: -20px">
+                Page views: <p:link id="link-stats" href="#"> <span
+                        style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></p:link>
+            </div>
+            <p:tabView>
+                <p:tab title="logon.xhtml">
+                    <pre>
                <code class="language-html">
                    <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
                </code>
-                        </pre>
-                    </p:tab>
+                    </pre>
+                </p:tab>
 
-                </p:tabView>
-            </section>
-            <h:outputScript library="js" name="prism.js"  target="head"/>
-            <h:outputScript library="js" name="admintemplate.js"  target="head"/>
-            <adm:ripple/>
+            </p:tabView>
+        </section>
+        <h:outputScript library="js" name="prism.js"  target="head"/>
+        <h:outputScript library="js" name="admintemplate.js"  target="head"/>
+        <adm:ripple/>
 
-        </h:body>
-    </f:view>
+    </h:body>
 </html>
