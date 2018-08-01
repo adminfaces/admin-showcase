@@ -48,7 +48,7 @@
             <h:form>
                 <div class="ui-g ui-fluid">
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:inputText id="input" required="true" placeholder="Material placeholder"/>
                             <p:outputLabel for="input" value="Material input"/>
@@ -56,21 +56,21 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
-                        <div class="material no-float">
+                    <div class="ui-g-6 ui-sm-12">
+                        <div class="ui-material no-float">
                             <p:inputText id="input-no-float" required="true" placeholder="Material without floating label"/>
                             <p:message for="input-no-float"/>
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:inputText id="disabled" value="pre filled value" disabled="true" />
                             <p:outputLabel for="disabled" value="Material input disabled"/>
                             <p:message for="disabled"/>
                         </div>
                     </div>
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:selectOneMenu id="select" value="#{userLoginMB.selected}" required="true">
                                 <f:selectItem itemLabel="Select"/>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:autoComplete id="autocomplete" completeMethod="#{autoCompleteMB.completeText}"
                                             placeholder="Autocomplete placeholder"
@@ -93,7 +93,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:calendar id="material-calendar" showOn="both" placeholder="Calendar placeholder"
                                         required="true">
@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:password id="password" placeholder="Password placeholder" required="true">
                                 <i class="fa fa-2x fa-lock"/>
@@ -114,7 +114,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:inputTextarea id="textarea" placeholder="Textarea placeholder" required="true"/>
                             <p:outputLabel for="textarea" value="Material textarea"/>
@@ -122,7 +122,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:selectCheckboxMenu id="chkmenu" label="Cities" required="true"
                                                   multiple="true" filter="true" filterMatchMode="startsWith">
@@ -133,7 +133,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-6 ui-sm-12">
                         <div class="ui-material">
                             <p:inputText id="icon" required="true" placeholder="Material placeholder">
                                 <i class="fa fa-2x fa-user-circle"/>
@@ -143,8 +143,8 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
-                        <div class="material icon-left">
+                    <div class="ui-g-6 ui-sm-12">
+                        <div class="ui-material icon-left">
                             <p:inputText id="user-icon" required="true" placeholder="Icon left">
                                 <i id="fa" class="fa fa-2x fa-user"/>
                             </p:inputText>
@@ -153,8 +153,8 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
-                        <div class="material icon-left">
+                    <div class="ui-g-6 ui-sm-12">
+                        <div class="ui-material icon-left">
                             <p:calendar id="material-calendar-left" showOn="both" placeholder="Icon left calendar"
                                         required="true">
                                 <p:ajax event="dateSelect" global="false" onstart="adminMaterial()"/>
@@ -164,7 +164,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-8 ui-sm-12">
+                    <div class="ui-g-12">
                         <div class="ui-material">
                             <p:keyboard id="keyboard" placeholder="keyboard" required="true"/>
                             <p:outputLabel for="keyboard" value="Keyboard"/>
@@ -172,9 +172,7 @@
                         </div>
                     </div>
 
-                    <div class="ui-g-4">
-                    </div>
-                    <div class="ui-g-4">
+                    <div class="ui-g-12">
                         <p:commandButton id="submitButton" styleClass="btn-primary" value="Submit" update="@form"
                                          ignoreAutoUpdate="true"/>
                     </div>
