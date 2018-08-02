@@ -125,6 +125,7 @@ public class AdminFt {
         assertThat(exception.getTitle().getText()).contains("Exceptions");
         exception.clickRuntimeButton();
         assertThat(errorPage.getTitle().getText()).isEqualTo("500");
+        assertThat(pageBody.getAttribute("class").contains("sidebar-collapse")).isTrue();
     }
 
     @Test
