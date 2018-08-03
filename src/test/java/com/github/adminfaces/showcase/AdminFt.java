@@ -68,6 +68,9 @@ public class AdminFt {
 
     @Page
     protected DialogPage dialogPage;
+    
+    @Page
+    protected IndexPage indexPage;
 
     @Page
     protected DataTablePage dataTablePage;
@@ -256,7 +259,8 @@ public class AdminFt {
         assertThat(breadcrumbPage.getHomeItem().isDisplayed()).isTrue();
         assertThat(breadcrumbPage.getHomeItem().getText()).isEqualTo("Home");
         breadcrumbPage.getHomeItem().click();// click in 'home' item to clear items added in other tests
-        waitModel();
+        waitModel().until().element(indexPage.getPageTitle()).is().present();
+        assertThat(indexPage.getPageTitle().getText()).startsWith("Welcome to the AdminFaces Showcase!");
         Graphene.goTo(BreadcrumbPage.class);
 
         assertThat(breadcrumbPage.getBreadcrumbItem().isDisplayed()).isTrue();
@@ -362,7 +366,6 @@ public class AdminFt {
                 .isDisplayed()).isTrue();
         waitModel().until().element(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]")).is().clickable();
         Actions actions = new Actions(browser);
-        actions = new Actions(browser);
         actions.moveToElement(browser.findElement(By.xpath("//button[contains(@class,'ui-autocomplete-dropdown')]")))
                 .click().perform();
         waitModel().until().element(By.xpath("//li[contains(@class,'ui-autocomplete-item')]")).is().visible();
