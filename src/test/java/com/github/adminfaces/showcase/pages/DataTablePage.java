@@ -44,10 +44,9 @@ public class DataTablePage extends BasePage {
     }
 
     public void selectRows() {
-        Actions actions = new Actions(browser);
         for (int i = 0; i <= 2; i++) {
-            datatableCheckBoxes.get(i).click();
             waitModel();
+            datatableCheckBoxes.get(i).click();
         }
         assertThat(browser.findElements(By.cssSelector("tr.ui-datatable-selectable.ui-state-highlight")).size())
                 .isEqualTo(3);
