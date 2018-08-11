@@ -4,8 +4,6 @@ import org.omnifaces.cdi.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -22,7 +20,7 @@ public class DFLevel1MB implements Serializable {
         Map<String, Object> options = new HashMap<String, Object>();
         options.put("modal", true);
         options.put("appendTo", "@(body)");
-        options.put("style", "z-index:10001");
+        options.put("styleClass", "dlg2");
         RequestContext.getCurrentInstance().openDialog("level2", options, null);
     }
 
