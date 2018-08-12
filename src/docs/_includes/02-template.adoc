@@ -459,7 +459,7 @@ public class CustomAuthorizer implements Serializable {
 }
 ----
 
-IMPORTANT: As isLoggedIn is `true by default` you need to set it to false on application startup so user is redirected to login page. This step is not needed when <<AdminSession Specialization>>.
+IMPORTANT: As isLoggedIn is `true by default` you need to set it to false on application startup so user is redirected to login page. This step is not needed when using <<AdminSession Specialization>>.
 
 
 == Error Pages

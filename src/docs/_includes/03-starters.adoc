@@ -1,0 +1,23 @@
+= Admin Starters
+
+Admin Starters are sample projects to get you started with AdminFaces. Following are current starters, access their github `README` for running instructions:
+
+
+* {link-admin-starter}[Admin Starter^]: The default starter is a simple JavaEE 6(+) application without any persistence layer. You can run it on a JavaEE 6 or newer server and also in http://wildfly-swarm.io/[wildfly-swarm^].
+
+* {link-admin-starter-persistence}[Admin Starter Persistence^]: Admin Starter application with persistence layer based on Apache DeltaSpike Data module via <<Admin Persistence>>;
+
+* {link-admin-starter-tomcat}[Admin Starter Tomcat^]: Admin Starter application for Tomcat; 
+
+* {link-admin-starter-springboot}[Admin Starter SpringBoot^]: Admin Starter application using https://github.com/spring-projects/spring-boot[SpringBoot^] and https://github.com/joinfaces/[JoinFaces^].
+
+
+TIP: All starters have images published on docker hub so you can easily run them via docker.
+
+
+image::starter.png[]
+
+
+== Demo
+
+A live demo is available on Openshift here: {link-admin-starter-openshift}

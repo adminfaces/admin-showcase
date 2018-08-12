@@ -12,11 +12,14 @@
 :link-adminfaces: http://github.com/adminfaces
 :link-admin-showcase: {link-adminfaces}/admin-showcase
 :link-admin-showcase-openshift: http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase
+:link-admin-starter-openshift: http://admin-starter-admin-starter.1d35.starter-us-east-1.openshiftapps.com/admin-starter/
 :link-admin-starter: {link-adminfaces}/admin-starter
 :link-admin-template: {link-adminfaces}/admin-template
 :link-admin-theme: {link-adminfaces}/admin-theme
 :link-admin-designer: {link-adminfaces}/admin-designer
 :link-admin-persistence: {link-adminfaces}/admin-persistence
+:link-admin-starter-tomcat: {link-adminfaces}/admin-starter-tomcat
+:link-admin-starter-persistence: {link-adminfaces}/admin-starter-persistence
 :link-admin-starter-springboot: {link-adminfaces}/admin-starter-springboot
 :link-admin-mobile: {link-adminfaces}/admin-mobile
 
@@ -47,6 +50,7 @@ AdminFaces ecosystem is composed by the following projects:
 * {link-admin-designer}[Admin Designer^]: The same showcase application with Admin Theme and Admin Template bundled (instead of being library dependencies) in order to make it easier to customize the theme and the template.
 * {link-admin-starter}[Admin Starter^]: A simple starter project to get you started with AdminFaces.
 * {link-admin-persistence}[Admin Persistence^]: CRUD operations like a breeze for AdminFaces applications based on https://deltaspike.apache.org/[Apache DeltaSpike^] Data module.
+* {link-admin-starter-tomcat}[Admin Starter Tomcat^]: Admin Starter application for Tomcat.
 * {link-admin-starter-springboot}[Admin Starter SpringBoot^]: Admin Starter application using https://github.com/spring-projects/spring-boot[SpringBoot^] and https://github.com/joinfaces/[JoinFaces^].
 * {link-admin-mobile}[Admin Mobile^]: A simple https://developer.android.com/studio/index.html[Android Studio^] project which uses https://developer.android.com/reference/android/webkit/WebView.html[Webview^] to create an https://www.mobiloud.com/blog/native-web-or-hybrid-apps/[hybrid web app^] based on Admin Showcase.
 
@@ -56,9 +60,9 @@ include::{includedir}/01-theme.adoc[leveloffset=+1]
 
 include::{includedir}/02-template.adoc[leveloffset=+1]
 
-include::{includedir}/03-designer.adoc[leveloffset=+1]
+include::{includedir}/03-starters.adoc[leveloffset=+1]
 
-include::{includedir}/04-starter.adoc[leveloffset=+1]
+include::{includedir}/04-designer.adoc[leveloffset=+1]
 
 include::{includedir}/05-persistence.adoc[leveloffset=+1]
 
