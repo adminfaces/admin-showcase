@@ -11,6 +11,8 @@ Admin Starters are sample projects to get you started with AdminFaces. Following
 
 * {link-admin-starter-springboot}[Admin Starter SpringBoot^]: Admin Starter application using https://github.com/spring-projects/spring-boot[SpringBoot^] and https://github.com/joinfaces/[JoinFaces^].
 
+* {link-admin-starter-shiro}[Admin Starter Shiro^]: Admin Starter application using https://shiro.apache.org/[Apache Shiro^] for authentication.
+
 
 TIP: All starters have images published on docker hub so you can easily run them via docker.
 
