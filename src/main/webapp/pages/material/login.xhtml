@@ -18,6 +18,26 @@
         <h:outputStylesheet library="css" name="prism.css"/>
 
         <style type="text/css">
+            /* below css hides growls in small screens and makes messages visible */
+            @media (max-width: 768px) {
+                
+                body div.ui-growl {
+                    display: none;
+                }
+                
+               body div.ui-messages {
+                    display: block;
+                }
+            }
+            /* below css hides messages in medium/big devices and makes growl visible in such devices */
+            @media (min-width: 769px) {
+              body div.ui-growl {
+                    display: block;
+                }
+              body div.ui-messages {
+                    display: none;
+                }
+            }  
             body.login-page {
                 background-color: transparent;
             }
