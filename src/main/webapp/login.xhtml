@@ -22,10 +22,7 @@
 
         <style type="text/css">
 
-            body .load-bar {
-                margin-top: -20px;
-            }
-
+            /* below css hides growls in small screens and makes messages visible */
             @media (max-width: 768px) {
                 
                 body div.ui-growl {
@@ -37,7 +34,7 @@
                 }
 
             }
-
+            /* below css hides messages in medium/big devices and makes growl visible in such devices */
             @media (min-width: 769px) {
               body div.ui-growl {
                     display: block;
@@ -59,19 +56,6 @@
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;
-            }
-
-            body .login-logo {
-                margin: 20px;   
-                text-align: right;
-                font-size: 60px;
-                font-weight: 500
-            }
-
-            @media (max-width: 1024px) {
-                body .login-logo {
-                    text-align: center;
-                }
             }
 
         </style>
