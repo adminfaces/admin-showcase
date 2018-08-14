@@ -22,6 +22,7 @@
 :link-admin-starter-persistence: {link-adminfaces}/admin-starter-persistence
 :link-admin-starter-springboot: {link-adminfaces}/admin-starter-springboot
 :link-admin-starter-shiro: {link-adminfaces}/admin-starter-shiro
+:link-admin-starter-security: {link-adminfaces}/admin-starter-security
 :link-admin-mobile: {link-adminfaces}/admin-mobile
 
 :link-jsf: https://javaserverfaces.java.net/
@@ -50,10 +51,11 @@ AdminFaces ecosystem is composed by the following projects:
 * {link-admin-showcase}[Admin Showcase^]: A showcase web application, {link-admin-showcase-openshift}[deployed on openshift^], which demonstrates AdminFaces main features and components.
 * {link-admin-designer}[Admin Designer^]: The same showcase application with Admin Theme and Admin Template bundled (instead of being library dependencies) in order to make it easier to customize the theme and the template.
 * {link-admin-starter}[Admin Starter^]: A simple starter project to get you started with AdminFaces.
-* {link-admin-persistence}[Admin Persistence^]: CRUD operations like a breeze for AdminFaces applications based on https://deltaspike.apache.org/[Apache DeltaSpike^] Data module.
+* {link-admin-persistence}[Admin Persistence^]: CRUD operations like a breeze for AdminFaces applications based on https://deltaspike.apache.org/documentation/data.html[Apache DeltaSpike Data^] module.
 * {link-admin-starter-tomcat}[Admin Starter Tomcat^]: Admin Starter application for Tomcat.
 * {link-admin-starter-springboot}[Admin Starter SpringBoot^]: Admin Starter application using https://github.com/spring-projects/spring-boot[SpringBoot^] and https://github.com/joinfaces/[JoinFaces^].
 * {link-admin-starter-shiro}[Admin Starter Shiro^]: Admin Starter application using https://shiro.apache.org/[Apache Shiro^] for authentication.
+* {link-admin-starter-security}[Admin Starter Security^]: Admin Starter application using `JavaEE 8` https://javaee.github.io/security-spec/[security API^] for authentication and authorization.
 * {link-admin-mobile}[Admin Mobile^]: A simple https://developer.android.com/studio/index.html[Android Studio^] project which uses https://developer.android.com/reference/android/webkit/WebView.html[Webview^] to create an https://www.mobiloud.com/blog/native-web-or-hybrid-apps/[hybrid web app^] based on Admin Showcase.
 
 In subsequent chapters we will drive through each project in detail.
