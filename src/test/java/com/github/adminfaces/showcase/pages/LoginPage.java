@@ -1,19 +1,16 @@
 package com.github.adminfaces.showcase.pages;
 
-import org.jboss.arquillian.drone.api.annotation.Drone;
-import static org.jboss.arquillian.graphene.Graphene.guardAjax;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.Location;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
  * Created by rafael-pestano on 16/01/17.
  */
 @Location("login.xhtml")
-public class LoginPage  {
+public class LoginPage {
     
     @FindByJQuery("p.login-box-msg")
     private WebElement pageTitle;
@@ -38,8 +35,6 @@ public class LoginPage  {
     public GrapheneElement getMessages() {
         return messages;
     }
-    
-    
     
     public void doLogon(String email, String password) {
         this.email.clear();
