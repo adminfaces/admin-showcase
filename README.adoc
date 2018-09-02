@@ -77,4 +77,4 @@ WARNING: See the chrome driver version the tests are https://github.com/adminfac
 
 == Documentation
 
-Documentation can be found here: http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/docs/
+Documentation can be found here: http://adminfaces.github.io/site/#Docs
