@@ -21,7 +21,7 @@
         <h:form>
             <p:panel header="Default Tree" styleClass="card box-solid box-teal" toggleable="true">
                 <p:tree id="docs" value="#{treeMB.root}" var="doc" selectionMode="single" selection="#{treeMB.selectedNode}">
-                    <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
+                    <p:treeNode expandedIcon="fa fa-folder-open-o" collapsedIcon="fa fa-folder">
                         <h:outputText value="#{doc.name}"/>
                     </p:treeNode>
 
@@ -45,7 +45,7 @@
             <p:spacer height="5px"/>
             <p:panel header="Horizontal Tree" styleClass="card box-solid box-success" toggleable="true">
                 <p:tree id="docs-hr" value="#{treeMB.root}" var="doc" selectionMode="single" selection="#{treeMB.selectedNode}" orientation="horizontal">                    
-                    <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
+                    <p:treeNode expandedIcon="fa fa-folder-open-o" collapsedIcon="fa fa fa-folder">
                         <h:outputText value="#{doc.name}"/>
                     </p:treeNode>
 
@@ -74,8 +74,8 @@
                         selection="#{treeMB.selectedNodes}">
                     <p:ajax event="select"  update="@(.btn-primary)" />
                     <p:ajax event="unselect" update="@(.btn-primary)" />
-                    
-                    <p:treeNode icon="ui-icon-note">
+
+                    <p:treeNode expandedIcon="fa fa-folder-open-o" collapsedIcon="fa fa-folder">
                         <h:outputText value="#{doc.name}"/>
                     </p:treeNode>
                     <p:treeNode type="document" icon="fa fa-file-word-o">
@@ -95,7 +95,6 @@
             </p:panel>
 
         </h:form>
-
     </ui:define>
 
     <ui:define name="code">
