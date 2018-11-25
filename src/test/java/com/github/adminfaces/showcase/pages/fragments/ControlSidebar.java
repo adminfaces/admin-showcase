@@ -1,7 +1,7 @@
 package com.github.adminfaces.showcase.pages.fragments;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.jboss.arquillian.graphene.Graphene.guardAjax;
+import static org.jboss.arquillian.graphene.Graphene.*;
 import static org.jboss.arquillian.graphene.Graphene.waitGui;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
@@ -58,7 +58,7 @@ public class ControlSidebar {
     @FindBy(id = "btn-skin-teal")
     private GrapheneElement btnSkinTeal;
 
-    @FindBy(id = "restore-defaults")
+    @FindByJQuery("div#restore-defaults a")
     private GrapheneElement restoreDefaults;
     
     @FindByJQuery("a#layout-setup")
@@ -78,7 +78,7 @@ public class ControlSidebar {
         waitGui().until().element(fixedLayoutCheckbox).is().visible();
         boolean isFixedLayout = pageBody.getAttribute("class")
             .contains("fixed");
-        guardAjax(fixedLayoutCheckbox).click();
+        guardNoRequest(fixedLayoutCheckbox).click();
         assertThat(pageBody.getAttribute("class")
             .contains("fixed")).isEqualTo(!isFixedLayout);
         assertThat(boxedLayoutCheckbox.getAttribute("class").contains("ui-state-disabled")).isEqualTo(!isFixedLayout);//boxed layout is disabled when fixed layout is enabled
@@ -88,7 +88,7 @@ public class ControlSidebar {
         waitGui().until().element(boxedLayoutCheckbox).is().visible();
         boolean isBoxedLayout = pageBody.getAttribute("class")
             .contains("layout-boxed");
-        guardAjax(boxedLayoutCheckbox).click();
+        guardNoRequest(boxedLayoutCheckbox).click();
         assertThat(pageBody.getAttribute("class")
             .contains("layout-boxed")).isEqualTo(!isBoxedLayout);
         assertThat(fixedLayoutCheckbox.getAttribute("class").contains("ui-state-disabled")).isEqualTo(!isBoxedLayout);//fixed layout is disabled when boxed layout is enabled
@@ -97,7 +97,7 @@ public class ControlSidebar {
     public void toggleSidebarSkin() {
         assertThat(controlSidebar.getAttribute("class")
             .contains("control-sidebar-dark")).isTrue();
-        guardAjax(sidebarSkinCheckbox).click();
+        guardNoRequest(sidebarSkinCheckbox).click();
         assertThat(controlSidebar.getAttribute("class")
             .contains("control-sidebar-light")).isTrue();
     }
@@ -131,7 +131,8 @@ public class ControlSidebar {
     }
 
     public void restoreDefaults() {
-        browser.findElement(By.id("restore-defaults")).click();
+        waitModel().until().element(restoreDefaults).is().present();
+        restoreDefaults.click();
         waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
     }
 
@@ -147,7 +148,7 @@ public class ControlSidebar {
         waitGui().until().element(collapsedSidebarCheckbox).is().visible();
         boolean isSidebarCoppased = pageBody.getAttribute("class")
             .contains("sidebar-collapse");
-        guardAjax(collapsedSidebarCheckbox).click();
+        guardNoRequest(collapsedSidebarCheckbox).click();
         assertThat(pageBody.getAttribute("class")
             .contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
     }
@@ -156,7 +157,7 @@ public class ControlSidebar {
         waitGui().until().element(expandOnHoverLabel).is().visible();
         boolean isSidebarCoppased = pageBody.getAttribute("class")
             .contains("sidebar-collapse");
-        guardAjax(expandOnHoverLabel).click();
+        guardNoRequest(expandOnHoverLabel).click();
         assertThat(pageBody.getAttribute("class")
             .contains("sidebar-collapse")).isEqualTo(!isSidebarCoppased);
 

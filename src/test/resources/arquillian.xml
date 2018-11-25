@@ -39,7 +39,7 @@
         <property name="browser">${browser}</property>
         <!--<property name="browser">chrome,firefox, chromeheadless or internetExplorer</property>-->
         <property name="dimensions">1366x1024</property>
-        <!--property name="chromeDriverVersion">2.40</property-->
+        <property name="chromeDriverVersion">2.41</property>
     </extension>
     
     <extension qualifier="graphene">
