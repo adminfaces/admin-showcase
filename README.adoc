@@ -12,6 +12,8 @@ image:showcase.png[link="https://raw.githubusercontent.com/adminfaces/admin-show
 
 Showcase is available on http://admin-showcase-admin-showcase.7e14.starter-us-west-2.openshiftapps.com/showcase/index.xhtml[Openshift here^].
 
+It is also available on http://docker175194-env-8309037.jelasticlw.com.br/showcase/[Jelastic here^]
+
 IMPORTANT: The demo runs on the Openshift starter which is a platform used just for testing and not for production. So it's likely the showcase may be slow or *even down*.
 
 == Running locally
