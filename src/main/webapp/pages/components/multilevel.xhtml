@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="#{layoutMB.template}">
+    
+    <ui:param name="title" value="Multi level menu"/>
+
+    <ui:define name="description">
+       Multi level menu example
+    </ui:define>
+
+    <ui:define name="body">
+        Multi level menu content
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="multilevel.xhtml">
+                <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+                </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

@@ -3,15 +3,16 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="#{layoutMB.template}">
-    
-    
-    <ui:param name="renderBreadCrumb" value="false"/>
-    
+
+    <ui:define name="metadata">
+        <ui:param name="renderBreadCrumb" value="false"/>
+    </ui:define>
+
     <ui:define name="title">
-         <div class="pull-right hidden-xs">
-             <a href="https://adminfaces.github.io/site/" target="_blank">
-                  <h:graphicImage library="images" name="logo.png" height="100" width="100"/>
-             </a>
+        <div class="pull-right hidden-xs">
+            <a href="https://adminfaces.github.io/site/" target="_blank">
+                <h:graphicImage library="images" name="logo.png" height="100" width="100"/>
+            </a>
         </div>
         <p:growl autoUpdate="true" life="4000"/>
 
@@ -37,9 +38,9 @@
                 <ul>
                     <li>
                         <p:link value="Admin Theme" href="https://github.com/adminfaces/admin-theme"/>: Is a <i><p:link
-                            value="Primefaces theme" href="http://primefaces.org/themes"/> </i> based on <p:link
+                                value="Primefaces theme" href="http://primefaces.org/themes"/> </i> based on <p:link
                             value="Bootstrap" href="http://getbootstrap.com"/> and <p:link value=" Admin LTE"
-                                                                                           href="https://adminlte.io/themes/AdminLTE/"/> where PrimeFaces components are customized to look like mentioned frameworks.
+                            href="https://adminlte.io/themes/AdminLTE/"/> where PrimeFaces components are customized to look like mentioned frameworks.
                     </li>
                     <li>
                         <p:link value="Admin Template" href="https://github.com/adminfaces/admin-template"/>: It's a
@@ -64,7 +65,7 @@
                         <p:link value="Admin Persistence"
                                 href="https://github.com/adminfaces/admin-persistence"/>: CRUD operations like a breeze for AdminFaces applications based on <p:link href="https://deltaspike.apache.org/" value="Apache DeltaSpike" target="_blank"/> Data module.
                     </li>
-                     <li>
+                    <li>
                         <p:link value="Admin Starter SpringBoot"
                                 href="https://github.com/adminfaces/admin-starter-springboot"/>: Admin Starter application based on SpringBoot and JoinFaces.
                     </li>
@@ -80,7 +81,7 @@
                         <p:link value="Admin Blog"
                                 href="https://github.com/adminfaces/blog"/>:  <a href="https://adminfaces.github.io/blog/" target="_blank">AdminFaces blog</a>, used for AdminFaces announcements and tips.
                     </li>
-                     <li>
+                    <li>
                         <p:link value="Admin Mobile"
                                 href="https://github.com/adminfaces/admin-mobile"/>: Admin showcase mobile application using Android webview.
                     </li>
