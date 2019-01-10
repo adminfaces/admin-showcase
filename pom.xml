@@ -24,6 +24,7 @@
         <asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
         <asciidoctorj.version>1.5.6</asciidoctorj.version>
         <jruby.version>9.1.13.0</jruby.version>
+        <adminfaces.version>1.0.0-RC21-SNAPSHOT</adminfaces.version>
     </properties>
 
     <dependencies>
@@ -52,7 +53,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-template</artifactId>
-            <version>1.0.0-RC21-SNAPSHOT</version>
+            <version>${adminfaces.version}</version>
             <!-- end::dep-admin-template[] -->
             <exclusions>
                 <exclusion>
@@ -65,7 +66,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
-            <version>1.0.0-RC21-SNAPSHOT</version>
+            <version>${adminfaces.version}</version>
             <!-- end::dep-admin-theme[] -->
             <classifier>no-cache</classifier>
         </dependency>
@@ -630,12 +631,6 @@
             <id>snapshots</id>
             <name>libs-snapshot</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
         </repository>
     </repositories>
 
