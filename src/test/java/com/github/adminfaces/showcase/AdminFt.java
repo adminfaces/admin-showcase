@@ -197,6 +197,7 @@ public class AdminFt {
         menuSearchInput.clear();
 
         menuSearchInput.sendKeys("at");
+        waitModel().until().element(By.id("menu-search")).is().visible();
         assertThat(menuSearch.containsMenuItem("DataTable")).isTrue();
         assertThat(menuSearch.containsMenuItem("TriStateCheckbox")).isTrue();
         assertThat(menuSearch.containsMenuItem("Material")).isTrue();
