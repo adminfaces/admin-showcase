@@ -164,11 +164,44 @@
                     <p:multiSelectListbox id="multListBox" value="#{multiSelectBean.selection}" effect="slide" header="Categories" showHeaders="true">
                         <f:selectItems value="#{multiSelectBean.categories}" />
                     </p:multiSelectListbox>
+                    <p:outputLabel for="selectMany" value="Select Many:" />
+                    <p:selectManyMenu id="selectMany" value="#{selectManyMB.selectedThemes}" converter="themeConverter"
+                                      var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                        <f:selectItems value="#{selectManyMB.themes}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
+                        <p:column>
+                            <h:outputText styleClass="ui-theme ui-theme-#{t.name}" style="margin-left:35px" />
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="#{t.displayName}" />
+                        </p:column>
+                    </p:selectManyMenu>
+                    <p:outputLabel for="toggleable" value="Panel:" />
+                    <p:panel id="toggleable" header="Toggleable" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" styleClass="card box-primary">
+
+                        <p:ajax event="close" listener="#{panelMB.onClose}" />
+                        <p:ajax event="toggle" listener="#{panelMB.onToggle}" />
+
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather/godfather2.jpg" />
+                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream.
+            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living.." />
+                        </h:panelGrid>
+
+                        <f:facet name="options">
+                            <p:menu>
+                                <p:submenu label="Settings">
+                                    <p:menuitem value="Toggle" url="#" icon="fa fa-refresh" onclick="PF('panel').toggle()" />
+                                    <p:menuitem value="Remove" url="#" icon="fa fa-close" onclick="PF('panel').close()" />
+                                </p:submenu>
+                            </p:menu>
+                        </f:facet>
+                    </p:panel>
                     <p:outputLabel for="cmdBtn" value="Command Button"/>
                     <p:commandButton value="Action" id="cmdBtn" styleClass="btn-primary"/>
                     <p:outputLabel for="cmdBtnFlat" value="Material flat button"/>
                     <p:commandButton value="Action" id="cmdBtnFlat" styleClass="btn-primary btn-material"/>
                 </p:panelGrid>
+
                 <p:commandButton id="dialog" value="Dialog" icon="ui-icon-extlink" styleClass="btn-success"
                                  type="button" onclick="PF('dlg').show()" style="margin-top:20px;display:block"/>
                 <p:dialog header="Login" widgetVar="dlg" resizable="false" responsive="true"
