@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -187,27 +188,32 @@ public class AdminFt {
 
     @Test
     @InSequence(4)
-    public void shouldFilterMenuItens(@InitialPage IndexPage index) {
+    public void shouldFilterMenuItens(@InitialPage IndexPage index) throws InterruptedException {
         WebElement menuSearchInput = browser.findElement(By.cssSelector("input.form-control"));
         menuSearchInput.sendKeys("for");
         waitModel();
         assertThat(menuSearch.containsMenuItem("forms")).isTrue();
         assertThat(menuSearch.containsMenuItem("home")).isFalse();
         assertThat(menuSearch.containsMenuItem("exceptions")).isFalse();
-        menuSearchInput.clear();
-
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
+        waitModel();
         menuSearchInput.sendKeys("at");
-        waitModel().until().element(By.id("menu-search")).is().visible();
+        waitModel();
         assertThat(menuSearch.containsMenuItem("DataTable")).isTrue();
         assertThat(menuSearch.containsMenuItem("TriStateCheckbox")).isTrue();
         assertThat(menuSearch.containsMenuItem("Material")).isTrue();
         waitModel();
-        menuSearchInput.clear();
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
         waitModel();
         menuSearchInput.sendKeys("hom");
         assertThat(menuSearch.containsMenuItem("home")).isTrue();
         waitModel();
-        menuSearchInput.clear();
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
+        menuSearchInput.sendKeys(Keys.BACK_SPACE);
         menuSearchInput.sendKeys("exc");
         waitModel();
         assertThat(menuSearch.containsMenuItem("Exceptions")).isTrue();
