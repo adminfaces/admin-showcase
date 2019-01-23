@@ -5,16 +5,16 @@
  */
 package com.github.adminfaces.showcase.pages;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.jboss.arquillian.graphene.Graphene.guardAjax;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
+
 import java.util.List;
-import static org.jboss.arquillian.graphene.Graphene.*;
 
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
@@ -25,7 +25,7 @@ public class DataTablePage extends BasePage {
     @FindByJQuery("hr.ui-separator + div.ui-datatable")
     private GrapheneElement datatable;
 
-    @FindByJQuery("div.ui-datatable-sticky td .ui-chkbox-box")
+    @FindByJQuery("div.ui-datatable td .ui-chkbox-box")
     private List<GrapheneElement> datatableCheckBoxes;
 
     @FindByJQuery(".ui-column-customfilter .ui-selectcheckboxmenu-trigger")
