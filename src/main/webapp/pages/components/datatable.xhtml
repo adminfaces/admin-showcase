@@ -45,7 +45,7 @@
                     <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true" styleClass="header-right"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{car.id}"
-                                 emptyMessage="No cars found with given criteria" stickyHeader="true"
+                                 emptyMessage="No cars found with given criteria" stickyHeader="false"
                                  filteredValue="#{datatableMB.filteredCars}">
 
                         <f:facet name="header">
@@ -71,11 +71,11 @@
                         <p:column filterBy="#{car.year}" sortBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
                                   priority="2">
                             <f:facet name="filter">
-                                <p:calendar pattern="yyyy" showOn="both" yearRange="c-60:c+0" navigator="true">
+                                <p:datePicker pattern="yyyy" showOn="both" showIcon="true" yearNavigator="true" yearRange = "1995:2050" navigator="true">
                                     <f:converter converterId="calendarYearConverter"/>
                                     <p:ajax process="@this" event="change" oncomplete="PF('carsTable').filter()"/>
                                     <p:ajax process="@this" event="dateSelect" oncomplete="PF('carsTable').filter()"/>
-                                </p:calendar>
+                                </p:datePicker>
                             </f:facet>
                             <h:outputText value="#{car.year}"/>
                         </p:column>

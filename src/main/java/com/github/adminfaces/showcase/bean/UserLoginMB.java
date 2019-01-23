@@ -16,12 +16,12 @@
 package com.github.adminfaces.showcase.bean;
 
 import org.omnifaces.cdi.ViewScoped;
-import org.primefaces.context.RequestContext;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
+import org.primefaces.PrimeFaces;
 
 @Named
 @ViewScoped
@@ -58,7 +58,7 @@ public class UserLoginMB implements Serializable {
     }
 
     public void login() {
-        RequestContext context = RequestContext.getCurrentInstance();
+        PrimeFaces context = PrimeFaces.current();
         FacesMessage message = null;
         boolean loggedIn = false;
 
@@ -71,6 +71,6 @@ public class UserLoginMB implements Serializable {
         }
 
         FacesContext.getCurrentInstance().addMessage(null, message);
-        context.addCallbackParam("loggedIn", loggedIn);
+        context.ajax().addCallbackParam("loggedIn", loggedIn);
     }
 }

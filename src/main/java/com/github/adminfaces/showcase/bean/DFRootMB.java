@@ -1,7 +1,7 @@
 package com.github.adminfaces.showcase.bean;
 
 import org.omnifaces.cdi.ViewScoped;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 import javax.faces.application.FacesMessage;
@@ -22,7 +22,7 @@ public class DFRootMB implements Serializable {
         Map<String, Object> options = new HashMap<String, Object>();
         options.put("modal", true);
         options.put("appendTo", "@(body)");
-        RequestContext.getCurrentInstance().openDialog("level1", options, null);
+          PrimeFaces.current().dialog().openDynamic("level1", options, null);
     }
 
     public void onReturnFromLevel1(SelectEvent event) {

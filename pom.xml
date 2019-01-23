@@ -25,6 +25,7 @@
 		<asciidoctorj.version>1.5.6</asciidoctorj.version>
 		<jruby.version>9.1.13.0</jruby.version>
 		<adminfaces.version>1.0.0-RC21-SNAPSHOT</adminfaces.version>
+		<primefaces.version>7.0.RC1</primefaces.version>
 	</properties>
 
 	<dependencies>
@@ -56,7 +57,7 @@
 					<artifactId>admin-theme</artifactId>
 				</exclusion>
 			</exclusions>
-         <classifier>legacy</classifier>
+         <!--<classifier>legacy</classifier> PrimeFaces 6.1 and below -->
 		</dependency>
 		<!-- tag::dep-admin-theme[] -->
 		<dependency>
@@ -70,7 +71,7 @@
         <dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>6.2</version>
+			<version>${primefaces.version}</version>
 		</dependency>
 
 		<dependency>

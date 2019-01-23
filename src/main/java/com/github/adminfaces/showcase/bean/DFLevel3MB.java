@@ -1,13 +1,10 @@
 package com.github.adminfaces.showcase.bean;
 
 import org.omnifaces.cdi.ViewScoped;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
+import org.primefaces.PrimeFaces;
 
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by rafael-pestano on 22/06/17.
@@ -28,6 +25,6 @@ public class DFLevel3MB implements Serializable {
 
     public void closeDialog() {
         //pass back to level 2
-        RequestContext.getCurrentInstance().closeDialog(val);
+        PrimeFaces.current().dialog().closeDynamic(val);
     }
 }

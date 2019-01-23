@@ -1,7 +1,7 @@
 package com.github.adminfaces.showcase.bean;
 
 import org.omnifaces.cdi.ViewScoped;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 import javax.inject.Named;
@@ -21,11 +21,11 @@ public class DFLevel1MB implements Serializable {
         options.put("modal", true);
         options.put("appendTo", "@(body)");
         options.put("styleClass", "dlg2");
-        RequestContext.getCurrentInstance().openDialog("level2", options, null);
+        PrimeFaces.current().dialog().openDynamic("level2", options, null);
     }
 
     public void onReturnFromLevel2(SelectEvent event) {
         //pass back to root
-        RequestContext.getCurrentInstance().closeDialog(event.getObject());
+        PrimeFaces.current().dialog().closeDynamic(event.getObject());
     }
 }
