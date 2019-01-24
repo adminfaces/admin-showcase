@@ -21,6 +21,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
+
 import org.primefaces.PrimeFaces;
 
 @Named
@@ -62,7 +63,7 @@ public class UserLoginMB implements Serializable {
         FacesMessage message = null;
         boolean loggedIn = false;
 
-        if(username != null && username.equals("admin") && password != null && password.equals("admin")) {
+        if (username != null && username.equals("admin") && password != null && password.equals("admin")) {
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
         } else {
