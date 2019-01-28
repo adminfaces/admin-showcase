@@ -71,11 +71,11 @@
                         <p:column filterBy="#{car.year}" sortBy="#{car.year}" headerText="Year" footerText="lte" filterMatchMode="lte"
                                   priority="2">
                             <f:facet name="filter">
-                                <p:datePicker pattern="yyyy" showOn="both" showIcon="true" yearNavigator="true" yearRange = "1995:2050" navigator="true">
+                                <p:calendar pattern="yyyy" showOn="both" yearRange="c-60:c+0" navigator="true">
                                     <f:converter converterId="calendarYearConverter"/>
                                     <p:ajax process="@this" event="change" oncomplete="PF('carsTable').filter()"/>
                                     <p:ajax process="@this" event="dateSelect" oncomplete="PF('carsTable').filter()"/>
-                                </p:datePicker>
+                                </p:calendar>
                             </f:facet>
                             <h:outputText value="#{car.year}"/>
                         </p:column>
@@ -155,7 +155,7 @@
             </h:form>
         </p:panel>
 
-       <p:spacer/>
+        <p:spacer/>
         <p:panel header="Tree table" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <h:form>
                 <div id="treetable">
@@ -180,7 +180,7 @@
                     </p:treeTable>
                 </div>
 
-               <p:spacer/>
+                <p:spacer/>
                 <div id="treetable-multiple">
                     <p:treeTable value="#{treeTableMB.root}" selectionMode="checkbox"
                                  selection="#{treeTableMB.selectedNodes}"
@@ -206,7 +206,7 @@
                 </div>
             </h:form>
         </p:panel>
-        
+
         <p:spacer/>
         <p:panel header="Editable" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <h:form id="form">
@@ -282,7 +282,7 @@
                     <p:column headerText="Year">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
-                           <f:facet name="input">
+                            <f:facet name="input">
                                 <p:calendar value="#{car.year}" pattern="yyyy" showOn="both" yearRange="c-60:c+0" navigator="true" label="Year">
                                     <f:converter converterId="calendarYearConverter"/>
                                 </p:calendar>
@@ -321,7 +321,66 @@
             </h:form>
         </p:panel>
 
-       <p:spacer/>
+        <p:spacer/>
+        <p:panel header="No border" styleClass="card no-border" toggleable="true" toggleSpeed="300">
+            <div class="ui-g">
+                <div class="ui-g-6 ui-sm-12">
+                    <p:dataTable id="noBorderTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
+                                 styleClass="no-border" rowKey="#{car.id}"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15" rows="3" selection="#{datatableMB.selectedCar}"
+                                 emptyMessage="No cars found with given criteria"
+                                 >
+
+                        <f:facet name="header">
+                            <h:outputText value="No border table"/>
+                        </f:facet>
+
+                        <f:facet name="footer">
+                            <h:outputText value="Table footer"/>
+                        </f:facet>
+                        
+                       <p:column selectionMode="single" style="width: 42px"
+                                  styleClass="align-center"
+                                  priority="1"/>
+
+                       <p:column styleClass="align-center" sortBy="#{car.id}" headerText="Id"
+                                  priority="1">
+                            <h:outputText value="#{car.id}"/>
+                        </p:column>
+
+                        <p:column styleClass="align-center" headerText="Brand"
+                                  priority="2">
+                            <h:outputText value="#{car.brand}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+
+                <div class="ui-g-6 ui-sm-12">
+                    <p:treeTable value="#{treeTableMB.root}" selectionMode="single" styleClass="no-border"
+                                 var="document" paginator="true" paginatorPosition="bottom" rows="3">
+                        <f:facet name="header">
+                            No border treetable 
+                        </f:facet>
+                        <p:column headerText="Name" sortBy="#{document.name}">
+                            <p:link value="#{document.name}" outcome="/index"/>
+                        </p:column>
+                        <p:column headerText="Size (p3)" priority="2">
+                            <h:outputText value="#{document.size}"/>
+                        </p:column>
+                        <p:column headerText="Type (p2)" priority="3">
+                            <h:outputText value="#{document.type}"/>
+                        </p:column>
+                        <p:column headerText="(p4)" priority="4">
+                            <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')"
+                                           title="View Detail" styleClass="fa fa-search" style="text-decoration: none"/>
+                        </p:column>
+                    </p:treeTable>
+                </div>
+            </div> 
+        </p:panel>
+        
+        <p:spacer/>
         <p:panel header="Box colors" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <div class="ui-g">
                 <div class="ui-g-6 ui-sm-12">
@@ -382,8 +441,8 @@
                 </div>
             </div> 
         </p:panel>
-        
-      <p:spacer/>
+
+        <p:spacer/>
 
         <p:panel styleClass="car box-info" header="SubTable" toggleable="true" toggleSpeed="300">
             <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right">
