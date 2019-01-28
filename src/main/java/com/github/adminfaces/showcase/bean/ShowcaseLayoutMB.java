@@ -18,13 +18,14 @@ import javax.enterprise.inject.Specializes;
 public class ShowcaseLayoutMB extends com.github.adminfaces.template.bean.LayoutMB {
     
     private boolean flat;
-    
+    private boolean borderless;
     private boolean materialButtons;
     
     @PostConstruct
     public void init() {
         super.init();
         flat = false;
+        borderless = false;
     }
 
     public boolean isFlat() {
@@ -35,6 +36,14 @@ public class ShowcaseLayoutMB extends com.github.adminfaces.template.bean.Layout
         this.flat = flat;
     }
 
+    public boolean isBorderless() {
+        return borderless;
+    }
+
+    public void setBorderless(boolean borderless) {
+        this.borderless = borderless;
+    }
+    
     public boolean isMaterialButtons() {
         return materialButtons;
     }
@@ -42,9 +51,5 @@ public class ShowcaseLayoutMB extends com.github.adminfaces.template.bean.Layout
     public void setMaterialButtons(boolean materialButtons) {
         this.materialButtons = materialButtons;
     }
-    
-    
-    
-    
     
 }

@@ -8,9 +8,13 @@
 
 
     <ui:define name="metadata">
+		 <f:metadata>
+            <f:viewParam name="bordeless" value="#{layoutMB.borderless}" converter="javax.faces.Boolean"/>
+        </f:metadata>
         <ui:param name="enableSlideMenu" value="false"/> <!-- disables slide menu (only on this page) on small screens -->
         <ui:param name="autoShowNavbar" value="false"/> <!-- disables auto show navbar (only on this page) on small devices -->
         <style type="text/css">
+
             .header-right.ui-datatable .ui-datatable-header {
                 text-align: right !important;
             }
@@ -38,11 +42,19 @@
 
     <ui:define name="body">
         <adm:breadcrumb title="Datatable"/>
-        <p:panel styleClass="card box-info" header="Datatable">
+        <p:panel styleClass="card box-primary" header="Datatable">
             <h:form prependId="false">
+			<div>
+				<p:tooltip for="borderless" escape="false" position="top" value="Turns borderless tables on, just add &lt;code&gt;no-border&lt;/code&gt; class to all datatables."/>
+				<p:outputLabel value="Borderless tables?" for="borderless"/>
+				<p:inputSwitch id="borderless" value="#{layoutMB.borderless}">
+					<p:ajax update="@this @(.ui-datatable, .ui-treetable)"/>
+				</p:inputSwitch>
+			</div>
+            <p:spacer height="15px"/>
 
                 <div id="datatable">
-                    <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true" styleClass="header-right"
+                    <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true" styleClass="header-right #{layoutMB.borderless ? 'no-border':''}"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" rows="10" rowKey="#{car.id}"
                                  emptyMessage="No cars found with given criteria" stickyHeader="true"
@@ -128,7 +140,7 @@
 
                 <div id="datatable-single">
                     <p:dataTable id="radioDT" var="car" value="#{datatableMB.cars}" paginator="true"
-                                 paginatorPosition="bottom"
+                                 paginatorPosition="bottom" styleClass="#{layoutMB.borderless ? 'no-border':''}"
                                  selection="#{datatableMB.selectedCar}" rowKey="#{car.id}" rows="5">
                         <f:facet name="header">
                             RadioButton
@@ -156,10 +168,10 @@
         </p:panel>
 
         <p:spacer/>
-        <p:panel header="Tree table" styleClass="card no-border" toggleable="true" toggleSpeed="300">
+        <p:panel header="Tree table" styleClass="card no-border" toggleable="true" toggleSpeed="300" >
             <h:form>
                 <div id="treetable">
-                    <p:treeTable value="#{treeTableMB.root}" selectionMode="single"
+                    <p:treeTable value="#{treeTableMB.root}" selectionMode="single" styleClass="#{layoutMB.borderless ? 'no-border':''}"
                                  var="document" paginator="true" paginatorPosition="bottom" rows="2">
                         <f:facet name="header">
                             Document Viewer
@@ -183,7 +195,7 @@
                 <p:spacer/>
                 <div id="treetable-multiple">
                     <p:treeTable value="#{treeTableMB.root}" selectionMode="checkbox"
-                                 selection="#{treeTableMB.selectedNodes}"
+                                 selection="#{treeTableMB.selectedNodes}" styleClass="#{layoutMB.borderless ? 'no-border':''}"
                                  var="document" paginator="true" paginatorPosition="bottom" rows="2">
                         <f:facet name="header">
                             Document Viewer (multiple selection)
@@ -212,7 +224,8 @@
             <h:form id="form">
                 <p:growl id="msgs" showDetail="true"/>
 
-                <p:dataTable id="cars1" var="car" value="#{datatableEditMB.cars1}" editable="true" style="margin-bottom:20px">
+                <p:dataTable id="cars1" var="car" value="#{datatableEditMB.cars1}" styleClass="#{layoutMB.borderless ? 'no-border':''}"
+							 editable="true" style="margin-bottom:20px">
                     <f:facet name="header">
                         Row Editing
                     </f:facet>
@@ -265,7 +278,8 @@
                     </p:column>
                 </p:dataTable>
 
-                <p:dataTable id="cars2" var="car" value="#{datatableEditMB.cars2}" editable="true" editMode="cell" widgetVar="cellCars">
+                <p:dataTable id="cars2" var="car" value="#{datatableEditMB.cars2}" styleClass="#{layoutMB.borderless ? 'no-border':''}"
+							 editable="true" editMode="cell" widgetVar="cellCars">
                     <f:facet name="header">
                         Cell Editing with Click and RightClick
                     </f:facet>
@@ -322,70 +336,11 @@
         </p:panel>
 
         <p:spacer/>
-        <p:panel header="No border" styleClass="card no-border" toggleable="true" toggleSpeed="300">
-            <div class="ui-g">
-                <div class="ui-g-6 ui-sm-12">
-                    <p:dataTable id="noBorderTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
-                                 styleClass="no-border" rowKey="#{car.id}"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="5,10,15" rows="3" selection="#{datatableMB.selectedCar}"
-                                 emptyMessage="No cars found with given criteria"
-                                 >
-
-                        <f:facet name="header">
-                            <h:outputText value="No border table"/>
-                        </f:facet>
-
-                        <f:facet name="footer">
-                            <h:outputText value="Table footer"/>
-                        </f:facet>
-                        
-                       <p:column selectionMode="single" style="width: 42px"
-                                  styleClass="align-center"
-                                  priority="1"/>
-
-                       <p:column styleClass="align-center" sortBy="#{car.id}" headerText="Id"
-                                  priority="1">
-                            <h:outputText value="#{car.id}"/>
-                        </p:column>
-
-                        <p:column styleClass="align-center" headerText="Brand"
-                                  priority="2">
-                            <h:outputText value="#{car.brand}"/>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-
-                <div class="ui-g-6 ui-sm-12">
-                    <p:treeTable value="#{treeTableMB.root}" selectionMode="single" styleClass="no-border"
-                                 var="document" paginator="true" paginatorPosition="bottom" rows="3">
-                        <f:facet name="header">
-                            No border treetable 
-                        </f:facet>
-                        <p:column headerText="Name" sortBy="#{document.name}">
-                            <p:link value="#{document.name}" outcome="/index"/>
-                        </p:column>
-                        <p:column headerText="Size (p3)" priority="2">
-                            <h:outputText value="#{document.size}"/>
-                        </p:column>
-                        <p:column headerText="Type (p2)" priority="3">
-                            <h:outputText value="#{document.type}"/>
-                        </p:column>
-                        <p:column headerText="(p4)" priority="4">
-                            <p:commandLink process="@none" update="@none" oncomplete="alert('view detail')"
-                                           title="View Detail" styleClass="fa fa-search" style="text-decoration: none"/>
-                        </p:column>
-                    </p:treeTable>
-                </div>
-            </div> 
-        </p:panel>
-        
-        <p:spacer/>
         <p:panel header="Box colors" styleClass="card no-border" toggleable="true" toggleSpeed="300">
             <div class="ui-g">
                 <div class="ui-g-6 ui-sm-12">
                     <p:dataTable id="boxSolidTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
-                                 styleClass="box-primary"
+                                 styleClass="box-primary #{layoutMB.borderless ? 'no-border':''}"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" rows="10"
                                  emptyMessage="No cars found with given criteria"
@@ -413,7 +368,7 @@
 
                 <div class="ui-g-6 ui-sm-12">
                     <p:dataTable id="boxTable" var="car" value="#{datatableMB.cars}" paginator="true" paginatorPosition="bottom"
-                                 styleClass="box-solid box-primary"
+                                 styleClass="box-solid box-primary #{layoutMB.borderless ? 'no-border':''}"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" rows="10"
                                  emptyMessage="No cars found with given criteria"
@@ -445,7 +400,7 @@
         <p:spacer/>
 
         <p:panel styleClass="car box-info" header="SubTable" toggleable="true" toggleSpeed="300">
-            <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right">
+            <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right #{layoutMB.borderless ? 'no-border':''}">
                 <f:facet name="header">
                     NBA Teams
                 </f:facet>
