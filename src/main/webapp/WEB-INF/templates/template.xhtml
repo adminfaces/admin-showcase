@@ -55,12 +55,12 @@
                        target='_blank'&gt;Admin theme &lt;span style='font-weight: 600'&gt;
                        #{adm['admin.version']}&lt;/span&gt;&lt;/a&gt; and &lt;a href='https://primefaces.org/'
                        target='_blank'&gt;PrimeFaces &lt;span style='font-weight: 600'&gt;
-                       7.0-SNAPSHOT&lt;/span&gt;&lt;/a&gt;
+                       #{msg['primefaces.version']}&lt;/span&gt;&lt;/a&gt;
                        "/>
             Powered by <h:link value="AdminFaces - © 2017-2019" id="admin-footer" href="#" onclick="void(0);return false"/>
             <div class="pull-right " style="color: gray">
                 Page views: <h:link id="link-stats" href="#" onclick="void(0);return false"> <span
-                        style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></h:link>
+                    style="font-weight: 600"> #{analyticsMB.pageStats.totalPageViews}</span></h:link>
             </div>
 
             <p:tooltip for="link-stats" escape="false" position="top"
@@ -69,7 +69,6 @@
                        style='font-weight: 600;color:#3c8dbc;display:inline'&gt; #{analyticsMB.pageStats.uniquePageViews}&lt;/div&gt;"/>
 
         </div>
-
 
     </ui:define>
 
