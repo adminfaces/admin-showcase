@@ -1,17 +1,16 @@
 package com.github.adminfaces.showcase.pages.components;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.jboss.arquillian.graphene.Graphene.waitModel;
-
-import java.time.Year;
-import java.util.List;
-
+import com.github.adminfaces.showcase.pages.BasePage;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.Location;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.github.adminfaces.showcase.pages.BasePage;
+import java.util.Calendar;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
 /**
  * Created by rafael-pestano on 16/01/17.
@@ -40,7 +39,7 @@ public class DatePickerPage extends BasePage {
         assertThat(days).isNotEmpty();
         days.get(1).click();
         waitModel().until().element(spanishDatePickerDays).is().not().clickable();
-        assertThat(spanishDatePicker.getAttribute("value")).startsWith(Year.now().getValue()+"");
+        assertThat(spanishDatePicker.getAttribute("value")).startsWith(Calendar.getInstance().get(Calendar.YEAR)+"");
     }
 
     public WebElement getPageTitle() {
