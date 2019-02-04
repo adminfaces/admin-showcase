@@ -4,6 +4,7 @@ import static com.github.adminfaces.showcase.ultil.DeployUtil.deploy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.jboss.arquillian.graphene.Graphene.waitModel;
 
+import com.github.adminfaces.showcase.pages.components.DatePickerPage;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.Graphene;
@@ -352,6 +353,13 @@ public class AdminFt {
 
     @Test
     @InSequence(12)
+    public void shouldSelectDateInSpanishDatePicker(@InitialPage DatePickerPage datePickerPage) {
+        assertThat(datePickerPage.getPageTitle().getText()).startsWith("DatePicker");
+        datePickerPage.selectDate();
+    }
+
+    @Test
+    @InSequence(12)
     public void shouldDestroyTheWorld(@InitialPage DialogPage dialogPage) {
         dialogPage.destroyTheWorld();
         WebElement confirmDialog = browser
@@ -393,6 +401,8 @@ public class AdminFt {
         loginPage.doLogon("admin@faces.org", "adminfaces");
         assertThat(loginPage.getMessages().getText()).isEqualTo("Logged in successfully!");
     }
+
+
 
     private boolean isSidebarCollapsed() {
         return browser.findElement(By.cssSelector("aside.main-sidebar")).getLocation().getX() == -230;
