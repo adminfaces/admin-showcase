@@ -45,11 +45,15 @@
 
                         <p:outputLabel for="multiselect" value="Multiple Selection:"/>
                         <p:datePicker id="multiselect" selectionMode="multiple" value="#{datePickerMB.multi}"
-                                      readonlyInput="true"/>
+                                      readonlyInput="true">
+                                       <p:ajax event="dateSelect" update="@(.ui-dialog)"/>
+                        </p:datePicker>       
 
                         <p:outputLabel for="range" value="Range Selection:"/>
                         <p:datePicker id="range" selectionMode="range" value="#{datePickerMB.range}"
-                                      readonlyInput="true"/>
+                                      readonlyInput="true">
+                                       <p:ajax event="dateSelect" update="@(.ui-dialog)"/>
+                        </p:datePicker>              
 
                         <p:outputLabel for="month" value="Month Picker:"/>
                         <p:datePicker id="month" view="month" value="#{datePickerMB.date3}" pattern="MM/yyyy"
@@ -99,7 +103,7 @@
                     <p:separator/>
                     <div class="ui-g">
                         <div class="ui-g-12 align-center">
-                            <p:commandButton value="Submit" update=":display" icon="fa fa-check"
+                            <p:commandButton value="Submit" update="@(.ui-dialog)" icon="fa fa-check"
                                              styleClass="btn-primary btn-lg"
                                              oncomplete="PF('dlg').show()"/>
                         </div>
@@ -112,7 +116,7 @@
 
         <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold" responsive="true"
                   styleClass="box-primary" minimizable="true" appendTo="@(body)">
-            <p:panelGrid id="display" columns="4" layout="grid" style="min-width: 600px;min-height: 500px"
+            <p:panelGrid id="display" columns="4" layout="grid" style="min-width: 650px;min-height: 500px"
                          columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4">
                 <p:outputLabel value="Inline:"/>
                 <h:outputText value="#{datePickerMB.date1}">
@@ -134,7 +138,7 @@
                 </ui:repeat>
 
                 <p:outputLabel value="Range Selection:"/>
-                <ui:repeat var="date" value="#{datePickerMB.range}" varStatus="status" size="2">
+                <ui:repeat var="date" value="#{datePickerMB.range}" varStatus="status" size="#{datePickerMB.range.size()}">
                     #{status.first ? '' : '-'}
                     <h:outputText value="#{date}">
                         <f:convertDateTime pattern="MM/dd/yyyy"/>
