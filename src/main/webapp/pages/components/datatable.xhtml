@@ -435,7 +435,7 @@
             </p:dataTable>
         </p:panel>
         <p:separator/>
-        <p:panel styleClass="card no-border" header="Row grouping" id="rowGroupPanel">
+        <p:panel styleClass="card no-border" header="Row grouping" id="rowGroupPanel" toggleable="true" toggleSpeed="300">
             <h:form>
                 <p:dataTable var="car" widgetVar="rowGroupTable" value="#{datatableMB.cars}" sortBy="#{car.brand}" expandableRowGroups="true" styleClass="#{layoutMB.borderless ? 'no-border':''}">
                     <p:headerRow>
