@@ -7,7 +7,7 @@
 	<groupId>com.github.adminfaces</groupId>
 	<artifactId>admin-showcase</artifactId>
 	<!-- tag::version[] -->
-	<version>1.0.0-RC20</version>
+	<version>1.0.0-RC21</version>
 	<!-- end::version[] -->
 	<name>admin-showcase</name>
 
@@ -24,7 +24,7 @@
 		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
 		<asciidoctorj.version>1.5.6</asciidoctorj.version>
 		<jruby.version>9.1.13.0</jruby.version>
-		<adminfaces.version>1.0.0-RC21-SNAPSHOT</adminfaces.version>
+		<adminfaces.version>1.0.0-RC21</adminfaces.version>
 		<primefaces.version>7.0.RC2</primefaces.version>
 	</properties>
 
