@@ -8,19 +8,14 @@
 
 
     <ui:define name="metadata">
-		 <f:metadata>
+        <f:metadata>
             <f:viewParam name="bordeless" value="#{layoutMB.borderless}" converter="javax.faces.Boolean"/>
         </f:metadata>
         <ui:param name="enableSlideMenu" value="false"/> <!-- disables slide menu (only on this page) on small screens -->
         <ui:param name="autoShowNavbar" value="false"/> <!-- disables auto show navbar (only on this page) on small devices -->
         <style type="text/css">
-
             .header-right.ui-datatable .ui-datatable-header {
                 text-align: right !important;
-            }
-
-            .year-spinner input {
-                width: 100px
             }
 
             .ui-button-text-only .ui-button-text {
@@ -44,14 +39,14 @@
         <adm:breadcrumb title="Datatable"/>
         <p:panel styleClass="card box-primary" header="Datatable">
             <h:form prependId="false">
-			<div>
-				<p:tooltip for="borderless" escape="false" position="top" value="Turns borderless tables on, just add &lt;code&gt;no-border&lt;/code&gt; class to all datatables."/>
-				<p:outputLabel value="Borderless tables?" for="borderless"/>
-				<p:inputSwitch id="borderless" value="#{layoutMB.borderless}">
-					<p:ajax update="@this @(.ui-datatable, .ui-treetable)"/>
-				</p:inputSwitch>
-			</div>
-            <p:spacer height="15px"/>
+                <div>
+                    <p:tooltip for="borderless" escape="false" position="top" value="Turns borderless tables on, just add &lt;code&gt;no-border&lt;/code&gt; class to all datatables."/>
+                    <p:outputLabel value="Borderless tables?" for="borderless"/>
+                    <p:inputSwitch id="borderless" value="#{layoutMB.borderless}">
+                        <p:ajax update="@this @(.ui-datatable, .ui-treetable)"/>
+                    </p:inputSwitch>
+                </div>
+                <p:spacer height="15px"/>
 
                 <div id="datatable">
                     <p:dataTable var="car" value="#{datatableMB.cars}" widgetVar="carsTable" paginator="true" styleClass="header-right #{layoutMB.borderless ? 'no-border':''}"
@@ -225,7 +220,7 @@
                 <p:growl id="msgs" showDetail="true"/>
 
                 <p:dataTable id="cars1" var="car" value="#{datatableEditMB.cars1}" styleClass="#{layoutMB.borderless ? 'no-border':''}"
-							 editable="true" style="margin-bottom:20px">
+                             editable="true" style="margin-bottom:20px">
                     <f:facet name="header">
                         Row Editing
                     </f:facet>
@@ -279,7 +274,7 @@
                 </p:dataTable>
 
                 <p:dataTable id="cars2" var="car" value="#{datatableEditMB.cars2}" styleClass="#{layoutMB.borderless ? 'no-border':''}"
-							 editable="true" editMode="cell" widgetVar="cellCars">
+                             editable="true" editMode="cell" widgetVar="cellCars">
                     <f:facet name="header">
                         Cell Editing with Click and RightClick
                     </f:facet>
@@ -327,10 +322,10 @@
                     </p:column>
                 </p:dataTable>
 
-                <p:contextMenu for="cars2" widgetVar="cMenu">   
-                    <p:menuitem value="Edit Cell" icon="fa fa-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
-                    <p:menuitem value="Hide Menu" icon="fa fa-close" onclick="PF('cMenu').hide()"/>  
-                </p:contextMenu> 
+                <p:contextMenu for="cars2" widgetVar="cMenu">
+                    <p:menuitem value="Edit Cell" icon="fa fa-search" onclick="PF('cellCars').showCellEditor();return false;"/>
+                    <p:menuitem value="Hide Menu" icon="fa fa-close" onclick="PF('cMenu').hide()"/>
+                </p:contextMenu>
 
             </h:form>
         </p:panel>
@@ -344,7 +339,7 @@
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" rows="10"
                                  emptyMessage="No cars found with given criteria"
-                                 >
+                    >
 
                         <f:facet name="header">
                             <h:outputText value="Box primary table"/>
@@ -372,7 +367,7 @@
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" rows="10"
                                  emptyMessage="No cars found with given criteria"
-                                 >
+                    >
 
                         <f:facet name="header">
                             <h:outputText value="Box solid primary table"/>
@@ -394,12 +389,12 @@
 
                     </p:dataTable>
                 </div>
-            </div> 
+            </div>
         </p:panel>
 
         <p:spacer/>
 
-        <p:panel styleClass="car box-info" header="SubTable" toggleable="true" toggleSpeed="300">
+        <p:panel styleClass="card box-info" header="SubTable" toggleable="true" toggleSpeed="300">
             <p:dataTable id="subtable" var="team" value="#{datatableMB.teams}" styleClass="header-right #{layoutMB.borderless ? 'no-border':''}">
                 <f:facet name="header">
                     NBA Teams
@@ -438,6 +433,43 @@
                     </p:columnGroup>
                 </p:subTable>
             </p:dataTable>
+        </p:panel>
+        <p:separator/>
+        <p:panel styleClass="card no-border" header="Row grouping" id="rowGroupPanel">
+            <h:form>
+                <p:dataTable var="car" widgetVar="rowGroupTable" value="#{datatableMB.cars}" sortBy="#{car.brand}" expandableRowGroups="true" styleClass="#{layoutMB.borderless ? 'no-border':''}">
+                    <p:headerRow>
+                        <p:column colspan="3" sortBy="#{car.brand}">
+                            <h:outputText value="#{car.brand}" />
+                        </p:column>
+                    </p:headerRow>
+                    <p:column headerText="Year" sortBy="#{car.year}">
+                        <h:outputText value="#{car.year}" />
+                    </p:column>
+                    <p:column headerText="Color" sortBy="#{car.color}" filterBy="#{car.color}" filterFunction="#{datatableMB.filterByColor}">
+                        <f:facet name="filter">
+                            <p:selectCheckboxMenu multiple="true" filter="true" value="#{datatableMB.selectedColors}" filterMatchMode="contains">
+                                <f:selectItems value="#{datatableMB.colors}" var="c" itemLabel="#{c}" itemValue="#{c}"/>
+                                <p:ajax event="change" oncomplete="PF('rowGroupTable').filter()" update="rowGroupPanel"/>
+                            </p:selectCheckboxMenu>
+                        </f:facet>
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                    <p:column headerText="Id">
+                        <h:outputText value="#{car.id}" />
+                    </p:column>
+                    <p:summaryRow>
+                        <p:column colspan="2" style="text-align:right">
+                            <h:outputText value="Total:" />
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="#{datatableMB.randomPrice}">
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+                        </p:column>
+                    </p:summaryRow>
+                </p:dataTable>
+            </h:form>
         </p:panel>
     </ui:define>
 

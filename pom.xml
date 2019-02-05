@@ -519,7 +519,7 @@
 				<dependency>
 					<groupId>org.apache.tomee</groupId>
 					<artifactId>apache-tomee</artifactId>
-					<version>7.0.2</version>
+					<version>7.0.5</version>
 					<classifier>webprofile</classifier>
 					<type>zip</type>
 					<scope>provided</scope>
@@ -527,7 +527,7 @@
 				<dependency>
 					<groupId>org.apache.tomee</groupId>
 					<artifactId>arquillian-tomee-remote</artifactId>
-					<version>7.0.2</version>
+					<version>7.0.5</version>
 					<scope>test</scope>
 					<exclusions>
 						<exclusion>
@@ -600,7 +600,7 @@
 				<dependency>
 					<groupId>org.apache.openejb</groupId>
 					<artifactId>apache-tomee</artifactId>
-					<version>1.7.4</version>
+					<version>1.7.5</version>
 					<classifier>webprofile</classifier>
 					<type>zip</type>
 					<scope>provided</scope>
@@ -608,7 +608,7 @@
 				<dependency>
 					<groupId>org.apache.openejb</groupId>
 					<artifactId>arquillian-tomee-remote</artifactId>
-					<version>1.7.4</version>
+					<version>1.7.5</version>
 					<scope>test</scope>
 					<exclusions>
 						<exclusion>

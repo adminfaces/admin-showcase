@@ -24,17 +24,17 @@ public class DatatableMB implements Serializable {
     private List<Team> teams;
     private List<Car> cars;
     private Car selectedCar;
+    private List<String> selectedColors;
 
     private List<Car> filteredCars;
 
     @Inject
     private CarService carService;
 
-
-
     @PostConstruct
     public void init() {
         teams = new ArrayList<Team>();
+        selectedColors = new ArrayList<>();
         Team lakers = new Team("Los Angeles Lakers");
         lakers.getStats().add(new Stats("2005-2006", 50, 32));
         lakers.getStats().add(new Stats("2006-2007", 44, 38));
@@ -69,6 +69,28 @@ public class DatatableMB implements Serializable {
         return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
     }
 
+    public int getRandomPrice() {
+        return (int) (Math.random() * 100000);
+    }
+
+    public boolean filterByColor(Object value, Object filter, Locale locale) {
+
+        if(filter == null || filter.toString().equals("")) {
+            return true;
+        }
+
+        if(value == null) {
+            return false;
+        }
+
+        if(selectedColors.isEmpty()) {
+            return true;
+        }
+
+
+        return selectedColors.contains(value.toString());
+    }
+
 
     public List<Team> getTeams() {
         return teams;
@@ -98,6 +120,13 @@ public class DatatableMB implements Serializable {
         this.filteredCars = filteredCars;
     }
 
+    public List<String> getSelectedColors() {
+        return selectedColors;
+    }
+
+    public void setSelectedColors(List<String> selectedColors) {
+        this.selectedColors = selectedColors;
+    }
 
     public Car getSelectedCar() {
         return selectedCar;

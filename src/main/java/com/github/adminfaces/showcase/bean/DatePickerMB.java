@@ -63,11 +63,6 @@ public class DatePickerMB implements Serializable {
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
  
-    public void click() {
-        PrimeFaces.current().ajax().update("form:display");
-        PrimeFaces.current().executeScript("PF('dlg').show()");
-    }
- 
     public Date getDate1() {
         return date1;
     }
