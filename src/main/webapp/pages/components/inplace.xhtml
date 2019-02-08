@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+                
+    <ui:define name="metadata">
+        <ui:param name="title" value="Inplace"/>
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link href="https://www.primefaces.org/showcase/ui/input/inplace.xhtml" value="Inplace"/> provides easy inplace editing and inline content display. For inplace editing, "save" and "cancel" ajax behavior events are provided for customizing the use-case.
+    </ui:define>
+
+    <ui:define name="body">
+        <p:panel styleClass="card">
+            <h:form>
+                <p:panelGrid layout="grid" columns="2" columnClasses="ui-grid-col-1,ui-grid-col-6">  
+                    <h:outputLabel for="basic" value="Basic:" />
+                    <p:inplace id="basic">
+                        <p:inputText value="Edit Me" />
+                    </p:inplace>
+
+                    <h:outputLabel for="ajax" value="Ajax:" />
+                    <p:inplace id="ajax" editor="true" >
+                        <p:inputText value="#{inplaceMB.text}" required="true" label="text" />
+                    </p:inplace>
+
+                    <h:outputLabel for="event" value="Dblclick"/>
+                    <p:inplace id="event" label="Cities" effectSpeed="fast" event="dblclick">
+                        <p:selectOneMenu>
+                            <f:selectItem itemLabel="New York" itemValue="0" />
+                            <f:selectItem itemLabel="London" itemValue="1" />
+                            <f:selectItem itemLabel="Paris" itemValue="2" />
+                            <f:selectItem itemLabel="Berlin" itemValue="3" />
+                        </p:selectOneMenu>
+                    </p:inplace>
+
+                    <h:outputLabel for="facet" value="Facet:" />
+                    <p:inplace id="facet" effect="none">
+                        <f:facet name="output">
+                            Yes or No
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectBooleanCheckbox styleClass="black"/>
+                        </f:facet>
+                    </p:inplace>
+
+                    <h:outputLabel for="image" value="Image:" />
+                    <p:inplace id="image" label="Show" effect="slide">
+                        <p:graphicImage name="demo/images/godfather1.jpg" />
+                    </p:inplace>
+                </p:panelGrid>
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView styleClass="hidden-sm hidden-xs">
+            <p:tab title="messages.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="MessagesMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.MessagesMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
+
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="messages.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="MessagesMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.MessagesMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:accordionPanel>
+
+    </ui:define>
+</ui:composition>
