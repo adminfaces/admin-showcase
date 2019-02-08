@@ -15,18 +15,9 @@
  */
 package com.github.adminfaces.showcase.bean;
 
-import com.github.adminfaces.showcase.model.Theme;
-import com.github.adminfaces.showcase.service.ThemeService;
 import org.omnifaces.cdi.ViewScoped;
-import org.primefaces.event.SelectEvent;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Named
 @ViewScoped
