@@ -59,7 +59,7 @@
 
     <ui:define name="code">
         <p:tabView styleClass="hidden-sm hidden-xs">
-            <p:tab title="messages.xhtml">
+            <p:tab title="inplace.xhtml">
            <pre>
                <code class="language-html">
                    <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
@@ -67,10 +67,10 @@
            </pre>
             </p:tab>
 
-            <p:tab title="MessagesMB.java">
+            <p:tab title="InplaceMB.java">
               <pre>
                <code class="language-java">
-                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.MessagesMB')}"
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.InplaceMB')}"
                                  escape="false"/>
                </code>
              </pre>
