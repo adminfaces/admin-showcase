@@ -20,9 +20,13 @@
             <p:tooltip/>
 
             <h:form>
-                <p:growl autoUpdate="true" showDetail="true" life="3000" severity="info"/>
-                <p:growl autoUpdate="true" showDetail="true" sticky="true" severity="warn,error,fatal"/>
-
+                <p:growl showDetail="true" life="3000" severity="info">
+                    <p:autoUpdate/>
+                </p:growl>
+                <p:growl showDetail="true" sticky="true" severity="warn,error,fatal">
+                    <p:autoUpdate/>
+                </p:growl>   
+                    
                 <p:commandButton value="Info" actionListener="#{messagesMB.info}" styleClass="btn-primary"
                                  update="@form"/>
                 <p:commandButton value="Warn" actionListener="#{messagesMB.warn}" styleClass="btn-warning"
