@@ -24,8 +24,8 @@
 		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
 		<asciidoctorj.version>1.5.6</asciidoctorj.version>
 		<jruby.version>9.1.13.0</jruby.version>
-		<adminfaces.version>1.0.0-RC21</adminfaces.version>
-		<primefaces.version>7.0.RC2</primefaces.version>
+		<adminfaces.version>1.0.0-RC22-SNAPSHOT</adminfaces.version>
+		<primefaces.version>7.0.RC3</primefaces.version>
 	</properties>
 
 	<dependencies>
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>com.github.adminfaces</groupId>
 			<artifactId>admin-theme</artifactId>
-			<version>1.0.0-RC22-SNAPSHOT</version>
+			<version>${adminfaces.version}</version>
 			<!-- end::dep-admin-theme[] -->
 			<classifier>no-cache</classifier>
 		</dependency>
