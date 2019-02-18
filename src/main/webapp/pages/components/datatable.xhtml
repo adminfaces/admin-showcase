@@ -471,6 +471,38 @@
                 </p:dataTable>
             </h:form>
         </p:panel>
+        <p:separator/>
+        <p:panel styleClass="card no-border" header="Row expansion" id="rowExpansionPanel" toggleable="true" toggleSpeed="300">
+            <p:dataTable var="car" value="#{datatableMB.cars}" styleClass="#{layoutMB.borderless ? 'no-border':''}">
+                <f:facet name="header">
+                    Expand rows to see detailed information
+                </f:facet>
+                <p:column style="width:30px">
+                    <p:rowToggler />
+                </p:column>
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.id}" />
+                </p:column>
+                <p:column headerText="Year">
+                    <h:outputText value="#{car.year}" />
+                </p:column>
+                <p:rowExpansion>
+                    <p:panelGrid  columns="2" style="width:300px">
+                        <f:facet name="header">
+                            <p:graphicImage name="demo/images/car/#{car.brand}-big.gif"/>
+                        </f:facet>
+                        <p:outputLabel for="id" value="Id:" />
+                        <h:outputText id="id" value="#{car.id}" />
+                        <p:outputLabel for="year"  value="Year" />
+                        <h:outputText id="year" value="#{car.year}" />
+                        <p:outputLabel for="color"  value="Color:" />
+                        <h:outputText id="color" value="#{car.color}" style="color:#{car.color}"/>
+                        <p:outputLabel for="price"  value="Price" />
+                        <h:outputText id="price" value="$#{car.price}" />
+                    </p:panelGrid>
+                </p:rowExpansion>
+            </p:dataTable>
+        </p:panel>
     </ui:define>
 
     <ui:define name="code">
