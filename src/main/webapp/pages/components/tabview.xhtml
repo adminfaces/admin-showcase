@@ -6,6 +6,12 @@
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
 
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="flat" value="#{layoutMB.flat}" converter="javax.faces.Boolean"/>
+        </f:metadata>
+    </ui:define>
+
     <ui:define name="title">
         TabView
     </ui:define>
@@ -18,9 +24,17 @@
     <ui:define name="body">
         <adm:breadcrumb title="TabView"/>
 
-        <div class="box box-info">
+        <div class="box box-primary #{layoutMB.flat ? 'ui-flat':''}">
             <div class="box-header with-border">
                 <h:form id="form">
+                    <div>
+                        <p:tooltip for="flat-switch" escape="false" position="top" value="Turns flat borders on, just add &lt;code&gt;ui-flat&lt;/code&gt; to a parent div."/>
+                        <p:outputLabel value="Flat borders?" for="flat-switch"/>
+                        <p:inputSwitch id="flat-switch" value="#{layoutMB.flat}">
+                            <p:ajax update="@(.content-wrapper)"/>
+                        </p:inputSwitch>
+                    </div>
+                    <p:separator/>
 
                     <p:growl id="msgs" showDetail="true"/>
 
@@ -79,7 +93,7 @@
                             but given to ruthless violence whenever anything stands against the good of the family."/>
                             </h:panelGrid>
                         </p:tab>
-                        
+
                         <p:tab title="Box Primary Solid" titleStyleClass="box-solid">
                             <h:panelGrid columns="2" cellpadding="10">
                                 <p:graphicImage name="demo/images/godfather1.jpg"/>
@@ -112,21 +126,21 @@
                             Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate."/>
                             </h:panelGrid>
                         </p:tab>
-                         <p:tab title="Box Warning" closable="true" titleStyleClass="box-warning">
+                        <p:tab title="Box Warning" closable="true" titleStyleClass="box-warning">
                             <h:panelGrid columns="2" cellpadding="10">
                                 <p:graphicImage name="demo/images/godfather3.jpg"/>
                                 <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.
                             Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate."/>
                             </h:panelGrid>
                         </p:tab>
-                         <p:tab title="Box Danger" closable="true" titleStyleClass="box-danger">
+                        <p:tab title="Box Danger" closable="true" titleStyleClass="box-danger">
                             <h:panelGrid columns="2" cellpadding="10">
                                 <p:graphicImage name="demo/images/godfather3.jpg"/>
                                 <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.
                             Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate."/>
                             </h:panelGrid>
                         </p:tab>
-                         <p:tab title="Box Fatal" closable="true" titleStyleClass="box-fatal">
+                        <p:tab title="Box Fatal" closable="true" titleStyleClass="box-fatal">
                             <h:panelGrid columns="2" cellpadding="10">
                                 <p:graphicImage name="demo/images/godfather3.jpg"/>
                                 <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.
