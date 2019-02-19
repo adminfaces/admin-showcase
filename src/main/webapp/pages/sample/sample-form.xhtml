@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="title">
+        Sample page
+    </ui:define>
+    <ui:define name="description">
+        Sample responsonsive form
+    </ui:define>
+    <ui:define name="body">
+        <adm:breadcrumb title="Sample page"/>
+
+        <h:form id="form" prependId="false">
+            <p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton value="Save" action="#{samplePageMB.save}" update="@form" icon="fa fa-check"
+                                         styleClass="btn-primary"/>
+                        <p:spacer width="5" rendered="#{samplePageMB.isNew()}"/>
+                        <p:commandButton value="Clear" action="#{samplePageMB.clear}" process="@this"
+                                         icon="fa fa-refresh" styleClass="btn-success" update="@form"
+                                         rendered="#{samplePageMB.isNew()}" resetValues="true"/>
+                        <p:spacer width="5" rendered="#{not samplePageMB.isNew()}"/>
+                        <p:commandButton value="Delete" action="#{samplePageMB.remove}" process="@this"
+                                         rendered="#{not samplePageMB.isNew()}" icon="fa fa-trash"
+                                         styleClass="btn-danger">
+                            <f:setPropertyActionListener value="true"
+                                                         target="#{facesContext.externalContext.flash.keepMessages}"/>
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Back" immediate="true"
+                                         action="/index?faces-redirect=true" process="@this"
+                                         icon="fa fa-reply"/>
+                    </div>
+                    <p:splitButton value="Save" action="#{samplePageMB.save}" update="@form" icon="fa fa-check"
+                                   styleClass="hidden-md hidden-lg btn-primary">
+                        <p:menuitem value="Reset" action="#{samplePageMB.clear}" process="@this" update="@form"
+                                    rendered="#{samplePageMB.isNew()}" resetValues="true" icon="fa fa-refresh"/>
+                        <p:menuitem value="Delete" action="#{samplePageMB.remove}" process="@this"
+                                    rendered="#{not samplePageMB.isNew()}" icon="fa fa-trash">
+                            <f:setPropertyActionListener value="true"
+                                                         target="#{facesContext.externalContext.flash.keepMessages}"/>
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
+                        </p:menuitem>
+                        <p:separator/>
+                        <p:menuitem value="Back" action="/index?faces-redirect=true" process="@this"
+                                    immediate="true" icon="fa fa-reply"/>
+                    </p:splitButton>
+                    <p:separator/>
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="id" value="Id"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:inputText id="id" value="#{samplePageMB.entity.id}" readonly="true"
+                                             styleClass="form-control" />
+                                <span class="help-block"> 
+                                    <p:message for="id"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="firstname" value="Firstname"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:inputText id="firstname" value="#{samplePageMB.entity.firstname}" maxlength="50"
+                                             required="true" requiredMessage="Firstname is required."/>
+                                <span class="help-block"> 
+                                    <p:message for="firstname"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="surname" value="Surname"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:inputText id="surname" value="#{samplePageMB.entity.surname}" maxlength="50"
+                                             required="true" requiredMessage="Surname is required."/>
+                                <span class="help-block"> 
+                                    <p:message for="surname"/>
+                                </span>
+                            </div>
+                        </div>
+                         <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="age" value="Age"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:spinner id="age" value="#{samplePageMB.entity.age}" required="true" requiredMessage="Age is required."/>
+                                <span class="help-block"> 
+                                    <p:message for="age"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="talk" value="Talks to attend"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:autoComplete id="talk" multiple="true" value="#{samplePageMB.entity.talks}" completeMethod="#{samplePageMB.completeTalk}" minQueryLength="2" dropdown="true" required="true" requiredMessage="Talk is required." var="talk" itemLabel="#{talk}" itemValue="#{talk}"  />
+                                <span class="help-block">
+                                    <p:message for="talk" />
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="cities" value="Cities visited"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:selectCheckboxMenu id="cities" value="#{samplePageMB.entity.cities}" label="Cities"
+                                                      multiple="true" filter="true" filterMatchMode="contains">
+                                    <f:selectItems value="#{samplePageMB.cities}" var="city" itemLabel="#{city}"
+                                                   itemValue="#{city}"/>
+                                </p:selectCheckboxMenu>
+                                <span class="help-block"> 
+                                    <p:message for="cities"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="date" value="Session day"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:datePicker id="date" value="#{samplePageMB.entity.date}" showIcon="true"/>
+                                <span class="help-block"> 
+                                    <p:message for="date"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:outputLabel for="useSpaces" value="Use spaces over tabs?"/>
+                            </div>
+                            <div class="ui-sm-12 ui-g-11">
+                                <p:inputSwitch id="useSpaces" value="#{samplePageMB.entity.useSpacesOverTabs}"/>
+                                <span class="help-block">
+                                    <p:message for="useSpaces" />
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="ui-g2-2 ui-g-nopad">
+                            <div class="ui-g-12">
+                                <p:outputLabel for="bio" value="Bio"/>
+                            </div>
+                            <div class="ui-g-12">
+                                <p:inputTextarea id="bio" rows="3" cols="20" counter="display" maxlength="2000"
+                                                 counterTemplate="{0} remaining chars"
+                                                 autoResize="true"/>
+                                <span class="help-block"> 
+                                    <h:outputText id="display"/> 
+                                    <p:message for="bio"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
+                <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+                <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                 icon="fa fa-close"/>
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="sample-form.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="SamplePageMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.SamplePageMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+            <p:tab title="Entity.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.model.Entity')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>
