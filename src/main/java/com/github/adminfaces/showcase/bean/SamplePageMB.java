@@ -48,7 +48,7 @@ public class SamplePageMB implements Serializable {
         }
         
         if(entity.getAge() < 18) {
-            be.addException(new BusinessException("<b>Age</b> age must be greater or equal to <b style=\"color:#fff\">18</b>", FacesMessage.SEVERITY_ERROR, "firstname"));
+            be.addException(new BusinessException("<b>Age</b> must be greater or equal to <b style=\"color:#fff\">18</b>", FacesMessage.SEVERITY_ERROR, "age"));
         }
         
         be.build(); //will throw exceptions if has any enqueued

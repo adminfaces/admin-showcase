@@ -19,7 +19,7 @@ public class Entity {
 
     private List<String> cities;
 
-    private List<String> talks;
+    private String talk;
     
     private String bio;
 
@@ -88,13 +88,12 @@ public class Entity {
         this.cities = cities;
     }
 
-    public List<String> getTalks() {
-        return talks;
+    public String getTalk() {
+        return talk;
     }
 
-    public void setTalks(List<String> talks) {
-        this.talks = talks;
+    public void setTalk(String talk) {
+        this.talk = talk;
     }
-
     
 }

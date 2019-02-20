@@ -96,16 +96,16 @@
                             <div class="ui-sm-12 ui-g-11">
                                 <p:spinner id="age" value="#{samplePageMB.entity.age}" required="true" requiredMessage="Age is required."/>
                                 <span class="help-block"> 
-                                    <p:message for="age"/>
+                                    <p:message for="age" escape="false"/>
                                 </span>
                             </div>
                         </div>
                         <div class="ui-sm-12 ui-g-6 ui-g-nopad">
                             <div class="ui-sm-12 ui-g-11">
-                                <p:outputLabel for="talk" value="Talks to attend"/>
+                                <p:outputLabel for="talk" value="Talk"/>
                             </div>
                             <div class="ui-sm-12 ui-g-11">
-                                <p:autoComplete id="talk" multiple="true" value="#{samplePageMB.entity.talks}" completeMethod="#{samplePageMB.completeTalk}" minQueryLength="2" dropdown="true" required="true" requiredMessage="Talk is required." var="talk" itemLabel="#{talk}" itemValue="#{talk}"  />
+                                <p:autoComplete id="talk" value="#{samplePageMB.entity.talk}" completeMethod="#{samplePageMB.completeTalk}" minQueryLength="2" dropdown="true" required="true" requiredMessage="Talk is required." var="talk" itemLabel="#{talk}" itemValue="#{talk}"  />
                                 <span class="help-block">
                                     <p:message for="talk" />
                                 </span>
@@ -114,7 +114,7 @@
                         
                         <div class="ui-sm-12 ui-g-6 ui-g-nopad">
                             <div class="ui-sm-12 ui-g-11">
-                                <p:outputLabel for="cities" value="Cities visited"/>
+                                <p:outputLabel for="cities" value="Cities"/>
                             </div>
                             <div class="ui-sm-12 ui-g-11">
                                 <p:selectCheckboxMenu id="cities" value="#{samplePageMB.entity.cities}" label="Cities"
@@ -150,7 +150,7 @@
                             </div>
                         </div>
                         
-                        <div class="ui-g2-2 ui-g-nopad">
+                        <div class="ui-g-12 ui-g-nopad">
                             <div class="ui-g-12">
                                 <p:outputLabel for="bio" value="Bio"/>
                             </div>
