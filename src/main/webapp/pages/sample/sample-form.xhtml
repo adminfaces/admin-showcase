@@ -25,7 +25,7 @@
                                          icon="fa fa-refresh" styleClass="btn-success" update="@form"
                                          rendered="#{samplePageMB.isNew()}" resetValues="true"/>
                         <p:spacer width="5" rendered="#{not samplePageMB.isNew()}"/>
-                        <p:commandButton value="Delete" action="#{samplePageMB.remove}" process="@this"
+                        <p:commandButton value="Delete" action="#{samplePageMB.remove}" process="@this" update="@form"
                                          rendered="#{not samplePageMB.isNew()}" icon="fa fa-trash"
                                          styleClass="btn-danger">
                             <f:setPropertyActionListener value="true"
@@ -39,9 +39,9 @@
                     </div>
                     <p:splitButton value="Save" action="#{samplePageMB.save}" update="@form" icon="fa fa-check"
                                    styleClass="hidden-md hidden-lg btn-primary">
-                        <p:menuitem value="Reset" action="#{samplePageMB.clear}" process="@this" update="@form"
+                        <p:menuitem value="Clear" action="#{samplePageMB.clear}" process="@this" update="@form"
                                     rendered="#{samplePageMB.isNew()}" resetValues="true" icon="fa fa-refresh"/>
-                        <p:menuitem value="Delete" action="#{samplePageMB.remove}" process="@this"
+                        <p:menuitem value="Delete" action="#{samplePageMB.remove}" process="@this" update="@form"
                                     rendered="#{not samplePageMB.isNew()}" icon="fa fa-trash">
                             <f:setPropertyActionListener value="true"
                                                          target="#{facesContext.externalContext.flash.keepMessages}"/>
@@ -89,7 +89,7 @@
                                 </span>
                             </div>
                         </div>
-                         <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad">
                             <div class="ui-sm-12 ui-g-11">
                                 <p:outputLabel for="age" value="Age"/>
                             </div>
@@ -111,7 +111,7 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="ui-sm-12 ui-g-6 ui-g-nopad">
                             <div class="ui-sm-12 ui-g-11">
                                 <p:outputLabel for="cities" value="Cities"/>
@@ -149,7 +149,7 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="ui-g-12 ui-g-nopad">
                             <div class="ui-g-12">
                                 <p:outputLabel for="bio" value="Bio"/>
