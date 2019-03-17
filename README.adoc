@@ -1,3 +1,0 @@
-== http://adminfaces.github.io/admin-showcase[AdminFaces Site^]
-
-
