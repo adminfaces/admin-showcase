@@ -24,7 +24,7 @@ image:showcase.png[link="https://raw.githubusercontent.com/adminfaces/admin-show
 
 == Demo 
 
-Showcase is available on 	http://admin-showcase-admin.1d35.starter-us-east-1.openshiftapps.com/showcase/index.xhtml[Openshift here^].
+Showcase is available on https://adminfaces.github.io/admin-showcase/[Openshift here^].
 
 IMPORTANT: The demo runs on the Openshift starter which is a platform used just for testing and not for production. So it's likely the showcase may be slow or *even down*.
 
@@ -91,4 +91,4 @@ WARNING: See the chrome driver version the tests are https://github.com/adminfac
 
 == Documentation
 
-Documentation can be found here: http://adminfaces.github.io/site/#Docs
+Documentation can be found here: https://adminfaces.github.io/site/#Documentation
