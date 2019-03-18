@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+
+    <ui:define name="metadata">
+        <ui:param name="title" value="NotificationBar"/>
+    </ui:define>
+
+    <ui:define name="description">
+        <p:link href="https://www.primefaces.org/showcase/ui/panel/notificationBar.xhtml"
+                value="NotificationBar"/> is a fixed positioned panel either at the top or the bottom of the page.
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form prependId="false">
+            <p:panel styleClass="card">
+                <p:button value="Show" onclick="PF('bar').show();return false" styleClass="btn-primary" icon="fa fa-arrow-down"/>
+                <p:button value="Hide" onclick="PF('bar').hide();return false" styleClass="btn-danger" icon="fa fa-arrow-up"/>
+
+                <p:notificationBar position="top" effect="slide" widgetVar="bar" effectSpeed="slow"
+                                   styleClass="#{panelMB.selectedColor}">
+                    <h:outputText value="Always bet on Prime and &lt;b&gt;Admin&lt;/b&gt;!" escape="false" style="font-size:36px;"/>
+                </p:notificationBar>
+
+                <f:facet name="footer">
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12">
+                            <p:outputLabel value="Choice box colors" for="box-colors"/>
+                        </div>
+                        <div class="ui-g-12">
+                            <p:selectOneRadio id="box-colors" value="#{panelMB.selectedColor}">
+                                <f:selectItem itemLabel="Box primary" itemValue="box-primary" />
+                                <f:selectItem itemLabel="Box info" itemValue="box-info"/>
+                                <f:selectItem itemLabel="Box success" itemValue="box-success"/>
+                                <f:selectItem itemLabel="Box warning" itemValue="box-warning"/>
+                                <f:selectItem itemLabel="Box teal" itemValue="box-teal"/>
+                                <f:selectItem itemLabel="Box danger" itemValue="box-danger"/>
+                                <f:selectItem itemLabel="Box fatal" itemValue="box-fatal"/>
+                                <f:selectItem itemLabel="Card" itemValue="card"/>
+                                <p:ajax update="@(.ui-notificationbar)" oncomplete="PF('bar').show()"/>
+                            </p:selectOneRadio>
+                        </div>
+                    </div>
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView styleClass="hidden-sm hidden-xs">
+            <p:tab title="notificationBar.xhtml">
+                <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+                </pre>
+            </p:tab>
+        </p:tabView>
+        <p:accordionPanel styleClass="hidden-md hidden-lg no-icon">
+            <p:tab title="notificationBar.xhtml">
+                <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+                </pre>
+            </p:tab>
+        </p:accordionPanel>
+
+    </ui:define>
+</ui:composition>
