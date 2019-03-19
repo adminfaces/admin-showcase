@@ -139,7 +139,7 @@
                                  style="cursor: pointer" value="#{analyticsMB.monthYearSelection}"/>
                     <p:spacer width="5"/>
                     <p:commandButton value="All times" action="#{analyticsMB.updateStatistics}" style="font-size: 16px"
-                                     update="@(.ui-panel, .analyticsScripts, .statsDate)" styleClass="btn-danger"
+                                     update="@(.ui-panel, .analyticsScripts, .statsDate)" styleClass="btn-danger" global="false"
                                      process="@this"
                                      oncomplete="initStats()">
                         <p:confirm header="Confirmation" message="Load ALL times statistics?" icon="ui-icon-alert"/>
