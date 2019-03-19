@@ -41,19 +41,19 @@ public class ExceptionPage extends BasePage {
 
 
     public void clickBusinessButton() {
-        try {
-            guardAjax(btnBusiness).click();
-        }catch (RequestGuardException e) {
-            guardHttp(btnBusiness).click();
-        }
+        guardAjax(btnBusiness).click();
     }
 
     public void clickMultipleBusinessButton() {
-        guardAjax(btnMultipleBusiness).click(); 
+        guardAjax(btnMultipleBusiness).click();
     }
 
     public void clickRuntimeButton() {
-        guardAjax(btnRuntime).click();
+        try {
+            guardAjax(btnRuntime).click();
+        }catch (RequestGuardException e){
+            guardHttp(btnBusiness).click();
+        }
     }
 
     public void clickViewExpiredButton() {
