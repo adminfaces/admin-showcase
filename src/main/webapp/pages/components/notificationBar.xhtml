@@ -27,12 +27,12 @@
                 </p:notificationBar>
 
                 <f:facet name="footer">
-                    <div class="ui-g ui-fluid">
+                    <div class="ui-g">
                         <div class="ui-g-12">
                             <p:outputLabel value="Choice box colors" for="box-colors"/>
                         </div>
                         <div class="ui-g-12">
-                            <p:selectOneRadio id="box-colors" value="#{panelMB.selectedColor}">
+                            <p:selectOneRadio id="box-colors"  value="#{panelMB.selectedColor}" layout="responsive" columns="2">
                                 <f:selectItem itemLabel="Box primary" itemValue="box-primary" />
                                 <f:selectItem itemLabel="Box info" itemValue="box-info"/>
                                 <f:selectItem itemLabel="Box success" itemValue="box-success"/>
