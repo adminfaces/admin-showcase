@@ -38,12 +38,12 @@
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
 			<artifactId>primefaces-extensions</artifactId>
-			<version>6.1.0</version>
+			<version>6.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
-			<version>2.1</version>
+			<version>2.3</version>
 		</dependency>
 		<!-- tag::dep-admin-template[] -->
 		<dependency>
