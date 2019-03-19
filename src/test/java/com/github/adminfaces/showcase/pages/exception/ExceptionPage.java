@@ -4,6 +4,7 @@ import com.github.adminfaces.showcase.pages.BasePage;
 import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.Location;
+import org.jboss.arquillian.graphene.request.RequestGuardException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -40,7 +41,11 @@ public class ExceptionPage extends BasePage {
 
 
     public void clickBusinessButton() {
-        guardAjax(btnBusiness).click();
+        try {
+            guardAjax(btnBusiness).click();
+        }catch (RequestGuardException e) {
+            guardHttp(btnBusiness).click();
+        }
     }
 
     public void clickMultipleBusinessButton() {
