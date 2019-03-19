@@ -52,7 +52,6 @@ public class ExceptionPage extends BasePage {
         try {
             guardAjax(btnRuntime).click();
         }catch (RequestGuardException e){
-            guardHttp(btnBusiness).click();
         }
     }
 
