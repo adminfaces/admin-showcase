@@ -60,7 +60,6 @@
 
 
     <h:body styleClass="hold-transition login-page">
-        <p:growl autoUpdate="true" sticky="true"/>
         <div id="loader" class="load-bar" style="display: none">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -83,6 +82,7 @@
                         <div class="ui-g-12">
                             <p class="login-box-msg">Sign in to start your session</p>
                             <p:messages escape="false" closable="true" showDetail="true" showSummary="false"/>
+                            <p:growl sticky="true"/>
                         </div>
 
                         <div class="ui-g-12">

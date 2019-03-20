@@ -69,7 +69,6 @@
 
 
     <h:body styleClass="hold-transition login-page">
-        <p:growl autoUpdate="true" sticky="true"/>
         <div id="loader" class="load-bar" style="display: none">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -90,6 +89,7 @@
                 <h:form>
                     <p class="login-box-msg">Sign in to start your session</p>
                     <p:messages closable="true" />
+                    <p:growl sticky="true"/>
                     <div class="form-group has-feedback">
                         <p:inputText value="#{logonMB.email}" type="email" styleClass="form-control" placeholder="Email"
                                      required="true" autocomplete="off"
