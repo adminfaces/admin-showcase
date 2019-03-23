@@ -393,11 +393,8 @@ public class AdminFt {
 
     @Test
     @InSequence(13)
-    public void shouldFillLoginDialog(@InitialPage IndexPage indexPage) {
-        waitModel().until().element(By.cssSelector("section.sidebar > ul.sidebar-menu")).is().present();
-        menu.goToDialogPage();
-        assertThat(browser.findElement(By.cssSelector("section.content-header h1")).getText())
-                .startsWith("Dialog Dialog");
+    public void shouldFillLoginDialog(@InitialPage DialogPage dialogPage) {
+        assertThat(dialogPage.getTitle().getText()).startsWith("Dialog Dialog");
         dialogPage.doLogin();
         assertThat(browser.findElement(By.xpath("//SPAN[contains(@class, 'ui-dialog-title') and text()='Login']"))
                 .isDisplayed()).isTrue();

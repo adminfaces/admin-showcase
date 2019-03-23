@@ -61,8 +61,6 @@ public class ControlSidebar {
     @FindByJQuery("div#restore-defaults a")
     private GrapheneElement restoreDefaults;
     
-    @FindByJQuery("a#layout-setup")
-    private GrapheneElement openControlSidebarBtn;
 
     public void openControlSidebar() {
         assertThat(controlSidebar.getAttribute("class")
@@ -131,8 +129,9 @@ public class ControlSidebar {
     }
 
     public void restoreDefaults() {
-        waitModel().until().element(restoreDefaults).is().present();
-        restoreDefaults.click();
+        WebElement restoreDefaultsLink = browser.findElement(By.cssSelector("div#restore-defaults a"));
+        waitModel().until().element(restoreDefaultsLink).is().clickable();
+        restoreDefaultsLink.click();
         waitModel().until().element(By.cssSelector("ul.sidebar-menu")).is().present();
     }
 
