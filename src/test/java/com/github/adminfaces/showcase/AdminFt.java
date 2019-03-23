@@ -31,6 +31,7 @@ import com.github.adminfaces.showcase.pages.LoginPage;
 import com.github.adminfaces.showcase.pages.components.ChipsPage;
 import com.github.adminfaces.showcase.pages.components.DialogPage;
 import com.github.adminfaces.showcase.pages.components.MessagesPage;
+import com.github.adminfaces.showcase.pages.components.SampleFormPage;
 import com.github.adminfaces.showcase.pages.exception.AccessDeniedPage;
 import com.github.adminfaces.showcase.pages.exception.ErrorPage;
 import com.github.adminfaces.showcase.pages.exception.ExceptionPage;
@@ -286,7 +287,7 @@ public class AdminFt {
         assertThat(messagesPage.getTitle().getText())
                 .isEqualTo("Messages This page shows how faces messages are rendered.");
     }
-
+    
     @Test
     @InSequence(7)
     public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage) {
@@ -335,12 +336,33 @@ public class AdminFt {
     public void shouldRestoreLayoutConfiguration(@InitialPage IndexPage indexPage) {
         controlSidebar.openControlSidebar();
         controlSidebar.restoreDefaults();
-
         assertThat(pageBody.getAttribute("class").contains("layout-top-nav")).isFalse();
-
         assertThat(pageBody.getAttribute("class").contains("layout-boxed")).isFalse();
-
         assertThat(pageBody.getAttribute("class").contains("skin-blue")).isTrue();
+    }
+    
+    @Test
+    @InSequence(10)
+    public void shouldFillSampleForm(@InitialPage SampleFormPage sampleFormPage) {
+        assertThat(sampleFormPage.getTitle().getText()).contains("Sample page");
+        sampleFormPage.clickBtnSubmit();
+        assertThat(sampleFormPage.getFirstameMsg().getText()).contains("Firstname is required.");
+        assertThat(sampleFormPage.getSurnameMsg().getText()).contains("Surname is required.");
+        assertThat(sampleFormPage.getAgeMsg().getText()).contains("Age is required.");
+        assertThat(sampleFormPage.getTalkMsg().getText()).contains("Talk is required.");
+        sampleFormPage.getFirstname().sendKeys("Admin");
+        sampleFormPage.getSurname().sendKeys("Faces");
+        sampleFormPage.getAge().sendKeys("3");
+        sampleFormPage.selectTalk();
+        sampleFormPage.getUseSpaces().click();
+        waitModel();
+        sampleFormPage.clickBtnSubmit();
+        assertThat(sampleFormPage.getAgeMsg().getText()).contains("must be greater or equal to");
+        sampleFormPage.getAge().sendKeys("20");
+        assertThat(sampleFormPage.getId().getAttribute("value")).isEmpty();
+        sampleFormPage.clickBtnSubmit();
+        assertThat(sampleFormPage.getInfoMsg().getText()).contains("Entity created successfully");
+        assertThat(sampleFormPage.getId().getAttribute("value")).isNotEmpty();
     }
 
     @Test
