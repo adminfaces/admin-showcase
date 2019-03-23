@@ -35,7 +35,7 @@ There are several ways to run Admin Showcase on your machine. Just clone this re
 === Using an application server
 
 
-Admin Showcase is compatible with most JavaEE 6 and 7 application servers.
+Admin Showcase is compatible with most JavaEE 6 and Java EE 8 application servers.
 
 Just build the application with maven using `mvn clean package -DskipTests` and deploy the resulting `showcase.war` into a JavaEE 6 or greater server.
 
@@ -45,14 +45,15 @@ Following is the list of tested servers:
 
 .Supported Application Servers
 
-This application is compatible with `Java EE 6/7` application servers, tested with:
+This application is compatible with `Java EE 6/7/8` application servers, tested with:
 
-* http://wildfly.org/downloads/[WildFly *10.1.0* and *8.2.0*^]
+* http://wildfly.org/downloads/[WildFly *8.2.0* to *13.0.0*^]
 * https://developers.redhat.com/download-manager/file/jboss-eap-6.4.0.GA.zip[JBoss EAP *6.4*^]
 * http://tomee.apache.org/downloads.html[Tomee *7.0.2* Web profile and *1.7.4* Web]
 * http://www.payara.fish/all_downloads[Payara *4.1.1.164* Web profile]
 * https://developer.ibm.com/wasdev/downloads/liberty-profile-using-non-eclipse-environments/[WebSphere Liberty profile *16.0.0.4*^]
 
+IMPORTANT: To run on `JavaEE 8` application servers such as `Wildfly 16` you'ĺl need to upgrade OmniFaces to version 3.x.
 
 === WildFly Swarm
 
