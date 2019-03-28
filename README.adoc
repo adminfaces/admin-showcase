@@ -73,6 +73,8 @@ You can run this showcase via docker through the following command:
 docker run -it -p 8080:8080 rmpestano/admin-showcase
 ----
 
+TIP: use `build.and-run.sh` to easily run the application via docker.
+
 == Testing
 
 To execute functional tests you need to activate the `tests` profile and choose the application server also using a maven profile, ex:
