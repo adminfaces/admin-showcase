@@ -24,7 +24,7 @@
 		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
 		<asciidoctorj.version>1.5.6</asciidoctorj.version>
 		<jruby.version>9.1.13.0</jruby.version>
-		<adminfaces.version>1.0.1-SNAPSHOT</adminfaces.version>
+		<adminfaces.version>1.0.1</adminfaces.version>
         <primefaces.version>7.0</primefaces.version>
 	</properties>
 
