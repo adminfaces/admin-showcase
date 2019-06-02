@@ -30,7 +30,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>admin-1.0.1</param-value>
+        <param-value>admin-1.0.2</param-value>
     </context-param>
     
     <context-param>
