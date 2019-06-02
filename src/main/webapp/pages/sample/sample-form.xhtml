@@ -16,8 +16,7 @@
 
         <h:form id="form" prependId="false">
             <p:focus context="@form"/>
-            <div class="box box-primary">
-                <div class="box-header with-border">
+            <p:panel styleClass="box-primary card">
                     <div id="main-buttons" class="hidden-sm hidden-xs">
                         <p:commandButton value="Save" action="#{samplePageMB.save}" update="@form" icon="fa fa-check"
                                          styleClass="btn-primary"/>
@@ -166,8 +165,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+            </p:panel>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
                 <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
                                  icon="fa fa-check"/>
