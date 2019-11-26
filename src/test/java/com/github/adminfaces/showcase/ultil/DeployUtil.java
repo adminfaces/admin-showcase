@@ -27,7 +27,7 @@ public class DeployUtil {
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.github.adminfaces:admin-theme:jar:no-cache:?").withoutTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("com.github.adminfaces:admin-template").withoutTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.primefaces.extensions:primefaces-extensions").withTransitivity().asFile());
-        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.omnifaces:omnifaces").withTransitivity().asSingleFile());
+        war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.omnifaces:omnifaces:2.1").withTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("net.bull.javamelody:javamelody-core").withoutTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("javax.json:javax.json-api").withTransitivity().asSingleFile());
         war.addAsLibraries(resolver.loadPomFromFile("pom.xml").resolve("org.glassfish:javax.json").withTransitivity().asSingleFile());
