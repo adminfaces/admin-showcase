@@ -2,7 +2,7 @@ dist: trusty
 addons:
   chrome: stable
 language: java
-jdk: oraclejdk8
+jdk: openjdk8
 sudo: required
 services:
 - docker
