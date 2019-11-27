@@ -181,7 +181,7 @@
 			<dependency>
 				<groupId>org.jboss.arquillian.selenium</groupId>
 				<artifactId>selenium-bom</artifactId>
-				<version>3.13.0</version>
+				<version>3.5.3</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
