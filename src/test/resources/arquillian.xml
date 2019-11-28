@@ -40,8 +40,7 @@
         <!--<property name="browser">chrome,firefox, chromeheadless or internetExplorer</property>-->
         <property name="dimensions">1366x1024</property>
         <property name="chromeDriverVersion">78.0.3904.105</property>
-        <property name="disable-dev-shm-usage">true</property>
-        <property name="no-sandbox">true</property>
+        <property name="chromeArguments">--no-sandbox --disable-dev-shm-usage</property>
     </extension>
     
     <extension qualifier="graphene">
