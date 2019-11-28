@@ -41,6 +41,7 @@
         <property name="dimensions">1366x1024</property>
         <property name="chromeDriverVersion">78.0.3904.105</property>
         <property name="chromeArguments">--verbose --no-sandbox --disable-dev-shm-usage</property>
+        <property name="chromePrintOptions">true</property>
     </extension>
     
     <extension qualifier="graphene">
