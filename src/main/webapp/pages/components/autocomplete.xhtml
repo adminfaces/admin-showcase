@@ -6,6 +6,8 @@
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
 
+    <ui:param name="renderAjaxStatus" value="false"/>
+
     <ui:define name="title">
         AutoComplete
     </ui:define>
@@ -17,6 +19,7 @@
     </ui:define>
 
     <ui:define name="body">
+        <ui:param name="renderAjaxStatus" value="#{false}"/>
         <adm:breadcrumb title="AutoComplete"/>
 
         <div class="box box-primary">
