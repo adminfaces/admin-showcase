@@ -24,8 +24,9 @@
 		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
 		<asciidoctorj.version>1.5.6</asciidoctorj.version>
 		<jruby.version>9.1.13.0</jruby.version>
-		<adminfaces.version>1.0.2</adminfaces.version>
+		<adminfaces.version>1.1.0</adminfaces.version>
         <primefaces.version>7.0</primefaces.version>
+		<chromedriver.version>80.0.3987.16</chromedriver.version>
 	</properties>
 
 	<dependencies>
@@ -44,7 +45,7 @@
 		<dependency>
 			<groupId>com.github.adminfaces</groupId>
 			<artifactId>admin-template</artifactId>
-			<version>1.0.3-SNAPSHOT</version>
+			<version>1.1.0</version>
 			<!-- end::dep-admin-template[] -->
 			<exclusions>
 				<exclusion>
