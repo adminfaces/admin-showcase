@@ -13,10 +13,11 @@ cache:
 before_script:
 - rm -r $HOME/.m2/repository/com/github/adminfaces/
 - git config --global http.postBuffer 157286400
+- google-chrome --version
 script:
-- mvn -U clean package -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless
-- mvn test -Ptests -Pglassfish-managed -Dbrowser=chromeheadless
-- mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless
+- mvn -U clean package -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless -Dchromedriver.version=79.0.3945.36
+- mvn test -Ptests -Pglassfish-managed -Dbrowser=chromeheadless -Dchromedriver.version=79.0.3945.16
+- mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless -Dchromedriver.version=78.0.3904.105
 - mvn test -Ptests -Ptomee1.7-remote -Dbrowser=chromeheadless
 after_success:
 - mvn clean package -DskipTests
