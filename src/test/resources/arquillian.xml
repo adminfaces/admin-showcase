@@ -40,7 +40,7 @@
         <!--<property name="browser">chrome,firefox, chromeheadless or internetExplorer</property>-->
         <property name="dimensions">1366x1024</property>
         <property name="chromeDriverVersion">${chromedriver.version}</property>
-        <property name="chromeArguments">--verbose</property>
+        <property name="chromeArguments">--verbose --no-sandbox --disable-dev-shm-usage --disable-extensions --disable-gpu --headless</property>
         <property name="chromePrintOptions">true</property>
     </extension>
     
