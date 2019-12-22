@@ -13,12 +13,14 @@ cache:
 before_script:
 - rm -r $HOME/.m2/repository/com/github/adminfaces/
 - git config --global http.postBuffer 157286400
-- google-chrome --version
+- export CHROME_VERSION="$(google-chrome --version)"
+- export CHROME_VERSION=${CHROME_VERSION:14}
+- echo $CHROME_VERSION
 script:
-- mvn -U clean package -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless -Dchromedriver.version=79.0.3945.88
-- mvn test -Ptests -Pglassfish-managed -Dbrowser=chromeheadless -Dchromedriver.version=79.0.3945.88
-- mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless -Dchromedriver.version=79.0.3945.88
-- mvn test -Ptests -Ptomee1.7-remote -Dbrowser=chromeheadless -Dchromedriver.version=79.0.3945.88
+- mvn -U clean package -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless -Dchromedriver.version=$CHROME_VERSION
+- mvn test -Ptests -Pglassfish-managed -Dbrowser=chromeheadless -Dchromedriver.version=$CHROME_VERSION
+- mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless -Dchromedriver.version=$CHROME_VERSION
+- mvn test -Ptests -Ptomee1.7-remote -Dbrowser=chromeheadless -Dchromedriver.version=$CHROME_VERSION
 after_success:
 - mvn clean package -DskipTests
 - docker login -u rmpestano -p ${pass}
