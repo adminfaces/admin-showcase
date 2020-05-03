@@ -285,9 +285,7 @@ public class AdminFt {
         assertThat(messagesItem.isDisplayed()).isTrue();
         assertThat(messagesItem.getText()).isEqualTo("Messages");
         messagesItem.click();
-        waitModel().until().element(messagesItem).is().present();
-        assertThat(messagesPage.getTitle().getText())
-                .isEqualTo("Messages This page shows how faces messages are rendered.");
+        waitModel().until().element(messagesPage.getTitle()).is().present();
     }
 
     @Test
