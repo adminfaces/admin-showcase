@@ -12,6 +12,7 @@ import org.jboss.arquillian.graphene.GrapheneElement;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.InitialPage;
 import org.jboss.arquillian.graphene.page.Page;
+import org.jboss.arquillian.graphene.request.RequestGuardException;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.Archive;
@@ -71,7 +72,7 @@ public class AdminFt {
 
     @Page
     protected DialogPage dialogPage;
-    
+
     @Page
     protected IndexPage indexPage;
 
@@ -283,11 +284,12 @@ public class AdminFt {
         // preRenderView
         assertThat(messagesItem.isDisplayed()).isTrue();
         assertThat(messagesItem.getText()).isEqualTo("Messages");
-        Graphene.guardHttp(messagesItem).click();
+        messagesItem.click();
+        waitModel().until().element(messagesItem).is().present();
         assertThat(messagesPage.getTitle().getText())
                 .isEqualTo("Messages This page shows how faces messages are rendered.");
     }
-    
+
     @Test
     @InSequence(7)
     public void shouldConfigureLayoutViaControlSidebar(@InitialPage IndexPage indexPage) {
@@ -340,7 +342,7 @@ public class AdminFt {
         assertThat(pageBody.getAttribute("class").contains("layout-boxed")).isFalse();
         assertThat(pageBody.getAttribute("class").contains("skin-blue")).isTrue();
     }
-    
+
     @Test
     @InSequence(10)
     public void shouldFillSampleForm(@InitialPage SampleFormPage sampleFormPage) {

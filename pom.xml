@@ -40,16 +40,12 @@
 			<artifactId>primefaces-extensions</artifactId>
 			<version>6.1.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.omnifaces</groupId>
-			<artifactId>omnifaces</artifactId>
-			<version>3.2</version>
-		</dependency>
+		
 		<!-- tag::dep-admin-template[] -->
 		<dependency>
 			<groupId>com.github.adminfaces</groupId>
 			<artifactId>admin-template</artifactId>
-			<version>${adminfaces.version}</version>
+			<version>1.0.3-SNAPSHOT</version>
 			<!-- end::dep-admin-template[] -->
 			<exclusions>
                             <exclusion>
@@ -66,14 +62,18 @@
 			<version>${adminfaces.version}</version>
 			<!-- end::dep-admin-theme[] -->
 			<classifier>no-cache</classifier>
-		</dependency>
-                
-                <dependency>
+		</dependency>      
+        <dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 		</dependency>
 
+        <dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>2.7.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
