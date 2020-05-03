@@ -27,5 +27,5 @@ public class BasePage {
     public String getGrowlMsg() {
         return growl.getText();
     }
-
+    
 }

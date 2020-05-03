@@ -24,8 +24,9 @@
 		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
 		<asciidoctorj.version>1.5.6</asciidoctorj.version>
 		<jruby.version>9.1.13.0</jruby.version>
-		<adminfaces.version>1.0.2</adminfaces.version>
+		<adminfaces.version>1.1.0</adminfaces.version>
         <primefaces.version>7.0</primefaces.version>
+		<chromedriver.version>80.0.3987.16</chromedriver.version>
 	</properties>
 
 	<dependencies>
@@ -40,19 +41,18 @@
 			<artifactId>primefaces-extensions</artifactId>
 			<version>6.1.1</version>
 		</dependency>
-		
 		<!-- tag::dep-admin-template[] -->
 		<dependency>
 			<groupId>com.github.adminfaces</groupId>
 			<artifactId>admin-template</artifactId>
-			<version>1.0.3-SNAPSHOT</version>
+			<version>1.1.0</version>
 			<!-- end::dep-admin-template[] -->
 			<exclusions>
-                            <exclusion>
-                                <groupId>com.github.adminfaces</groupId>
-                                 <artifactId>admin-theme</artifactId>
-                            </exclusion>
-                         </exclusions>
+				<exclusion>
+					<groupId>com.github.adminfaces</groupId>
+					<artifactId>admin-theme</artifactId>
+				</exclusion>
+			</exclusions>
          <!--<classifier>legacy</classifier> PrimeFaces 6.1 and below -->
 		</dependency>
 		<!-- tag::dep-admin-theme[] -->
@@ -62,18 +62,14 @@
 			<version>${adminfaces.version}</version>
 			<!-- end::dep-admin-theme[] -->
 			<classifier>no-cache</classifier>
-		</dependency>      
-        <dependency>
+		</dependency>
+
+                <dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>${primefaces.version}</version>
 		</dependency>
 
-        <dependency>
-			<groupId>org.omnifaces</groupId>
-			<artifactId>omnifaces</artifactId>
-			<version>2.7.1</version>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -405,7 +401,7 @@
 			<properties>
 				<arquillian.container>wildfly:8.2.0.Final:managed</arquillian.container>
 			</properties>
-			<!-- cannot be in main dependencies section because of conflict with tomee7-remote 
+			<!-- cannot be in main dependencies section because of conflict with tomee7-remote
 				profile which doesn't use chameleon adapter -->
 			<dependencies>
 				<dependency>
@@ -428,7 +424,7 @@
 			<properties>
 				<arquillian.container>wildfly:8.2.0.Final:remote</arquillian.container>
 			</properties>
-			<!-- cannot be in main dependencies section because of conflict with tomee7-remote 
+			<!-- cannot be in main dependencies section because of conflict with tomee7-remote
 				profile which doesn't use chameleon adapter -->
 			<dependencies>
 				<dependency>
@@ -450,7 +446,7 @@
 			<properties>
 				<arquillian.container>wildfly:10.1.0.Final:managed</arquillian.container>
 			</properties>
-			<!-- cannot be in main dependencies section because of conflict with tomee7-remote 
+			<!-- cannot be in main dependencies section because of conflict with tomee7-remote
 				profile which doesn't use chameleon adapter -->
 			<dependencies>
 				<dependency>
@@ -473,7 +469,7 @@
 			<properties>
 				<arquillian.container>glassfish:4.1:managed</arquillian.container>
 			</properties>
-			<!-- cannot be in main dependencies section because of conflict with tomee7-remote 
+			<!-- cannot be in main dependencies section because of conflict with tomee7-remote
 				profile which doesn't use chameleon adapter -->
 			<dependencies>
 				<dependency>
