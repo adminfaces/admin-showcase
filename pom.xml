@@ -26,7 +26,7 @@
 		<jruby.version>9.1.13.0</jruby.version>
 		<adminfaces.version>1.1.0</adminfaces.version>
         <primefaces.version>7.0</primefaces.version>
-		<chromedriver.version>80.0.3987.16</chromedriver.version>
+		<chromedriver.version>80.0.3987.106</chromedriver.version>
 	</properties>
 
 	<dependencies>
