@@ -20,7 +20,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: ChromeDriver Script
         run: |
-          CHROME_VERSION=80.0.3987.106
+          CHROME_VERSION=83.0.4103.14
           # Download and unpack latest release of chromedriver
           echo "Downloading chromedriver v$CHROME_VERSION..."
           wget "https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip"
@@ -37,7 +37,7 @@ jobs:
       - name: Maven Package
         run: mvn clean package -DskipTests
       - name: Wildfly-8
-        run: mvn test -Ptests -Pwildfly8-managed -Dbrowser=chrome
+        run: mvn test -Ptests -Pwildfly8-managed -Dbrowser=chrome -Dchrome.version=83.0.4103.14 -Dwebdriver.chrome.driver=/usr/local/share/chrome_driver/chromedriver
       - name: Glassfish-5
         run: mvn test -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless
       - name: Tomee-7
