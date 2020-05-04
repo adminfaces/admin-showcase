@@ -37,7 +37,7 @@ jobs:
       - name: Maven Package
         run: mvn clean package -DskipTests
       - name: Wildfly-8
-        run: mvn test -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless
+        run: mvn test -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless -Dwebdriver.chrome.driver=/usr/local/share/chrome_driver
       - name: Glassfish-5
         run: mvn test -Ptests -Pwildfly8-managed -Dbrowser=chromeheadless
       - name: Tomee-7
