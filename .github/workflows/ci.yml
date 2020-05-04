@@ -18,9 +18,22 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Script
+      - name: ChromeDriver Script
         run: |
-          $CHROMEWEBDRIVER/chromedriver
+          CHROME_VERSION=80.0.3987.106
+          # Download and unpack latest release of chromedriver
+          echo "Downloading chromedriver v$CHROME_VERSION..."
+          wget "https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip
+          rm chromedriver_linux64.zip
+          CHROMEDRIVER_DIR="/usr/local/share/chrome_driver"
+          CHROMEDRIVER_BIN="$CHROMEDRIVER_DIR/chromedriver"
+          sudo rm -rf $CHROMEDRIVER_DIR/*
+          sudo rm -rf $CHROMEDRIVER_BIN/*
+          sudo mkdir -p $CHROMEDRIVER_DIR
+          sudo mv "chromedriver" $CHROMEDRIVER_BIN
+          sudo chmod +x $CHROMEDRIVER_BIN
+          chromedriver --version
       - name: Maven Package
         run: mvn clean package -DskipTests
       - name: Wildfly-8
@@ -31,3 +44,6 @@ jobs:
         run: mvn test -Ptests -Ptomee7-remote -Dbrowser=chromeheadless
       - name: Tomee-1.7
         run: mvn test -Ptests -Ptomee1.7-remote -Dbrowser=chromeheadless
+
+
+
