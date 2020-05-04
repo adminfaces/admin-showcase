@@ -23,6 +23,7 @@ jobs:
   test:
     name: Functional Tests
     runs-on: ubuntu-18.04
+    needs: build
     steps:
       - uses: actions/cache@v1
         with:
