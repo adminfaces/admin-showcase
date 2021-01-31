@@ -34,7 +34,7 @@ public class DatePickerPage extends BasePage {
     public void selectDate() {
         spanishDatePicker.click();
         waitModel().until().element(spanishDatePickerDays).is().clickable();
-        assertThat(spanishDatePickerMonths.getText()).contains("Enero");
+        assertThat(spanishDatePickerMonths.getText()).contains("Ene");
         List<WebElement> days = spanishDatePickerDays.findElements(By.cssSelector(".ui-datepicker-calendar td a "));
         assertThat(days).isNotEmpty();
         days.get(1).click();

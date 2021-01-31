@@ -7,7 +7,7 @@
     <groupId>com.github.adminfaces</groupId>
     <artifactId>admin-showcase</artifactId>
     <!-- tag::version[] -->
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.2.0</version>
     <!-- end::version[] -->
     <name>admin-showcase</name>
 
@@ -26,7 +26,7 @@
         <jruby.version>9.1.13.0</jruby.version>
         <adminfaces.version>1.2.0</adminfaces.version>
         <primefaces.version>8.0</primefaces.version>
-        <chromedriver.version>80.0.3987.106</chromedriver.version>
+        <chromedriver.version>88.0.4324.96</chromedriver.version>
     </properties>
 
     <dependencies>
@@ -146,7 +146,7 @@
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-drone-webdriver-depchain</artifactId>
-            <version>2.4.1</version>
+            <version>2.5.1</version>
             <type>pom</type>
             <scope>test</scope>
         </dependency>
@@ -177,7 +177,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian.selenium</groupId>
                 <artifactId>selenium-bom</artifactId>
-                <version>3.5.3</version>
+                <version>3.13.0</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>

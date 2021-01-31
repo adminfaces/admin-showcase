@@ -35,7 +35,7 @@ public class DataTablePage extends BasePage {
         colorsFilterTrigger.click();
         List<WebElement> colorOptions = browser.findElements(By.cssSelector("div.ui-selectcheckboxmenu-items-wrapper ul li"));
         waitModel().until().element(By.cssSelector("div.ui-selectcheckboxmenu-items-wrapper")).is().present();
-        for (int i = 0; i <= 1; i++) {
+        for (int i = 0; i <= 2; i++) {
             guardAjax(colorOptions.get(i)).click();
         }
         browser.findElement(By.cssSelector("a.ui-selectcheckboxmenu-close .ui-icon-circle-close")).click();
