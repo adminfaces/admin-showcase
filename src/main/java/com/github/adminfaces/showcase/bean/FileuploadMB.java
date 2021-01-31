@@ -1,7 +1,7 @@
 package com.github.adminfaces.showcase.bean;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;

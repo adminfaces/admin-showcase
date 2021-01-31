@@ -581,7 +581,7 @@ public class PageStatisticsStore implements Serializable {
     }
 
     public void handleFileUpload(FileUploadEvent event) throws IOException {
-        try (InputStream in = event.getFile().getInputstream()) {
+        try (InputStream in = event.getFile().getInputStream()) {
             unzip(in, pagesStatsFilePath);
             //Files.copy(in,Paths.get(pagesStatsFilePath), StandardCopyOption.REPLACE_EXISTING);
             initStatistics();

@@ -30,7 +30,7 @@ import org.primefaces.model.charts.bar.BarChartModel;
 import org.primefaces.model.charts.bar.BarChartOptions;
 import org.primefaces.model.charts.bubble.BubbleChartDataSet;
 import org.primefaces.model.charts.bubble.BubbleChartModel;
-import org.primefaces.model.charts.bubble.BubblePoint;
+import org.primefaces.model.charts.data.BubblePoint;
 import org.primefaces.model.charts.donut.DonutChartDataSet;
 import org.primefaces.model.charts.donut.DonutChartModel;
 import org.primefaces.model.charts.hbar.HorizontalBarChartDataSet;
@@ -176,7 +176,7 @@ public class ChartMB implements Serializable {
         ChartData data = new ChartData();
 
         LineChartDataSet dataSet = new LineChartDataSet();
-        List<Number> values = new ArrayList<>();
+        List<Object> values = new ArrayList<>();
         values.add(65);
         values.add(59);
         values.add(80);
@@ -217,7 +217,7 @@ public class ChartMB implements Serializable {
         ChartData data = new ChartData();
 
         LineChartDataSet dataSet = new LineChartDataSet();
-        List<Number> values = new ArrayList<>();
+        List<Object> values = new ArrayList<>();
         values.add(20);
         values.add(50);
         values.add(100);
@@ -229,7 +229,7 @@ public class ChartMB implements Serializable {
         dataSet.setYaxisID("left-y-axis");
 
         LineChartDataSet dataSet2 = new LineChartDataSet();
-        List<Number> values2 = new ArrayList<>();
+        List<Object> values2 = new ArrayList<>();
         values2.add(0.1);
         values2.add(0.5);
         values2.add(1.0);
@@ -832,7 +832,7 @@ public class ChartMB implements Serializable {
         dataSet.setBackgroundColor("rgba(255, 99, 132, 0.2)");
 
         LineChartDataSet dataSet2 = new LineChartDataSet();
-        List<Number> values2 = new ArrayList<>();
+        List<Object> values2 = new ArrayList<>();
         values2.add(50);
         values2.add(50);
         values2.add(50);

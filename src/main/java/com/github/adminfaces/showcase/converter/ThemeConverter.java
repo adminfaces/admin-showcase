@@ -17,7 +17,10 @@ package com.github.adminfaces.showcase.converter;
 
 import com.github.adminfaces.showcase.model.Theme;
 import com.github.adminfaces.showcase.service.ThemeService;
+import org.omnifaces.config.BeanManager;
+import org.omnifaces.util.Beans;
 
+import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -30,13 +33,11 @@ import javax.inject.Inject;
 @FacesConverter("themeConverter")
 public class ThemeConverter implements Converter {
 
-    @Inject
-    ThemeService service;
 
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
         if(value != null && value.trim().length() > 0) {
             try {
-                return service.getThemes().get(Integer.parseInt(value));
+                return Beans.getReference(ThemeService.class).getThemes().get(Integer.parseInt(value));
             } catch(NumberFormatException e) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
             }
